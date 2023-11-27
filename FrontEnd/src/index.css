@@ -1,11 +1,3 @@
 @taildwind base;
 @tailwind components;
 @tailwind utilities;
-/* @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100&family=Poppins:wght@100&family=Rubik:wght@300&display=swap');
- */
-
-/* @layer base{
-    body{
-        @apply font-poppins;
-    }
-} */
