@@ -24,20 +24,21 @@ export const LoginForm: React.FC = () => {
     console.log(values)
     /*  peticion fetch api  */
   }
-  const { values, errors, touched, handleBlur, handleChange, handleSubmit } = useFormik({
-    initialValues: initialValues,
-    validationSchema: validationSchema,
-    onSubmit: values => {
-      console.log(values)
-    }
+  const { values, errors, handleChange, handleSubmit } = useFormik({
+    initialValues,
+    validationSchema,
+    onSubmit
   })
 
   console.log(errors)
   return (
     <div className="">
       <h2 className="text-blueLight mx-auto mb-10 w-10/12">Iniciar sesión</h2>
-      <form className="mx-auto flex w-10/12 flex-col justify-center gap-2 " action=""
-      onSubmit={handleSubmit}>
+      <form
+        className="mx-auto flex w-10/12 flex-col justify-center gap-2 "
+        action=""
+        onSubmit={handleSubmit}
+      >
         <label className="text-blueDark font-bold" htmlFor="email">
           Mail
         </label>
@@ -68,7 +69,7 @@ export const LoginForm: React.FC = () => {
           />
         </div>
         <small className="font-bold text-red-500">{errors?.password}</small>
-        <button className=" bg-blueDark w-full rounded-3xl py-2 text-white shadow-lg" type="submit" >
+        <button className=" bg-blueDark w-full rounded-3xl py-4 text-white shadow-lg" type="submit">
           Iniciar sesión
         </button>
       </form>
