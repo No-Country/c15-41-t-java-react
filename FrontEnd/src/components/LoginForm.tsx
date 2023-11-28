@@ -1,5 +1,6 @@
-import { MdOutlineEmail, MdLockOutline } from 'react-icons/md'
 import { IoEyeOffOutline, IoEyeOutline } from 'react-icons/io5'
+import lockIcon from '../assets/lock.svg'
+import mailIcon from '../assets/mail.svg'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import { useState } from 'react'
@@ -8,6 +9,7 @@ interface typeInitialValues {
   email: string
   password: string
 }
+
 const initialValues = {
   email: '',
   password: ''
@@ -20,66 +22,76 @@ const validationSchema = Yup.object({
     .max(20, '20 carateres  maximo')
     .required('La contraseña es requerida')
 })
+
 export const LoginForm: React.FC = () => {
   const [showPass, setShowPass] = useState(false)
+
   const onSubmit = (values: typeInitialValues) => {
     console.log(values)
     /*  peticion fetch api  */
   }
+
   const { values, errors, handleChange, handleSubmit } = useFormik({
     initialValues,
     validationSchema,
     onSubmit
   })
 
-  console.log(errors)
   return (
-    <div className="">
-      <h2 className="mx-auto mb-10 w-10/12 text-blueLight">Iniciar sesión</h2>
-      <form
-        className="mx-auto flex w-10/12 flex-col justify-center gap-2"
-        action=""
-        onSubmit={handleSubmit}
-      >
-        <label className="font-bold text-blueDark" htmlFor="email">
+    <div className="w-full">
+      <h2 className="mx-auto mb-14 w-10/12 text-3xl font-bold leading-normal text-blueLight">
+        Iniciar sesión
+      </h2>
+
+      <form className="mx-auto w-10/12" action="" onSubmit={handleSubmit}>
+        <label className="text-base font-[500] leading-[normal] text-blueDark" htmlFor="email">
           Mail
         </label>
-        <div className="mb-8 flex h-6 w-full items-center gap-2 border-0 border-b-2 border-solid border-slate-500 hover:border-blueDark">
-          <MdOutlineEmail />
+        <div className="relative mb-14 flex h-8 w-full items-center gap-2 border-0 border-b-2 border-solid border-[#999] hover:border-blueDark active:border-blueDark">
+          <img src={mailIcon} alt="Mail Icon" />
           <input
-            className="w-full border-0 focus:outline-none"
+            className="w-full border-0 text-base font-[400] leading-[normal] text-[#263238] placeholder-[#ABABAB] focus:outline-none"
             name="email"
             type="email"
-            placeholder="maria@booktech.com"
+            placeholder="Ingresá tu email"
             value={values.email}
             onChange={handleChange}
           />
+          <small className="absolute -bottom-6 text-xs font-bold text-red-500">
+            {errors?.email}
+          </small>
         </div>
-        <small className="font-bold text-red-500">{errors?.email}</small>
-        <label className="font-semibold text-blueDark" htmlFor="password">
+
+        <label className="text-base font-[500] leading-[normal] text-blueDark" htmlFor="password">
           Contraseña
         </label>
-        <div className="mb-8 flex h-6 w-full items-center gap-2 border-0 border-b-2 border-solid border-slate-500 hover:border-blueDark">
-          <MdLockOutline />
+        <div className="relative mb-14 flex h-8 w-full items-center gap-2 border-0 border-b-2 border-solid border-[#999] hover:border-blueDark">
+          <img src={lockIcon} alt="Lock Icon" />
           <input
-            className="w-full border-0 focus:outline-none"
+            className="w-full border-0 text-base font-[400] leading-[normal] text-[#263238] placeholder-[#ABABAB] focus:outline-none"
             name="password"
             type={showPass ? 'text' : 'password'}
-            placeholder="booktech1234"
+            placeholder="Ingresá tu contraseña"
             value={values.password}
             onChange={handleChange}
           />
           <div
-            className="cursor-pointer"
+            className="cursor-pointer self-end"
             onClick={() => {
               setShowPass(!showPass)
             }}
           >
-            {showPass ? <IoEyeOutline /> : <IoEyeOffOutline />}
+            {showPass ? <IoEyeOutline size={16} /> : <IoEyeOffOutline size={16} />}
           </div>
+          <small className="absolute -bottom-6 text-xs font-bold text-red-500">
+            {errors?.password}
+          </small>
         </div>
-        <small className="font-bold text-red-500">{errors?.password}</small>
-        <button className=" w-full rounded-3xl bg-blueDark py-2 text-white shadow-lg" type="submit">
+
+        <button
+          className="h-[53px] w-full rounded-[32px] border-none bg-blueDark py-2 text-[17px] font-bold leading-normal text-white shadow-btn hover:cursor-pointer"
+          type="submit"
+        >
           Iniciar sesión
         </button>
       </form>
