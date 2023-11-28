@@ -9,6 +9,9 @@ export default {
       colors: {
         blueDark: '#052940',
         blueLight: '#0A7ABF'
+      },
+      boxShadow: {
+        btn: '0px 4px 26px 0px rgba(0, 0, 0, 0.25)'
       }
     }
   },
