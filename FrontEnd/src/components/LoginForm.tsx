@@ -1,5 +1,5 @@
-import { MdOutlineEmail } from "react-icons/md";
-import { MdLockOutline } from "react-icons/md";
+import { MdOutlineEmail } from "react-icons/md"
+import { MdLockOutline } from "react-icons/md"
 
 export const LoginForm: React.FC = () => {
   return (
