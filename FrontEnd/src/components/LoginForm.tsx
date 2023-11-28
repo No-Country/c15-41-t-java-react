@@ -1,7 +1,10 @@
 import { MdOutlineEmail } from 'react-icons/md'
 import { MdLockOutline } from 'react-icons/md'
+import { IoEyeOffOutline } from 'react-icons/io5'
+import { IoEyeOutline } from 'react-icons/io5'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
+import { useState } from 'react'
 
 interface typeInitialValues {
   email: string
@@ -20,6 +23,7 @@ const validationSchema = Yup.object({
     .required('La contraseña es requerida')
 })
 export const LoginForm: React.FC = () => {
+  const [showPass, setShowPass] = useState(false)
   const onSubmit = (values: typeInitialValues) => {
     console.log(values)
     /*  peticion fetch api  */
@@ -62,11 +66,19 @@ export const LoginForm: React.FC = () => {
           <input
             className="w-full border-0 focus:outline-none"
             name="password"
-            type="password"
+            type={showPass ? 'text' : 'password'}
             placeholder="booktech1234"
             value={values.password}
             onChange={handleChange}
           />
+          <div
+            className="cursor-pointer"
+            onClick={() => {
+              setShowPass(!showPass)
+            }}
+          >
+            {showPass ? <IoEyeOutline /> : <IoEyeOffOutline />}
+          </div>
         </div>
         <small className="font-bold text-red-500">{errors?.password}</small>
         <button className=" bg-blueDark w-full rounded-3xl py-4 text-white shadow-lg" type="submit">
