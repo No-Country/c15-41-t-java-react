@@ -1,5 +1,6 @@
 import { Link, Outlet } from 'react-router-dom'
 import logotipo from '../assets/BiblioTech.png'
+import Footer from './Footer'
 
 export default function Layout() {
   return (
@@ -29,6 +30,7 @@ export default function Layout() {
         </Link>
       </header>
       <Outlet />
+      <Footer />
     </>
   )
 }
