@@ -6,6 +6,7 @@ import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -16,23 +17,25 @@ import java.util.List;
 @Table(name = "admins")
 @Data
 @NoArgsConstructor
-public class Admin {
+public class Admin implements Serializable {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(name = "id_admin")
+    private Long idAdmin;
 
-    @NotBlank
+    @Column(nullable = false)
     private String name;
 
-    @NotBlank
-    @Column(name = "last_name")
+    @Column(name = "last_name", nullable = false)
     private String lastName;
 
-    @NotBlank
-    @Email
+    @Column(nullable = false,unique = true)
     private String email;
 
     @OneToMany (mappedBy = "admin")
     private List <Loan> loans;
+
+    @Column(nullable = false)
+    private String password;
 
 }

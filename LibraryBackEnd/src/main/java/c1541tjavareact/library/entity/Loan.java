@@ -2,10 +2,12 @@ package c1541tjavareact.library.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
+import java.io.Serializable;
+import java.time.LocalDate;
 
 /**
  * @author jdmon on 27/11/2023
@@ -15,36 +17,37 @@ import java.util.Date;
 @Table(name = "loans")
 @Data
 @NoArgsConstructor
-public class Loan {
+@AllArgsConstructor
+public class Loan implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(name = "id_loan")
+    private Long idLoan;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_book")
-    @NotNull
+    @JoinColumn(name = "id_book",nullable = false,
+    referencedColumnName = "id_book")
     private Book book;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_admin")
-    @NotNull
+    @JoinColumn(name = "id_admin",nullable = false,
+    referencedColumnName = "id_admin")
     private Admin admin;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_user")
-    @NotNull
+    @JoinColumn(name = "id_user",nullable = false,
+    referencedColumnName = "id_user")
     private User user;
 
-    @Column(name = "loan_date")
-    @NotNull
-    private Date loanDate;
+    @Column(name = "loan_date",nullable = false)
+    private LocalDate loanDate;
 
-    @Column(name = "return_date")
-    @NotNull
-    private Date returnDate;
-    //mappedBy indicates that the entity that owns the relationship is loan and bookReturn is the inverse
+    @Column(name = "return_expected_date", nullable = false)
+    private LocalDate returnExpectedDate;
+
     @OneToOne(mappedBy = "loan")
     private BookReturn bookReturn;
+    //TODO ver relacion 1 a 1
 
 
 }
