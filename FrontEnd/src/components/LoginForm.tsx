@@ -1,7 +1,5 @@
-
-import { MdOutlineEmail } from 'react-icons/md'
-import { MdLockOutline } from 'react-icons/md'
 import { MdOutlineEmail, MdLockOutline } from 'react-icons/md'
+import { IoEyeOffOutline, IoEyeOutline } from 'react-icons/io5'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import { useState } from 'react'
@@ -37,8 +35,10 @@ export const LoginForm: React.FC = () => {
   console.log(errors)
   return (
     <div className="">
-       <h2 className="mx-auto mb-10 w-10/12 text-blueLight">Iniciar sesión</h2>
-       <form className="mx-auto flex w-10/12 flex-col justify-center gap-2 " action=""
+      <h2 className="mx-auto mb-10 w-10/12 text-blueLight">Iniciar sesión</h2>
+      <form
+        className="mx-auto flex w-10/12 flex-col justify-center gap-2"
+        action=""
         onSubmit={handleSubmit}
       >
         <label className="font-bold text-blueDark" htmlFor="email">
@@ -56,11 +56,11 @@ export const LoginForm: React.FC = () => {
           />
         </div>
         <small className="font-bold text-red-500">{errors?.email}</small>
-         <label className="font-semibold text-blueDark" htmlFor="password">
+        <label className="font-semibold text-blueDark" htmlFor="password">
           Contraseña
         </label>
         <div className="mb-8 flex h-6 w-full items-center gap-2 border-0 border-b-2 border-solid border-slate-500 hover:border-blueDark">
-        <MdLockOutline />
+          <MdLockOutline />
           <input
             className="w-full border-0 focus:outline-none"
             name="password"
