@@ -89,7 +89,7 @@ export const LoginForm: React.FC = () => {
         </div>
 
         <button
-          className="shadow-btn h-[53px] w-full rounded-[32px] border-none bg-blueDark py-2 text-[17px] font-bold leading-normal text-white hover:cursor-pointer"
+          className="h-[53px] w-full rounded-[32px] border-none bg-blueDark py-2 text-[17px] font-bold leading-normal text-white shadow-btn hover:cursor-pointer"
           type="submit"
         >
           Iniciar sesión
