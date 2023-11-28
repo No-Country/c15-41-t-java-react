@@ -6,6 +6,8 @@ import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 /**
  * @author jdmon on 27/11/2023
  * @project LibraryBackEnd
@@ -29,5 +31,8 @@ public class Admin {
     @NotBlank
     @Email
     private String email;
+
+    @OneToMany (mappedBy = "admin")
+    private List <Loan> loans;
 
 }

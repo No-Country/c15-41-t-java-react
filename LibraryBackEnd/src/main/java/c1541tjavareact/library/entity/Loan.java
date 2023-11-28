@@ -21,17 +21,17 @@ public class Loan {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "book_id")
+    @JoinColumn(name = "id_book")
     @NotNull
     private Book book;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "admin_id")
+    @JoinColumn(name = "id_admin")
     @NotNull
     private Admin admin;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "id_user")
     @NotNull
     private User user;
 
