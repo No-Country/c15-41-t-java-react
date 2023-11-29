@@ -1,4 +1,3 @@
-
 import { Login } from './routes/Login.tsx'
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import Layout from './components/Layout.tsx'
