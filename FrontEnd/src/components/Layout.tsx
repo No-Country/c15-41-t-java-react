@@ -16,25 +16,25 @@ export default function Layout() {
         />
         <Link
           to="/home"
-          className="p-8 text-center text-2xl font-bold text-black no-underline hover:underline max-lg:hidden"
+          className="p-8 text-center text-2xl text-black no-underline hover:underline max-lg:hidden"
         >
           Inicio
         </Link>
         <Link
           to="/libros"
-          className="p-8 text-center text-2xl font-bold text-black no-underline hover:underline max-lg:hidden"
+          className="p-8 text-center text-2xl text-black no-underline hover:underline max-lg:hidden"
         >
           Libros y catalogo
         </Link>
         <Link
           to="/prestamos"
-          className="p-8 text-center text-2xl font-bold text-black no-underline hover:underline max-lg:hidden"
+          className="p-8 text-center text-2xl text-black no-underline hover:underline max-lg:hidden"
         >
           Prestamos
         </Link>
         <Link
           to="/usuarios"
-          className="p-8 text-center text-2xl font-bold text-black no-underline hover:underline max-lg:hidden"
+          className="p-8 text-center text-2xl text-black no-underline hover:underline max-lg:hidden"
         >
           Usuarios
         </Link>
@@ -45,7 +45,7 @@ export default function Layout() {
           <img src="/Logout.png" alt="logout" />
         </button>
       </header>
-      <main className="m-13 min-h-[calc(100vh-9rem-4rem)] max-lg:h-[calc(100vh-9rem-104px)]">
+      <main className="min-h-[calc(100vh-9rem-4rem)] max-lg:min-h-[calc(100vh-9rem-104px)]">
         <Outlet />
       </main>
       <Footer />
