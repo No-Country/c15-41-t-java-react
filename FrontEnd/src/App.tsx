@@ -1,23 +1,10 @@
-<<<<<<< Updated upstream
-import React from 'react'
-import Footer from './components/Footer'
-const App: React.FC = () => {
-  return (
-    <>
-      <header>
-        <nav></nav>
-      </header>
-      <h1 className="mt-2 text-center text-6xl font-bold text-blue-800">Biblioteca web</h1>
-      <Footer />
-    </>
-=======
+
 import { Login } from './routes/Login.tsx'
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import Layout from './components/Layout.tsx'
 import Home from './components/Home.tsx'
 import { useUser } from './context/UserContext.tsx'
 import BookList from './components/BookList.tsx'
-
 const App = () => {
   const { currentUser, setupComplete } = useUser()
 
@@ -41,7 +28,6 @@ const App = () => {
         </Route>
       </Routes>
     </BrowserRouter>
->>>>>>> Stashed changes
   )
 }
 
