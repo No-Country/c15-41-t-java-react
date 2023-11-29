@@ -2,6 +2,7 @@ import { Link, Outlet } from 'react-router-dom'
 import logotipo from '../../public/isologotipo.png'
 import Footer from './Footer'
 import { useUser } from '../context/UserContext'
+import { NavBarMobile } from './NavBarMobile'
 
 export default function Layout() {
   const { signOut } = useUser()
@@ -48,6 +49,7 @@ export default function Layout() {
       <main className="min-h-[calc(100vh-9rem-4rem)] max-lg:min-h-[calc(100vh-9rem-104px)]">
         <Outlet />
       </main>
+      <NavBarMobile />
       <Footer />
     </>
   )
