@@ -4,6 +4,8 @@ import mailIcon from '../assets/mail.svg'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { useUser } from '../context/UserContext'
 
 interface typeInitialValues {
   email: string
@@ -24,11 +26,14 @@ const validationSchema = Yup.object({
 })
 
 export const LoginForm: React.FC = () => {
+  const { signIn, signInWaiting } = useUser()
+
   const [showPass, setShowPass] = useState(false)
 
-  const onSubmit = (values: typeInitialValues) => {
-    console.log(values)
-    /*  peticion fetch api  */
+  const navigate = useNavigate()
+
+  const onSubmit = async (values: typeInitialValues) => {
+    await signIn(values.email, values.password, navigate)
   }
 
   const { values, errors, handleChange, handleSubmit } = useFormik({
@@ -56,6 +61,7 @@ export const LoginForm: React.FC = () => {
             placeholder="Ingresá tu email"
             value={values.email}
             onChange={handleChange}
+            disabled={signInWaiting}
           />
           <small className="absolute -bottom-6 text-xs font-bold text-red-500">
             {errors?.email}
@@ -74,6 +80,7 @@ export const LoginForm: React.FC = () => {
             placeholder="Ingresá tu contraseña"
             value={values.password}
             onChange={handleChange}
+            disabled={signInWaiting}
           />
           <div
             className="cursor-pointer self-end"
@@ -89,10 +96,18 @@ export const LoginForm: React.FC = () => {
         </div>
 
         <button
-          className="h-[53px] w-full rounded-[32px] border-none bg-blueDark py-2 text-[17px] font-bold leading-normal text-white shadow-btn hover:cursor-pointer"
+          className="relative flex h-[53px] w-full items-center justify-center gap-x-2 rounded-[32px] border-none bg-blueDark py-2 text-[17px] font-bold leading-normal text-white shadow-btn hover:cursor-pointer disabled:cursor-not-allowed disabled:opacity-50"
           type="submit"
+          disabled={signInWaiting}
         >
-          Iniciar sesión
+          {/*
+            eslint-disable-next-line multiline-ternary
+          */}
+          {signInWaiting ? (
+            <div className="absolute h-4 w-4 animate-spin rounded-full border-solid border-x-blueDark"></div>
+          ) : (
+            'Iniciar sesión'
+          )}
         </button>
       </form>
     </div>
