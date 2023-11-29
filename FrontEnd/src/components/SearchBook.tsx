@@ -3,7 +3,7 @@ import { GoSearch } from 'react-icons/go'
 
 export const SearchBook: React.FC = () => {
   return (
-    <section>
+    <section className="my-10">
       <div className="relative flex items-center justify-center">
         <img
           className="max-h-72 min-h-[8rem] w-full"
