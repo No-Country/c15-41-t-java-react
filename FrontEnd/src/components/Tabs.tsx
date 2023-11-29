@@ -1,4 +1,5 @@
 import { Tab, Tabs as ReactTabs, TabList, TabPanel } from 'react-tabs'
+import { SearchBook } from './SearchBook'
 
 const Tabs = () => {
   return (
@@ -23,7 +24,9 @@ const Tabs = () => {
 
       <TabPanel>{}</TabPanel>
       <TabPanel>{'Agregar Libro'}</TabPanel>
-      <TabPanel>{'Busqueda'}</TabPanel>
+      <TabPanel>
+        <SearchBook />
+      </TabPanel>
     </ReactTabs>
   )
 }
