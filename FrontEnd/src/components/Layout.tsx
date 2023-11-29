@@ -1,8 +1,11 @@
 import { Link, Outlet } from 'react-router-dom'
 import logotipo from '../../public/isologotipo.png'
 import Footer from './Footer'
+import { useUser } from '../context/UserContext'
 
 export default function Layout() {
+  const { signOut } = useUser()
+
   return (
     <>
       <header className="flex h-36 items-center justify-start">
@@ -31,8 +34,11 @@ export default function Layout() {
         >
           Usuarios
         </Link>
+        <button className="border-none bg-white hover:cursor-pointer" onClick={signOut}>
+          <img src="/Logout.png" alt="logout" />
+        </button>
       </header>
-      <main className="m-13">
+      <main className="m-13 min-h-[calc(100vh-9rem-4rem)]">
         <Outlet />
       </main>
       <Footer />
