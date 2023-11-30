@@ -1,4 +1,6 @@
 import { Tab, Tabs as ReactTabs, TabList, TabPanel } from 'react-tabs'
+import 'react-tabs/style/react-tabs.css'
+import RegisterForm from './RegisterForm'
 import { SearchBook } from './SearchBook'
 
 const Tabs = () => {
@@ -22,13 +24,15 @@ const Tabs = () => {
           Buscador
         </Tab>
       </TabList>
-
       <TabPanel>{}</TabPanel>
-      <TabPanel>{'Agregar Libro'}</TabPanel>
+      <TabPanel>
+        <RegisterForm />
+      </TabPanel>
       <TabPanel>
         <SearchBook />
       </TabPanel>
     </ReactTabs>
+
   )
 }
 
