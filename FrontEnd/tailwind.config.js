@@ -8,7 +8,8 @@ export default {
       },
       colors: {
         blueDark: '#052940',
-        blueLight: '#0A7ABF'
+        blueLight: '#0A7ABF',
+        grey: '#e6e7e9'
       },
       boxShadow: {
         btn: '0px 4px 26px 0px rgba(0, 0, 0, 0.25)'
