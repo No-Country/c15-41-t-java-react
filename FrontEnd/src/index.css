@@ -7,3 +7,23 @@
   padding: 0;
   box-sizing: border-box;
 }
+
+#search-book {
+  background-image: url(../src/assets/img/sortDown.png);
+  background-repeat: no-repeat;
+  background-position: right center;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -o-appearance: none;
+  appearance: none;
+}
+#search-book::-ms-expand {
+  display: none;
+}
+
+#search-book option {
+  @apply bg-white text-[#000842];
+}
+#search-book option:hover {
+  @apply bg-[#0A7ABF] text-white;
+}
