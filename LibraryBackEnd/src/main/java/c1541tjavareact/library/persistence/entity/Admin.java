@@ -1,8 +1,6 @@
-package c1541tjavareact.library.entity;
+package c1541tjavareact.library.persistence.entity;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

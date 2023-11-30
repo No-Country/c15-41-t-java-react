@@ -1,4 +1,4 @@
-package c1541tjavareact.library.entity;
+package c1541tjavareact.library.persistence.entity;
 
 
 import jakarta.persistence.*;

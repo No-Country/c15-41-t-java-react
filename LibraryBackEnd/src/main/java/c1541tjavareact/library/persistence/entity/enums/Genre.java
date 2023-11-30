@@ -1,4 +1,4 @@
-package c1541tjavareact.library.entity.enums;
+package c1541tjavareact.library.persistence.entity.enums;
 
 public enum Genre {
     THRILLER("Thriller"),

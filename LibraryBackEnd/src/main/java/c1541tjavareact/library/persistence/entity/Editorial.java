@@ -1,4 +1,4 @@
-package c1541tjavareact.library.entity;
+package c1541tjavareact.library.persistence.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "editorials")
@@ -21,10 +21,13 @@ public class Editorial implements Serializable {
     @Column(name = "id_editorial")
     private long idEditorial;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="id_book",nullable = false,
-            referencedColumnName = "id_book")
-    private Book book;
+    @OneToMany(mappedBy = "editorial")
+    private List<BookEditorial> editorialList;
+
+//    @ManyToOne(fetch = FetchType.LAZY)
+////    @JoinColumn(name="id_book",nullable = false,
+////            referencedColumnName = "id_book")
+//    private Book book;
 
     @Column(nullable = false)
     private String name;
