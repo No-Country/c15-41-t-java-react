@@ -1,7 +1,9 @@
 package c1541tjavareact.library.domain.service;
 
 import c1541tjavareact.library.domain.repository.BookCrudRepository;
+import c1541tjavareact.library.persistence.entity.Author;
 import c1541tjavareact.library.persistence.entity.Book;
+import c1541tjavareact.library.persistence.entity.Editorial;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -40,5 +42,13 @@ public class BookService {
 
     public void delete(Long idBook) {
         bookCrudRepository.delete(idBook);
+    }
+
+    public Author getAuthor(Long idAuthor){
+        return bookCrudRepository.getAuthor(idAuthor).orElseThrow();
+    }
+
+    public Editorial getEditorial(Long idEditorial) {
+        return bookCrudRepository.getEditorial(idEditorial).orElseThrow();
     }
 }

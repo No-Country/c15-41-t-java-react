@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -33,16 +34,30 @@ public class Book implements Serializable {
     @Column(nullable = false)
     private Integer quantity;
 
-    private Integer id_author_2;
-
     @OneToMany(mappedBy = "book")
     private List<Loan> loanList;
 
-    @OneToMany(mappedBy = "book")
-    private List<BookEditorial> editorialList;
+//    @OneToMany
+//    private List<BookEditorial> editorialList;
 
-    @ManyToOne
-    @JoinColumn(name = "id_author", insertable=false, updatable=false)
+    @ManyToMany
+    @JoinTable(
+            name = "linked_editorials",
+            joinColumns = @JoinColumn(name = "id_book"),
+            inverseJoinColumns = @JoinColumn(name = "id_editorial")
+    )
+    private List<Editorial> linkedEditorials=new ArrayList<>();
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_author",nullable = false)
     private Author author;
 
+    public Book(BookDto bookDto,Author author, Editorial editorial) {
+        this.title= bookDto.title();
+        this.isbn= bookDto.isbn();
+        this.genre= bookDto.genre();
+        this.quantity= bookDto.quantity();
+        this.author=author;
+        this.linkedEditorials.add(editorial);
+    }
 }

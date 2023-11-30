@@ -1,7 +1,9 @@
 package c1541tjavareact.library.persistence.crud;
 
+import c1541tjavareact.library.domain.repository.AuthorRepository;
 import c1541tjavareact.library.domain.repository.BookCrudRepository;
 import c1541tjavareact.library.domain.repository.BookRepository;
+import c1541tjavareact.library.domain.repository.EditorialRepository;
 import c1541tjavareact.library.persistence.entity.Author;
 import c1541tjavareact.library.persistence.entity.Book;
 import c1541tjavareact.library.persistence.entity.Editorial;
@@ -25,6 +27,11 @@ public class BookCrudRepositoryImpl implements BookCrudRepository {
     @Autowired
     private BookRepository bookRepository;
 
+    @Autowired
+    private AuthorRepository authorRepository;
+
+    @Autowired
+    private EditorialRepository editorialRepository;
 //    @Autowired
 //    private BookDaoMapper bookDaoMapper;
 
@@ -57,7 +64,7 @@ public class BookCrudRepositoryImpl implements BookCrudRepository {
                     book1.setGenre(book.getGenre());
                     book1.setQuantity(book.getQuantity());
                     book1.setAuthor(book.getAuthor());
-                    book1.setEditorialList(book.getEditorialList());
+                    book1.setLinkedEditorials(book.getLinkedEditorials());
                     return bookRepository.save(book1);
                 }
         ).orElseThrow(() -> new RuntimeException("Id not found"));
@@ -66,5 +73,15 @@ public class BookCrudRepositoryImpl implements BookCrudRepository {
     @Override
     public void delete(Long idBook) {
         bookRepository.deleteById(idBook);
+    }
+
+    @Override
+    public Optional<Author> getAuthor(Long idAuthor) {
+        return authorRepository.findById(idAuthor);
+    }
+
+    @Override
+    public Optional<Editorial> getEditorial(Long idEditorial) {
+        return editorialRepository.findById(idEditorial);
     }
 }

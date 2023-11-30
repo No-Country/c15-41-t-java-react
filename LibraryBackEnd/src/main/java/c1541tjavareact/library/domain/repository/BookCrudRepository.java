@@ -1,6 +1,8 @@
 package c1541tjavareact.library.domain.repository;
 
+import c1541tjavareact.library.persistence.entity.Author;
 import c1541tjavareact.library.persistence.entity.Book;
+import c1541tjavareact.library.persistence.entity.Editorial;
 import c1541tjavareact.library.persistence.entity.enums.Genre;
 
 import java.util.List;
@@ -18,6 +20,10 @@ public interface BookCrudRepository {
     Book save(Book book);
     Book update(Long idBook,Book book);
     void delete(Long idBook);
+
+    Optional<Author> getAuthor(Long idAuthor);
+
+    Optional<Editorial> getEditorial(Long idEditorial);
 //    Optional<Book> getBookByGenre(String genre); TODO
 
 }

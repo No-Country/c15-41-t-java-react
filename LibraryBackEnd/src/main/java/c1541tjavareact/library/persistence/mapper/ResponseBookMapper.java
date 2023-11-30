@@ -16,13 +16,13 @@ import java.util.List;
  */
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
 public interface ResponseBookMapper {
-
-    @Mapping(source = "title",target = "title")
-    @Mapping(source = "isbn",target = "isbn")
-    ResponseBookDto toResponseBookDto(Book book);
-    List<BookDto> toResponseBooksDto(List<Book> books);
-
-    @InheritInverseConfiguration
-    @Mapping(target = "loanList", ignore = true)
-    Book toBook (ResponseBookDto responseBookDto);
+//
+//    @Mapping(source = "title",target = "title")
+//    @Mapping(source = "isbn",target = "isbn")
+//    ResponseBookDto toResponseBookDto(Book book);
+//    List<BookDto> toResponseBooksDto(List<Book> books);
+//
+//    @InheritInverseConfiguration
+//    @Mapping(target = "loanList", ignore = true)
+//    Book toBook (ResponseBookDto responseBookDto);
 }
