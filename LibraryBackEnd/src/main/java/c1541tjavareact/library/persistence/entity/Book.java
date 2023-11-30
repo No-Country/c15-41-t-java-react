@@ -1,9 +1,12 @@
 package c1541tjavareact.library.persistence.entity;
 
+import c1541tjavareact.library.domain.dto.AuthorDto;
 import c1541tjavareact.library.domain.dto.BookDto;
 import c1541tjavareact.library.persistence.entity.enums.Genre;
+import c1541tjavareact.library.persistence.mapper.AuthorDaoMapper;
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -52,12 +55,12 @@ public class Book implements Serializable {
     @JoinColumn(name = "id_author",nullable = false)
     private Author author;
 
-    public Book(BookDto bookDto,Author author, Editorial editorial) {
-        this.title= bookDto.title();
-        this.isbn= bookDto.isbn();
-        this.genre= bookDto.genre();
-        this.quantity= bookDto.quantity();
-        this.author=author;
-        this.linkedEditorials.add(editorial);
-    }
+//    public Book(BookDto bookDto, AuthorDto authorDto, Editorial editorial) {
+//        this.title= bookDto.title();
+//        this.isbn= bookDto.isbn();
+//        this.genre= bookDto.genre();
+//        this.quantity= bookDto.quantity();
+//        this.author=null;
+//        this.linkedEditorials.add(editorial);
+//    }
 }

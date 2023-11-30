@@ -1,5 +1,6 @@
 package c1541tjavareact.library.persistence.crud;
 
+import c1541tjavareact.library.domain.dto.AuthorDto;
 import c1541tjavareact.library.domain.repository.AuthorRepository;
 import c1541tjavareact.library.domain.repository.BookCrudRepository;
 import c1541tjavareact.library.domain.repository.BookRepository;
@@ -9,6 +10,7 @@ import c1541tjavareact.library.persistence.entity.Book;
 import c1541tjavareact.library.persistence.entity.Editorial;
 import c1541tjavareact.library.persistence.entity.Loan;
 import c1541tjavareact.library.persistence.entity.enums.Genre;
+import c1541tjavareact.library.persistence.mapper.AuthorDaoMapper;
 import c1541tjavareact.library.persistence.mapper.BookDaoMapper;
 import jakarta.persistence.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +34,9 @@ public class BookCrudRepositoryImpl implements BookCrudRepository {
 
     @Autowired
     private EditorialRepository editorialRepository;
+
+    @Autowired
+    private AuthorDaoMapper authorDaoMapper;
 //    @Autowired
 //    private BookDaoMapper bookDaoMapper;
 
@@ -76,8 +81,10 @@ public class BookCrudRepositoryImpl implements BookCrudRepository {
     }
 
     @Override
-    public Optional<Author> getAuthor(Long idAuthor) {
-        return authorRepository.findById(idAuthor);
+    public Optional<AuthorDto> getAuthor(Long idAuthor) {
+        return authorRepository.findById(idAuthor).map(author ->
+                    authorDaoMapper.toAuthorDto(author)
+        );
     }
 
     @Override

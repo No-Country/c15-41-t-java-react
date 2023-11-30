@@ -1,5 +1,6 @@
 package c1541tjavareact.library.domain.repository;
 
+import c1541tjavareact.library.domain.dto.AuthorDto;
 import c1541tjavareact.library.persistence.entity.Author;
 
 /**
@@ -7,5 +8,5 @@ import c1541tjavareact.library.persistence.entity.Author;
  * @project LibraryBackEnd
  */
 public interface AuthorCrudRepository {
-    Author save(Author author);
+    AuthorDto save(AuthorDto authorDto);
 }
