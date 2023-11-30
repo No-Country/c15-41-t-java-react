@@ -1,0 +1,52 @@
+{
+  "books": [
+    {
+      "id": 1,
+      "title": "Cien años de soledad",
+      "author": "Gabriel García Márquez",
+      "editorial": "Realismo mágico",
+      "genere": "Editorial Sudamericana",
+      "image": "./src/assets/img/imagen1.png"
+    },
+    {
+      "id": 2,
+      "title": "1984",
+      "author": "George Orwell",
+      "editorial": "De Bolsillo",
+      "genere": "Distopía",
+      "image": "./src/assets/img/imagen2.png"
+    },
+    {
+      "id": 3,
+      "title": "El amor en los tiempos del cólera",
+      "author": "Gabriel García Márquez",
+      "editorial": "Editorial Sudamericana",
+      "genere": "Realismo mágico",
+      "image": "./src/assets/img/image3.png"
+    },
+    {
+      "id": 4,
+      "title": "La sombra del viento",
+      "author": "Carlos Ruiz Zafón",
+      "editorial": "Editorial Planeta",
+      "genere": "Novela histórica",
+      "image": "./src/assets/img/image4.png"
+    },
+    {
+      "id": 5,
+      "title": "Harry Potter y la piedra filosofal",
+      "author": "JK Rowling",
+      "editorial": "Editorial Salamandra",
+      "genere": "Fantasía",
+      "image": "./src/assets/img/imagen5.png"
+    },
+    {
+      "id": 6,
+      "title": "El principito",
+      "author": "Antoine de Saint-Exupéry",
+      "editorial": "Editorial Gallimard",
+      "genere": "Literatura infantil/filosófica",
+      "image": "./src/assets/img/imagen6.png"
+    }
+  ]
+}
