@@ -64,8 +64,8 @@ export default function RegisterForm() {
   })
 
   return (
-    <div className="px-20 py-10">
-      <div className="rounded-[60px] bg-grey">
+    <div className="px-2 py-10">
+      <div className="rounded-[40px] bg-grey w-full sm:max-w-[70%]  mx-auto">
         <h2 className="mx-auto w-10/12 py-8 text-2xl font-bold leading-normal text-blueDark">
           Registro de un nuevo libro
         </h2>

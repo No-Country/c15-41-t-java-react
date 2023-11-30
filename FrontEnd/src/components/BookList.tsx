@@ -23,7 +23,7 @@ const BookList: React.FC = () => {
   }, [])
 
   return (
-    <div className="m-2 grid w-full grid-cols-2 items-center justify-center gap-5 p-5 align-middle">
+    <div className="grid w-full items-center justify-center gap-y-5 gap-x-14 py-5 align-middle lg:grid-cols-2">
       {books.map((book: book) => (
         <Book key={book.id} {...book} />
       ))}
