@@ -18,12 +18,6 @@ const Tabs = () => {
         <Tab className="flex w-full flex-col flex-wrap items-center justify-center bg-[#E6E7E9] px-2 text-center text-base font-[500] leading-[24px] text-blueLight hover:cursor-pointer aria-selected:bg-blueLight aria-selected:text-white">
           Agregar Libro
         </Tab>
-        <Tab
-          className="flex w-full flex-col flex-wrap items-center justify-center bg-[#E6E7E9] px-2 text-center text-base font-[500] leading-[24px] text-blueLight hover:cursor-pointer aria-selected:bg-blueLight aria-selected:text-white"
-          selectedClassName="bg-blueLight"
-        >
-          Buscador
-        </Tab>
       </TabList>
       <TabPanel>
         <BookList />
@@ -31,9 +25,7 @@ const Tabs = () => {
       <TabPanel>
         <RegisterForm />
       </TabPanel>
-      <TabPanel>
-        <SearchBook />
-      </TabPanel>
+      <TabPanel></TabPanel>
     </ReactTabs>
   )
 }

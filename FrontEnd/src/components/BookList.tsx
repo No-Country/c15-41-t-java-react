@@ -1,14 +1,9 @@
 import { useState, useEffect } from 'react'
 import Book from './Book.tsx'
+import { book } from '../types/types'
+import SearchBookModify  from './SearchBookModify'
 
-interface book {
-  id: number
-  title: string
-  author: string
-  genere: string
-  editorial: string
-  image: string
-}
+
 
 const BookList: React.FC = () => {
   const [books, setBooks] = useState([])
@@ -23,11 +18,15 @@ const BookList: React.FC = () => {
   }, [])
 
   return (
+    <div>
+    <SearchBookModify />
     <div className="grid w-full items-center justify-center gap-y-5 gap-x-14 py-5 align-middle lg:grid-cols-2">
+      
       {books.map((book: book) => (
         <Book key={book.id} {...book} />
       ))}
     </div>
+   </div> 
   )
 }
 
