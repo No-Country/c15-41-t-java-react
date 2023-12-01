@@ -1,9 +1,7 @@
 import { useState, useEffect } from 'react'
 import Book from './Book.tsx'
 import { book } from '../types/types'
-import SearchBookModify  from './SearchBookModify'
-
-
+import SearchBookModify from './SearchBookModify'
 
 const BookList: React.FC = () => {
   const [books, setBooks] = useState([])
@@ -19,14 +17,15 @@ const BookList: React.FC = () => {
 
   return (
     <div>
-    <SearchBookModify />
-    <div className="grid w-full items-center justify-center gap-y-5 gap-x-14 py-5 align-middle lg:grid-cols-2">
-    <div className="grid w-full items-center justify-center gap-x-14 gap-y-5 py-5 align-middle lg:grid-cols-2">
-      {books.map((book: book) => (
-        <Book key={book.id} {...book} />
-      ))}
+      <SearchBookModify />
+      <div className="grid w-full items-center justify-center gap-x-14 gap-y-5 py-5 align-middle lg:grid-cols-2">
+        <div className="grid w-full items-center justify-center gap-x-14 gap-y-5 py-5 align-middle lg:grid-cols-2">
+          {books.map((book: book) => (
+            <Book key={book.id} {...book} />
+          ))}
+        </div>
+      </div>
     </div>
-   </div> 
   )
 }
 
