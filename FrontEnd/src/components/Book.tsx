@@ -12,8 +12,8 @@ type Props = {
 const Book: React.FC<Props> = ({ id, image, title, author, genere, editorial }) => {
   return (
     <div className=" flex h-full justify-start gap-3  border-0 border-b border-solid border-black p-3">
-      <div className="  h-[145px] w-[95px]">
-        <img className="h-full w-full" src={image} alt={title} />
+      <div className="bg-cover">
+        <img className="h-[145px] w-[95px] shadow-lg" src={image} alt={title} />
       </div>
       <div className=" xs:text-sm flex h-auto flex-col lg:gap-2">
         <h3 className="text-lg text-blueLight"> Titulo: {title}</h3>
