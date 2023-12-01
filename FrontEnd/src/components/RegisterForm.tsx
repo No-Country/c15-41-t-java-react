@@ -62,7 +62,7 @@ export default function RegisterForm() {
 
   async function onSubmit(values: RegisterFormType) {
     console.log(values)
-/*     try {
+    /*     try {
       const postOptions = {
         method: 'POST',
         body: JSON.stringify(values)
