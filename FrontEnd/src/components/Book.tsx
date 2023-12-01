@@ -9,7 +9,7 @@ type Props = {
   image: string
 }
 
-const Book: React.FC<Props> = ({ id, image, title, author, genere, editorial }) => {
+const Book: React.FC<Props> = ({ image, title, author, genere, editorial }) => {
   return (
     <div className=" flex h-full justify-start gap-3  border-0 border-b border-solid border-black p-3">
       <div className="  h-[145px] w-[95px]">
