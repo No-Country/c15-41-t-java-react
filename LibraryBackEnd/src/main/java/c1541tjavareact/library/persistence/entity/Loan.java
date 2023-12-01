@@ -8,10 +8,6 @@ import lombok.NoArgsConstructor;
 import java.io.Serializable;
 import java.time.LocalDate;
 
-/**
- * @author jdmon on 27/11/2023
- * @project LibraryBackEnd
- */
 @Entity
 @Table(name = "loans")
 @Data
@@ -46,7 +42,6 @@ public class Loan implements Serializable {
 
     @OneToOne(mappedBy = "loan")
     private BookReturn bookReturn;
-    //TODO ver relacion 1 a 1
 
 
 }

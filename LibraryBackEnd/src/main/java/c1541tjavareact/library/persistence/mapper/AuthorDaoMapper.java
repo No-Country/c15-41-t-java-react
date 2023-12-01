@@ -15,11 +15,8 @@ import java.util.List;
  */
 @Mapper (componentModel = MappingConstants.ComponentModel.SPRING)
 public interface AuthorDaoMapper {
-
-    @Mapping(source = "idAuthor", target = "idAuthor")
     AuthorDto toAuthorDto (Author author);
     List<AuthorDto> toAuthorsDto(List<Author> authors);
-
     @InheritInverseConfiguration
     @Mapping(target = "books" , ignore = true)
     Author toAuthor (AuthorDto authorDto);

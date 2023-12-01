@@ -1,28 +1,24 @@
 package c1541tjavareact.library.persistence.mapper;
 
+import c1541tjavareact.library.domain.dto.AuthorDto;
 import c1541tjavareact.library.domain.dto.BookDto;
+import c1541tjavareact.library.persistence.entity.Author;
 import c1541tjavareact.library.persistence.entity.Book;
-
-import org.mapstruct.*;
+import org.mapstruct.InheritInverseConfiguration;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.MappingConstants;
 
 import java.util.List;
 
-/**
- * @author jdmon on 29/11/2023
- * @project LibraryBackEnd
- */
-@Mapper (componentModel = MappingConstants.ComponentModel.SPRING)
+@Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
 public interface BookDaoMapper {
-    @Mapping(source = "idBook",target = "idBook")
-    @Mapping(source = "title",target = "title")
-    @Mapping(source = "isbn",target = "isbn")
-    @Mapping(source = "genre",target = "genre")
-    @Mapping(source = "quantity",target = "quantity")
-    @Mapping(source = "author.idAuthor",target = "id_author")
-    BookDto toBookDto(Book book);
+    @Mapping(source = "author", target = "authorDto")
+    @Mapping(source = "editorial", target = "editorialDto")
+    BookDto toBookDto (Book book);
     List<BookDto> toBooksDto(List<Book> books);
-
     @InheritInverseConfiguration
-    @Mapping(target = "loanList", ignore = true)
+    @Mapping(target = "loanList" , ignore = true)
     Book toBook (BookDto bookDto);
+
 }

@@ -12,10 +12,6 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Optional;
 
-/**
- * @author jdmon on 29/11/2023
- * @project LibraryBackEnd
- */
 @Repository
 public class AuthorCrudRepositoryImpl implements AuthorCrudRepository {
 

@@ -1,28 +1,15 @@
 package c1541tjavareact.library.persistence.crud;
 
-import c1541tjavareact.library.domain.dto.AuthorDto;
-import c1541tjavareact.library.domain.repository.AuthorRepository;
+import c1541tjavareact.library.domain.dto.BookDto;
 import c1541tjavareact.library.domain.repository.BookCrudRepository;
 import c1541tjavareact.library.domain.repository.BookRepository;
-import c1541tjavareact.library.domain.repository.EditorialRepository;
-import c1541tjavareact.library.persistence.entity.Author;
 import c1541tjavareact.library.persistence.entity.Book;
-import c1541tjavareact.library.persistence.entity.Editorial;
-import c1541tjavareact.library.persistence.entity.Loan;
-import c1541tjavareact.library.persistence.entity.enums.Genre;
-import c1541tjavareact.library.persistence.mapper.AuthorDaoMapper;
 import c1541tjavareact.library.persistence.mapper.BookDaoMapper;
-import jakarta.persistence.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
 import java.util.Optional;
 
-/**
- * @author jdmon on 29/11/2023
- * @project LibraryBackEnd
- */
 @Repository
 public class BookCrudRepositoryImpl implements BookCrudRepository {
 
@@ -30,65 +17,18 @@ public class BookCrudRepositoryImpl implements BookCrudRepository {
     private BookRepository bookRepository;
 
     @Autowired
-    private AuthorRepository authorRepository;
+    private BookDaoMapper bookDaoMapper;
 
-    @Autowired
-    private EditorialRepository editorialRepository;
-
-    @Autowired
-    private AuthorDaoMapper authorDaoMapper;
-//    @Autowired
-//    private BookDaoMapper bookDaoMapper;
 
     @Override
-    public List<Book> getAllBooks() {
-        return bookRepository.findAll();
+    public BookDto save(BookDto bookDto) {
+
+        Book book = bookDaoMapper.toBook(bookDto);
+        return bookDaoMapper.toBookDto(bookRepository.save(book));
     }
 
     @Override
-    public Optional<Book> getBookByIsbn(String isbn) {
-        return bookRepository.findByIsbn(isbn);
-    }
-
-    @Override
-    public Optional<List<Book>> getBookByTitle(String title) {
-        return bookRepository.findByTitle(title);
-    }
-
-    @Override
-    public Book save(Book book) {
-        return bookRepository.save(book);
-    }
-
-    @Override
-    public Book update(Long idBook, Book book) {
-        return bookRepository.findById(idBook).map(
-                book1 -> {
-                    book1.setTitle(book.getTitle());
-                    book1.setIsbn(book.getIsbn());
-                    book1.setGenre(book.getGenre());
-                    book1.setQuantity(book.getQuantity());
-                    book1.setAuthor(book.getAuthor());
-                    book1.setLinkedEditorials(book.getLinkedEditorials());
-                    return bookRepository.save(book1);
-                }
-        ).orElseThrow(() -> new RuntimeException("Id not found"));
-    }
-
-    @Override
-    public void delete(Long idBook) {
-        bookRepository.deleteById(idBook);
-    }
-
-    @Override
-    public Optional<AuthorDto> getAuthor(Long idAuthor) {
-        return authorRepository.findById(idAuthor).map(author ->
-                    authorDaoMapper.toAuthorDto(author)
-        );
-    }
-
-    @Override
-    public Optional<Editorial> getEditorial(Long idEditorial) {
-        return editorialRepository.findById(idEditorial);
+    public Optional<BookDto> getBook(Long idBook) {
+        return bookRepository.findById(idBook).map(Book -> bookDaoMapper.toBookDto(Book));
     }
 }

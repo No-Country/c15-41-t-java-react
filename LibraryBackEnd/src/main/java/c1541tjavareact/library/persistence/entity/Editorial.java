@@ -21,20 +21,13 @@ public class Editorial implements Serializable {
     @Column(name = "id_editorial")
     private long idEditorial;
 
-//    @ManyToOne(fetch = FetchType.LAZY)
-////    @JoinColumn(name="id_book",nullable = false,
-////            referencedColumnName = "id_book")
-//    private Book book;
-
     @Column(nullable = false)
     private String name;
 
     @Column(name = "established_date",nullable = false)
     private LocalDate establishedDate;
 
-    @ManyToMany(mappedBy = "linkedEditorials")
-    private List<Book> likes;
+    @OneToMany(mappedBy = "editorial")
+    private List<Book> books;
 
-//    @OneToMany(mappedBy = "editorial", cascade = CascadeType.ALL)
-//    private List<BookEditorial> editorialList;
 }
