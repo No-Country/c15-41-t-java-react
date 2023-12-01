@@ -1,21 +1,23 @@
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
-import { useUser } from '../context/UserContext'
+/* import { useUser } from '../context/UserContext' */
 
 interface RegisterFormType {
   title: string
-  quantity: number | undefined
-  author: string
+  quantity: number
+  author: number | undefined
   genre: string
-  editorial: string
+  editorial: number | undefined
+  image?: string
 }
 
 const initialValues: RegisterFormType = {
   title: '',
   quantity: 0,
-  author: '',
+  author: undefined,
   genre: '',
-  editorial: ''
+  editorial: undefined,
+  image: ''
 }
 
 // DEBERIAN SER PROPORCIONADOS POR BACKEND
@@ -34,14 +36,14 @@ const mockEditorials = [
 ]
 
 const mockGenres = [
-  { name: 'Filosofia', id: 1001 },
-  { name: 'Ciencia', id: 1005 },
-  { name: 'Novela', id: 1006 },
-  { name: 'Historia', id: 1007 },
-  { name: 'Ciencia ficcion', id: 1002 },
-  { name: 'Religion', id: 1003 },
-  { name: 'Gastronimia', id: 1004 },
-  { name: 'Arte', id: 1008 }
+  'Filosofia',
+  'Ciencia',
+  'Novela',
+  'Historia',
+  'Ciencia ficcion',
+  'Religion',
+  'Gastronimia',
+  'Arte'
 ]
 
 const validationSchema = Yup.object({
@@ -58,7 +60,7 @@ export default function RegisterForm() {
     validationSchema,
     onSubmit
   })
-  const { fetch } = useUser()
+  /*   const { fetch } = useUser() */
 
   async function onSubmit(values: RegisterFormType) {
     console.log(values)
@@ -123,7 +125,7 @@ export default function RegisterForm() {
               value={values.author}
               onChange={handleChange}
             >
-              <option value="" disabled>
+              <option selected disabled>
                 Selecciona un autor
               </option>
               {mockAuthors.map(author => (
@@ -150,8 +152,8 @@ export default function RegisterForm() {
                 Selecciona un genero
               </option>
               {mockGenres.map(genre => (
-                <option key={genre.id} value={genre.name}>
-                  {genre.name}
+                <option key={genre} value={genre}>
+                  {genre}
                 </option>
               ))}
             </select>
@@ -172,17 +174,34 @@ export default function RegisterForm() {
               value={values.editorial}
               onChange={handleChange}
             >
-              <option value="" disabled>
+              <option selected disabled>
                 Selecciona una editorial
               </option>
               {mockEditorials.map(editorial => (
-                <option key={editorial.id} value={editorial.name}>
+                <option key={editorial.id} value={editorial.id}>
                   {editorial.name}
                 </option>
               ))}
             </select>
             <small className="absolute -bottom-6 text-xs font-bold text-red-500">
               {errors?.editorial}
+            </small>
+          </div>
+          <label className="text-base font-bold leading-[normal] text-blueLight" htmlFor="image">
+            Agrega una imagen
+          </label>
+          <div className="relative mb-14 flex h-8 w-full items-center gap-2 border-0 border-b-2 border-solid border-blueDark">
+            <input
+              className="w-full border-0 bg-grey text-base font-[400] leading-[normal] text-blueDark placeholder-[#ABABAB] focus:outline-none"
+              type="file"
+              name="image"
+              value={values.image}
+              onChange={handleChange}
+              accept=".jpg, .jpeg, .png"
+            />
+
+            <small className="absolute -bottom-6 text-xs font-bold text-red-500">
+              {errors?.image}
             </small>
           </div>
           <div className="pb-10">

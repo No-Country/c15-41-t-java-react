@@ -3,7 +3,6 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import Layout from './components/Layout.tsx'
 import Home from './components/Home.tsx'
 import { useUser } from './context/UserContext.tsx'
-import BookList from './components/BookList.tsx'
 import Catalogue from './components/Catalogue.tsx'
 const App = () => {
   const { currentUser, setupComplete } = useUser()
