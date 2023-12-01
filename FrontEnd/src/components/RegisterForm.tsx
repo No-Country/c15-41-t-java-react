@@ -176,7 +176,7 @@ export default function RegisterForm() {
                 Selecciona una editorial
               </option>
               {mockEditorials.map(editorial => (
-                <option key={editorial.id} value={editorial.name}>
+                <option key={editorial.id} value={editorial.id}>
                   {editorial.name}
                 </option>
               ))}
