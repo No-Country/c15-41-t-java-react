@@ -1,42 +1,33 @@
-
-export interface BookG {
-  id: number
-  title: string
-  quantity: number
-  idAuthor: number
-  authorDto: {
-    id: number
-    name: string
-    lastName: string
-  }
-  genre: string
-  editorialDto: {
-    id: number
-    name: string
-    idEditorial: number
-  }
-  image: string
-}
-
 export interface Book {
   id: number
   title: string
-  quantity: number
   idAuthor: number
-  author: number
- 
+  IdEditorial: number
   genre: string
-  editorial: number
+  quantity: number
   image: string
+  editorialDto: Editorial
+  authorDto: Author
 }
 
-interface Author {
-  id: number;
-  name: string;
-  lastName: string;
+export interface BookPost {
+  title: string
+  idAuthor: number
+  IdEditorial: number
+  genre: string
+  quantity: number
+  image: string
+  
 }
 
-interface Editorial {
-  id: number;
-  name: string;
+export interface Author {
+  name: string
+  lastName: string
+  idAuthor: number
+}
+
+export interface Editorial {
+  name: string
+  idEditorial: number
+  establishedDate: string
 }

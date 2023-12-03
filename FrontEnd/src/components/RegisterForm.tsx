@@ -6,38 +6,41 @@ import{Author, Editorial} from '../types/types'
 
 
 interface RegisterFormType {
+  id: number
   title: string
-  quantity: number
-  author:number | undefined,
+  idAuthor: number
+  IdEditorial: number
   genre: string
-  editorial:number | undefined
-  image?: string
+  quantity: number
+  image: string
+  
 }
 
 const initialValues: RegisterFormType = {
+  id: 0,
   title: '',
-  quantity: 0,
-  author: undefined,
+  idAuthor: 0,
+  IdEditorial: 0,
   genre: '',
-  editorial: undefined,
+  quantity: 0,
   image: ''
 }
 
 // DEBERIAN SER PROPORCIONADOS POR BACKEND
-const mockAuthors: Author[] = [
+/*const mockAuthors: Author[] = [
   { name: 'Paulo', lastName: 'Coelho', id: 25452 },
   { name: 'Edgar Allan', lastName: 'Poe', id: 4435 },
   { name: 'Jane', lastName: 'Austen', id: 55646 }
-]
+]/*
 
-const mockEditorials: Editorial[] = [
+/*onst mockEditorials: Editorial[] = [
   { name: 'Planeta', id: 1001 },
   { name: 'Austral', id: 1005 },
   { name: 'BlackList', id: 1006 },
   { name: 'El Aleph editores', id: 1007 },
   { name: 'Ariel', id: 1002 }
 ]
-
+*/
 const mockGenres = [
   'Filosofia',
   'Ciencia',
@@ -57,7 +60,7 @@ const validationSchema = Yup.object({
   editorial: Yup.string().required('La editorial es requerido')
 })
 
-export default function RegisterForm({ formData }: { formData: RegisterFormType }) {
+export default function RegisterForm() {
   const [authors, setAuthors] = useState<Author[]>([])
   const [editorials, setEditorials] = useState<Editorial[]>([])
 
@@ -88,11 +91,8 @@ export default function RegisterForm({ formData }: { formData: RegisterFormType 
 
   async function onSubmit(values: RegisterFormType) {
    console.log(values)
-   console.log(authors)
-   console.log(editorials)
-    const getAuthorById = (id: number) => {
-      return authors.find((author) => author.id === id)
-    }
+  
+    
 
    
     
@@ -163,7 +163,7 @@ export default function RegisterForm({ formData }: { formData: RegisterFormType 
                 Selecciona un autor
               </option>
               {authors.map(author => (
-                <option key={author.id} value={author.id}>
+                <option key={author.idAuthor} value={author.idAuthor}>
                   {`${author.name} ${author.lastName}`}
                 </option>
               ))}
@@ -212,7 +212,7 @@ export default function RegisterForm({ formData }: { formData: RegisterFormType 
                 Selecciona una editorial
               </option>
               {editorials.map(editorial => (
-                <option key={editorial.id} value={editorial.id}>
+                <option key={editorial.idEditorial} value={editorial.idEditorial}>
                   {editorial.name}
                 </option>
               ))}
