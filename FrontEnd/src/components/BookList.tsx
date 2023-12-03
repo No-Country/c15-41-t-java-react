@@ -28,7 +28,7 @@ const BookList: React.FC = () => {
 
   return (
     <div className='flex flex-col items-center min-h-screen'>
-      <SearchBookModify allBooks={books} onSearchResults={handleSearchResults} />
+      <SearchBookModify allBooks={books} onSearchResults={handleSearchResults} setPage={setPage} />
       <div className="grid w-full items-center justify-center gap-x-14 gap-y-5 py-5 align-middle lg:grid-cols-2">
         <div className="grid w-full items-center justify-center gap-x-14 gap-y-5 py-5 align-middle lg:grid-cols-2">
           {searchResults.length > 0
