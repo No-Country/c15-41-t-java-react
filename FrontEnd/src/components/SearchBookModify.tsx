@@ -1,15 +1,15 @@
 import { useState, useEffect } from 'react'
 import React from 'react'
 import { GoSearch } from 'react-icons/go'
-import { Book } from '../types/types'
+import { BookL } from '../types/types'
 
 interface SearchBookModifyProps {
-  allBooks: Book[]
-  onSearchResults: (results: Book[]) => void
+  allBooks: BookL[]
+  onSearchResults: (results: BookL[]) => void
 }
 
 const SearchBookModify: React.FC<SearchBookModifyProps> = ({ allBooks, onSearchResults }) => {
-  const [filteredProducts, setFilteredProducts] = useState<Book[]>([])
+  const [filteredProducts, setFilteredProducts] = useState<BookL[]>([])
   const [searchTerm, setSearchTerm] = useState('')
 
   function arraysAreEqual(array1: any, array2: any) {

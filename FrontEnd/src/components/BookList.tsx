@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react'
 import BookC   from './Book.tsx'
-import { Book } from '../types/types'
+import { BookL } from '../types/types'
 import SearchBookModify from './SearchBookModify'
 
 
 const BookList: React.FC = () => {
-  const [books, setBooks] = useState<Book[]>([])
+  const [books, setBooks] = useState<BookL[]>([])
   const [searchResults, setSearchResults] = useState([])
   useEffect(() => {
     const getBooks = async () => {
@@ -27,7 +27,7 @@ const BookList: React.FC = () => {
       <SearchBookModify allBooks={books} onSearchResults={handleSearchResults} />
       <div className="grid w-full items-center justify-center gap-x-14 gap-y-5 py-5 align-middle lg:grid-cols-2">
         <div className="grid w-full items-center justify-center gap-x-14 gap-y-5 py-5 align-middle lg:grid-cols-2">
-          {searchResults.map((book: Book) => (
+          {searchResults.map((book: BookL) => (
             <BookC key={book.id} {...book} />
           ))}
         </div>

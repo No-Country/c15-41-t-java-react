@@ -8,32 +8,18 @@ import{Author, Editorial} from '../types/types'
 interface RegisterFormType {
   title: string
   quantity: number
-  author: {
-    id: number
-    name: string
-    lastName: string
-  }
+  author:undefined
   genre: string
-  editorial: {
-    id: number
-    name: string
-  }
+  editorial:undefined
   image?: string
 }
 
 const initialValues: RegisterFormType = {
   title: '',
   quantity: 0,
-  author: {
-    id: 0,
-    name: '',
-    lastName: ''
-  },
+  author: undefined,
   genre: '',
-  editorial: {
-    id: 0,
-    name: ''
-  },
+  editorial: undefined,
   image: ''
 }
 
@@ -101,27 +87,17 @@ export default function RegisterForm({ formData }: { formData: RegisterFormType 
   /*   const { fetch } = useUser() */
 
   async function onSubmit(values: RegisterFormType) {
-   
-    const newBook={
-      title: values.title,
-      quantity: values.quantity,
-      idAuthor: values.author.id,
-      author: {
-        id: values.author.id,
-        name: values.author.name,
-        lastName: values.author.lastName
-      },
-      genre: values.genre,
-
-      editorial:{
-        id: values.editorial.id,
-        name: values.editorial.name
-      },
-      idEditorial: values.editorial.id,
-      image: values.image
+   console.log(values)
+   console.log(authors)
+   console.log(editorials)
+    const getAuthorById = (id: number) => {
+      return authors.find((author) => author.id === id)
     }
+    const authorB= getAuthorById(values.author)
+   
+    
+   
 
-    console.log(newBook)
        /* try {
       const postOptions = {
         method: 'POST',
@@ -180,7 +156,7 @@ export default function RegisterForm({ formData }: { formData: RegisterFormType 
             <select
               className="w-full border-0 bg-grey text-base font-[400] leading-[normal] text-blueDark placeholder-[#ABABAB] focus:outline-none"
               name="author"
-              value={values.author.id}
+              defaultValue=""
               onChange={handleChange}
             >
               <option value="" disabled>

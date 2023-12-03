@@ -1,4 +1,4 @@
-export interface Book {
+export interface BookL {
   id: number
   title: string
   quantity: number
@@ -14,6 +14,18 @@ export interface Book {
     name: string
     idEditorial: number
   }
+  image: string
+}
+
+export interface Book {
+  id: number
+  title: string
+  quantity: number
+  idAuthor: number
+  author: number
+ 
+  genre: string
+  editorial: number
   image: string
 }
 

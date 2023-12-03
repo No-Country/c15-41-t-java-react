@@ -1,5 +1,5 @@
 {
-  "books": [
+  "getBooks": [
     {
       "id": 1,
       "title": "Cien años de soledad",
