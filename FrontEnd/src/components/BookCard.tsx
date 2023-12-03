@@ -1,15 +1,7 @@
 import React from 'react'
+import type { Book } from '../types/types'
 
-type Props = {
-  id: number
-  title: string
-  author: string
-  genere: string
-  editorial: string
-  image: string
-}
-
-const Book: React.FC<Props> = ({ id, image, title, author, genere, editorial }) => {
+const BookCard: React.FC<Book> = ({ id, image, title, author, genre, editorial }) => {
   return (
     <div className=" flex h-full justify-start gap-3  border-0 border-b border-solid border-black p-3">
       <div className="bg-cover">
@@ -23,7 +15,7 @@ const Book: React.FC<Props> = ({ id, image, title, author, genere, editorial }) 
         </p>
         <p>
           <span className="font-bold text-black">Genero: </span>
-          {genere}
+          {genre}
         </p>
         <p>
           <span className="font-bold text-black">Editorial: </span>
@@ -34,4 +26,4 @@ const Book: React.FC<Props> = ({ id, image, title, author, genere, editorial }) 
   )
 }
 
-export default Book
+export default BookCard

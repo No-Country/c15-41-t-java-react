@@ -1,5 +1,6 @@
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
+import type { Author, Editorial } from '../types/types'
 /* import { useUser } from '../context/UserContext' */
 
 interface RegisterFormType {
@@ -21,13 +22,13 @@ const initialValues: RegisterFormType = {
 }
 
 // DEBERIAN SER PROPORCIONADOS POR BACKEND
-const mockAuthors = [
+const mockAuthors: Author[] = [
   { name: 'Paulo', lastName: 'Coelho', id: 25452 },
   { name: 'Edgar Allan', lastName: 'Poe', id: 4435 },
   { name: 'Jane', lastName: 'Austen', id: 55646 }
 ]
 
-const mockEditorials = [
+const mockEditorials: Editorial[] = [
   { name: 'Planeta', id: 1001 },
   { name: 'Austral', id: 1005 },
   { name: 'BlackList', id: 1006 },
