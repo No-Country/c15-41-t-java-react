@@ -24,7 +24,6 @@ const Tabs = () => {
       <TabPanel>
         <RegisterForm />
       </TabPanel>
-      <TabPanel></TabPanel>
     </ReactTabs>
   )
 }

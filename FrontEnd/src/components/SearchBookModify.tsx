@@ -1,14 +1,6 @@
 import { useState, useEffect } from 'react'
-import React from 'react'
 import { GoSearch } from 'react-icons/go'
-
-interface Book {
-  title: string
-  author: string
-  genere: string
-  editorial: string
-  image: string
-}
+import type { Book } from '../types/types'
 
 interface SearchBookModifyProps {
   allBooks: Book[]
@@ -16,7 +8,7 @@ interface SearchBookModifyProps {
 }
 
 const SearchBookModify: React.FC<SearchBookModifyProps> = ({ allBooks, onSearchResults }) => {
-  const [filteredProducts, setFilteredProducts] = useState<Book[]>([])
+  const [filteredProducts, setFilteredProducts] = useState<Book[] | []>([])
   const [searchTerm, setSearchTerm] = useState('')
 
   function arraysAreEqual(array1: any, array2: any) {
@@ -29,7 +21,7 @@ const SearchBookModify: React.FC<SearchBookModifyProps> = ({ allBooks, onSearchR
         book =>
           book.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
           book.author.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          book.genere.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          book.genre.toLowerCase().includes(searchTerm.toLowerCase()) ||
           book.editorial.toLowerCase().includes(searchTerm.toLowerCase())
       )
       if (!arraysAreEqual(filtered, filteredProducts)) {
@@ -49,8 +41,11 @@ const SearchBookModify: React.FC<SearchBookModifyProps> = ({ allBooks, onSearchR
           id="searchInput"
           className="folnt-bold h-full w-full border-0 font-poppins text-lg placeholder-black focus:outline-none"
           type="text"
+          value={searchTerm}
           placeholder="Buscar"
-          onChange={e => setSearchTerm(e.target.value)}
+          onChange={e => {
+            setSearchTerm(e.target.value)
+          }}
         />
       </div>
       <button className="ml-2 h-8 w-8 rounded-full bg-white text-lg font-bold text-black">?</button>
