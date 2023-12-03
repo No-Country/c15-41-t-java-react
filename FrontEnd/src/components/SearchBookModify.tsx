@@ -1,14 +1,7 @@
 import { useState, useEffect } from 'react'
 import React from 'react'
 import { GoSearch } from 'react-icons/go'
-
-interface Book {
-  title: string
-  author: string
-  genere: string
-  editorial: string
-  image: string
-}
+import { Book } from '../types/types'
 
 interface SearchBookModifyProps {
   allBooks: Book[]
@@ -28,9 +21,10 @@ const SearchBookModify: React.FC<SearchBookModifyProps> = ({ allBooks, onSearchR
       const filtered = allBooks.filter(
         book =>
           book.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          book.author.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          book.genere.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          book.editorial.toLowerCase().includes(searchTerm.toLowerCase())
+          book.author.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          book.author.lastName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          book.genre.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          book.editorial.name.toLowerCase().includes(searchTerm.toLowerCase())
       )
       if (!arraysAreEqual(filtered, filteredProducts)) {
         setFilteredProducts(filtered)

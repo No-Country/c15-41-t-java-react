@@ -2,6 +2,25 @@ import { Tab, Tabs as ReactTabs, TabList, TabPanel } from 'react-tabs'
 import 'react-tabs/style/react-tabs.css'
 import RegisterForm from './RegisterForm'
 import BookList from './BookList'
+import { Book } from '../types/types'
+
+const formData: Book = {
+  id: 0,
+  title: '',
+  quantity: 0,
+  author:{
+    id: 0,
+    name: '',
+    lastName: ''
+  },
+  genre: '',
+  editorial:{
+    id: 0,
+    name: ''
+  },
+  image: ''
+  
+}
 
 const Tabs = () => {
   return (
@@ -22,9 +41,8 @@ const Tabs = () => {
         <BookList />
       </TabPanel>
       <TabPanel>
-        <RegisterForm />
+        <RegisterForm formData={formData}/>
       </TabPanel>
-      <TabPanel></TabPanel>
     </ReactTabs>
   )
 }

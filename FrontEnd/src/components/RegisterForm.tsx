@@ -1,22 +1,39 @@
+import {useState, useEffect} from 'react'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
+import{Author, Editorial} from '../types/types'
+
 /* import { useUser } from '../context/UserContext' */
 
 interface RegisterFormType {
   title: string
   quantity: number
-  author: number | undefined
+  author: {
+    id: number
+    name: string
+    lastName: string
+  }
   genre: string
-  editorial: number | undefined
+  editorial: {
+    id: number
+    name: string
+  }
   image?: string
 }
 
 const initialValues: RegisterFormType = {
   title: '',
   quantity: 0,
-  author: undefined,
+  author: {
+    id: 0,
+    name: '',
+    lastName: ''
+  },
   genre: '',
-  editorial: undefined,
+  editorial: {
+    id: 0,
+    name: ''
+  },
   image: ''
 }
 
@@ -54,7 +71,28 @@ const validationSchema = Yup.object({
   editorial: Yup.string().required('La editorial es requerido')
 })
 
-export default function RegisterForm() {
+export default function RegisterForm({ formData }: { formData: RegisterFormType }) {
+  const [authors, setAuthors] = useState<Author[]>([])
+  const [editorials, setEditorials] = useState<Editorial[]>([])
+
+  useEffect(() => {
+    const getAuthors = async () => {
+      const response = await fetch('http://localhost:3000/authors')
+      const data = await response.json()
+      setAuthors(data)
+    }
+    getAuthors()
+  }, [])
+
+  useEffect(() => {
+    const getEditorials = async () => {
+      const response = await fetch('http://localhost:3000/editorials')
+      const data = await response.json()
+      setEditorials(data)
+    }
+    getEditorials()
+  }, [])
+  
   const { values, errors, handleChange, handleSubmit } = useFormik({
     initialValues,
     validationSchema,
@@ -63,13 +101,33 @@ export default function RegisterForm() {
   /*   const { fetch } = useUser() */
 
   async function onSubmit(values: RegisterFormType) {
-    console.log(values)
-    /*     try {
+   
+    const newBook={
+      title: values.title,
+      quantity: values.quantity,
+      idAuthor: values.author.id,
+      author: {
+        id: values.author.id,
+        name: values.author.name,
+        lastName: values.author.lastName
+      },
+      genre: values.genre,
+
+      editorial:{
+        id: values.editorial.id,
+        name: values.editorial.name
+      },
+      idEditorial: values.editorial.id,
+      image: values.image
+    }
+
+    console.log(newBook)
+       /* try {
       const postOptions = {
         method: 'POST',
-        body: JSON.stringify(values)
+        body: JSON.stringify(newBook)
       }
-      const postResponse = await fetch('here api', postOptions)
+      const postResponse = await fetch('http://localhost:3000/books', postOptions)
       console.log(postResponse)
     } catch (error) {
       console.error(error)
@@ -122,20 +180,20 @@ export default function RegisterForm() {
             <select
               className="w-full border-0 bg-grey text-base font-[400] leading-[normal] text-blueDark placeholder-[#ABABAB] focus:outline-none"
               name="author"
-              value={values.author}
+              value={values.author.id}
               onChange={handleChange}
             >
-              <option selected disabled>
+              <option value="" disabled>
                 Selecciona un autor
               </option>
-              {mockAuthors.map(author => (
+              {authors.map(author => (
                 <option key={author.id} value={author.id}>
                   {`${author.name} ${author.lastName}`}
                 </option>
               ))}
             </select>
             <small className="absolute -bottom-6 text-xs font-bold text-red-500">
-              {errors?.author}
+              {errors?.author?.lastName}
             </small>
           </div>
           <label className="text-base font-bold leading-[normal] text-blueLight" htmlFor="genre">
@@ -171,20 +229,20 @@ export default function RegisterForm() {
             <select
               className="w-full border-0 bg-grey text-base font-[400] leading-[normal] text-blueDark placeholder-[#ABABAB] focus:outline-none"
               name="editorial"
-              value={values.editorial}
+              defaultValue=""
               onChange={handleChange}
             >
-              <option selected disabled>
+              <option value="" disabled>
                 Selecciona una editorial
               </option>
-              {mockEditorials.map(editorial => (
+              {editorials.map(editorial => (
                 <option key={editorial.id} value={editorial.id}>
                   {editorial.name}
                 </option>
               ))}
             </select>
             <small className="absolute -bottom-6 text-xs font-bold text-red-500">
-              {errors?.editorial}
+              {errors?.editorial?.name}
             </small>
           </div>
           <label className="text-base font-bold leading-[normal] text-blueLight" htmlFor="image">
