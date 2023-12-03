@@ -3,6 +3,8 @@
     {
       "id": 1,
       "title": "Cien años de soledad",
+      "quantity": 12,
+      "idAuthor": 1,
       "authorDto": {
         "id": 1,
         "name": "Gabriel",
@@ -10,39 +12,52 @@
       },
       "editorialDto": 
       {"id": 1, "name": "Editorial Sudamericana"},
+      "idEditorial": 1,
       "genre": "Realismo mágico",
       "image": "./src/assets/img/imagen1.png"
     },
     {
       "id": 2,
       "title": "1984",
-      "author": "George Orwell",
-      "editorial": "De Bolsillo",
-      "genere": "Distopía",
+      "quantity": 10,
+      "idAuthor": 2,
+      "authorDto": {"id": 2, "name": "George", "lastName": "Orwell"},
+      "editorialDto": {"id": 2, "name": "de bolsillo"},
+      "idEditorial": 2,
+      "genre": "Distopía",
       "image": "./src/assets/img/imagen2.png"
     },
     {
       "id": 3,
       "title": "El amor en los tiempos del cólera",
-      "author": "Gabriel García Márquez",
-      "editorial": "Editorial Sudamericana",
-      "genere": "Realismo mágico",
+      "quantity": 5,
+      "authorDto":{"id":1, "name": "Gabriel", "lastName": "García Márquez"},
+      "idAuthor": 1,
+      "editorialDto": {"id": 1, "name": "Editorial Sudamericana"},
+      "idEditorial": 1,
+      "genre": "Realismo mágico",
       "image": "./src/assets/img/image3.png"
     },
     {
       "id": 4,
       "title": "La sombra del viento",
-      "author": "Carlos Ruiz Zafón",
-      "editorial": "Editorial Planeta",
-      "genere": "Novela histórica",
+      "quantity": 3,
+      "author": {"id": 3, "name": "Carlos", "lastName": "Ruiz Zafón"},
+      "idAuthor": 3,
+      "editorial": {"id": 3, "name": "Editorial Planeta"},
+      "idEditorial": 3,
+      "genre": "Novela histórica",
       "image": "./src/assets/img/image4.png"
     },
     {
       "id": 5,
       "title": "Harry Potter y la piedra filosofal",
-      "author": "JK Rowling",
-      "editorial": "Editorial Salamandra",
-      "genere": "Fantasía",
+      "quantity": 8,
+      "idAuthor": 4,
+      "author": {"id": 4, "name": "JK", "lastName": "Rowling"},
+      "editorial": {"id": 4, "name": "Salamandra"},
+      "idEditorial": 4,
+      "genre": "Fantasía",
       "image": "./src/assets/img/imagen5.png"
     },
     {
@@ -52,7 +67,8 @@
       "author": {"id":5, "name": "Antoine", "lastName": "De Saint-Exupéry"},
       "idAuthor": 5,
       "editorial": "Editorial Gallimard",
-      "genere": "Literatura infantil/filosófica",
+      "idEditorial": 5,
+      "genre": "Literatura infantil/filosófica",
       "image": "./src/assets/img/imagen6.png"
     }
 
@@ -87,7 +103,7 @@
   "Editorials": [
     {
       "id": 1,
-      "name": "Realismo mágico"
+      "name": "Editorial Sudamericana"
     },
     {
       "id": 2,
@@ -103,11 +119,8 @@
     },
     {
       "id": 5,
-      "name": "Editorial Sudamericana"
-    },
-    {
-      "id": 6,
       "name": "Editorial Gallimard"
     }
+  
   ]
 }

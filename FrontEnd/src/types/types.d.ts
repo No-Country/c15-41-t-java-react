@@ -4,13 +4,13 @@ export interface BookG {
   title: string
   quantity: number
   idAuthor: number
-  author: {
+  authorDto: {
     id: number
     name: string
     lastName: string
   }
   genre: string
-  editorial: {
+  editorialDto: {
     id: number
     name: string
     idEditorial: number

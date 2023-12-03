@@ -9,20 +9,20 @@ type Props = {
   id: number
   title: string
   quantity: number
-  author: {
+  authorDto: {
     id: number
     name: string
     lastName: string
   }
   genre: string
-  editorial: {
+  editorialDto: {
     id: number
     name: string
   }
   image: string
 }
 
-const BookCard: React.FC<Props> = ({ id, image, title, author, genre, editorial, quantity }) => {
+const BookCard: React.FC<Props> = ({ id, image, title, authorDto, genre, editorialDto, quantity }) => {
   
   const [isModalOpen, setIsModalOpen] = useState(false)
 
@@ -30,9 +30,9 @@ const BookCard: React.FC<Props> = ({ id, image, title, author, genre, editorial,
     id: id,
     title: title,
     quantity: quantity,
-    author: author.id,
+    author: authorDto.id,
     genre: genre,
-    editorial: editorial.id,
+    editorial: editorialDto.id,
     image: image
   }
   return (
@@ -69,7 +69,7 @@ const BookCard: React.FC<Props> = ({ id, image, title, author, genre, editorial,
         <div className="flex">
           <p className="">
             <span className="font-bold text-black">Autor: </span>
-            {author?.name} {author?.lastName}
+            {authorDto?.name} {authorDto?.lastName}
           </p>
           <div className="w-full object-cover">
             <img src={imgDelete} alt="icono eliminar" className="ml-4 cursor-pointer" />
@@ -81,7 +81,7 @@ const BookCard: React.FC<Props> = ({ id, image, title, author, genre, editorial,
         </p>
         <p>
           <span className="font-bold text-black">Editorial: </span>
-          {editorial?.name}
+          {editorialDto?.name}
         </p>
       </div>
       {isModalOpen && (

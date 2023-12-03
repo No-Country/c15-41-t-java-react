@@ -1,22 +1,13 @@
 import { useState, useEffect } from 'react'
 import { GoSearch } from 'react-icons/go'
-<<<<<<< HEAD
-import { BookL } from '../types/types'
-=======
-import type { Book } from '../types/types'
->>>>>>> FrontEnd
-
+import type { BookG } from '../types/types'
 interface SearchBookModifyProps {
-  allBooks: BookL[]
-  onSearchResults: (results: BookL[]) => void
+  allBooks: BookG[]
+  onSearchResults: (results: BookG[]) => void
 }
 
 const SearchBookModify: React.FC<SearchBookModifyProps> = ({ allBooks, onSearchResults }) => {
-<<<<<<< HEAD
-  const [filteredProducts, setFilteredProducts] = useState<BookL[]>([])
-=======
-  const [filteredProducts, setFilteredProducts] = useState<Book[] | []>([])
->>>>>>> FrontEnd
+  const [filteredProducts, setFilteredProducts] = useState<BookG[] | []>([])
   const [searchTerm, setSearchTerm] = useState('')
 
   function arraysAreEqual(array1: any, array2: any) {
@@ -28,16 +19,9 @@ const SearchBookModify: React.FC<SearchBookModifyProps> = ({ allBooks, onSearchR
       const filtered = allBooks.filter(
         book =>
           book.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-<<<<<<< HEAD
-          book.author.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          book.author.lastName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          book.authorDto.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
           book.genre.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          book.editorial.name.toLowerCase().includes(searchTerm.toLowerCase())
-=======
-          book.author.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          book.genre.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          book.editorial.toLowerCase().includes(searchTerm.toLowerCase())
->>>>>>> FrontEnd
+          book.editorialDto.name.toLowerCase().includes(searchTerm.toLowerCase())
       )
       if (!arraysAreEqual(filtered, filteredProducts)) {
         setFilteredProducts(filtered)
