@@ -5,9 +5,10 @@ import type { Book } from '../types/types'
 interface SearchBookModifyProps {
   allBooks: Book[]
   onSearchResults: (results: Book[]) => void
+  setPage: React.Dispatch<React.SetStateAction<number>>
 }
 
-const SearchBookModify: React.FC<SearchBookModifyProps> = ({ allBooks, onSearchResults }) => {
+const SearchBookModify: React.FC<SearchBookModifyProps> = ({ allBooks, onSearchResults, setPage }) => {
   const [filteredProducts, setFilteredProducts] = useState<Book[] | []>([])
   const [searchTerm, setSearchTerm] = useState('')
 
@@ -17,12 +18,14 @@ const SearchBookModify: React.FC<SearchBookModifyProps> = ({ allBooks, onSearchR
 
   useEffect(() => {
     if (searchTerm !== '') {
+      setPage(1)
       const filtered = allBooks.filter(
         book =>
           book.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          book.author.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          book.authorDto.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          book.authorDto.lastName.toLowerCase().includes(searchTerm.toLowerCase()) ||
           book.genre.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          book.editorial.toLowerCase().includes(searchTerm.toLowerCase())
+          book.editorialDto.name.toLowerCase().includes(searchTerm.toLowerCase())
       )
       if (!arraysAreEqual(filtered, filteredProducts)) {
         setFilteredProducts(filtered)

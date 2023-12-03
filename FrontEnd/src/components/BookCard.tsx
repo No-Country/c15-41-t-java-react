@@ -1,7 +1,7 @@
 import React from 'react'
 import type { Book } from '../types/types'
 
-const BookCard: React.FC<Book> = ({ id, image, title, author, genre, editorial }) => {
+const BookCard: React.FC<Book> = ({ id, image, title, authorDto, genre, editorialDto }) => {
   return (
     <div className=" flex h-full justify-start gap-3  border-0 border-b border-solid border-black p-3">
       <div className="bg-cover">
@@ -11,7 +11,7 @@ const BookCard: React.FC<Book> = ({ id, image, title, author, genre, editorial }
         <h3 className="text-lg text-blueLight"> Titulo: {title}</h3>
         <p className="">
           <span className="font-bold text-black">Autor: </span>
-          {author}
+          {`${authorDto.name} + ${authorDto.lastName}`}
         </p>
         <p>
           <span className="font-bold text-black">Genero: </span>
@@ -19,7 +19,7 @@ const BookCard: React.FC<Book> = ({ id, image, title, author, genre, editorial }
         </p>
         <p>
           <span className="font-bold text-black">Editorial: </span>
-          {editorial}
+          {editorialDto.name}
         </p>
       </div>
     </div>

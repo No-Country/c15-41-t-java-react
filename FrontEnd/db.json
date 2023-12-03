@@ -3,50 +3,78 @@
     {
       "id": 1,
       "title": "Cien años de soledad",
-      "author": "Gabriel García Márquez",
-      "editorial": "Realismo mágico",
+      "idEditorial": 1,
+      "idAuthor": 1,
       "genre": "Editorial Sudamericana",
-      "image": "./src/assets/img/imagen1.png"
+      "image": "./src/assets/img/imagen1.png",
+      "authorDto": { "idAuthor": 1, "name": "Gabriel", "lastName": "García Márquez" },
+      "editorialDto": {
+        "idEditorial": 1,
+        "name": "Realismo mágico",
+        "establishedDate": "1990-01-17"
+      }
     },
     {
       "id": 2,
       "title": "1984",
-      "author": "George Orwell",
-      "editorial": "De Bolsillo",
+      "idEditorial": 2,
+      "idAuthor": 2,
       "genre": "Distopía",
-      "image": "./src/assets/img/imagen2.png"
+      "image": "./src/assets/img/imagen2.png",
+      "authorDto": { "idAuthor": 2, "name": "George", "lastName": "Orwell" },
+      "editorialDto": { "idEditorial": 2, "name": "De Bolsillo", "establishedDate": "1990-01-17" }
     },
     {
       "id": 3,
       "title": "El amor en los tiempos del cólera",
-      "author": "Gabriel García Márquez",
-      "editorial": "Editorial Sudamericana",
+      "idEditorial": 3,
+      "idAuthor": 3,
       "genre": "Realismo mágico",
-      "image": "./src/assets/img/image3.png"
+      "image": "./src/assets/img/image3.png",
+      "authorDto": { "idAuthor": 3, "name": "Gabriel", "lastName": "García Márquez" },
+      "editorialDto": {
+        "idEditorial": 3,
+        "name": "Editorial Sudamericana",
+        "establishedDate": "1990-01-17"
+      }
     },
     {
       "id": 4,
       "title": "La sombra del viento",
-      "author": "Carlos Ruiz Zafón",
-      "editorial": "Editorial Planeta",
+      "idEditorial": 5,
+      "idAuthor": 5,
       "genre": "Novela histórica",
-      "image": "./src/assets/img/image4.png"
+      "image": "./src/assets/img/image4.png",
+      "authorDto": { "idAuthor": 5, "name": "Carlos", "lastName": "Ruiz Zafón" },
+      "editorialDto": {
+        "idEditorial": 5,
+        "name": "Editorial Planeta",
+        "establishedDate": "1990-01-17"
+      }
     },
     {
       "id": 5,
       "title": "Harry Potter y la piedra filosofal",
-      "author": "JK Rowling",
-      "editorial": "Editorial Salamandra",
+      "idEditorial": 4,
+      "idAuthor": 4,
       "genre": "Fantasía",
-      "image": "./src/assets/img/imagen5.png"
+      "image": "./src/assets/img/imagen5.png",
+      "authorDto": { "idAuthor": 4, "name": "Emma", "lastName": "Brown" },
+      "editorialDto": { "idEditorial": 4, "name": "Emma", "establishedDate": "1990-01-17" }
     },
     {
       "id": 6,
       "title": "El principito",
-      "author": "Antoine de Saint-Exupéry",
-      "editorial": "Editorial Gallimard",
+      "idEditorial": 6,
+      "idAuthor": 6,
       "genre": "Literatura infantil/filosófica",
-      "image": "./src/assets/img/imagen6.png"
+      "image": "./src/assets/img/imagen6.png",
+      "authorDto": { "idAuthor": 6, "name": "Antoine", "lastName": "de Saint-Exupéry" },
+      "editorialDto": {
+        "idEditorial": 6,
+        "name": "Editorial Gallimard",
+        "establishedDate": "1990-01-17"
+      }
     }
   ]
 }
