@@ -1,7 +1,9 @@
+
 import { useState } from 'react'
 import imgDelete from '../assets/img/Trash.jpg'
 import RegisterForm from './RegisterForm'
 import { IoMdClose } from 'react-icons/io'
+import { Book } from '../types/types'
 
 type Props = {
   id: number
@@ -20,7 +22,7 @@ type Props = {
   image: string
 }
 
-const Book: React.FC<Props> = ({ id, image, title, author, genre, editorial, quantity }) => {
+const BookCard: React.FC<Props> = ({ id, image, title, author, genre, editorial, quantity }) => {
   
   const [isModalOpen, setIsModalOpen] = useState(false)
 
@@ -28,12 +30,11 @@ const Book: React.FC<Props> = ({ id, image, title, author, genre, editorial, qua
     id: id,
     title: title,
     quantity: quantity,
-    author: author,
+    author: author.id,
     genre: genre,
-    editorial: editorial,
+    editorial: editorial.id,
     image: image
   }
-
   return (
     <div className=" flex h-full justify-start gap-3  border-0 border-b border-solid border-black p-3">
       <div className="bg-cover">
@@ -96,4 +97,4 @@ const Book: React.FC<Props> = ({ id, image, title, author, genre, editorial, qua
   )
 }
 
-export default Book
+export default BookCard

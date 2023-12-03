@@ -1,4 +1,5 @@
-export interface BookL {
+
+export interface BookG {
   id: number
   title: string
   quantity: number

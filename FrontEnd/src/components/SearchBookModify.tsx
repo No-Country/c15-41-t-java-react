@@ -1,7 +1,10 @@
 import { useState, useEffect } from 'react'
-import React from 'react'
 import { GoSearch } from 'react-icons/go'
+<<<<<<< HEAD
 import { BookL } from '../types/types'
+=======
+import type { Book } from '../types/types'
+>>>>>>> FrontEnd
 
 interface SearchBookModifyProps {
   allBooks: BookL[]
@@ -9,7 +12,11 @@ interface SearchBookModifyProps {
 }
 
 const SearchBookModify: React.FC<SearchBookModifyProps> = ({ allBooks, onSearchResults }) => {
+<<<<<<< HEAD
   const [filteredProducts, setFilteredProducts] = useState<BookL[]>([])
+=======
+  const [filteredProducts, setFilteredProducts] = useState<Book[] | []>([])
+>>>>>>> FrontEnd
   const [searchTerm, setSearchTerm] = useState('')
 
   function arraysAreEqual(array1: any, array2: any) {
@@ -21,10 +28,16 @@ const SearchBookModify: React.FC<SearchBookModifyProps> = ({ allBooks, onSearchR
       const filtered = allBooks.filter(
         book =>
           book.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+<<<<<<< HEAD
           book.author.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
           book.author.lastName.toLowerCase().includes(searchTerm.toLowerCase()) ||
           book.genre.toLowerCase().includes(searchTerm.toLowerCase()) ||
           book.editorial.name.toLowerCase().includes(searchTerm.toLowerCase())
+=======
+          book.author.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          book.genre.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          book.editorial.toLowerCase().includes(searchTerm.toLowerCase())
+>>>>>>> FrontEnd
       )
       if (!arraysAreEqual(filtered, filteredProducts)) {
         setFilteredProducts(filtered)
@@ -43,8 +56,11 @@ const SearchBookModify: React.FC<SearchBookModifyProps> = ({ allBooks, onSearchR
           id="searchInput"
           className="folnt-bold h-full w-full border-0 font-poppins text-lg placeholder-black focus:outline-none"
           type="text"
+          value={searchTerm}
           placeholder="Buscar"
-          onChange={e => setSearchTerm(e.target.value)}
+          onChange={e => {
+            setSearchTerm(e.target.value)
+          }}
         />
       </div>
       <button className="ml-2 h-8 w-8 rounded-full bg-white text-lg font-bold text-black">?</button>

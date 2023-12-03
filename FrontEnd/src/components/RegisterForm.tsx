@@ -3,14 +3,14 @@ import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import{Author, Editorial} from '../types/types'
 
-/* import { useUser } from '../context/UserContext' */
+
 
 interface RegisterFormType {
   title: string
   quantity: number
-  author:undefined
+  author:number | undefined,
   genre: string
-  editorial:undefined
+  editorial:number | undefined
   image?: string
 }
 
@@ -24,13 +24,13 @@ const initialValues: RegisterFormType = {
 }
 
 // DEBERIAN SER PROPORCIONADOS POR BACKEND
-const mockAuthors = [
+const mockAuthors: Author[] = [
   { name: 'Paulo', lastName: 'Coelho', id: 25452 },
   { name: 'Edgar Allan', lastName: 'Poe', id: 4435 },
   { name: 'Jane', lastName: 'Austen', id: 55646 }
 ]
 
-const mockEditorials = [
+const mockEditorials: Editorial[] = [
   { name: 'Planeta', id: 1001 },
   { name: 'Austral', id: 1005 },
   { name: 'BlackList', id: 1006 },
@@ -93,7 +93,7 @@ export default function RegisterForm({ formData }: { formData: RegisterFormType 
     const getAuthorById = (id: number) => {
       return authors.find((author) => author.id === id)
     }
-    const authorB= getAuthorById(values.author)
+
    
     
    
@@ -169,7 +169,7 @@ export default function RegisterForm({ formData }: { formData: RegisterFormType 
               ))}
             </select>
             <small className="absolute -bottom-6 text-xs font-bold text-red-500">
-              {errors?.author?.lastName}
+           
             </small>
           </div>
           <label className="text-base font-bold leading-[normal] text-blueLight" htmlFor="genre">
@@ -218,7 +218,7 @@ export default function RegisterForm({ formData }: { formData: RegisterFormType 
               ))}
             </select>
             <small className="absolute -bottom-6 text-xs font-bold text-red-500">
-              {errors?.editorial?.name}
+             
             </small>
           </div>
           <label className="text-base font-bold leading-[normal] text-blueLight" htmlFor="image">

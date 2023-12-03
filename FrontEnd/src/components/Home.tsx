@@ -6,7 +6,7 @@ const Home: React.FC = () => {
   const { currentUser } = useUser()
 
   return (
-    <div className="flex p-10 max-lg:p-2 max-md:flex-col max-md:items-center">
+    <div className="flex p-10 max-lg:p-2 max-md:flex-col max-md:items-center min-h-screen">
       <div className="w-1/2 p-4 max-md:w-full max-md:text-center">
         <img src={imgHome} alt="Imagen de pagina Home" className="h-full w-full object-cover" />
       </div>

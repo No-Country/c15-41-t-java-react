@@ -3,90 +3,46 @@
     {
       "id": 1,
       "title": "Cien años de soledad",
-      "quantity": 10,
-      "author": {
+      "authorDto": {
         "id": 1,
         "name": "Gabriel",
-        "lastName": " García Marquez"
+        "lastName": "García Márquez"
       },
-      "idAuthor": 1,
-      "idEditorial": 5,
-      "editorial": {
-        "id": 5,
-        "name": "Editorial Sudamericana"
-      },
+      "editorialDto": 
+      {"id": 1, "name": "Editorial Sudamericana"},
       "genre": "Realismo mágico",
       "image": "./src/assets/img/imagen1.png"
     },
     {
       "id": 2,
       "title": "1984",
-      "quantity": 5,
-      "author": {
-        "id": 2,
-        "name": "George",
-        "lastName": "Orwell"
-      },
-      "idAuthor": 2,
-      "editorial": {
-        "id": 2,
-        "name": "De Bolsillo"
-      },
-      "idEditorial": 2,
-      "genre": "Distopía",
+      "author": "George Orwell",
+      "editorial": "De Bolsillo",
+      "genere": "Distopía",
       "image": "./src/assets/img/imagen2.png"
     },
     {
       "id": 3,
       "title": "El amor en los tiempos del cólera",
-      "quantity": 20,
-      "author": {
-        "id:1, name": "Gabriel",
-        "lastName": "García Marquez"
-      },
-      "idAuthor": 1,
-      "editorial": {
-        "id": 5,
-        "name": "Editorial Sudamericana"
-      },
-      "idEditorial": 5,
-      "genre": "Realismo mágico",
+      "author": "Gabriel García Márquez",
+      "editorial": "Editorial Sudamericana",
+      "genere": "Realismo mágico",
       "image": "./src/assets/img/image3.png"
     },
     {
       "id": 4,
       "title": "La sombra del viento",
-      "quantity": 15,
-      "author": {
-        "id": 3,
-        "name": "Carlos",
-        "lastName": "Ruiz Zafón"
-      },
-      "idAuthor": 3,
-      "editorial": {
-        "id": 4,
-        "name": "Editorial Planeta"
-      },
-      "idEditorial": 4,
-      "genre": "Novela histórica",
+      "author": "Carlos Ruiz Zafón",
+      "editorial": "Editorial Planeta",
+      "genere": "Novela histórica",
       "image": "./src/assets/img/image4.png"
     },
     {
       "id": 5,
       "title": "Harry Potter y la piedra filosofal",
-      "quantity": 8,
-      "author": {
-        "id": 4,
-        "name": "JK",
-        "lastName": "Rowling"
-      },
-      "idAuthor": 4,
-      "editorial": {
-        "id": 6,
-        "name": "Editorial Gallimard"
-      },
-      "idEditorial": 6,
-      "genre": "Fantasía",
+      "author": "JK Rowling",
+      "editorial": "Editorial Salamandra",
+      "genere": "Fantasía",
       "image": "./src/assets/img/imagen5.png"
     },
     {
@@ -96,8 +52,7 @@
       "author": {"id":5, "name": "Antoine", "lastName": "De Saint-Exupéry"},
       "idAuthor": 5,
       "editorial": "Editorial Gallimard",
-      "idEditorial": 6,
-      "genre": "Literatura infantil/filosófica",
+      "genere": "Literatura infantil/filosófica",
       "image": "./src/assets/img/imagen6.png"
     }
 
