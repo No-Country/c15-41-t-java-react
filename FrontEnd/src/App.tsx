@@ -4,6 +4,7 @@ import Layout from './components/Layout.tsx'
 import Home from './components/Home.tsx'
 import { useUser } from './context/UserContext.tsx'
 import Catalogue from './components/Catalogue.tsx'
+import UsersTabs from './components/UsersTabs.tsx'
 const App = () => {
   const { currentUser, setupComplete } = useUser()
 
@@ -23,7 +24,7 @@ const App = () => {
           <Route path="/home" element={<Home />} />
           <Route path="/libros" element={<Catalogue />} />
           <Route path="/prestamos" element={<p>Prestamos page</p>} />
-          <Route path="/usuarios" element={<p>Usuarios</p>} />
+          <Route path="/usuarios" element={<UsersTabs />} />
         </Route>
       </Routes>
     </BrowserRouter>

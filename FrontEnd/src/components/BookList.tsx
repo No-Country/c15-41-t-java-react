@@ -46,7 +46,7 @@ const BookList: React.FC = () => {
       </div>
       <div className="justify-self-end pb-8">
         <Pagination
-          count={searchResults.length / PAGE_SIZE}
+          count={Math.ceil(searchResults.length / PAGE_SIZE)}
           variant="outlined"
           shape="rounded"
           color="primary"
