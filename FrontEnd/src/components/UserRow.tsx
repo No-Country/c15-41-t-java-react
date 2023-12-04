@@ -1,4 +1,5 @@
 import { IoTrashOutline, IoPencil } from 'react-icons/io5'
+/* DE ACUERDO AL TIPADO AGREGAR LOS CAMPOS CORRESPONDIENTES */
 
 export default function UserRow({ user }) {
   return (
