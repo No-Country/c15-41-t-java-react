@@ -1,4 +1,4 @@
-import Tabs from './Tabs'
+import Tabs from '../components/Tabs'
 
 const Catalogue = () => {
   return <Tabs />

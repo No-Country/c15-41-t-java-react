@@ -1,6 +1,6 @@
 import { Tab, Tabs as ReactTabs, TabList, TabPanel } from 'react-tabs'
 import 'react-tabs/style/react-tabs.css'
-import UsersList from './UsersList'
+import UsersList from '../components/UsersList'
 
 const UsersTabs = () => {
   return (

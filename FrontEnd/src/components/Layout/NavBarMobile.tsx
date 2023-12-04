@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom'
-import imgBook from '../assets/icons-mobile/Book.png'
-import imgCustomer from '../assets/icons-mobile/Customer.png'
-import imgHome from '../assets/icons-mobile/Home.png'
-import imgOpenBook from '../assets/icons-mobile/OpenBook.png'
+import imgBook from '../../assets/icons-mobile/Book.png'
+import imgCustomer from '../../assets/icons-mobile/Customer.png'
+import imgHome from '../../assets/icons-mobile/Home.png'
+import imgOpenBook from '../../assets/icons-mobile/OpenBook.png'
 
 export const NavBarMobile: React.FC = () => {
   return (

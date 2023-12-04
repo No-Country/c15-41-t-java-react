@@ -1,7 +1,6 @@
 import { Link, Outlet } from 'react-router-dom'
-import logotipo from '../../public/isologotipo.png'
 import Footer from './Footer'
-import { useUser } from '../context/UserContext'
+import { useUser } from '../../context/UserContext'
 import { NavBarMobile } from './NavBarMobile'
 
 export default function Layout() {
@@ -11,7 +10,7 @@ export default function Layout() {
     <>
       <header className="flex h-36 items-center justify-start">
         <img
-          src={logotipo}
+          src={'/isologotipo.png'}
           alt="logo"
           className="h-full pl-24 max-lg:h-24 max-lg:pl-12 max-sm:pl-6"
         />
