@@ -1,10 +1,11 @@
-import { Login } from './routes/Login.tsx'
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
-import Layout from './components/Layout.tsx'
-import Home from './components/Home.tsx'
+import Layout from './components/Layout'
 import { useUser } from './context/UserContext.tsx'
-import Catalogue from './components/Catalogue.tsx'
-import UsersTabs from './components/UsersTabs.tsx'
+import { Login } from './pages/Login.tsx'
+import Home from './pages/Home.tsx'
+import Catalogue from './pages/Catalogue.tsx'
+import UsersTabs from './pages/UsersTabs.tsx'
+
 const App = () => {
   const { currentUser, setupComplete } = useUser()
 

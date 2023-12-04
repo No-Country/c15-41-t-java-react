@@ -4,7 +4,7 @@ import UserRow from './UserRow'
 import { useState, useEffect } from 'react' */
 
 export default function UsersList() {
-/*   const { fetch } = useUser()
+  /*   const { fetch } = useUser()
   const [users, setUsers] = useState<User[] | []>([]) // falta saber como van a venir tipados los users
   const [fetchError, setFetchError] = useState(false)
   async function fetchUsers(): Promise<void> {

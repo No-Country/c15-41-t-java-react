@@ -7,7 +7,7 @@
       "idEditorial": 1,
       "idAuthor": 1,
       "genre": "Editorial Sudamericana",
-      "image": "./src/assets/img/imagen1.png",
+      "image": "/sample/imagen1.png",
       "authorDto": {
         "idAuthor": 1,
         "name": "Gabriel",
@@ -26,7 +26,7 @@
       "idEditorial": 2,
       "idAuthor": 2,
       "genre": "Distopía",
-      "image": "./src/assets/img/imagen2.png",
+      "image": "/sample/imagen2.png",
       "authorDto": {
         "idAuthor": 2,
         "name": "George",
@@ -45,7 +45,7 @@
       "idEditorial": 3,
       "idAuthor": 3,
       "genre": "Realismo mágico",
-      "image": "./src/assets/img/image3.png",
+      "image": "/sample/image3.png",
       "authorDto": {
         "idAuthor": 3,
         "name": "Gabriel",
@@ -64,7 +64,7 @@
       "idEditorial": 5,
       "idAuthor": 5,
       "genre": "Novela histórica",
-      "image": "./src/assets/img/image4.png",
+      "image": "/sample/image4.png",
       "authorDto": {
         "idAuthor": 5,
         "name": "Carlos",
@@ -83,7 +83,7 @@
       "idEditorial": 4,
       "idAuthor": 4,
       "genre": "Fantasía",
-      "image": "./src/assets/img/imagen5.png",
+      "image": "/sample/imagen5.png",
       "authorDto": {
         "idAuthor": 4,
         "name": "Emma",
@@ -102,7 +102,7 @@
       "idEditorial": 6,
       "idAuthor": 6,
       "genre": "Literatura infantil/filosófica",
-      "image": "./src/assets/img/imagen6.png",
+      "image": "/sample/imagen6.png",
       "authorDto": {
         "idAuthor": 6,
         "name": "Antoine",
@@ -171,41 +171,41 @@
       "lastName": "Doe",
       "phoneNumber": "123456789",
       "address": "123 Main St"
-  },
-  {
+    },
+    {
       "Dni": "87654321",
       "name": "Jane",
       "lastName": "Smith",
       "phoneNumber": "987654321",
       "address": "456 Elm St"
-  },
-  {
+    },
+    {
       "Dni": "98765432",
       "name": "Alice",
       "lastName": "Johnson",
       "phoneNumber": "567890123",
       "address": "789 Oak St"
-  },
-  {
+    },
+    {
       "Dni": "54321678",
       "name": "Bob",
       "lastName": "Williams",
       "phoneNumber": "654321098",
       "address": "321 Pine St"
-  },
-  {
+    },
+    {
       "Dni": "34567812",
       "name": "Sarah",
       "lastName": "Taylor",
       "phoneNumber": "908765432",
       "address": "567 Maple St"
-  },
-  {
+    },
+    {
       "Dni": "87654321",
       "name": "Michael",
       "lastName": "Brown",
       "phoneNumber": "234567890",
       "address": "901 Cedar St"
-  }
+    }
   ]
 }

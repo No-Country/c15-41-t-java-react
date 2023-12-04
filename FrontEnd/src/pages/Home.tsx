@@ -1,5 +1,4 @@
 import React from 'react'
-import imgHome from '../assets/img/rafiki.jpg'
 import { useUser } from '../context/UserContext'
 
 const Home: React.FC = () => {
@@ -8,7 +7,11 @@ const Home: React.FC = () => {
   return (
     <div className="flex min-h-screen p-10 max-lg:p-2 max-md:flex-col max-md:items-center">
       <div className="w-1/2 p-4 max-md:w-full max-md:text-center">
-        <img src={imgHome} alt="Imagen de pagina Home" className="h-full w-full object-cover" />
+        <img
+          src="/brand/rafiki.jpg"
+          alt="Imagen de pagina Home"
+          className="h-full w-full object-cover"
+        />
       </div>
       <div className="w-1/2 flex-col p-4 px-4 max-md:w-full max-md:text-center">
         <h1 className="mb-4 justify-items-start text-6xl font-bold text-blueLight max-md:text-2xl">
