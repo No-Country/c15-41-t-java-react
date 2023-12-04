@@ -48,7 +48,7 @@ const BookCard: React.FC<Book> = ({
           {editorialDto.name}
         </p>
       </div>
-      <div className="flex flex-col">
+      <div className="flex flex-col  items-end">
         <div className="cursor-pointer" onClick={() => setIsModalOpen(true)}>
           <svg
             width="27"

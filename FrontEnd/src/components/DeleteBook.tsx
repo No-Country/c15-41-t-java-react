@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+
 
 type Props = {
   id: number
@@ -11,6 +11,7 @@ const DeleteBook: React.FC<Props> = ({ id, setIsModalDeleteOpen }: Props) => {
       method: 'DELETE'
     })
     setIsModalDeleteOpen(false)
+
   }
 
   return (

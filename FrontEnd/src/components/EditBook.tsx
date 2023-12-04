@@ -147,7 +147,9 @@ const EditBook: React.FC<BookProps> = props => {
                 </option>
               ))}
             </select>
-            <small className="absolute -bottom-6 text-xs font-bold text-red-500"></small>
+            <small className="absolute -bottom-6 text-xs font-bold text-red-500">
+              {errors?.author}
+            </small>
           </div>
           <label className="text-base font-bold leading-[normal] text-blueLight" htmlFor="genre">
             Género
@@ -194,7 +196,9 @@ const EditBook: React.FC<BookProps> = props => {
                 </option>
               ))}
             </select>
-            <small className="absolute -bottom-6 text-xs font-bold text-red-500"></small>
+            <small className="absolute -bottom-6 text-xs font-bold text-red-500">
+              {errors?.editorial}
+            </small>
           </div>
           <label className="text-base font-bold leading-[normal] text-blueLight" htmlFor="image">
             Agrega una imagen
