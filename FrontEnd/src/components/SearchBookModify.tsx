@@ -38,14 +38,14 @@ const SearchBookModify: React.FC<SearchBookModifyProps> = ({
   }, [searchTerm, filteredProducts])
 
   return (
-    <div className="mx-auto mt-10 grid h-full w-full grid-cols-8 items-center justify-center ">
-      <div className="  col-span-7 flex h-full w-full  items-center gap-x-4 rounded-3xl bg-white pl-4 text-lg font-bold shadow-lg">
-        <label htmlFor="searchInput">
-          <GoSearch className=" text-2xl" />
+    <div className="mt-10 flex h-full w-full items-center justify-between gap-x-2">
+      <div className="flex h-9 w-full items-center gap-x-4 rounded-[14px] bg-white px-4 text-lg font-bold shadow-lg md:h-12">
+        <label htmlFor="searchInput" className="flex align-middle">
+          <GoSearch className="text-base md:text-2xl" />
         </label>
         <input
           id="searchInput"
-          className="folnt-bold h-full w-full border-0 font-poppins text-lg placeholder-black focus:outline-none"
+          className="h-full w-full border-0 font-poppins text-lg placeholder-black focus:outline-none"
           type="text"
           value={searchTerm}
           placeholder="Buscar"
@@ -54,7 +54,9 @@ const SearchBookModify: React.FC<SearchBookModifyProps> = ({
           }}
         />
       </div>
-      <button className="ml-2 h-8 w-8 rounded-full bg-white text-lg font-bold text-black">?</button>
+      <button className="h-9 w-9 rounded-full border bg-white text-lg font-bold text-black outline-none">
+        ?
+      </button>
     </div>
   )
 }
