@@ -6,7 +6,11 @@ COPY package.json package-lock.json ./
 
 RUN npm i
 
-COPY . ./
+COPY .eslintrc.cjs index.html postcss.config.js tailwind.config.js vite.config.ts tsconfig.json tsconfig.node.json ./
+
+COPY src ./src
+
+COPY public ./public
 
 RUN npm run build
 
