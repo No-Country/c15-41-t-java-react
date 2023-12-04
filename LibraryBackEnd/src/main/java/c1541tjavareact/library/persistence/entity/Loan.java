@@ -36,17 +36,17 @@ public class Loan implements Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_book",nullable = false,
-    referencedColumnName = "id_book")
+                insertable = false, updatable = false)
     private Book book;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_admin",nullable = false,
-    referencedColumnName = "id_admin")
+                insertable = false, updatable = false)
     private Admin admin;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_user",nullable = false,
-    referencedColumnName = "id_user")
+                insertable = false, updatable = false)
     private User user;
 
     @OneToOne(mappedBy = "loan")
