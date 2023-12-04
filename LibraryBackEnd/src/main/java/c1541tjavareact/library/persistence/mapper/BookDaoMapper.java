@@ -1,8 +1,6 @@
 package c1541tjavareact.library.persistence.mapper;
 
-import c1541tjavareact.library.domain.dto.AuthorDto;
 import c1541tjavareact.library.domain.dto.BookDto;
-import c1541tjavareact.library.persistence.entity.Author;
 import c1541tjavareact.library.persistence.entity.Book;
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
