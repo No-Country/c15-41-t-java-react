@@ -163,5 +163,49 @@
       "idEditorial": 5,
       "name": "Editorial Gallimard"
     }
+  ],
+  "Users": [
+    {
+      "Dni": "12345678",
+      "name": "John",
+      "lastName": "Doe",
+      "phoneNumber": "123456789",
+      "address": "123 Main St"
+    },
+    {
+      "Dni": "87654321",
+      "name": "Jane",
+      "lastName": "Smith",
+      "phoneNumber": "987654321",
+      "address": "456 Elm St"
+    },
+    {
+      "Dni": "98765432",
+      "name": "Alice",
+      "lastName": "Johnson",
+      "phoneNumber": "567890123",
+      "address": "789 Oak St"
+    },
+    {
+      "Dni": "54321678",
+      "name": "Bob",
+      "lastName": "Williams",
+      "phoneNumber": "654321098",
+      "address": "321 Pine St"
+    },
+    {
+      "Dni": "34567812",
+      "name": "Sarah",
+      "lastName": "Taylor",
+      "phoneNumber": "908765432",
+      "address": "567 Maple St"
+    },
+    {
+      "Dni": "87654321",
+      "name": "Michael",
+      "lastName": "Brown",
+      "phoneNumber": "234567890",
+      "address": "901 Cedar St"
+    }
   ]
 }
