@@ -17,10 +17,10 @@ const UsersTabs = () => {
         </Tab>
       </TabList>
       <TabPanel>
-       <UsersList/>
+        <UsersList />
       </TabPanel>
       <TabPanel>
-      <p>Form para agregar usuarios</p>
+        <p>Form para agregar usuarios</p>
       </TabPanel>
     </ReactTabs>
   )

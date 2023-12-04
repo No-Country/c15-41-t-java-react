@@ -15,7 +15,7 @@ export const Login: React.FC = () => {
       </div>
       <div className="flex items-center justify-center bg-[#000842] sm:w-1/2">
         <div className="mx-12 mt-12 w-full">
-          <img className="w-full" src="/Bibliophile-cuate.png" alt="" />
+          <img className="w-full" src="/brand/Bibliophile-cuate.png" alt="" />
         </div>
       </div>
     </div>

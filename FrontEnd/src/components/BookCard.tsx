@@ -1,6 +1,6 @@
 import React from 'react'
 import type { Book } from '../types/types'
-import imgDelete from '../assets/img/delete.svg'
+import imgDelete from '../assets/icons/delete.svg'
 import { IoMdClose } from 'react-icons/io'
 import EditBook from './EditBook'
 import DeleteBook from './DeleteBook'

@@ -1,6 +1,6 @@
 import { IoEyeOffOutline, IoEyeOutline } from 'react-icons/io5'
-import lockIcon from '../assets/lock.svg'
-import mailIcon from '../assets/mail.svg'
+import lockIcon from '../assets/icons/lock.svg'
+import mailIcon from '../assets/icons/mail.svg'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import { useState } from 'react'
