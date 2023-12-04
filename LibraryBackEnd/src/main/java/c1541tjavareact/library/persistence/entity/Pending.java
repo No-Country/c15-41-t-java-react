@@ -20,14 +20,18 @@ public class Pending implements Serializable {
     @Column(name = "id_pending")
     private long idPending;
 
+    @Column(nullable = false)
+    private String message;
+
+    @Column(name = "local_pending_date",nullable = false)
+    private LocalDate localPendingDate;
+
     @OneToOne
     @JoinColumn(name = "id_book_return",nullable = false,
     referencedColumnName = "id_return")
     private BookReturn bookReturn;
 
-    @Column(name = "local_pending_date",nullable = false)
-    private LocalDate localPendingDate;
 
-    @Column(nullable = false)
-    private String message;
+
+
 }
