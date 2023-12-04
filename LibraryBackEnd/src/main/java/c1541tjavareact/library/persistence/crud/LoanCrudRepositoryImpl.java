@@ -46,7 +46,7 @@ public class LoanCrudRepositoryImpl implements LoanCrudRepository {
 
             loanDto.setBookDto(loanToUpdate.getBookDto());
 
-            loanToUpdate.setLoanDate(optLoan.get().getLoanDate());
+            loanToUpdate.setLoanDate(loanDto.getLoanDate());
 
             return this.save(loanToUpdate);
         }

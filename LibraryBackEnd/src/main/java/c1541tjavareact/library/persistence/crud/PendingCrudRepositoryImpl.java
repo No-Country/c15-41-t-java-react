@@ -42,9 +42,10 @@ public class PendingCrudRepositoryImpl implements PendingCrudRepository {
         Optional<PendingDto> optPending = this.getPending(idPending);
         if(optPending.isPresent()){
             PendingDto pendingToUpdate = optPending.get();
-            pendingToUpdate.setMessage(optPending.get().getMessage());
-            pendingToUpdate.setLocalPendingDate(optPending.get().getLocalPendingDate());
-            return this.save(pendingDto);//TODO
+            pendingToUpdate.setMessage(pendingDto.getMessage());
+            pendingToUpdate.setLocalPendingDate(pendingDto.getLocalPendingDate());
+            pendingToUpdate.setIdReturn(pendingDto.getIdReturn());
+            return this.save(pendingToUpdate);
         }
         return null;
     }

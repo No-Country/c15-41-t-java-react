@@ -30,7 +30,7 @@ public class Pending implements Serializable {
     private LocalDate localPendingDate;
 
     @OneToOne
-    @JoinColumn(name = "id_book_return",nullable = false,
+    @JoinColumn(name = "id_return",nullable = false,
                 insertable = false, updatable = false)
     private BookReturn bookReturn;
 
