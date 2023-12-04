@@ -4,20 +4,18 @@ import * as Yup from 'yup'
 import { Author, Editorial } from '../types/types'
 
 interface RegisterFormType {
-  id: number
   title: string
-  author: number
-  editorial: number
+  author: null
+  editorial: null
   genre: string
   quantity: number
   image: string
 }
 
 const initialValues: RegisterFormType = {
-  id: 0,
   title: '',
-  author: 0,
-  editorial: 0,
+  author: null,
+  editorial: null,
   genre: '',
   quantity: 0,
   image: ''
@@ -81,7 +79,7 @@ export default function RegisterForm() {
     getEditorials()
   }, [])
 
-  const { values, errors, handleChange, handleSubmit } = useFormik({
+  const { values, errors, handleChange, handleSubmit, setFieldValue } = useFormik({
     initialValues,
     validationSchema,
     onSubmit
@@ -90,6 +88,7 @@ export default function RegisterForm() {
 
   async function onSubmit(values: FormikValues) {
     console.log(values)
+    console.log(author)
 
     /* try {
       const postOptions = {
@@ -161,7 +160,9 @@ export default function RegisterForm() {
                 </option>
               ))}
             </select>
-            <small className="absolute -bottom-6 text-xs font-bold text-red-500"></small>
+            <small className="absolute -bottom-6 text-xs font-bold text-red-500">
+              {errors?.author}
+            </small>
           </div>
           <label className="text-base font-bold leading-[normal] text-blueLight" htmlFor="genre">
             Género
@@ -208,7 +209,9 @@ export default function RegisterForm() {
                 </option>
               ))}
             </select>
-            <small className="absolute -bottom-6 text-xs font-bold text-red-500"></small>
+            <small className="absolute -bottom-6 text-xs font-bold text-red-500">
+              {errors?.editorial}
+            </small>
           </div>
           <label className="text-base font-bold leading-[normal] text-blueLight" htmlFor="image">
             Agrega una imagen
