@@ -18,7 +18,7 @@ const BookList: React.FC = () => {
       setSearchResults(data)
     }
     getBooks()
-  }, [books])
+  }, [])
 
   const handleSearchResults = (results: any) => {
     setSearchResults(results)
