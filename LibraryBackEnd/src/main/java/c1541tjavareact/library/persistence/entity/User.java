@@ -33,5 +33,8 @@ public class User {
     private List<Loan> loans;
 
     private boolean isActive = true;
-    
+
+    public User(Long dni, String name, String lastName, String phoneNumber, String address) {
+    }
+
 }
