@@ -9,6 +9,7 @@ export default function UsersList() {
   const [fetchError, setFetchError] = useState(false)
   async function fetchUsers(): Promise<void> {
     try {
+      setFetchError(false)
       const response = await fetch('http://localhost:8080/bibliotech/api/books/all')
       const users: User[] = await response.json
       setUsers(users)
