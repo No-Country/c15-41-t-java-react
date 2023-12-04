@@ -3,21 +3,24 @@ import BookCard from './BookCard.tsx'
 import type { Book } from '../types/types'
 import SearchBookModify from './SearchBookModify'
 import Pagination from '@mui/material/Pagination'
+import { useUser } from '../context/UserContext.tsx'
 
 const BookList: React.FC = () => {
   const [books, setBooks] = useState<Book[] | []>([])
   const [searchResults, setSearchResults] = useState<Book[] | []>([])
   const [page, setPage] = useState(1)
   const PAGE_SIZE = 3 // podemos ponerlo como variable de entorno
+  const { fetch } = useUser()
 
   useEffect(() => {
     const getBooks = async () => {
-      const response = await fetch(' http://localhost:3000/books')
-      const data = await response.json()
-      setBooks(data)
-      setSearchResults(data)
+      const books = await fetch('http://localhost:3000/books')
+      setBooks(books)
+      setSearchResults(books)
     }
-    getBooks()
+    getBooks().catch(error => {
+      console.error(error)
+    })
   }, [])
 
   const handleSearchResults = (results: any) => {

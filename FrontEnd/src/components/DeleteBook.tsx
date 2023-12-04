@@ -1,17 +1,19 @@
+import { useUser } from '../context/UserContext'
 
-
-type Props = {
+interface Props {
   id: number
   setIsModalDeleteOpen: (value: boolean) => void
 }
 
 const DeleteBook: React.FC<Props> = ({ id, setIsModalDeleteOpen }: Props) => {
+  const { fetch } = useUser()
   const handleDelete = () => {
     fetch(`http://localhost:3000/books/${id}`, {
       method: 'DELETE'
+    }).catch(error => {
+      console.error(error)
     })
     setIsModalDeleteOpen(false)
-
   }
 
   return (
@@ -33,7 +35,9 @@ const DeleteBook: React.FC<Props> = ({ id, setIsModalDeleteOpen }: Props) => {
           </button>
           <button
             className="flex  w-[350px] items-center justify-center  rounded-[32px] border-none bg-blueDark py-5 text-[17px] font-bold leading-normal text-white shadow-btn hover:cursor-pointer disabled:cursor-not-allowed disabled:opacity-50"
-            onClick={() => setIsModalDeleteOpen(false)}
+            onClick={() => {
+              setIsModalDeleteOpen(false)
+            }}
           >
             No
           </button>

@@ -1,17 +1,17 @@
 import UserRow from './UserRow'
-/* CUANDO TENGAMOS LA API USERS LISTA DESMARCAR COMENTARIOS */
-/* import { useUser } from '../context/UserContext'
-import { useState, useEffect } from 'react' */
+import { useUser } from '../context/UserContext'
+import { useState, useEffect } from 'react'
+import type { User } from '../types/types'
 
 export default function UsersList() {
-  /*   const { fetch } = useUser()
-  const [users, setUsers] = useState<User[] | []>([]) // falta saber como van a venir tipados los users
+  const { fetch } = useUser()
+  const [users, setUsers] = useState<User[] | []>([])
   const [fetchError, setFetchError] = useState(false)
+
   async function fetchUsers(): Promise<void> {
     try {
       setFetchError(false)
-      const response = await fetch('http://localhost:8080/bibliotech/api/books/all')
-      const users: User[] = await response.json
+      const users = await fetch('http://localhost:3000/users')
       setUsers(users)
     } catch (error) {
       console.error(error)
@@ -24,8 +24,12 @@ export default function UsersList() {
     })
   }, [])
 
-  if (fetchError) { return <p> Error cargando usuarios </p> }
-  if (users.length === 0) { return <p>Loading</p> } */
+  if (fetchError) {
+    return <p> Error cargando usuarios </p>
+  }
+  if (users.length === 0) {
+    return <p>Loading</p>
+  }
 
   return (
     <div className="my-10 flex">
@@ -37,12 +41,13 @@ export default function UsersList() {
             <th>Apellido</th>
             <th>Celular</th>
             <th>Direccion</th>
-            <th>Acciones</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
-          <UserRow key={'user.id'} user={'user'} />
-          {/* mapear los users una vez obtenidos de back */}
+          {users.map(user => (
+            <UserRow key={user.dni} user={user} />
+          ))}
         </tbody>
       </table>
     </div>

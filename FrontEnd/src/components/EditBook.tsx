@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react'
-import { Author, Editorial } from '../types/types'
-import { FormikValues, useFormik } from 'formik'
+import type { Author, Editorial } from '../types/types'
+import type { FormikValues } from 'formik'
+import { useFormik } from 'formik'
 import * as Yup from 'yup'
+import { useUser } from '../context/UserContext'
 
-type BookProps = {
+interface BookProps {
   id: number
   title: string
   idAuthor: number
@@ -38,23 +40,26 @@ const mockGenres = [
 const EditBook: React.FC<BookProps> = props => {
   const [authors, setAuthors] = useState<Author[]>([])
   const [editorials, setEditorials] = useState<Editorial[]>([])
+  const { fetch } = useUser()
 
   useEffect(() => {
     const getAuthors = async () => {
-      const response = await fetch('http://localhost:3000/authors')
-      const data = await response.json()
+      const data = await fetch('http://localhost:3000/authors')
       setAuthors(data)
     }
-    getAuthors()
+    getAuthors().catch(error => {
+      console.log(error)
+    })
   }, [])
 
   useEffect(() => {
     const getEditorials = async () => {
-      const response = await fetch('http://localhost:3000/editorials')
-      const data = await response.json()
+      const data = await fetch('http://localhost:3000/editorials')
       setEditorials(data)
     }
-    getEditorials()
+    getEditorials().catch(error => {
+      console.log(error)
+    })
   }, [])
 
   const { values, errors, handleChange, handleSubmit } = useFormik({
@@ -68,7 +73,6 @@ const EditBook: React.FC<BookProps> = props => {
     validationSchema,
     onSubmit
   })
-  /*   const { fetch } = useUser() */
 
   async function onSubmit(values: FormikValues) {
     console.log(values)

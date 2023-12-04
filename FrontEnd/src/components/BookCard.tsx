@@ -50,7 +50,12 @@ const BookCard: React.FC<Book> = ({
           </p>
         </div>
         <div className="flex flex-col align-middle">
-          <div className="hover:cursor-pointer" onClick={() => setIsModalOpen(true)}>
+          <div
+            className="hover:cursor-pointer"
+            onClick={() => {
+              setIsModalOpen(true)
+            }}
+          >
             <svg
               width="27"
               height="27"
@@ -73,7 +78,13 @@ const BookCard: React.FC<Book> = ({
             </svg>
           </div>
           <div className="hover:cursor-pointer">
-            <img src={imgDelete} alt="icono eliminar" onClick={() => setIsModalDeleteOpen(true)} />
+            <img
+              src={imgDelete}
+              alt="icono eliminar"
+              onClick={() => {
+                setIsModalDeleteOpen(true)
+              }}
+            />
           </div>
         </div>
       </div>
@@ -82,7 +93,9 @@ const BookCard: React.FC<Book> = ({
           <EditBook {...bookData} setIsModalOpen={setIsModalOpen} />
           <div
             className="absolute right-4 top-4 cursor-pointer text-5xl font-semibold text-black hover:scale-125"
-            onClick={() => setIsModalOpen(false)}
+            onClick={() => {
+              setIsModalOpen(false)
+            }}
           >
             <IoMdClose />
           </div>
@@ -93,7 +106,9 @@ const BookCard: React.FC<Book> = ({
           <DeleteBook id={bookData.id} setIsModalDeleteOpen={setIsModalDeleteOpen} />
           <div
             className="absolute right-4 top-4 cursor-pointer text-5xl font-semibold text-black hover:scale-125"
-            onClick={() => setIsModalDeleteOpen(false)}
+            onClick={() => {
+              setIsModalDeleteOpen(false)
+            }}
           >
             <IoMdClose />
           </div>
