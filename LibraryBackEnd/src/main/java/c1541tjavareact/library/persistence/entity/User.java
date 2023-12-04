@@ -14,6 +14,10 @@ import java.util.List;
 public class User {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_user")
+    private Long idUser;
+
     @Column(nullable = false, unique = true)
     private String dni;
 
