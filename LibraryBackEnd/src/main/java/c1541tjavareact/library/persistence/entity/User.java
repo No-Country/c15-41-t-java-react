@@ -8,16 +8,14 @@ import lombok.NoArgsConstructor;
 import java.util.List;
 
 @Data
-@Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "users")
+@Entity
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_user")
-    private Long idUser;
+    @Column(nullable = false, unique = true)
+    private String dni;
 
     @Column(nullable = false)
     private String name;
@@ -25,20 +23,18 @@ public class User {
     @Column(nullable = false)
     private String lastName;
 
-    @Column(name = "identification_number",nullable = false)
-    private String identificationNumber;
+    @Column(nullable = false, unique = true)
+    private String phoneNumber;
 
-    @Column(name = "phone_number",nullable = false)
-    private Long phoneNumber;
-
-    @Column(nullable = false,unique = true)
-    private String email;
-
-    @Embedded
-    private Address address;
+    @Column(nullable = false)
+    private String address;
 
     @OneToMany(mappedBy = "user")
     private List<Loan> loans;
 
+    private boolean isActive = true;
+
+    public User(Long dni, String name, String lastName, String phoneNumber, String address) {
+    }
 
 }
