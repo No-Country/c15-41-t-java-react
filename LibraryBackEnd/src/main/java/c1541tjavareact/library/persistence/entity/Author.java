@@ -28,6 +28,6 @@ public class Author implements Serializable {
     private String lastName;
 
     @OneToMany(mappedBy = "author")
-    private List<Book> Books;
+    private List<Book> books;
 
 }

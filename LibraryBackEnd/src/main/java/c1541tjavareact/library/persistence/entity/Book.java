@@ -1,6 +1,5 @@
 package c1541tjavareact.library.persistence.entity;
 
-import c1541tjavareact.library.domain.dto.BookDto;
 import c1541tjavareact.library.persistence.entity.enums.Genre;
 import jakarta.persistence.*;
 import lombok.*;
@@ -24,6 +23,12 @@ public class Book implements Serializable {
     @Column(nullable = false)
     private String title;
 
+    @Column(name = "id_author")
+    private Long idAuthor;
+
+    @Column(name = "id_editorial")
+    private Long idEditorial;
+
     @Column(nullable = false,unique = true)
     private String isbn;
 
@@ -37,27 +42,12 @@ public class Book implements Serializable {
     @OneToMany(mappedBy = "book")
     private List<Loan> loanList;
 
-//    @OneToMany
-//    private List<BookEditorial> editorialList;
-
-    @ManyToMany
-    @JoinTable(
-            name = "linked_editorials",
-            joinColumns = @JoinColumn(name = "id_book"),
-            inverseJoinColumns = @JoinColumn(name = "id_editorial")
-    )
-    private List<Editorial> linkedEditorials=new ArrayList<>();
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_editorial", nullable = false, insertable = false, updatable = false)
+    private Editorial editorial;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_author",nullable = false)
+    @JoinColumn(name = "id_author", nullable = false, insertable = false, updatable = false)
     private Author author;
 
-    public Book(BookDto bookDto,Author author, Editorial editorial) {
-        this.title= bookDto.title();
-        this.isbn= bookDto.isbn();
-        this.genre= bookDto.genre();
-        this.quantity= bookDto.quantity();
-        this.author=author;
-        this.linkedEditorials.add(editorial);
-    }
 }

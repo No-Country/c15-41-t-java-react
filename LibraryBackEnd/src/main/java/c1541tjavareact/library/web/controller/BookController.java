@@ -1,50 +1,61 @@
 package c1541tjavareact.library.web.controller;
 
 import c1541tjavareact.library.domain.dto.BookDto;
-import c1541tjavareact.library.domain.dto.ResponseBookDto;
 import c1541tjavareact.library.domain.service.BookService;
-import c1541tjavareact.library.persistence.entity.Author;
-import c1541tjavareact.library.persistence.entity.Book;
-import c1541tjavareact.library.persistence.entity.Editorial;
-import c1541tjavareact.library.persistence.mapper.BookDaoMapper;
-import c1541tjavareact.library.persistence.mapper.ResponseBookMapper;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.Optional;
+import java.util.List;
 
-/**
- * @author jdmon on 29/11/2023
- * @project LibraryBackEnd
- */
 @RestController
 @RequestMapping("/books")
 public class BookController {
-
     @Autowired
     private BookService bookService;
 
-//    @Autowired
-//    private BookDaoMapper bookDaoMapper;
-//
-//    @Autowired
-//    private ResponseBookMapper responseBookMapper;
-
-//    @GetMapping
-//    public ResponseEntity<Page<>>
-    @PostMapping("/save")
-    public ResponseEntity<ResponseBookDto> save(@RequestBody @Valid BookDto bookDto) {
-        System.out.println(bookDto);
-//        Book book = bookService.save(bookDaoMapper.toBook(bookDto));
-//        return ResponseEntity.ok(responseBookMapper.toResponseBookDto(book));
-        Author author=bookService.getAuthor(bookDto.id_author());
-        Editorial editorial =bookService.getEditorial(bookDto.id_editorial());
-        Book book = bookService.save(new Book(bookDto,author,editorial));
-        return ResponseEntity.ok(new ResponseBookDto(bookDto.title(), bookDto.isbn()));
+    @GetMapping("/all")
+    public ResponseEntity<List<BookDto>> getAll() {
+        return ResponseEntity.ok(bookService.getAll());
     }
+    @PostMapping("/save")
+    public ResponseEntity<?> save(@RequestBody @Valid BookDto bookDto) {
+        return new ResponseEntity<>(bookService.save(bookDto), HttpStatus.CREATED);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<BookDto> getBook(@PathVariable("id") Long idBook) {
+        return bookService.getBook(idBook)
+                .map(BookDto -> new ResponseEntity<>(BookDto, HttpStatus.OK))
+                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
+    @GetMapping("/search") //TODO genre
+    public ResponseEntity<List<BookDto>> searchBooksBytitleGenreAuthor(@RequestParam(required = false) String fields) {
+        List<BookDto> books = bookService.searchBooksBytitleGenreAuthor(fields);
+        if(!books.isEmpty()){
+            return ResponseEntity.ok(books);
+        }
+        return ResponseEntity.notFound().build();
+    }
+
+    @PutMapping("/update/{id}")
+    public ResponseEntity<BookDto> updateBook(@PathVariable("id") Long idBook, @RequestBody BookDto bookDto){
+        BookDto bookUpdated = bookService.update(idBook, bookDto);
+        if(bookUpdated!=null){
+            return ResponseEntity.ok(bookUpdated);
+        }
+        return ResponseEntity.notFound().build();
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<BookDto> deleteBook(@PathVariable("id") Long idBook){
+        if(bookService.delete(idBook)){
+            return ResponseEntity.ok().build();
+        }
+        return ResponseEntity.notFound().build();
+    }
+
+
 }

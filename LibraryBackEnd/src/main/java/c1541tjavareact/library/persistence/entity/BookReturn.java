@@ -36,7 +36,6 @@ public class BookReturn implements Serializable {
 
     @OneToOne(mappedBy = "bookReturn")
     private Pending pending;
-    //TODO ver relacion 1 a 1
 
 
 }

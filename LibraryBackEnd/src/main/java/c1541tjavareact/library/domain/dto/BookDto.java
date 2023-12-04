@@ -1,36 +1,38 @@
 package c1541tjavareact.library.domain.dto;
 
-
+import c1541tjavareact.library.persistence.entity.Author;
 import c1541tjavareact.library.persistence.entity.enums.Genre;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import lombok.Getter;
+import lombok.Setter;
 
-import java.util.List;
+@Getter
+@Setter
+public class BookDto {
 
+    private Long idBook;
 
-/**
- * @author jdmon on 29/11/2023
- * @project LibraryBackEnd
- */
-public record BookDto(Long idBook,
+    @NotBlank
+    private String title;
 
-        String title,
+    @NotNull
+    private Long idAuthor;
 
-        String isbn,
+    @NotNull
+    private Long idEditorial;
 
-        Genre genre,
+    @NotBlank
+    private String isbn;
 
-        Integer quantity,
+    @NotNull
+    private Genre genre;
 
-        Long id_author,
-        Long id_editorial ) {
-//    private Long idBook;
-//
-//    private String title;
-//
-//    private String isbn;
-//
-//    private Genre genre;
-//
-//    private Integer quantity;
-//
-//    private Long id_author;
+    @NotNull
+    private Integer quantity;
+
+    private EditorialDto editorialDto;
+
+    private AuthorDto authorDto;
+
 }

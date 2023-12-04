@@ -7,10 +7,6 @@ import lombok.NoArgsConstructor;
 import java.io.Serializable;
 import java.util.List;
 
-/**
- * @author jdmon on 27/11/2023
- * @project LibraryBackEnd
- */
 @Entity
 @Table(name = "admins")
 @Data

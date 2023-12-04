@@ -1,26 +1,22 @@
 package c1541tjavareact.library.domain.dto;
 
 
-import c1541tjavareact.library.persistence.entity.enums.Genre;
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 import lombok.Getter;
 import lombok.Setter;
 
-
-/**
- * @author jdmon on 29/11/2023
- * @project LibraryBackEnd
- */
 @Getter
 @Setter
 public class AuthorDto {
 
     private Long idAuthor;
 
+    @NotBlank
+    @Pattern(regexp = "^[a-zA-Z ]{3,}$")
     private String name;
 
+    @NotBlank
+    @Pattern(regexp = "^[a-zA-Z ]{3,}$")
     private String lastName;
 }

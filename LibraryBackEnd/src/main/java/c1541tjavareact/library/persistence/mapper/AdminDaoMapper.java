@@ -1,7 +1,7 @@
 package c1541tjavareact.library.persistence.mapper;
 
-import c1541tjavareact.library.domain.dto.AuthorDto;
-import c1541tjavareact.library.persistence.entity.Author;
+import c1541tjavareact.library.domain.dto.AdminDto;
+import c1541tjavareact.library.persistence.entity.Admin;
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -14,11 +14,11 @@ import java.util.List;
  * @project LibraryBackEnd
  */
 @Mapper (componentModel = MappingConstants.ComponentModel.SPRING)
-public interface AuthorDaoMapper {
-    AuthorDto toAuthorDto (Author author);
-    List<AuthorDto> toAuthorsDto(List<Author> authors);
+public interface AdminDaoMapper {
+    AdminDto toAdminDto (Admin admin);
+    List<AdminDto> toAdminsDto(List<Admin> admins);
     @InheritInverseConfiguration
-    @Mapping(target = "books" , ignore = true)
-    Author toAuthor (AuthorDto authorDto);
+    @Mapping(target = "loans" , ignore = true)
+    Admin toAdmin (AdminDto adminDto);
 
 }

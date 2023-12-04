@@ -1,11 +1,15 @@
 package c1541tjavareact.library.domain.repository;
 
-import c1541tjavareact.library.persistence.entity.Author;
+import c1541tjavareact.library.domain.dto.AuthorDto;
 
-/**
- * @author jdmon on 29/11/2023
- * @project LibraryBackEnd
- */
+import java.util.List;
+import java.util.Optional;
+
+
 public interface AuthorCrudRepository {
-    Author save(Author author);
+    List<AuthorDto> getAll();
+    AuthorDto save(AuthorDto authorDto);
+    Optional<AuthorDto> getAuthorDto(Long idAuthor);
+    AuthorDto update(Long idAuthor, AuthorDto authorDto);
+    void delete(Long idAuthor);
 }
