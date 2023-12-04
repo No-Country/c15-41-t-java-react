@@ -1,9 +1,12 @@
+import { useUser } from '../context/UserContext'
+
 interface Props {
   id: number
   setIsModalDeleteOpen: (value: boolean) => void
 }
 
 const DeleteBook: React.FC<Props> = ({ id, setIsModalDeleteOpen }: Props) => {
+  const { fetch } = useUser()
   const handleDelete = () => {
     fetch(`http://localhost:3000/books/${id}`, {
       method: 'DELETE'

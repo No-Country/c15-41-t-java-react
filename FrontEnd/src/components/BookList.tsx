@@ -15,7 +15,6 @@ const BookList: React.FC = () => {
   useEffect(() => {
     const getBooks = async () => {
       const books = await fetch('http://localhost:3000/books')
-      console.log(books)
       setBooks(books)
       setSearchResults(books)
     }
