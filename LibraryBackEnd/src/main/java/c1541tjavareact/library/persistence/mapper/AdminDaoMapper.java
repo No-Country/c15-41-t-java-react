@@ -1,9 +1,7 @@
 package c1541tjavareact.library.persistence.mapper;
 
 import c1541tjavareact.library.domain.dto.AdminDto;
-import c1541tjavareact.library.domain.dto.AuthorDto;
 import c1541tjavareact.library.persistence.entity.Admin;
-import c1541tjavareact.library.persistence.entity.Author;
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

@@ -2,7 +2,6 @@ package c1541tjavareact.library.web.controller;
 
 import c1541tjavareact.library.domain.dto.AdminDto;
 import c1541tjavareact.library.domain.service.AdminService;
-import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -33,7 +32,7 @@ public class AdminController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<AdminDto> delete(@PathVariable Long id){
+    public ResponseEntity<Void> delete(@PathVariable Long id){
         if(adminService.getAdminDto(id).isPresent()){
             adminService.delete(id);
             return ResponseEntity.noContent().build();
