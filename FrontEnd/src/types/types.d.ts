@@ -21,6 +21,14 @@ export interface BookPost {
   image: string
 }
 
+export interface User {
+  dni: number
+  name: string
+  lastName: string
+  phoneNumber: number
+  address: string
+}
+
 export interface Author {
   name: string
   lastName: string
