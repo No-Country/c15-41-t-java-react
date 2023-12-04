@@ -1,11 +1,32 @@
 import React from 'react'
 import type { Book } from '../types/types'
 import imgDelete from '../assets/img/delete.svg'
-import RegisterForm from './RegisterForm'
-import {IoMdClose } from 'react-icons/io'
+import { IoMdClose } from 'react-icons/io'
+import EditBook from './EditBook'
+import DeleteBook from './DeleteBook'
 
-const BookCard: React.FC<Book> = ({ id, image, title, authorDto, genre, editorialDto }) => {
+const BookCard: React.FC<Book> = ({
+  id,
+  image,
+  title,
+  authorDto,
+  genre,
+  editorialDto,
+  quantity
+}) => {
   const [isModalOpen, setIsModalOpen] = React.useState(false)
+  const [isModalDeleteOpen, setIsModalDeleteOpen] = React.useState(false)
+  const bookData: Book = {
+    id,
+    image,
+    title,
+    authorDto,
+    genre,
+    editorialDto,
+    quantity,
+    idAuthor: authorDto.idAuthor,
+    IdEditorial: editorialDto.idEditorial
+  }
 
   return (
     <div className=" flex h-full justify-start gap-3  border-0 border-b border-solid border-black p-3">
@@ -16,7 +37,7 @@ const BookCard: React.FC<Book> = ({ id, image, title, authorDto, genre, editoria
         <h3 className="text-lg text-blueLight"> Titulo: {title}</h3>
         <p className="">
           <span className="font-bold text-black">Autor: </span>
-          {`${authorDto.name} + ${authorDto.lastName}`}
+          {`${authorDto.name}  ${authorDto.lastName}`}
         </p>
         <p>
           <span className="font-bold text-black">Genero: </span>
@@ -27,7 +48,7 @@ const BookCard: React.FC<Book> = ({ id, image, title, authorDto, genre, editoria
           {editorialDto.name}
         </p>
       </div>
-      <div className='flex flex-col'>
+      <div className="flex flex-col">
         <div className="cursor-pointer" onClick={() => setIsModalOpen(true)}>
           <svg
             width="27"
@@ -51,14 +72,32 @@ const BookCard: React.FC<Book> = ({ id, image, title, authorDto, genre, editoria
           </svg>
         </div>
         <div className="w-full object-cover">
-          <img src={imgDelete} alt="icono eliminar" className="ml-4 cursor-pointer" />
+          <img
+            src={imgDelete}
+            alt="icono eliminar"
+            className="ml-4 cursor-pointer"
+            onClick={() => setIsModalDeleteOpen(true)}
+          />
         </div>
       </div>
       {isModalOpen && (
         <div className="fixed inset-0 z-50  bg-white opacity-100">
-          <RegisterForm/>
-          <div className="absolute right-4 top-4 text-5xl font-semibold text-black hover:scale-125 cursor-pointer"
-          onClick={()=>setIsModalOpen(false)}>
+          <EditBook {...bookData} setIsModalOpen={setIsModalOpen} />
+          <div
+            className="absolute right-4 top-4 cursor-pointer text-5xl font-semibold text-black hover:scale-125"
+            onClick={() => setIsModalOpen(false)}
+          >
+            <IoMdClose />
+          </div>
+        </div>
+      )}
+      {isModalDeleteOpen && (
+        <div className="fixed inset-0 z-50  bg-white opacity-100">
+          <DeleteBook id={bookData.id} setIsModalDeleteOpen={setIsModalDeleteOpen} />
+          <div
+            className="absolute right-4 top-4 cursor-pointer text-5xl font-semibold text-black hover:scale-125"
+            onClick={() => setIsModalDeleteOpen(false)}
+          >
             <IoMdClose />
           </div>
         </div>

@@ -1,26 +1,23 @@
-import {useState, useEffect} from 'react'
-import { useFormik } from 'formik'
+import { useState, useEffect } from 'react'
+import { FormikValues, useFormik } from 'formik'
 import * as Yup from 'yup'
-import{Author, Editorial} from '../types/types'
-
-
+import { Author, Editorial } from '../types/types'
 
 interface RegisterFormType {
   id: number
   title: string
-  idAuthor: number
-  IdEditorial: number
+  author: number
+  editorial: number
   genre: string
   quantity: number
   image: string
-  
 }
 
 const initialValues: RegisterFormType = {
   id: 0,
   title: '',
-  idAuthor: 0,
-  IdEditorial: 0,
+  author: 0,
+  editorial: 0,
   genre: '',
   quantity: 0,
   image: ''
@@ -63,6 +60,8 @@ const validationSchema = Yup.object({
 export default function RegisterForm() {
   const [authors, setAuthors] = useState<Author[]>([])
   const [editorials, setEditorials] = useState<Editorial[]>([])
+  const [author, setAuthor] = useState<Author | null>(null)
+  const [editorial, setEditorial] = useState<Editorial | null>(null)
 
   useEffect(() => {
     const getAuthors = async () => {
@@ -81,7 +80,7 @@ export default function RegisterForm() {
     }
     getEditorials()
   }, [])
-  
+
   const { values, errors, handleChange, handleSubmit } = useFormik({
     initialValues,
     validationSchema,
@@ -89,16 +88,10 @@ export default function RegisterForm() {
   })
   /*   const { fetch } = useUser() */
 
-  async function onSubmit(values: RegisterFormType) {
-   console.log(values)
-  
-    
+  async function onSubmit(values: FormikValues) {
+    console.log(values)
 
-   
-    
-   
-
-       /* try {
+    /* try {
       const postOptions = {
         method: 'POST',
         body: JSON.stringify(newBook)
@@ -168,9 +161,7 @@ export default function RegisterForm() {
                 </option>
               ))}
             </select>
-            <small className="absolute -bottom-6 text-xs font-bold text-red-500">
-           
-            </small>
+            <small className="absolute -bottom-6 text-xs font-bold text-red-500"></small>
           </div>
           <label className="text-base font-bold leading-[normal] text-blueLight" htmlFor="genre">
             Género
@@ -217,9 +208,7 @@ export default function RegisterForm() {
                 </option>
               ))}
             </select>
-            <small className="absolute -bottom-6 text-xs font-bold text-red-500">
-             
-            </small>
+            <small className="absolute -bottom-6 text-xs font-bold text-red-500"></small>
           </div>
           <label className="text-base font-bold leading-[normal] text-blueLight" htmlFor="image">
             Agrega una imagen

@@ -3,9 +3,6 @@ import 'react-tabs/style/react-tabs.css'
 import RegisterForm from './RegisterForm'
 import BookList from './BookList'
 
-
-
-
 const Tabs = () => {
   return (
     <ReactTabs className="max-lg:paddx-12 w-full px-24 max-sm:px-6">

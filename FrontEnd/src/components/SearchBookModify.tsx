@@ -2,13 +2,16 @@ import { useState, useEffect } from 'react'
 import { GoSearch } from 'react-icons/go'
 import type { Book } from '../types/types'
 interface SearchBookModifyProps {
-
   allBooks: Book[]
   onSearchResults: (results: Book[]) => void
   setPage: React.Dispatch<React.SetStateAction<number>>
 }
 
-const SearchBookModify: React.FC<SearchBookModifyProps> = ({ allBooks, onSearchResults, setPage }) => {
+const SearchBookModify: React.FC<SearchBookModifyProps> = ({
+  allBooks,
+  onSearchResults,
+  setPage
+}) => {
   const [filteredProducts, setFilteredProducts] = useState<Book[] | []>([])
   const [searchTerm, setSearchTerm] = useState('')
 

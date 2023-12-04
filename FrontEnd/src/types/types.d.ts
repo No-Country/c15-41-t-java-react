@@ -1,6 +1,7 @@
 export interface Book {
   id: number
   title: string
+  quantity: number
   idAuthor: number
   IdEditorial: number
   genre: string
@@ -12,12 +13,12 @@ export interface Book {
 
 export interface BookPost {
   title: string
+  quantity: number
   idAuthor: number
   IdEditorial: number
   genre: string
   quantity: number
   image: string
-  
 }
 
 export interface Author {
