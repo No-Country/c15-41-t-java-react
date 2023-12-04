@@ -1,43 +1,29 @@
 import { useState, useEffect } from 'react'
+import { Author, Editorial } from '../types/types'
 import { FormikValues, useFormik } from 'formik'
 import * as Yup from 'yup'
-import { Author, Editorial } from '../types/types'
 
-interface RegisterFormType {
+type BookProps = {
   id: number
   title: string
-  author: number
-  editorial: number
+  idAuthor: number
+  IdEditorial: number
   genre: string
   quantity: number
   image: string
+  editorialDto: Editorial
+  authorDto: Author
+  setIsModalOpen: (value: boolean) => void
 }
 
-const initialValues: RegisterFormType = {
-  id: 0,
-  title: '',
-  author: 0,
-  editorial: 0,
-  genre: '',
-  quantity: 0,
-  image: ''
-}
+const validationSchema = Yup.object({
+  title: Yup.string().required('El titulo es requerido'),
+  quantity: Yup.number().min(1, 'El valor debe ser mayor a 0').required('Cantidad es requerida'),
+  author: Yup.string().required('El nombre del autor es requerido'),
+  genre: Yup.string().required('El genero es requerido'),
+  editorial: Yup.string().required('La editorial es requerido')
+})
 
-// DEBERIAN SER PROPORCIONADOS POR BACKEND
-/*const mockAuthors: Author[] = [
-  { name: 'Paulo', lastName: 'Coelho', id: 25452 },
-  { name: 'Edgar Allan', lastName: 'Poe', id: 4435 },
-  { name: 'Jane', lastName: 'Austen', id: 55646 }
-]/*
-
-/*onst mockEditorials: Editorial[] = [
-  { name: 'Planeta', id: 1001 },
-  { name: 'Austral', id: 1005 },
-  { name: 'BlackList', id: 1006 },
-  { name: 'El Aleph editores', id: 1007 },
-  { name: 'Ariel', id: 1002 }
-]
-*/
 const mockGenres = [
   'Filosofia',
   'Ciencia',
@@ -49,19 +35,9 @@ const mockGenres = [
   'Arte'
 ]
 
-const validationSchema = Yup.object({
-  title: Yup.string().required('El titulo es requerido'),
-  quantity: Yup.number().min(1, 'El valor debe ser mayor a 0').required('Cantidad es requerida'),
-  author: Yup.string().required('El nombre del autor es requerido'),
-  genre: Yup.string().required('El genero es requerido'),
-  editorial: Yup.string().required('La editorial es requerido')
-})
-
-export default function RegisterForm() {
+const EditBook: React.FC<BookProps> = props => {
   const [authors, setAuthors] = useState<Author[]>([])
   const [editorials, setEditorials] = useState<Editorial[]>([])
-  const [author, setAuthor] = useState<Author | null>(null)
-  const [editorial, setEditorial] = useState<Editorial | null>(null)
 
   useEffect(() => {
     const getAuthors = async () => {
@@ -82,7 +58,13 @@ export default function RegisterForm() {
   }, [])
 
   const { values, errors, handleChange, handleSubmit } = useFormik({
-    initialValues,
+    initialValues: {
+      title: props.title,
+      quantity: props.quantity,
+      author: props.authorDto.name,
+      genre: props.genre,
+      editorial: props.editorialDto.name
+    },
     validationSchema,
     onSubmit
   })
@@ -90,26 +72,29 @@ export default function RegisterForm() {
 
   async function onSubmit(values: FormikValues) {
     console.log(values)
+    props.setIsModalOpen(false)
+    /*
+     try {
+          const postOptions = {
+            method: 'PUT',
+            body: JSON.stringify(values)
+          }
+          const postResponse = await fetch(`http://localhost:3000/books/${props.id}`, postOptions)
+          console.log(postResponse)
+        } catch (error) {
+          console.error(error)
+        } 
 
-    /* try {
-      const postOptions = {
-        method: 'POST',
-        body: JSON.stringify(newBook)
-      }
-      const postResponse = await fetch('http://localhost:3000/books', postOptions)
-      console.log(postResponse)
-    } catch (error) {
-      console.error(error)
-    } */
+    */
   }
 
   return (
     <div className="px-2 py-10">
       <div className="mx-auto w-full rounded-[40px] bg-grey  sm:max-w-[70%]">
         <h2 className="mx-auto w-10/12 py-8 text-2xl font-bold leading-normal text-blueDark">
-          Registro de un nuevo libro
+          Edicion del libro {props.title}
         </h2>
-        <form className="mx-auto w-10/12" onSubmit={handleSubmit}>
+        <form className="mx-auto w-10/12 " onSubmit={handleSubmit}>
           <label className="text-base font-bold leading-[normal] text-blueLight " htmlFor="title">
             Titulo
           </label>
@@ -126,6 +111,7 @@ export default function RegisterForm() {
               {errors?.title}
             </small>
           </div>
+
           <label className="text-base font-bold leading-[normal] text-blueLight" htmlFor="quantity">
             Cantidad
           </label>
@@ -149,7 +135,7 @@ export default function RegisterForm() {
             <select
               className="w-full border-0 bg-grey text-base font-[400] leading-[normal] text-blueDark placeholder-[#ABABAB] focus:outline-none"
               name="author"
-              defaultValue=""
+              value={values.author}
               onChange={handleChange}
             >
               <option value="" disabled>
@@ -196,7 +182,7 @@ export default function RegisterForm() {
             <select
               className="w-full border-0 bg-grey text-base font-[400] leading-[normal] text-blueDark placeholder-[#ABABAB] focus:outline-none"
               name="editorial"
-              defaultValue=""
+              value={values.editorial}
               onChange={handleChange}
             >
               <option value="" disabled>
@@ -218,14 +204,9 @@ export default function RegisterForm() {
               className="w-full border-0 bg-grey text-base font-[400] leading-[normal] text-blueDark placeholder-[#ABABAB] focus:outline-none"
               type="file"
               name="image"
-              value={values.image}
               onChange={handleChange}
               accept=".jpg, .jpeg, .png"
             />
-
-            <small className="absolute -bottom-6 text-xs font-bold text-red-500">
-              {errors?.image}
-            </small>
           </div>
           <div className="pb-10">
             <button
@@ -240,3 +221,5 @@ export default function RegisterForm() {
     </div>
   )
 }
+
+export default EditBook
