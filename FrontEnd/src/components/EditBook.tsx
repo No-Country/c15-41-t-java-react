@@ -82,7 +82,7 @@ const EditBook: React.FC<BookProps> = props => {
     props.setIsModalOpen(false)
 
     toast.success('Su libro se editó correctamente', { duration: 4000, position: 'top-center' })
-    console.log(values);
+    console.log(values)
     /*
   try {
     const formData = new FormData();
@@ -237,10 +237,10 @@ const EditBook: React.FC<BookProps> = props => {
               className="w-full border-0 bg-grey text-base font-[400] leading-[normal] text-blueDark placeholder-[#ABABAB] focus:outline-none"
               type="file"
               name="image"
-              onChange={(event) => {
-                const file = event.currentTarget.files?.[0];
+              onChange={event => {
+                const file = event.currentTarget.files?.[0]
                 if (file) {
-                  setFieldValue('image', file);
+                  setFieldValue('image', file)
                 }
               }}
             />

@@ -6,7 +6,6 @@ import type { Author, Editorial } from '../types/types'
 import { useUser } from '../context/UserContext'
 import toast from 'react-hot-toast'
 
-
 interface RegisterFormType {
   title: string
   idAuthor: null | number
@@ -41,8 +40,8 @@ const validationSchema = Yup.object({
   quantity: Yup.number().min(1, 'El valor debe ser mayor a 0').required('Cantidad es requerida'),
   idAuthor: Yup.number().required('El autor es requerido'),
   genre: Yup.string().required('El genero es requerido'),
-  idEditorial: Yup.number().required('La editorial es requerida'),
-});
+  idEditorial: Yup.number().required('La editorial es requerida')
+})
 
 export default function RegisterForm() {
   const [authors, setAuthors] = useState<Author[]>([])
