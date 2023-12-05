@@ -13,8 +13,8 @@ import java.util.List;
 public interface LoanDaoMapper {
 
     @Mapping(source = "book", target = "bookDto")
-//    @Mapping(source = "admin", target = "adminDto")
-//    @Mapping(source = "user", target = "userDto")
+    @Mapping(source = "admin", target = "adminDto")
+    @Mapping(source = "user", target = "userDto")
 //    @Mapping(source = "bookReturn", target = "bookReturnDto") //TODO
     @Mapping(source = "book.author", target = "bookDto.authorDto")
     @Mapping(source = "book.editorial", target = "bookDto.editorialDto")

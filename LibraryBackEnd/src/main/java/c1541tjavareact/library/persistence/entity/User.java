@@ -13,12 +13,13 @@ import java.util.List;
 @AllArgsConstructor
 @ToString
 @Entity
+@Table(name = "users")
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_user")
-    private Long id;
+    private Long idUser;
 
     @Column(nullable = false, unique = true)
     private String dni;
@@ -26,13 +27,13 @@ public class User {
     @Column(nullable = false)
     private String name;
 
-    @Column(nullable = false)
+    @Column(name = "last_name", nullable = false)
     private String lastName;
 
     @Column(nullable = false, unique = true)
     private String email;
 
-    @Column(nullable = false, unique = true)
+    @Column(name = "phone_number", nullable = false, unique = true)
     private String phoneNumber;
 
     @Column(nullable = false)
@@ -43,13 +44,5 @@ public class User {
 
     private boolean isActive = true;
 
-    public User(String dni, String name, String lastName, String email, String phoneNumber, String address) {
-        this.dni = dni;
-        this.name = name;
-        this.lastName = lastName;
-        this.email = email;
-        this.phoneNumber = phoneNumber;
-        this.address = address;
-    }
 }
 

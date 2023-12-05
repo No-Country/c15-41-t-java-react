@@ -1,64 +1,63 @@
 package c1541tjavareact.library.web.controller;
 
-import c1541tjavareact.library.domain.dto.UserDTO;
+
+import c1541tjavareact.library.domain.dto.UserDto;
 import c1541tjavareact.library.domain.service.UserService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.validation.annotation.Validated;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "*")
-@RequestMapping("/usr")
+
+@RequestMapping("/users")
 public class UserController {
 
-    UserService userService;
-
-    @Autowired
+    private final UserService userService;
+//    @Autowired
     public UserController(UserService userService) {
         this.userService = userService;
     }
 
-    @GetMapping
-    @ResponseStatus(HttpStatus.OK)
-    public List<UserDTO> listAllUsers() {
+    @GetMapping("/all")
+    public ResponseEntity<List<UserDto>> getAll (){
+        return ResponseEntity.ok(userService.getAll());
+    }
 
-        return userService.listUsers();
-
+    @PostMapping("/save")
+    public ResponseEntity<UserDto> save(@RequestBody @Valid UserDto userDto) {
+        return ResponseEntity.ok(userService.save(userDto));
     }
 
     @GetMapping("/{id}")
-    @ResponseStatus(HttpStatus.OK)
-    public UserDTO findCustomer(@PathVariable String dni) {
-
-        return userService.searchUserByDNI(dni);
-
+    public ResponseEntity<UserDto> getUser(@PathVariable Long id) {
+        return userService.getUserDto(id).map(
+                        ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 
-    @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public void createUser(@Validated @RequestBody UserDTO userDTO) {
-
-        userService.createUSer(userDTO);
-
+    @PutMapping("/update/{id}")
+    public ResponseEntity<UserDto> update(@PathVariable Long id,
+                                            @RequestBody UserDto userDto){
+        return ResponseEntity.ok(userService.update(id,userDto));
+    }
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id){
+        if(userService.getUserDto(id).isPresent()){
+            userService.delete(id);
+            return ResponseEntity.noContent().build();
+        }else return ResponseEntity.notFound().build();
     }
 
-    @PutMapping
-    @ResponseStatus(HttpStatus.OK)
-    public void updateUser(@Validated @RequestBody UserDTO userDTO) {
+//    @GetMapping("/{id}")
+//    @ResponseStatus(HttpStatus.OK)
+//    public UserDto findCustomer(@PathVariable String dni) {
+//
+//        return userService.searchUserByDNI(dni);
+//
+//    }
 
-        userService.updateUSer(userDTO);
-
-    }
-
-    @DeleteMapping("/{id}")
-    @ResponseStatus(HttpStatus.OK)
-    public void deleteUser(@PathVariable String dni) {
-
-        userService.deleteUser(dni);
-
-    }
 
 }

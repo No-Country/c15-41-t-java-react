@@ -4,6 +4,7 @@ import c1541tjavareact.library.persistence.entity.Admin;
 import c1541tjavareact.library.persistence.entity.BookReturn;
 import c1541tjavareact.library.persistence.entity.User;
 import jakarta.persistence.Column;
+import jakarta.validation.constraints.Future;
 import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
 import lombok.Getter;
@@ -19,10 +20,12 @@ public class LoanDto {
     private Long idLoan;
 
     @NotNull
+    @Future
     private LocalDate loanDate;
 
     @NotNull
-    private LocalDate returnExpectedDate;//o de default asigno entro un mes en el LoanCrudRepositoryImpl? TODO
+    @Future
+    private LocalDate returnExpectedDate;
 
     @NotNull
     private Long idBook;
@@ -35,9 +38,9 @@ public class LoanDto {
 
     private BookDto bookDto;
 
-//    private AdminDto adminDto; //TODO
+    private AdminDto adminDto;
 
-//    private UserDto userDto; //TODO
+    private UserDto userDto;
 
 //    private BookReturnDto bookReturnDto; //TODO
 

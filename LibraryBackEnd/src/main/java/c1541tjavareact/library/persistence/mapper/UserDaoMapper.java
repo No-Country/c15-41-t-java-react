@@ -1,6 +1,6 @@
 package c1541tjavareact.library.persistence.mapper;
 
-import c1541tjavareact.library.domain.dto.UserDTO;
+import c1541tjavareact.library.domain.dto.UserDto;
 import c1541tjavareact.library.persistence.entity.User;
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
@@ -12,15 +12,14 @@ import java.util.List;
 
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
 @Component
-public interface UserDAOMapper {
+public interface UserDaoMapper {
 
-    @Mapping(source = "loans", target = "loans")
-    UserDTO toUserDTO(User user);
+    @Mapping(source = "loans", target = "loansDto")
+    UserDto toUserDTO(User user);
 
-    List<UserDTO> toUsersDTO(List<User> users);
+    List<UserDto> toUsersDTO(List<User> users);
 
     @InheritInverseConfiguration
-    @Mapping(target = "loans", ignore = true)
-    User toUser(UserDTO userDTO);
+    User toUser(UserDto userDTO);
 
 }

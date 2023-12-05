@@ -1,92 +1,99 @@
 package c1541tjavareact.library.persistence.crud;
 
+
+import c1541tjavareact.library.domain.dto.UserDto;
+import c1541tjavareact.library.domain.repository.UserCrudRepository;
 import c1541tjavareact.library.domain.repository.UserRepository;
 import c1541tjavareact.library.persistence.entity.User;
-import c1541tjavareact.library.persistence.mapper.UserDAOMapper;
+import c1541tjavareact.library.persistence.mapper.UserDaoMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
 
-@Component
-public class UserCrudRepositoryImpl {
+@Repository
+public class UserCrudRepositoryImpl implements UserCrudRepository {
 
-    UserRepository userRepository;
-    UserDAOMapper userDAOMapper;
+    private final UserRepository userRepository;
+    private final UserDaoMapper userDaoMapper;
 
-    @Autowired
-    public UserCrudRepositoryImpl(UserRepository userRepository, UserDAOMapper userDAOMapper) {
+//    @Autowired
+    public UserCrudRepositoryImpl(UserRepository userRepository, UserDaoMapper userDaoMapper) {
         this.userRepository = userRepository;
-        this.userDAOMapper = userDAOMapper;
+        this.userDaoMapper = userDaoMapper;
     }
 
-    public Optional findByID(Long userId) {
+//    public Optional findByID(Long userId) {
+//
+//        Optional<User> answer = userRepository.findById(userId);
+//
+//        return answer;
+//
+//    }
 
-        Optional<User> answer = userRepository.findById(userId);
+//    public User findByDni(String dni) {
+//        return userRepository.findByDni(dni);
+//    }
+//
+//    public List<User> findByName(String searchParam) {
+//        return userRepository.findByName(searchParam);
+//    }
+//
+//    public List<User> findByLastname(String searchParam) {
+//        return userRepository.findByLastName(searchParam);
+//    }
+//
+//    public User findByPhoneNumber(String searchParam) {
+//        return userRepository.findByPhoneNumber(searchParam);
+//    }
+//
+//    public User findByEmail(String searchParam) {
+//        return userRepository.findByEmail(searchParam);
+//    }
+//
+//    public User findByAddress(String searchParam) {
+//        return userRepository.findByAddress(searchParam);
+//    }
 
-        return answer;
-
+    @Override
+    public List<UserDto> getAll() {
+        List<User> users = userRepository.findAll();
+        return userDaoMapper.toUsersDTO(users);
     }
 
-    public User findByDni(String dni) {
-        return userRepository.findByDni(dni);
+    @Override
+    public UserDto save(UserDto userDto) {
+        User user = userDaoMapper.toUser(userDto);
+        return userDaoMapper.toUserDTO(userRepository.save(user));
     }
 
-    public List<User> findByName(String searchParam) {
-        return userRepository.findByName(searchParam);
+    @Override
+    public Optional<UserDto> getUserDto(Long idUser) {
+        return userRepository.findById(idUser)
+                .map(userDaoMapper::toUserDTO);
     }
 
-    public List<User> findByLastname(String searchParam) {
-        return userRepository.findByLastName(searchParam);
+    @Override
+    public UserDto update(Long idUser, UserDto userDto) {
+        return getUserDto(idUser).map(userDtoUpdate -> {
+            userDtoUpdate.setDni(userDto.getDni());
+            userDtoUpdate.setName(userDto.getName());
+            userDtoUpdate.setLastName(userDto.getLastName());
+            userDtoUpdate.setEmail(userDto.getEmail());
+            userDtoUpdate.setPhoneNumber(userDto.getPhoneNumber());
+            userDtoUpdate.setAddress(userDto.getAddress());
+            return save(userDtoUpdate);
+        }).orElse(null);
     }
 
-    public User findByPhoneNumber(String searchParam) {
-        return userRepository.findByPhoneNumber(searchParam);
-    }
 
-    public User findByEmail(String searchParam) {
-        return userRepository.findByEmail(searchParam);
-    }
-
-    public User findByAddress(String searchParam) {
-        return userRepository.findByAddress(searchParam);
-    }
-
-    public List<User> findAll() {
-        return findAll();
-    }
-
-    public void save(User user) {
-
-        save(user);
+    @Override
+    public void delete(Long idUser) {
+        getUserDto(idUser).map(userDto -> {
+            userDto.setActive(false);
+            return save(userDto);
+        });
 
     }
-
-    public void update(User updatedUser) {
-
-        User user = userRepository.findByDni(updatedUser.getDni());
-
-        if (user != null){
-
-            save(updatedUser);
-
-        }
-
-    }
-
-    public void delete(String dni) {
-
-        User user = userRepository.findByDni(dni);
-
-        if (user != null){
-
-            user.setActive(false);
-
-            save(user);
-
-        }
-
-    }
-
 }

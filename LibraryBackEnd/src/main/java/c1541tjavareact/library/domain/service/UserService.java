@@ -1,69 +1,56 @@
 package c1541tjavareact.library.domain.service;
 
-import c1541tjavareact.library.domain.dto.UserDTO;
+
+import c1541tjavareact.library.domain.dto.UserDto;
+import c1541tjavareact.library.domain.repository.UserCrudRepository;
 import c1541tjavareact.library.persistence.crud.UserCrudRepositoryImpl;
-import c1541tjavareact.library.persistence.entity.User;
-import c1541tjavareact.library.persistence.mapper.UserDAOMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+
 
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Optional;
+
 
 @Service
 public class UserService {
 
-    UserCrudRepositoryImpl userCrudRepository;
-    UserDAOMapper userDAOMapper;
+    private final UserCrudRepository userCrudRepository;
 
-    @Autowired
-    public UserService(UserCrudRepositoryImpl userCrudRepository, UserDAOMapper userDAOMapper) {
+//    @Autowired
+    public UserService(UserCrudRepositoryImpl userCrudRepository) {
         this.userCrudRepository = userCrudRepository;
-        this.userDAOMapper = userDAOMapper;
     }
 
-    @Transactional
-    public void createUSer(UserDTO userDTO) {
-
-        User user = userDAOMapper.toUser(userDTO);
-
-        userCrudRepository.save(user);
-
+    public List<UserDto> getAll() {
+        return userCrudRepository.getAll();
     }
 
-    @Transactional
-    public void updateUSer(UserDTO userDTO) {
-
-        User user = userDAOMapper.toUser(userDTO);
-
-        userCrudRepository.update(user);
-
+    public UserDto save(UserDto userDto) {
+        return userCrudRepository.save(userDto);
     }
 
-    @Transactional
-    public void deleteUser(String dni) {
-
-        userCrudRepository.delete(dni);
-
+    public Optional<UserDto> getUserDto(Long idUser) {
+        return userCrudRepository.getUserDto(idUser);
     }
 
-    @Transactional(readOnly = true)
-    public List<UserDTO> listUsers() {
-
-        return userCrudRepository.findAll().stream()
-                .map(userDAOMapper::toUserDTO)
-                .collect(Collectors.toList());
-
+    public UserDto update(Long idAuthor, UserDto userDto) {
+        return userCrudRepository.update(idAuthor,userDto);
     }
 
-    @Transactional(readOnly = true)
-    public UserDTO searchUserByDNI(String dni) {
-
-        User user = userCrudRepository.findByDni(dni);
-
-        return userDAOMapper.toUserDTO(user);
-
+    public void delete(Long idUser) {
+        userCrudRepository.delete(idUser);
     }
+
+
+
+//    @Transactional(readOnly = true)
+//    public UserDto searchUserByDNI(String dni) {
+//
+//        User user = userCrudRepository.findByDni(dni);
+//
+//        return userDAOMapper.toUserDTO(user);
+//
+//    }
 
 }
