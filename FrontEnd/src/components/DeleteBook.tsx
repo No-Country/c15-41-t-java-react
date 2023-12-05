@@ -10,18 +10,21 @@ interface Props {
 const DeleteBook: React.FC<Props> = ({ id, setIsModalDeleteOpen, deleteEntity }: Props) => {
   const { fetch } = useUser()
   let spanishDeleteEntity: string = ''
+  let deleteUrl: string = ''
   switch (deleteEntity) {
     case 'book':
       spanishDeleteEntity = 'libro'
+      deleteUrl = `http://localhost:3000/books/${id}` // cambiar por api de books
       break
     case 'user':
       spanishDeleteEntity = 'usuario'
+      deleteUrl = `http://localhost:3000/users/${id}` // cambiar por api de users
       break
     default:
       break
   }
   const handleDeleteBook = () => {
-    fetch(`http://localhost:3000/${deleteEntity}s/${id}`, {
+    fetch(deleteUrl, {
       method: 'DELETE'
     }).catch(error => {
       console.error(error)

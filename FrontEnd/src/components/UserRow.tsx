@@ -1,5 +1,8 @@
 import { IoTrashOutline, IoPencil } from 'react-icons/io5'
 import type { User } from '../types/types'
+import DeleteBook from './DeleteBook'
+import { IoMdClose } from 'react-icons/io'
+import { useState } from 'react'
 
 interface UserRowProps {
   key: User['dni']
@@ -7,6 +10,8 @@ interface UserRowProps {
 }
 
 export default function UserRow({ user }: UserRowProps) {
+  const [isModalDeleteOpen, setIsModalDeleteOpen] = useState(false)
+
   return (
     <>
       <tr>
@@ -29,11 +34,33 @@ export default function UserRow({ user }: UserRowProps) {
           <div className="text-base hover:cursor-pointer">
             <IoPencil size={20} />
           </div>
-          <div className="hover:cursor-pointer">
+          <div
+            onClick={() => {
+              setIsModalDeleteOpen(true)
+            }}
+            className="hover:cursor-pointer"
+          >
             <IoTrashOutline size={20} />
           </div>
         </td>
       </tr>
+      {isModalDeleteOpen && (
+        <div className="fixed inset-0 z-50  bg-white opacity-100">
+          <DeleteBook
+            id={user.idUsers}
+            setIsModalDeleteOpen={setIsModalDeleteOpen}
+            deleteEntity="user"
+          />
+          <div
+            className="absolute right-4 top-4 cursor-pointer text-5xl font-semibold text-black hover:scale-125"
+            onClick={() => {
+              setIsModalDeleteOpen(false)
+            }}
+          >
+            <IoMdClose />
+          </div>
+        </div>
+      )}
     </>
   )
 }

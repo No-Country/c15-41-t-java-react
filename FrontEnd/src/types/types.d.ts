@@ -23,6 +23,7 @@ export interface BookPost {
 }
 
 export interface User {
+  idUsers: number
   dni: number
   name: string
   lastName: string
