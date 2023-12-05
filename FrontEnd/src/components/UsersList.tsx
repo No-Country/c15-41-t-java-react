@@ -74,7 +74,7 @@ export default function UsersList() {
             shape="rounded"
             color="primary"
             page={page}
-            onChange={(e, value) => {
+            onChange={(_, value) => {
               setPage(value)
             }}
           />
