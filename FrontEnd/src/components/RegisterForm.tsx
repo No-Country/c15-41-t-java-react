@@ -20,11 +20,11 @@ const mockGenres = ['THRILLER', 'FANTASY', 'ADVENTURE', 'ACTION']
 
 const validationSchema = Yup.object({
   title: Yup.string().required('El titulo es requerido'),
+  isbn: Yup.string().required('El isbn es requerido'),
   quantity: Yup.number().min(1, 'El valor debe ser mayor a 0').required('Cantidad es requerida'),
   idAuthor: Yup.number().min(1, 'Seleccione autor').required('El autor es requerido'),
   genre: Yup.string().required('El genero es requerido'),
-  idEditorial: Yup.number().min(1, 'Seleccione editorial').required('La editorial es requerida'),
-  isbn: Yup.string().required('El isbn es requerido')
+  idEditorial: Yup.number().min(1, 'Seleccione editorial').required('La editorial es requerida')
 })
 
 export default function RegisterForm() {

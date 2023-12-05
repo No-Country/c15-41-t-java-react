@@ -54,7 +54,7 @@ const BookCard: React.FC<Props> = ({
           </p>
           <p>
             <span className="font-bold text-black">Genero: </span>
-            {genre}
+            {genre.charAt(0) + genre.toLowerCase().slice(1)}
           </p>
           <p>
             <span className="font-bold text-black">Editorial: </span>
@@ -83,7 +83,12 @@ const BookCard: React.FC<Props> = ({
       </div>
       {isModalOpen && (
         <div className="absolute inset-0 z-50 bg-white opacity-100">
-          <EditBook {...bookData} setIsModalOpen={setIsModalOpen} />
+          <EditBook
+            {...bookData}
+            setIsModalOpen={setIsModalOpen}
+            id={bookData.idBook}
+            refresh={refresh}
+          />
           <div
             className="absolute right-4 top-4 cursor-pointer text-5xl font-semibold text-black hover:scale-125"
             onClick={() => {

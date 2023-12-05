@@ -18,7 +18,11 @@ const DeleteBook: React.FC<Props> = ({ id, setIsModalDeleteOpen, refresh }: Prop
       })
       .then(() => {
         refresh()
-        toast('Su libro ha sido eliminado', { duration: 3000, position: 'top-center', icon: '♻' })
+        toast.success('Su libro ha sido eliminado', {
+          duration: 3000,
+          position: 'top-center',
+          icon: '♻'
+        })
       })
     setIsModalDeleteOpen(false)
   }
