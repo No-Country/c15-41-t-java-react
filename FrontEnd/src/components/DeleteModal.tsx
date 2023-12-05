@@ -8,7 +8,7 @@ interface Props {
   refresh: () => void
 }
 
-const DeleteBook: React.FC<Props> = ({ id, setIsModalDeleteOpen, refresh, deleteEntity }: Props) => {
+const DeleteModal: React.FC<Props> = ({ id, setIsModalDeleteOpen, refresh, deleteEntity }: Props) => {
   const { fetch } = useUser()
   let spanishDeleteEntity: string = ''
   let deleteUrl: string = ''
@@ -24,7 +24,7 @@ const DeleteBook: React.FC<Props> = ({ id, setIsModalDeleteOpen, refresh, delete
     default:
       break
   }
-  const handleDeleteBook = () => {
+  const handleDelete = () => {
     fetch(deleteUrl, {
       method: 'DELETE'
     })
@@ -58,7 +58,7 @@ const DeleteBook: React.FC<Props> = ({ id, setIsModalDeleteOpen, refresh, delete
           <div className="flex items-center justify-around gap-4">
             <button
               className="flex h-10 w-[50%] items-center justify-center rounded-[32px] border-none bg-blueDark text-xl font-extrabold leading-normal text-white shadow-btn hover:cursor-pointer xl:h-12"
-              onClick={handleDeleteBook}
+              onClick={handleDelete}
             >
               Si
             </button>
@@ -76,4 +76,4 @@ const DeleteBook: React.FC<Props> = ({ id, setIsModalDeleteOpen, refresh, delete
     </div>
   )
 }
-export default DeleteBook
+export default DeleteModal

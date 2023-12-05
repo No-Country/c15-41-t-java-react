@@ -1,6 +1,6 @@
 import { IoTrashOutline, IoPencil } from 'react-icons/io5'
 import type { User } from '../types/types'
-import DeleteBook from './DeleteBook'
+import DeleteModal from './DeleteModal'
 import { IoMdClose } from 'react-icons/io'
 import { useState } from 'react'
 
@@ -46,10 +46,11 @@ export default function UserRow({ user }: UserRowProps) {
       </tr>
       {isModalDeleteOpen && (
         <div className="fixed inset-0 z-50  bg-white opacity-100">
-          <DeleteBook
+          <DeleteModal
             id={user.idUsers}
             setIsModalDeleteOpen={setIsModalDeleteOpen}
             deleteEntity="user"
+            /* refresh= agregar funcion de refresh de usuarios */
           />
           <div
             className="absolute right-4 top-4 cursor-pointer text-5xl font-semibold text-black hover:scale-125"
