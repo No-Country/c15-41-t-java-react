@@ -67,22 +67,21 @@ const EditBook: React.FC<BookProps> = props => {
   })
 
   async function onSubmit(values: FormikValues) {
-    console.log(values)
-    // try {
-    //   const postOptions = {
-    //     method: 'PUT',
-    //     body: JSON.stringify(values)
-    //   }
-    //   await fetch(`http://localhost:3000/books/update/${props.id}`, postOptions)
-    //   props.setIsModalOpen(false)
-    //   props.refresh()
-    //   toast.success('Su libro se editó correctamente', { duration: 4000, position: 'top-center' })
-    // } catch (error) {
-    //   toast.error('Hubo un error al intentar editar el libro', {
-    //     duration: 4000,
-    //     position: 'top-center'
-    //   })
-    // }
+    try {
+      const postOptions = {
+        method: 'PUT',
+        body: JSON.stringify(values)
+      }
+      await fetch(`http://localhost:3000/books/update/${props.id}`, postOptions)
+      props.setIsModalOpen(false)
+      props.refresh()
+      toast.success('Su libro se editó correctamente', { duration: 4000, position: 'top-center' })
+    } catch (error) {
+      toast.error('Hubo un error al intentar editar el libro', {
+        duration: 4000,
+        position: 'top-center'
+      })
+    }
   }
 
   return (
