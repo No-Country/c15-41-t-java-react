@@ -17,11 +17,26 @@ export type BookPost = Omit<Book, 'editorialDto' | 'authorDto' | 'idBook'>
 
 export interface User {
   idUsers: number
-  dni: number
+  dni: string
   name: string
   lastName: string
-  phoneNumber: number
+  email: string
+  phoneNumber: string
   address: string
+  loansDto: Loan[] | []
+  active: boolean
+}
+
+export interface Loan {
+  isLoan: boolean
+  loanDate: string
+  returnExpectedDate: string
+  isBook: number
+  isAdmin: number
+  isUser: number
+  bookDto: null
+  adminDto: null
+  userDto: null
 }
 
 export interface Author {

@@ -54,13 +54,14 @@ export default function UsersList() {
               <th>Apellido</th>
               <th>Celular</th>
               <th>Direccion</th>
+              <th>E-mail</th>
               <th></th>
             </tr>
           </thead>
           <tbody>
             {searchResults.map((user, index) => {
               if (index < page * PAGE_SIZE && index >= (page - 1) * PAGE_SIZE) {
-                return <UserRow key={user.dni} user={user} refresh={fetchUsers}/>
+                return <UserRow key={user.idUsers} user={user} refresh={fetchUsers}/>
               } else {
                 return null
               }

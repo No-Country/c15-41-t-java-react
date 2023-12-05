@@ -173,17 +173,19 @@
   "Users": [
     {
       "idUsers": 6565655,
-      "dni": 12345678,
+      "dni": "12345678",
       "name": "John",
       "lastName": "Doe",
+      "email" : "johndoe@gmail",
       "phoneNumber": "123456789",
       "address": "123 Main St"
     },
     {
       "idUsers": 656565,
-      "dni": 87654321,
+      "dni": "87654321",
       "name": "Jane",
       "lastName": "Smith",
+      "email" : "janesmith@gmail",
       "phoneNumber": "987654321",
       "address": "456 Elm St"
     },
@@ -191,6 +193,7 @@
       "idUsers": 656545,
       "dni": "98765432",
       "name": "Alice",
+      "email" : "alicejohnson@gmail",
       "lastName": "Johnson",
       "phoneNumber": "567890123",
       "address": "789 Oak St"
@@ -200,6 +203,7 @@
       "dni": "54321678",
       "name": "Bob",
       "lastName": "Williams",
+      "email" : "bobwilliams@gmail",
       "phoneNumber": "654321098",
       "address": "321 Pine St"
     },
@@ -208,6 +212,7 @@
       "dni": "34567812",
       "name": "Sarah",
       "lastName": "Taylor",
+      "email" : "sarahtaylor@gmail",
       "phoneNumber": "908765432",
       "address": "567 Maple St"
     },
@@ -216,6 +221,7 @@
       "dni": "87654329",
       "name": "Michael",
       "lastName": "Brown",
+      "email" : "michaelbrown@gmail",
       "phoneNumber": "234567890",
       "address": "901 Cedar St"
     }
