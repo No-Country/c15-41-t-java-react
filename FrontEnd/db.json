@@ -3,6 +3,7 @@
     {
       "id": 1,
       "title": "Cien años de soledad",
+      "isbn": "5451651651",
       "quantity": 10,
       "idEditorial": 1,
       "idAuthor": 1,
@@ -22,6 +23,7 @@
     {
       "id": 2,
       "title": "1984",
+      "isbn": "541414151",
       "quantity": 1,
       "idEditorial": 2,
       "idAuthor": 2,
@@ -41,6 +43,7 @@
     {
       "id": 3,
       "title": "El amor en los tiempos del cólera",
+      "isbn": "51771651651",
       "quantity": 3,
       "idEditorial": 3,
       "idAuthor": 3,
@@ -60,6 +63,7 @@
     {
       "id": 4,
       "title": "La sombra del viento",
+      "isbn": "5451651651222",
       "quantity": 8,
       "idEditorial": 5,
       "idAuthor": 5,
@@ -79,6 +83,7 @@
     {
       "id": 5,
       "title": "Harry Potter y la piedra filosofal",
+      "isbn": "545165165187877",
       "quantity": 5,
       "idEditorial": 4,
       "idAuthor": 4,
@@ -98,6 +103,7 @@
     {
       "id": 6,
       "title": "El principito",
+      "isbn": "542871951651651",
       "quantity": 5,
       "idEditorial": 6,
       "idAuthor": 6,

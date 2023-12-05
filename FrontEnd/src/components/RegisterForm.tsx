@@ -33,7 +33,7 @@ const validationSchema = Yup.object({
   idAuthor: Yup.number().required('El autor es requerido'),
   genre: Yup.string().required('El genero es requerido'),
   idEditorial: Yup.number().required('La editorial es requerida'),
-  isbn: Yup.string().required('El titulo es requerido')
+  isbn: Yup.string().required('El isbn es requerido')
 })
 
 export default function RegisterForm() {
@@ -151,7 +151,7 @@ export default function RegisterForm() {
               {errors?.quantity}
             </small>
           </div>
-          <label className="text-base font-bold leading-[normal] text-blueLight" htmlFor="author">
+          <label className="text-base font-bold leading-[normal] text-blueLight" htmlFor="idAuthor">
             Autor
           </label>
           <div className="relative mb-14 flex h-8 w-full items-center gap-2 border-0 border-b-2 border-solid border-blueDark">
@@ -199,7 +199,7 @@ export default function RegisterForm() {
           </div>
           <label
             className="text-base font-bold leading-[normal] text-blueLight"
-            htmlFor="editorial"
+            htmlFor="idEditorial"
           >
             Editorial
           </label>

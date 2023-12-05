@@ -7,12 +7,13 @@ import { useUser } from '../context/UserContext'
 import toast from 'react-hot-toast'
 import { imageListClasses } from '@mui/material'
 
-interface BookProps {
+interface EditBookProps {
   id: number
   title: string
   idAuthor: number
   IdEditorial: number
   genre: string
+  isbn: string
   quantity: number
   image: string
   editorialDto: Editorial
@@ -22,6 +23,7 @@ interface BookProps {
 
 const validationSchema = Yup.object({
   title: Yup.string().required('El titulo es requerido'),
+  isbn: Yup.string().required('El isbn es requerido'),
   quantity: Yup.number().min(1, 'El valor debe ser mayor a 0').required('Cantidad es requerida'),
   idAuthor: Yup.number().required('El autor es requerido'),
   genre: Yup.string().required('El genero es requerido'),
@@ -39,7 +41,7 @@ const mockGenres = [
   'Arte'
 ]
 
-const EditBook: React.FC<BookProps> = props => {
+const EditBook: React.FC<EditBookProps> = props => {
   const [authors, setAuthors] = useState<Author[]>([])
   const [editorials, setEditorials] = useState<Editorial[]>([])
   const { fetch } = useUser()
@@ -68,9 +70,10 @@ const EditBook: React.FC<BookProps> = props => {
     initialValues: {
       title: props.title,
       quantity: props.quantity,
-      author: props.authorDto.name,
+      idAuthor: props.idAuthor,
+      isbn: props.isbn,
       genre: props.genre,
-      editorial: props.editorialDto.name,
+      idEditorial: props.IdEditorial,
       image: props.image
     },
     validationSchema,
@@ -80,17 +83,15 @@ const EditBook: React.FC<BookProps> = props => {
   async function onSubmit(values: FormikValues) {
     console.log(values)
     props.setIsModalOpen(false)
-
-    toast.success('Su libro se editó correctamente', { duration: 4000, position: 'top-center' })
-    console.log(values);
     /*
   try {
     const formData = new FormData();
     formData.append('title', values.title);
+    formData.append('isbn', values.isbn);
     formData.append('quantity', values.quantity.toString());
-    formData.append('author', values.author.toString()); // Ajusta según sea necesario
+    formData.append('idAuthor', values.author.toString()); // Ajusta según sea necesario
     formData.append('genre', values.genre);
-    formData.append('editorial', values.editorial.toString()); // Ajusta según sea necesario
+    formData.append('idEditorial', values.editorial.toString()); // Ajusta según sea necesario
     formData.append('image', values.image); // Asumiendo que `values.image` es un archivo
 
     const putOptions = {
@@ -101,9 +102,7 @@ const EditBook: React.FC<BookProps> = props => {
     const putResponse = await fetch(`http://localhost:3000/books/${props.id}`, putOptions);
 
     if (putResponse.ok) {
-      console.log('Libro actualizado exitosamente');
       props.setIsModalOpen(false);
-      
       toast.success('Su libro se editó correctamente', { duration: 4000, position: 'top-center' });
     } else {
       console.error('Error al actualizar el libro');
@@ -140,7 +139,22 @@ const EditBook: React.FC<BookProps> = props => {
               {errors?.title}
             </small>
           </div>
-
+          <label className="text-base font-bold leading-[normal] text-blueLight " htmlFor="isbn">
+            ISBN
+          </label>
+          <div className="relative mb-14 flex h-8 w-full items-center gap-2 border-0 border-b-2 border-solid border-blueDark">
+            <input
+              className="w-full border-0 bg-grey text-base font-[400] leading-[normal] text-[#263238] placeholder-[#ABABAB] focus:outline-none"
+              name="isbn"
+              type="text"
+              placeholder="Ingresá el isbn"
+              value={values.isbn}
+              onChange={handleChange}
+            />
+            <small className="absolute -bottom-6 text-xs font-bold text-red-500">
+              {errors?.isbn}
+            </small>
+          </div>
           <label className="text-base font-bold leading-[normal] text-blueLight" htmlFor="quantity">
             Cantidad
           </label>
@@ -157,14 +171,14 @@ const EditBook: React.FC<BookProps> = props => {
               {errors?.quantity}
             </small>
           </div>
-          <label className="text-base font-bold leading-[normal] text-blueLight" htmlFor="author">
+          <label className="text-base font-bold leading-[normal] text-blueLight" htmlFor="idAuthor">
             Autor
           </label>
           <div className="relative mb-14 flex h-8 w-full items-center gap-2 border-0 border-b-2 border-solid border-blueDark">
             <select
               className="w-full border-0 bg-grey text-base font-[400] leading-[normal] text-blueDark placeholder-[#ABABAB] focus:outline-none"
               name="author"
-              value={values.author}
+              value={values.idAuthor}
               onChange={handleChange}
             >
               <option value="" disabled>
@@ -205,14 +219,14 @@ const EditBook: React.FC<BookProps> = props => {
           </div>
           <label
             className="text-base font-bold leading-[normal] text-blueLight"
-            htmlFor="editorial"
+            htmlFor="idEditorial"
           >
             Editorial
           </label>
           <div className="relative mb-14 flex h-8 w-full items-center gap-2 border-0 border-b-2 border-solid border-blueDark">
             <select
               className="w-full border-0 bg-grey text-base font-[400] leading-[normal] text-blueDark placeholder-[#ABABAB] focus:outline-none"
-              name="editorial"
+              name="idEditorial"
               defaultValue={values.editorial}
               onChange={handleChange}
             >
