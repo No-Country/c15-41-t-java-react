@@ -4,6 +4,8 @@ import type { FormikValues } from 'formik'
 import * as Yup from 'yup'
 import type { Author, Editorial } from '../types/types'
 import { useUser } from '../context/UserContext'
+import toast from 'react-hot-toast'
+
 
 interface RegisterFormType {
   title: string
@@ -76,6 +78,8 @@ export default function RegisterForm() {
   async function onSubmit(values: FormikValues) {
     console.log(values)
     console.log(author)
+    toast.success('Su libro se agregó correctamente', { duration: 4000, position: 'top-center' })
+
     /* try {
       const postOptions = {
         method: 'POST',

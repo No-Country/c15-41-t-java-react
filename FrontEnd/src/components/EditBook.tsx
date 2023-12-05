@@ -4,6 +4,7 @@ import type { FormikValues } from 'formik'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import { useUser } from '../context/UserContext'
+import toast from 'react-hot-toast'
 
 interface BookProps {
   id: number
@@ -77,6 +78,8 @@ const EditBook: React.FC<BookProps> = props => {
   async function onSubmit(values: FormikValues) {
     console.log(values)
     props.setIsModalOpen(false)
+
+    toast.success('Su libro se editó correctamente', { duration: 4000, position: 'top-center' })
     /*
      try {
           const postOptions = {
@@ -93,7 +96,7 @@ const EditBook: React.FC<BookProps> = props => {
   }
 
   return (
-    <div className="px-2 py-10">
+    <div className="bg-white px-2 py-10">
       <div className="mx-auto w-full rounded-[40px] bg-grey  sm:max-w-[70%]">
         <h2 className="mx-auto w-10/12 py-8 text-2xl font-bold leading-normal text-blueDark">
           Edicion del libro {props.title}

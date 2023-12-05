@@ -19,16 +19,26 @@ const SearchBookModify: React.FC<SearchBookModifyProps> = ({
     return JSON.stringify(array1) === JSON.stringify(array2)
   }
 
+  function normalizeString(string: string): string {
+    return string
+      .toLowerCase()
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+  }
+
+  function searchIncludes(stringSearch: string, stringInclude: string): boolean {
+    return normalizeString(stringSearch).includes(normalizeString(stringInclude))
+  }
+
   useEffect(() => {
     if (searchTerm !== '') {
       setPage(1)
       const filtered = allBooks.filter(
         book =>
-          book.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          book.authorDto.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          book.authorDto.lastName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          book.genre.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          book.editorialDto.name.toLowerCase().includes(searchTerm.toLowerCase())
+          searchIncludes(book.title, searchTerm) ||
+          searchIncludes(book.genre, searchTerm) ||
+          searchIncludes(book.editorialDto.name, searchTerm) ||
+          searchIncludes(`${book.authorDto.name} ${book.authorDto.lastName}`, searchTerm)
       )
       if (!arraysAreEqual(filtered, filteredProducts)) {
         setFilteredProducts(filtered)
@@ -54,9 +64,28 @@ const SearchBookModify: React.FC<SearchBookModifyProps> = ({
           }}
         />
       </div>
-      <button className="h-9 w-9 rounded-full border bg-white text-lg font-bold text-black outline-none">
-        ?
-      </button>
+      <div className="group relative">
+        <button className="h-9 w-9 rounded-full border bg-white text-lg font-bold text-black outline-none">
+          ?
+        </button>
+        <div
+          id="search-help"
+          className="absolute right-0 top-14 z-10 hidden w-[50vw] rounded-md bg-[#0A7ABF] p-4 text-white shadow-xl group-hover:block min-[750px]:w-[25vw]"
+        >
+          <p>
+            Puede escribir las palabras de su búsqueda en
+            <b> mayúscula o minúscula, con o sin tilde</b>, y el catálogo recuperará todos los
+            resultados.
+            <br />
+            <br />
+            Puede buscar por <b>Título de la obra, Autor, Género o Editorial.</b>
+            <br />
+            <br />
+            Por ejemplo, si busca la palabra "Química", se localizarán también "quimica, Quimica,
+            QUÍMICA, QUIMICA y química"
+          </p>
+        </div>
+      </div>
     </div>
   )
 }
