@@ -89,9 +89,9 @@ const EditBook: React.FC<EditBookProps> = props => {
     formData.append('title', values.title);
     formData.append('isbn', values.isbn);
     formData.append('quantity', values.quantity.toString());
-    formData.append('idAuthor', values.author.toString()); // Ajusta según sea necesario
+    formData.append('idAuthor', values.idAuthor.toString()); // Ajusta según sea necesario
     formData.append('genre', values.genre);
-    formData.append('idEditorial', values.editorial.toString()); // Ajusta según sea necesario
+    formData.append('idEditorial', values.idEditorial.toString()); // Ajusta según sea necesario
     formData.append('image', values.image); // Asumiendo que `values.image` es un archivo
 
     const putOptions = {
@@ -177,7 +177,7 @@ const EditBook: React.FC<EditBookProps> = props => {
           <div className="relative mb-14 flex h-8 w-full items-center gap-2 border-0 border-b-2 border-solid border-blueDark">
             <select
               className="w-full border-0 bg-grey text-base font-[400] leading-[normal] text-blueDark placeholder-[#ABABAB] focus:outline-none"
-              name="author"
+              name="idAuthor"
               value={values.idAuthor}
               onChange={handleChange}
             >
@@ -191,7 +191,7 @@ const EditBook: React.FC<EditBookProps> = props => {
               ))}
             </select>
             <small className="absolute -bottom-6 text-xs font-bold text-red-500">
-              {errors?.author}
+              {errors?.idAuthor}
             </small>
           </div>
           <label className="text-base font-bold leading-[normal] text-blueLight" htmlFor="genre">
@@ -227,7 +227,7 @@ const EditBook: React.FC<EditBookProps> = props => {
             <select
               className="w-full border-0 bg-grey text-base font-[400] leading-[normal] text-blueDark placeholder-[#ABABAB] focus:outline-none"
               name="idEditorial"
-              defaultValue={values.editorial}
+              defaultValue={values.idEditorial}
               onChange={handleChange}
             >
               <option value="" disabled>
@@ -240,7 +240,7 @@ const EditBook: React.FC<EditBookProps> = props => {
               ))}
             </select>
             <small className="absolute -bottom-6 text-xs font-bold text-red-500">
-              {errors?.editorial}
+              {errors?.idEditorial}
             </small>
           </div>
           <label className="text-base font-bold leading-[normal] text-blueLight" htmlFor="image">
