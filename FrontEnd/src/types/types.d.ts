@@ -1,5 +1,5 @@
 export interface Book {
-  id: number
+  idBook: number
   title: string
   quantity: number
   idAuthor: number
@@ -7,6 +7,7 @@ export interface Book {
   genre: string
   quantity: number
   image: string
+  isbn: string
   editorialDto: Editorial
   authorDto: Author
 }

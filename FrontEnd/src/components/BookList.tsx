@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import BookCard from './BookCard.tsx'
 import type { Book } from '../types/types'
 import SearchBookModify from './SearchBookModify'
@@ -12,22 +12,23 @@ const BookList: React.FC = () => {
   const PAGE_SIZE = 3 // podemos ponerlo como variable de entorno
   const { fetch } = useUser()
 
-  useEffect(() => {
-    const getBooks = async () => {
-      const books = await fetch('http://localhost:3000/books')
+  const getBooks = useCallback(async () => {
+    try {
+      const books = await fetch('http://localhost:3000/books/all')
       setBooks(books)
       setSearchResults(books)
-    }
-    getBooks().catch(error => {
+    } catch (error) {
       console.error(error)
-    })
-  }, [])
+    }
+  }, [fetch])
+
+  useEffect(() => {
+    getBooks()
+  }, [getBooks])
 
   const handleSearchResults = (results: any) => {
     setSearchResults(results)
   }
-
-  if (books.length === 0) return <p>Loading</p>
 
   return (
     <div className="flex h-full w-full flex-col items-center">
@@ -36,7 +37,7 @@ const BookList: React.FC = () => {
         {searchResults.length > 0 ? (
           searchResults.map((book, index) => {
             if (index < page * PAGE_SIZE && index >= (page - 1) * PAGE_SIZE) {
-              return <BookCard key={book.id} {...book} />
+              return <BookCard key={book.idBook} {...book} refresh={getBooks} />
             } else {
               return null
             }

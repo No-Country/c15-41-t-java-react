@@ -1,20 +1,11 @@
 import { useState, useEffect } from 'react'
-import type { Author, Editorial } from '../types/types'
+import type { Author, Book, Editorial } from '../types/types'
 import type { FormikValues } from 'formik'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import { useUser } from '../context/UserContext'
 
-interface BookProps {
-  id: number
-  title: string
-  idAuthor: number
-  IdEditorial: number
-  genre: string
-  quantity: number
-  image: string
-  editorialDto: Editorial
-  authorDto: Author
+interface BookProps extends Book {
   setIsModalOpen: (value: boolean) => void
 }
 
@@ -87,7 +78,7 @@ const EditBook: React.FC<BookProps> = props => {
           console.log(postResponse)
         } catch (error) {
           console.error(error)
-        } 
+        }
 
     */
   }

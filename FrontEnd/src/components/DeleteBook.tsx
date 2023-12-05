@@ -3,16 +3,21 @@ import { useUser } from '../context/UserContext'
 interface Props {
   id: number
   setIsModalDeleteOpen: (value: boolean) => void
+  refresh: () => void
 }
 
-const DeleteBook: React.FC<Props> = ({ id, setIsModalDeleteOpen }: Props) => {
+const DeleteBook: React.FC<Props> = ({ id, setIsModalDeleteOpen, refresh }: Props) => {
   const { fetch } = useUser()
   const handleDelete = () => {
-    fetch(`http://localhost:3000/books/${id}`, {
+    fetch(`http://localhost:3000/books/delete/${id}`, {
       method: 'DELETE'
-    }).catch(error => {
-      console.error(error)
     })
+      .catch(error => {
+        console.error(error)
+      })
+      .then(() => {
+        refresh()
+      })
     setIsModalDeleteOpen(false)
   }
 
