@@ -7,10 +7,10 @@ services:
       - 3306:3306
     environment:
       - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+      - MYSQL_USER
+      - MYSQL_PASSWORD
+      - MYSQL_DATABASE
     volumes:
-      - type: bind
-        source: ./LibraryBackEnd/src/main/resources/scripts/ScritpSchemaBibliotech.sql
-        target: /docker-entrypoint-initdb.d/ScritpSchemaBibliotech.sql
       - type: volume
         source: mysql-data
         target: /var/lib/mysql
@@ -37,6 +37,12 @@ services:
     build:
       context: ./LibraryBackEnd
       dockerfile: Dockerfile
+    environment:
+      - DB_HOSTNAME=mysql
+      - DB_PORT=3306
+      - DB_USERNAME
+      - DB_PASSWORD
+      - DB_DATABASE
     ports:
       - "8080:8080"
     networks:
