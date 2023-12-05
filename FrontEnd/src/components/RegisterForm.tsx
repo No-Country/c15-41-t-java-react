@@ -1,109 +1,76 @@
 import { useState, useEffect } from 'react'
-import { FormikValues, useFormik } from 'formik'
+import { useFormik } from 'formik'
+import type { FormikValues } from 'formik'
 import * as Yup from 'yup'
-import { Author, Editorial } from '../types/types'
+import type { Author, BookPost, Editorial } from '../types/types'
+import { useUser } from '../context/UserContext'
 import toast from 'react-hot-toast'
 
-interface RegisterFormType {
-  title: string
-  author: null
-  editorial: null
-  genre: string
-  quantity: number
-  image: string
-}
-
-const initialValues: RegisterFormType = {
+const initialValues: BookPost = {
   title: '',
-  author: null,
-  editorial: null,
+  idAuthor: -1,
+  idEditorial: -1,
+  isbn: '',
   genre: '',
   quantity: 0,
   image: ''
 }
 
-// DEBERIAN SER PROPORCIONADOS POR BACKEND
-/*const mockAuthors: Author[] = [
-  { name: 'Paulo', lastName: 'Coelho', id: 25452 },
-  { name: 'Edgar Allan', lastName: 'Poe', id: 4435 },
-  { name: 'Jane', lastName: 'Austen', id: 55646 }
-]/*
-
-/*onst mockEditorials: Editorial[] = [
-  { name: 'Planeta', id: 1001 },
-  { name: 'Austral', id: 1005 },
-  { name: 'BlackList', id: 1006 },
-  { name: 'El Aleph editores', id: 1007 },
-  { name: 'Ariel', id: 1002 }
-]
-*/
-const mockGenres = [
-  'Filosofia',
-  'Ciencia',
-  'Novela',
-  'Historia',
-  'Ciencia ficcion',
-  'Religion',
-  'Gastronimia',
-  'Arte'
-]
+const mockGenres = ['THRILLER', 'FANTASY', 'ADVENTURE', 'ACTION']
 
 const validationSchema = Yup.object({
   title: Yup.string().required('El titulo es requerido'),
+  isbn: Yup.string().required('El isbn es requerido'),
   quantity: Yup.number().min(1, 'El valor debe ser mayor a 0').required('Cantidad es requerida'),
-  author: Yup.string().required('El nombre del autor es requerido'),
+  idAuthor: Yup.number().min(1, 'Seleccione autor').required('El autor es requerido'),
   genre: Yup.string().required('El genero es requerido'),
-  editorial: Yup.string().required('La editorial es requerido')
+  idEditorial: Yup.number().min(1, 'Seleccione editorial').required('La editorial es requerida')
 })
 
 export default function RegisterForm() {
   const [authors, setAuthors] = useState<Author[]>([])
   const [editorials, setEditorials] = useState<Editorial[]>([])
-  const [author, setAuthor] = useState<Author | null>(null)
-  const [editorial, setEditorial] = useState<Editorial | null>(null)
+  const { fetch } = useUser()
 
   useEffect(() => {
     const getAuthors = async () => {
-      const response = await fetch('http://localhost:3000/authors')
-      const data = await response.json()
+      const data = await fetch('http://localhost:3000/authors/all')
       setAuthors(data)
     }
-    getAuthors()
+    getAuthors().catch(error => {
+      console.log(error)
+    })
   }, [])
 
   useEffect(() => {
     const getEditorials = async () => {
-      const response = await fetch('http://localhost:3000/editorials')
-      const data = await response.json()
+      const data = await fetch('http://localhost:3000/editorials/all')
       setEditorials(data)
     }
-    getEditorials()
+    getEditorials().catch(error => {
+      console.log(error)
+    })
   }, [])
 
-  const { values, errors, handleChange, handleSubmit, setFieldValue } = useFormik({
+  const { values, errors, handleChange, handleSubmit, resetForm } = useFormik({
     initialValues,
     validationSchema,
     onSubmit
   })
-  /*   const { fetch } = useUser() */
 
   async function onSubmit(values: FormikValues) {
-    console.log(values)
-    console.log(author)
-
-    toast.success('Su libro se agregó correctamente', { duration: 4000, position: 'top-center' })
-    /* try {
+    try {
       const postOptions = {
         method: 'POST',
-        body: JSON.stringify(newBook)
+        body: JSON.stringify(values)
       }
-      const postResponse = await fetch('http://localhost:3000/books', postOptions)
-      console.log(postResponse)
+      await fetch('http://localhost:3000/books/save', postOptions)
+      resetForm()
+      toast.success('Su libro se agregó correctamente', { duration: 4000, position: 'top-center' })
     } catch (error) {
-      console.error(error)
-    } */
+      toast.error('Error al agregar el libro', { duration: 4000, position: 'top-center' })
+    }
   }
-
   return (
     <div className="px-2 py-10">
       <div className="mx-auto w-full rounded-[40px] bg-grey  sm:max-w-[70%]">
@@ -127,6 +94,22 @@ export default function RegisterForm() {
               {errors?.title}
             </small>
           </div>
+          <label className="text-base font-bold leading-[normal] text-blueLight " htmlFor="isbn">
+            ISBN
+          </label>
+          <div className="relative mb-14 flex h-8 w-full items-center gap-2 border-0 border-b-2 border-solid border-blueDark">
+            <input
+              className="w-full border-0 bg-grey text-base font-[400] leading-[normal] text-[#263238] placeholder-[#ABABAB] focus:outline-none"
+              name="isbn"
+              type="text"
+              placeholder="Ingresá el isbn"
+              value={values.isbn}
+              onChange={handleChange}
+            />
+            <small className="absolute -bottom-6 text-xs font-bold text-red-500">
+              {errors?.isbn}
+            </small>
+          </div>
           <label className="text-base font-bold leading-[normal] text-blueLight" htmlFor="quantity">
             Cantidad
           </label>
@@ -143,17 +126,17 @@ export default function RegisterForm() {
               {errors?.quantity}
             </small>
           </div>
-          <label className="text-base font-bold leading-[normal] text-blueLight" htmlFor="author">
+          <label className="text-base font-bold leading-[normal] text-blueLight" htmlFor="idAuthor">
             Autor
           </label>
           <div className="relative mb-14 flex h-8 w-full items-center gap-2 border-0 border-b-2 border-solid border-blueDark">
             <select
               className="w-full border-0 bg-grey text-base font-[400] leading-[normal] text-blueDark placeholder-[#ABABAB] focus:outline-none"
-              name="author"
-              defaultValue=""
+              name="idAuthor"
+              value={values.idAuthor}
               onChange={handleChange}
             >
-              <option value="" disabled>
+              <option value="-1" disabled>
                 Selecciona un autor
               </option>
               {authors.map(author => (
@@ -163,7 +146,7 @@ export default function RegisterForm() {
               ))}
             </select>
             <small className="absolute -bottom-6 text-xs font-bold text-red-500">
-              {errors?.author}
+              {errors?.idAuthor}
             </small>
           </div>
           <label className="text-base font-bold leading-[normal] text-blueLight" htmlFor="genre">
@@ -181,7 +164,7 @@ export default function RegisterForm() {
               </option>
               {mockGenres.map(genre => (
                 <option key={genre} value={genre}>
-                  {genre}
+                  {genre.charAt(0) + genre.toLowerCase().slice(1)}
                 </option>
               ))}
             </select>
@@ -191,18 +174,18 @@ export default function RegisterForm() {
           </div>
           <label
             className="text-base font-bold leading-[normal] text-blueLight"
-            htmlFor="editorial"
+            htmlFor="idEditorial"
           >
             Editorial
           </label>
           <div className="relative mb-14 flex h-8 w-full items-center gap-2 border-0 border-b-2 border-solid border-blueDark">
             <select
               className="w-full border-0 bg-grey text-base font-[400] leading-[normal] text-blueDark placeholder-[#ABABAB] focus:outline-none"
-              name="editorial"
-              defaultValue=""
+              name="idEditorial"
+              value={values.idEditorial}
               onChange={handleChange}
             >
-              <option value="" disabled>
+              <option value="-1" disabled>
                 Selecciona una editorial
               </option>
               {editorials.map(editorial => (
@@ -212,7 +195,7 @@ export default function RegisterForm() {
               ))}
             </select>
             <small className="absolute -bottom-6 text-xs font-bold text-red-500">
-              {errors?.editorial}
+              {errors?.idEditorial}
             </small>
           </div>
           <label className="text-base font-bold leading-[normal] text-blueLight" htmlFor="image">

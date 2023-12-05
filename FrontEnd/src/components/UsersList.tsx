@@ -5,6 +5,7 @@ import type { User } from '../types/types'
 import { Pagination } from '@mui/material'
 import SearchUser from './SearchUser'
 
+
 export default function UsersList() {
   const { fetch } = useUser()
   const [users, setUsers] = useState<User[] | []>([])
