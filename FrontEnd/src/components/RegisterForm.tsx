@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { FormikValues, useFormik } from 'formik'
 import * as Yup from 'yup'
 import { Author, Editorial } from '../types/types'
+import toast from 'react-hot-toast'
 
 interface RegisterFormType {
   title: string
@@ -90,6 +91,7 @@ export default function RegisterForm() {
     console.log(values)
     console.log(author)
 
+    toast.success('Su libro se agregó correctamente', { duration: 4000, position: 'top-center' })
     /* try {
       const postOptions = {
         method: 'POST',

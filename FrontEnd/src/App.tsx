@@ -5,6 +5,7 @@ import { Login } from './pages/Login.tsx'
 import Home from './pages/Home.tsx'
 import Catalogue from './pages/Catalogue.tsx'
 import UsersTabs from './pages/UsersTabs.tsx'
+import { Toaster } from 'react-hot-toast'
 
 const App = () => {
   const { currentUser, setupComplete } = useUser()
@@ -28,6 +29,25 @@ const App = () => {
           <Route path="/usuarios" element={<UsersTabs />} />
         </Route>
       </Routes>
+      <Toaster
+        toastOptions={{
+          success: {
+            style: {
+              background: 'rgb(214, 251, 214)',
+              border: '1px solid green'
+            }
+          },
+          error: {
+            style: {
+              background: 'rgb(253, 221, 221)',
+              border: '1px solid red'
+            }
+          },
+          style: {
+            border: '1px solid black'
+          }
+        }}
+      />
     </BrowserRouter>
   )
 }
