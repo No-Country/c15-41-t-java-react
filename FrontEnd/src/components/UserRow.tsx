@@ -17,7 +17,7 @@ export default function UserRow({ user, refresh }: UserRowProps) {
     <>
       <tr>
         <td className="border-[1px] border-x-0 border-solid border-slate-200 text-center">
-          {user.dni}
+          {user.idUsers}
         </td>
         <td className="border-[1px] border-x-0 border-solid border-slate-200 text-center">
           {user.name}
