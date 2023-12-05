@@ -4,16 +4,22 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import java.util.List;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 @Entity
 public class User {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_user")
+    private Long id;
+
     @Column(nullable = false, unique = true)
     private String dni;
 
@@ -22,6 +28,9 @@ public class User {
 
     @Column(nullable = false)
     private String lastName;
+
+    @Column(nullable = false, unique = true)
+    private String email;
 
     @Column(nullable = false, unique = true)
     private String phoneNumber;
@@ -34,7 +43,13 @@ public class User {
 
     private boolean isActive = true;
 
-    public User(Long dni, String name, String lastName, String phoneNumber, String address) {
+    public User(String dni, String name, String lastName, String email, String phoneNumber, String address) {
+        this.dni = dni;
+        this.name = name;
+        this.lastName = lastName;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.address = address;
     }
-
 }
+
