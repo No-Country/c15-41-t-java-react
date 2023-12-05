@@ -17,16 +17,7 @@ const validationSchema = Yup.object({
   editorial: Yup.string().required('La editorial es requerido')
 })
 
-const mockGenres = [
-  'Filosofia',
-  'Ciencia',
-  'Novela',
-  'Historia',
-  'Ciencia ficcion',
-  'Religion',
-  'Gastronimia',
-  'Arte'
-]
+const mockGenres = ['THRILLER', 'FANTASY', 'ADVENTURE', 'ACTION']
 
 const EditBook: React.FC<BookProps> = props => {
   const [authors, setAuthors] = useState<Author[]>([])
