@@ -35,7 +35,7 @@ export default function UsersList() {
   }
 
   return (
-    <div className="my-10 min-h-64 flex flex-col items-center justify-evenly">
+    <div className="min-h-64 my-10 flex flex-col items-center justify-evenly">
       <table className="min-w-full table-auto border-collapse rounded border-[1px] border-solid border-slate-800">
         <thead className="p-10">
           <tr>
