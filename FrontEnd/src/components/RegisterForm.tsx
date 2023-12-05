@@ -2,24 +2,15 @@ import { useState, useEffect } from 'react'
 import { useFormik } from 'formik'
 import type { FormikValues } from 'formik'
 import * as Yup from 'yup'
-import type { Author, Editorial } from '../types/types'
+import type { Author, BookPost, Editorial } from '../types/types'
 import { useUser } from '../context/UserContext'
 import toast from 'react-hot-toast'
 
-
-interface RegisterFormType {
-  title: string
-  idAuthor: null | number
-  idEditorial: null | number
-  genre: string
-  quantity: number
-  image: string
-}
-
-const initialValues: RegisterFormType = {
+const initialValues: BookPost = {
   title: '',
   idAuthor: null,
   idEditorial: null,
+  isbn: '',
   genre: '',
   quantity: 0,
   image: ''
@@ -42,7 +33,8 @@ const validationSchema = Yup.object({
   idAuthor: Yup.number().required('El autor es requerido'),
   genre: Yup.string().required('El genero es requerido'),
   idEditorial: Yup.number().required('La editorial es requerida'),
-});
+  isbn: Yup.string().required('El titulo es requerido')
+})
 
 export default function RegisterForm() {
   const [authors, setAuthors] = useState<Author[]>([])
@@ -69,7 +61,7 @@ export default function RegisterForm() {
     })
   }, [])
 
-  const { values, errors, handleChange, handleSubmit, setFieldValue } = useFormik({
+  const { values, errors, handleChange, handleSubmit } = useFormik({
     initialValues,
     validationSchema,
     onSubmit
@@ -84,6 +76,7 @@ export default function RegisterForm() {
       formData.append('quantity', values.quantity);
       formData.append('idAuthor', values.idAuthor);
       formData.append('genre', values.genre);
+      formData.append('isbn', values.isbn);
       formData.append('idEditorial', values.idEditorial);
       formData.append('image', values.image);
   
@@ -124,6 +117,22 @@ export default function RegisterForm() {
             />
             <small className="absolute -bottom-6 text-xs font-bold text-red-500">
               {errors?.title}
+            </small>
+          </div>
+          <label className="text-base font-bold leading-[normal] text-blueLight " htmlFor="isbn">
+            ISBN
+          </label>
+          <div className="relative mb-14 flex h-8 w-full items-center gap-2 border-0 border-b-2 border-solid border-blueDark">
+            <input
+              className="w-full border-0 bg-grey text-base font-[400] leading-[normal] text-[#263238] placeholder-[#ABABAB] focus:outline-none"
+              name="isbn"
+              type="text"
+              placeholder="Ingresá el isbn"
+              value={values.isbn}
+              onChange={handleChange}
+            />
+            <small className="absolute -bottom-6 text-xs font-bold text-red-500">
+              {errors?.isbn}
             </small>
           </div>
           <label className="text-base font-bold leading-[normal] text-blueLight" htmlFor="quantity">
