@@ -35,10 +35,10 @@ public class LoanDto {
 
     private BookDto bookDto;
 
-//    private AdminDto admin; //TODO
+//    private AdminDto adminDto; //TODO
 
-//    private UserDto user; //TODO
+//    private UserDto userDto; //TODO
 
-//    private BookReturnDto bookReturn; //TODO
+//    private BookReturnDto bookReturnDto; //TODO
 
 }
