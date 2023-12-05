@@ -29,3 +29,17 @@
 #search-book option:hover {
   @apply bg-[#0A7ABF] text-white;
 }
+
+#search-help::after {
+  content: '';
+  position: absolute;
+  top: -13px;
+  right: 3px;
+  background: transparent;
+  width: 0px;
+  height: 0px;
+  border-bottom: 15px solid #0a7abf;
+  border-right: 15px solid transparent;
+  border-left: 15px solid transparent;
+  z-index: 10;
+}
