@@ -5,6 +5,7 @@ import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import { useUser } from '../context/UserContext'
 import toast from 'react-hot-toast'
+import { imageListClasses } from '@mui/material'
 
 interface BookProps {
   id: number
@@ -22,9 +23,9 @@ interface BookProps {
 const validationSchema = Yup.object({
   title: Yup.string().required('El titulo es requerido'),
   quantity: Yup.number().min(1, 'El valor debe ser mayor a 0').required('Cantidad es requerida'),
-  author: Yup.string().required('El nombre del autor es requerido'),
+  idAuthor: Yup.number().required('El autor es requerido'),
   genre: Yup.string().required('El genero es requerido'),
-  editorial: Yup.string().required('La editorial es requerido')
+  idEditorial: Yup.number().required('La editorial es requerida')
 })
 
 const mockGenres = [
@@ -63,13 +64,14 @@ const EditBook: React.FC<BookProps> = props => {
     })
   }, [])
 
-  const { values, errors, handleChange, handleSubmit } = useFormik({
+  const { values, errors, handleChange, handleSubmit, setFieldValue } = useFormik({
     initialValues: {
       title: props.title,
       quantity: props.quantity,
       author: props.authorDto.name,
       genre: props.genre,
-      editorial: props.editorialDto.name
+      editorial: props.editorialDto.name,
+      image: props.image
     },
     validationSchema,
     onSubmit
@@ -80,18 +82,38 @@ const EditBook: React.FC<BookProps> = props => {
     props.setIsModalOpen(false)
 
     toast.success('Su libro se editó correctamente', { duration: 4000, position: 'top-center' })
+    console.log(values);
     /*
-     try {
-          const postOptions = {
-            method: 'PUT',
-            body: JSON.stringify(values)
-          }
-          const postResponse = await fetch(`http://localhost:3000/books/${props.id}`, postOptions)
-          console.log(postResponse)
-        } catch (error) {
-          console.error(error)
-        }
+  try {
+    const formData = new FormData();
+    formData.append('title', values.title);
+    formData.append('quantity', values.quantity.toString());
+    formData.append('author', values.author.toString()); // Ajusta según sea necesario
+    formData.append('genre', values.genre);
+    formData.append('editorial', values.editorial.toString()); // Ajusta según sea necesario
+    formData.append('image', values.image); // Asumiendo que `values.image` es un archivo
 
+    const putOptions = {
+      method: 'PUT',
+      body: formData,
+    };
+
+    const putResponse = await fetch(`http://localhost:3000/books/${props.id}`, putOptions);
+
+    if (putResponse.ok) {
+      console.log('Libro actualizado exitosamente');
+      props.setIsModalOpen(false);
+      
+      toast.success('Su libro se editó correctamente', { duration: 4000, position: 'top-center' });
+    } else {
+      console.error('Error al actualizar el libro');
+      toast.error('Hubo un error al intentar editar el libro', { duration: 4000, position: 'top-center' });
+    }
+  } catch (error) {
+    console.error(error);
+    toast.error('Hubo un error al intentar editar el libro', { duration: 4000, position: 'top-center' });
+  }
+}
     */
   }
 
@@ -191,7 +213,7 @@ const EditBook: React.FC<BookProps> = props => {
             <select
               className="w-full border-0 bg-grey text-base font-[400] leading-[normal] text-blueDark placeholder-[#ABABAB] focus:outline-none"
               name="editorial"
-              value={values.editorial}
+              defaultValue={values.editorial}
               onChange={handleChange}
             >
               <option value="" disabled>
@@ -215,9 +237,15 @@ const EditBook: React.FC<BookProps> = props => {
               className="w-full border-0 bg-grey text-base font-[400] leading-[normal] text-blueDark placeholder-[#ABABAB] focus:outline-none"
               type="file"
               name="image"
-              onChange={handleChange}
-              accept=".jpg, .jpeg, .png"
+              onChange={(event) => {
+                const file = event.currentTarget.files?.[0];
+                if (file) {
+                  setFieldValue('image', file);
+                }
+              }}
             />
+            {/* Muestra la imagen actual */}
+            {props.image && <img src={props.image} alt="Imagen actual" className="h-24 w-24" />}
           </div>
           <div className="pb-10">
             <button
