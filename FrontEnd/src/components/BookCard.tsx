@@ -14,6 +14,7 @@ const BookCard: React.FC<Props> = ({
   idBook,
   image,
   title,
+  isbn,
   authorDto,
   genre,
   isbn,
@@ -26,6 +27,7 @@ const BookCard: React.FC<Props> = ({
   const bookData: Book = {
     idBook,
     image,
+    isbn,
     title,
     authorDto,
     genre,
@@ -82,7 +84,7 @@ const BookCard: React.FC<Props> = ({
         </div>
       </div>
       {isModalOpen && (
-        <div className="fixed inset-0 z-50  bg-white opacity-100">
+        <div className="absolute inset-0 z-50 bg-white opacity-100">
           <EditBook {...bookData} setIsModalOpen={setIsModalOpen} />
           <div
             className="absolute right-4 top-4 cursor-pointer text-5xl font-semibold text-black hover:scale-125"

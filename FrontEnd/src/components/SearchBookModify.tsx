@@ -64,9 +64,28 @@ const SearchBookModify: React.FC<SearchBookModifyProps> = ({
           }}
         />
       </div>
-      <button className="h-9 w-9 rounded-full border bg-white text-lg font-bold text-black outline-none">
-        ?
-      </button>
+      <div className="group relative">
+        <button className="h-9 w-9 rounded-full border bg-white text-lg font-bold text-black outline-none">
+          ?
+        </button>
+        <div
+          id="search-help"
+          className="absolute right-0 top-14 z-10 hidden w-[50vw] rounded-md bg-[#0A7ABF] p-4 text-white shadow-xl group-hover:block min-[750px]:w-[25vw]"
+        >
+          <p>
+            Puede escribir las palabras de su búsqueda en
+            <b> mayúscula o minúscula, con o sin tilde</b>, y el catálogo recuperará todos los
+            resultados.
+            <br />
+            <br />
+            Puede buscar por <b>Título de la obra, Autor, Género o Editorial.</b>
+            <br />
+            <br />
+            Por ejemplo, si busca la palabra "Química", se localizarán también "quimica, Quimica,
+            QUÍMICA, QUIMICA y química"
+          </p>
+        </div>
+      </div>
     </div>
   )
 }
