@@ -35,7 +35,7 @@ const EditBook: React.FC<BookProps> = props => {
 
   useEffect(() => {
     const getAuthors = async () => {
-      const data = await fetch('http://localhost:3000/authors')
+      const data = await fetch('http://localhost:3000/authors/all')
       setAuthors(data)
     }
     getAuthors().catch(error => {

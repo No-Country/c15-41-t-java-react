@@ -2,11 +2,12 @@ import { useState, useEffect } from 'react'
 import { FormikValues, useFormik } from 'formik'
 import * as Yup from 'yup'
 import { Author, Editorial } from '../types/types'
+import { useUser } from '../context/UserContext'
 
 interface RegisterFormType {
   title: string
-  author: null
-  editorial: null
+  author: string
+  editorial: string
   genre: string
   quantity: number
   image: string
@@ -14,38 +15,14 @@ interface RegisterFormType {
 
 const initialValues: RegisterFormType = {
   title: '',
-  author: null,
-  editorial: null,
+  author: '',
+  editorial: '',
   genre: '',
   quantity: 0,
   image: ''
 }
 
-// DEBERIAN SER PROPORCIONADOS POR BACKEND
-/*const mockAuthors: Author[] = [
-  { name: 'Paulo', lastName: 'Coelho', id: 25452 },
-  { name: 'Edgar Allan', lastName: 'Poe', id: 4435 },
-  { name: 'Jane', lastName: 'Austen', id: 55646 }
-]/*
-
-/*onst mockEditorials: Editorial[] = [
-  { name: 'Planeta', id: 1001 },
-  { name: 'Austral', id: 1005 },
-  { name: 'BlackList', id: 1006 },
-  { name: 'El Aleph editores', id: 1007 },
-  { name: 'Ariel', id: 1002 }
-]
-*/
-const mockGenres = [
-  'Filosofia',
-  'Ciencia',
-  'Novela',
-  'Historia',
-  'Ciencia ficcion',
-  'Religion',
-  'Gastronimia',
-  'Arte'
-]
+const mockGenres = ['THRILLER', 'FANTASY', 'ADVENTURE', 'ACTION']
 
 const validationSchema = Yup.object({
   title: Yup.string().required('El titulo es requerido'),
@@ -58,48 +35,47 @@ const validationSchema = Yup.object({
 export default function RegisterForm() {
   const [authors, setAuthors] = useState<Author[]>([])
   const [editorials, setEditorials] = useState<Editorial[]>([])
-  const [author, setAuthor] = useState<Author | null>(null)
-  const [editorial, setEditorial] = useState<Editorial | null>(null)
+  const { fetch } = useUser()
 
   useEffect(() => {
     const getAuthors = async () => {
-      const response = await fetch('http://localhost:3000/authors')
-      const data = await response.json()
-      setAuthors(data)
+      const authors = await fetch('http://localhost:3000/authors/all')
+      setAuthors(authors)
     }
     getAuthors()
   }, [])
 
   useEffect(() => {
     const getEditorials = async () => {
-      const response = await fetch('http://localhost:3000/editorials')
-      const data = await response.json()
-      setEditorials(data)
+      const editorials = await fetch('http://localhost:3000/editorials/all')
+      setEditorials(editorials)
     }
     getEditorials()
   }, [])
 
-  const { values, errors, handleChange, handleSubmit, setFieldValue } = useFormik({
+  const { values, errors, handleChange, handleSubmit, resetForm } = useFormik({
     initialValues,
     validationSchema,
     onSubmit
   })
-  /*   const { fetch } = useUser() */
 
   async function onSubmit(values: FormikValues) {
-    console.log(values)
-    console.log(author)
-
-    /* try {
+    try {
       const postOptions = {
         method: 'POST',
-        body: JSON.stringify(newBook)
+        body: JSON.stringify({
+          ...values,
+          isbn: '978-292221333',
+          idAuthor: Number(values.author),
+          idEditorial: Number(values.editorial)
+        })
       }
-      const postResponse = await fetch('http://localhost:3000/books', postOptions)
-      console.log(postResponse)
+      await fetch('http://localhost:3000/books/save', postOptions)
+      alert('Libro agregado correctamente')
+      resetForm()
     } catch (error) {
       console.error(error)
-    } */
+    }
   }
 
   return (
@@ -179,7 +155,7 @@ export default function RegisterForm() {
               </option>
               {mockGenres.map(genre => (
                 <option key={genre} value={genre}>
-                  {genre}
+                  {genre.charAt(0) + genre.toLowerCase().slice(1)}
                 </option>
               ))}
             </select>
