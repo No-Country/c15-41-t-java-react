@@ -9,7 +9,7 @@ const BookList: React.FC = () => {
   const [books, setBooks] = useState<Book[] | []>([])
   const [searchResults, setSearchResults] = useState<Book[] | []>([])
   const [page, setPage] = useState(1)
-  const PAGE_SIZE = 4 // podemos ponerlo como variable de entorno
+  const PAGE_SIZE = 6 // podemos ponerlo como variable de entorno
   const { fetch } = useUser()
 
   const getBooks = useCallback(async () => {
@@ -55,7 +55,7 @@ const BookList: React.FC = () => {
           shape="rounded"
           color="primary"
           page={page}
-          onChange={(e, value) => {
+          onChange={(_, value) => {
             setPage(value)
           }}
         />

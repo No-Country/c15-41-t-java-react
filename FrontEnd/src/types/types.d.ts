@@ -4,7 +4,7 @@ export interface Book {
   isbn: string
   quantity: number
   idAuthor: number
-  IdEditorial: number
+  idEditorial: number
   genre: string
   quantity: number
   image: string
@@ -13,15 +13,7 @@ export interface Book {
   authorDto: Author
 }
 
-export interface BookPost {
-  title: string
-  isbn: string
-  quantity: number
-  idAuthor: number | null
-  idEditorial: number | null
-  genre: string
-  image: string
-}
+export type BookPost = Omit<Book, 'editorialDto' | 'authorDto' | 'idBook'>
 
 export interface User {
   dni: number

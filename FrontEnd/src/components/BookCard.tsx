@@ -17,7 +17,6 @@ const BookCard: React.FC<Props> = ({
   isbn,
   authorDto,
   genre,
-  isbn,
   editorialDto,
   quantity,
   refresh
@@ -31,11 +30,10 @@ const BookCard: React.FC<Props> = ({
     title,
     authorDto,
     genre,
-    isbn,
     editorialDto,
     quantity,
     idAuthor: authorDto.idAuthor,
-    IdEditorial: editorialDto.idEditorial
+    idEditorial: editorialDto.idEditorial
   }
 
   return (

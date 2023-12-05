@@ -4,8 +4,6 @@ import type { FormikValues } from 'formik'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import { useUser } from '../context/UserContext'
-import toast from 'react-hot-toast'
-import { imageListClasses } from '@mui/material'
 
 interface BookProps extends Book {
   setIsModalOpen: (value: boolean) => void
@@ -22,7 +20,7 @@ const validationSchema = Yup.object({
 
 const mockGenres = ['THRILLER', 'FANTASY', 'ADVENTURE', 'ACTION']
 
-const EditBook: React.FC<EditBookProps> = props => {
+const EditBook: React.FC<BookProps> = props => {
   const [authors, setAuthors] = useState<Author[]>([])
   const [editorials, setEditorials] = useState<Editorial[]>([])
   const { fetch } = useUser()
@@ -54,7 +52,7 @@ const EditBook: React.FC<EditBookProps> = props => {
       idAuthor: props.idAuthor,
       isbn: props.isbn,
       genre: props.genre,
-      idEditorial: props.IdEditorial,
+      idEditorial: props.idEditorial,
       image: props.image
     },
     validationSchema,
@@ -182,7 +180,7 @@ const EditBook: React.FC<EditBookProps> = props => {
               ))}
             </select>
             <small className="absolute -bottom-6 text-xs font-bold text-red-500">
-              {errors?.author}
+              {errors?.idAuthor}
             </small>
           </div>
           <label className="text-base font-bold leading-[normal] text-blueLight" htmlFor="genre">
@@ -218,7 +216,7 @@ const EditBook: React.FC<EditBookProps> = props => {
             <select
               className="w-full border-0 bg-grey text-base font-[400] leading-[normal] text-blueDark placeholder-[#ABABAB] focus:outline-none"
               name="idEditorial"
-              defaultValue={values.editorial}
+              defaultValue={values.idEditorial}
               onChange={handleChange}
             >
               <option value="" disabled>
@@ -231,7 +229,7 @@ const EditBook: React.FC<EditBookProps> = props => {
               ))}
             </select>
             <small className="absolute -bottom-6 text-xs font-bold text-red-500">
-              {errors?.editorial}
+              {errors?.idEditorial}
             </small>
           </div>
           <label className="text-base font-bold leading-[normal] text-blueLight" htmlFor="image">

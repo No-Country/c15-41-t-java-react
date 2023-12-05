@@ -8,8 +8,8 @@ import toast from 'react-hot-toast'
 
 const initialValues: BookPost = {
   title: '',
-  idAuthor: null,
-  idEditorial: null,
+  idAuthor: -1,
+  idEditorial: -1,
   isbn: '',
   genre: '',
   quantity: 0,
@@ -21,9 +21,9 @@ const mockGenres = ['THRILLER', 'FANTASY', 'ADVENTURE', 'ACTION']
 const validationSchema = Yup.object({
   title: Yup.string().required('El titulo es requerido'),
   quantity: Yup.number().min(1, 'El valor debe ser mayor a 0').required('Cantidad es requerida'),
-  idAuthor: Yup.number().required('El autor es requerido'),
+  idAuthor: Yup.number().min(1, 'Seleccione autor').required('El autor es requerido'),
   genre: Yup.string().required('El genero es requerido'),
-  idEditorial: Yup.number().required('La editorial es requerida'),
+  idEditorial: Yup.number().min(1, 'Seleccione editorial').required('La editorial es requerida'),
   isbn: Yup.string().required('El isbn es requerido')
 })
 
@@ -133,10 +133,10 @@ export default function RegisterForm() {
             <select
               className="w-full border-0 bg-grey text-base font-[400] leading-[normal] text-blueDark placeholder-[#ABABAB] focus:outline-none"
               name="idAuthor"
-              defaultValue=""
+              value={values.idAuthor}
               onChange={handleChange}
             >
-              <option value="" disabled>
+              <option value="-1" disabled>
                 Selecciona un autor
               </option>
               {authors.map(author => (
@@ -182,10 +182,10 @@ export default function RegisterForm() {
             <select
               className="w-full border-0 bg-grey text-base font-[400] leading-[normal] text-blueDark placeholder-[#ABABAB] focus:outline-none"
               name="idEditorial"
-              defaultValue=""
+              value={values.idEditorial}
               onChange={handleChange}
             >
-              <option value="" disabled>
+              <option value="-1" disabled>
                 Selecciona una editorial
               </option>
               {editorials.map(editorial => (
