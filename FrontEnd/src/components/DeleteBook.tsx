@@ -1,4 +1,5 @@
 import { useUser } from '../context/UserContext'
+import toast from 'react-hot-toast'
 
 interface Props {
   id: number
@@ -13,6 +14,7 @@ const DeleteBook: React.FC<Props> = ({ id, setIsModalDeleteOpen }: Props) => {
     }).catch(error => {
       console.error(error)
     })
+    toast('Su libro ha sido eliminado', { duration: 3000, position: 'top-center', icon: '♻' })
     setIsModalDeleteOpen(false)
   }
 
