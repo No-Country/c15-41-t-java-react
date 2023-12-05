@@ -26,8 +26,12 @@ export default function UserRow({ user }: UserRowProps) {
           {user.address}
         </td>
         <td className="border-[1px] border-x-0 border-solid border-slate-200  text-center">
-          <div className="hover:cursor-pointer"><IoPencil /></div>
-          <div className="hover:cursor-pointer"><IoTrashOutline /></div>
+          <div className="hover:cursor-pointer">
+            <IoPencil />
+          </div>
+          <div className="hover:cursor-pointer">
+            <IoTrashOutline />
+          </div>
         </td>
       </tr>
     </>

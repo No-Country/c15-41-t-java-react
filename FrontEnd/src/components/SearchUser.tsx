@@ -5,10 +5,10 @@ import type { User } from '../types/types'
 interface SearchUserProps {
   allUsers: User[]
   onSearchResults: (results: User[]) => void
-  /* setPage: React.Dispatch<React.SetStateAction<number>> */
+  setPage: React.Dispatch<React.SetStateAction<number>>
 }
 
-const SearchUser: React.FC<SearchUserProps> = ({ allUsers, onSearchResults /* setPage */ }) => {
+const SearchUser: React.FC<SearchUserProps> = ({ allUsers, onSearchResults, setPage }) => {
   const [filteredUser, setFilteredUser] = useState<User[] | []>([])
   const [searchTerm, setSearchTerm] = useState('')
 
@@ -29,7 +29,7 @@ const SearchUser: React.FC<SearchUserProps> = ({ allUsers, onSearchResults /* se
 
   useEffect(() => {
     if (searchTerm !== '') {
-      /* setPage(1) */
+      setPage(1)
       const filtered = allUsers.filter(
         user =>
           user.dni.toString().includes(searchTerm) ||
