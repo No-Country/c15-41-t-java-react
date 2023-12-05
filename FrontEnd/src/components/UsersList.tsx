@@ -60,7 +60,7 @@ export default function UsersList() {
           <tbody>
             {searchResults.map((user, index) => {
               if (index < page * PAGE_SIZE && index >= (page - 1) * PAGE_SIZE) {
-                return <UserRow key={user.dni} user={user} />
+                return <UserRow key={user.dni} user={user} refresh={fetchUsers}/>
               } else {
                 return null
               }
@@ -74,7 +74,7 @@ export default function UsersList() {
             shape="rounded"
             color="primary"
             page={page}
-            onChange={(e, value) => {
+            onChange={(_, value) => {
               setPage(value)
             }}
           />

@@ -7,9 +7,10 @@ import { useState } from 'react'
 interface UserRowProps {
   key: User['dni']
   user: User
+  refresh: () => Promise<void>
 }
 
-export default function UserRow({ user }: UserRowProps) {
+export default function UserRow({ user, refresh }: UserRowProps) {
   const [isModalDeleteOpen, setIsModalDeleteOpen] = useState(false)
 
   return (
@@ -50,7 +51,7 @@ export default function UserRow({ user }: UserRowProps) {
             id={user.idUsers}
             setIsModalDeleteOpen={setIsModalDeleteOpen}
             deleteEntity="user"
-            /* refresh= agregar funcion de refresh de usuarios */
+            refresh={refresh}
           />
           <div
             className="absolute right-4 top-4 cursor-pointer text-5xl font-semibold text-black hover:scale-125"
