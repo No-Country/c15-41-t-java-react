@@ -34,6 +34,7 @@ services:
     depends_on:
       - mysql
     container_name: c15-41-t-java-react_backend
+    restart: always
     build:
       context: ./LibraryBackEnd
       dockerfile: Dockerfile
