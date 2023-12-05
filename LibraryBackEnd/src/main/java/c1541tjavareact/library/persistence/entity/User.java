@@ -4,13 +4,16 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import java.util.List;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 @Entity
+@Table(name = "users")
 public class User {
 
     @Id
@@ -24,10 +27,13 @@ public class User {
     @Column(nullable = false)
     private String name;
 
-    @Column(nullable = false)
+    @Column(name = "last_name", nullable = false)
     private String lastName;
 
     @Column(nullable = false, unique = true)
+    private String email;
+
+    @Column(name = "phone_number", nullable = false, unique = true)
     private String phoneNumber;
 
     @Column(nullable = false)
@@ -38,7 +44,5 @@ public class User {
 
     private boolean isActive = true;
 
-    public User(Long dni, String name, String lastName, String phoneNumber, String address) {
-    }
-
 }
+

@@ -18,7 +18,7 @@ public class AdminController {
     public ResponseEntity<AdminDto> save(@RequestBody @Valid AdminDto adminDto) {
         return ResponseEntity.ok(adminService.save(adminDto));
     }
-    @GetMapping("/get/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<AdminDto> getAdminDto(@PathVariable Long id){
         return adminService.getAdminDto(id).map(
                         ResponseEntity::ok)
