@@ -9,6 +9,7 @@ const BookCard: React.FC<Book> = ({
   id,
   image,
   title,
+  isbn,
   authorDto,
   genre,
   editorialDto,
@@ -19,6 +20,7 @@ const BookCard: React.FC<Book> = ({
   const bookData: Book = {
     id,
     image,
+    isbn,
     title,
     authorDto,
     genre,
