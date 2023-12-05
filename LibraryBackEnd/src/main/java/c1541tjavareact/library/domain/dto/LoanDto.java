@@ -22,7 +22,7 @@ public class LoanDto {
     private LocalDate loanDate;
 
     @NotNull
-    private LocalDate returnExpectedDate;
+    private LocalDate returnExpectedDate;//o de default asigno entro un mes en el LoanCrudRepositoryImpl? TODO
 
     @NotNull
     private Long idBook;
@@ -33,16 +33,11 @@ public class LoanDto {
     @NotNull
     private Long idUser;
 
-    @NotNull
     private BookDto bookDto;
 
-//    @NotNull
 //    private AdminDto admin; //TODO
 
-//    @NotNull
 //    private UserDto user; //TODO
-
-
 
 //    private BookReturnDto bookReturn; //TODO
 

@@ -38,16 +38,17 @@ public class LoanCrudRepositoryImpl implements LoanCrudRepository {
                              .map(l -> loanDaoMapper.toLoanDto(l));
     }
 
-    @Override//TODO
+    @Override
     public LoanDto update(Long idLoan, LoanDto loanDto) {
         Optional<LoanDto> optLoan = this.getLoan(idLoan);
         if(optLoan.isPresent()){
             LoanDto loanToUpdate = optLoan.get();
-
-            loanDto.setBookDto(loanToUpdate.getBookDto());
-
             loanToUpdate.setLoanDate(loanDto.getLoanDate());
-
+            loanToUpdate.setReturnExpectedDate(loanDto.getReturnExpectedDate());
+            //loanToUpdate.setReturnExpectedDate(loanToUpdate.getLoanDate().plusMonths(1));
+            loanToUpdate.setIdBook(loanDto.getIdBook());
+            loanToUpdate.setIdAdmin(loanDto.getIdAdmin());
+            loanToUpdate.setIdUser(loanDto.getIdUser());
             return this.save(loanToUpdate);
         }
         return null;
