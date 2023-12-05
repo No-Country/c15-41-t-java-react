@@ -1,7 +1,7 @@
 {
   "books": [
     {
-      "id": 1,
+      "idBook": 1,
       "title": "Cien años de soledad",
       "isbn": "5451651651",
       "quantity": 10,
@@ -21,7 +21,7 @@
       }
     },
     {
-      "id": 2,
+      "idBook": 2,
       "title": "1984",
       "isbn": "541414151",
       "quantity": 1,
@@ -41,7 +41,7 @@
       }
     },
     {
-      "id": 3,
+      "idBook": 3,
       "title": "El amor en los tiempos del cólera",
       "isbn": "51771651651",
       "quantity": 3,
@@ -61,7 +61,7 @@
       }
     },
     {
-      "id": 4,
+      "idBook": 4,
       "title": "La sombra del viento",
       "isbn": "5451651651222",
       "quantity": 8,
@@ -81,7 +81,7 @@
       }
     },
     {
-      "id": 5,
+      "idBook": 5,
       "title": "Harry Potter y la piedra filosofal",
       "isbn": "545165165187877",
       "quantity": 5,
@@ -101,7 +101,7 @@
       }
     },
     {
-      "id": 6,
+      "idBook": 6,
       "title": "El principito",
       "isbn": "542871951651651",
       "quantity": 5,
