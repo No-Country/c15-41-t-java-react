@@ -13,13 +13,15 @@ import org.springframework.web.bind.annotation.*;
 public class BookController {
     @Autowired
     private BookService bookService;
+
+
     @PostMapping("/save")
     public ResponseEntity<BookDto> save(@RequestBody @Valid BookDto bookDto) {
         return ResponseEntity.ok(bookService.save(bookDto));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<BookDto> getBook(@PathVariable("id") Long idBook) {
+    public ResponseEntity<BookDto> getReturn(@PathVariable("id") Long idBook) {
         return bookService.getBook(idBook)
                 .map(BookDto -> new ResponseEntity<>(BookDto, HttpStatus.OK))
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
