@@ -90,7 +90,7 @@ const EditBook: React.FC<BookProps> = props => {
           console.log(postResponse)
         } catch (error) {
           console.error(error)
-        } 
+        }
 
     */
   }
