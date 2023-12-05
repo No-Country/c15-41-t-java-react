@@ -4,13 +4,15 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import java.util.List;
 
 @Data
-@Entity
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
+@Entity
 @Table(name = "users")
 public class User {
 
@@ -19,26 +21,28 @@ public class User {
     @Column(name = "id_user")
     private Long idUser;
 
+    @Column(nullable = false, unique = true)
+    private String dni;
+
     @Column(nullable = false)
     private String name;
 
-    @Column(nullable = false)
+    @Column(name = "last_name", nullable = false)
     private String lastName;
 
-    @Column(name = "identification_number",nullable = false)
-    private String identificationNumber;
-
-    @Column(name = "phone_number",nullable = false)
-    private Long phoneNumber;
-
-    @Column(nullable = false,unique = true)
+    @Column(nullable = false, unique = true)
     private String email;
 
-    @Embedded
-    private Address address;
+    @Column(name = "phone_number", nullable = false, unique = true)
+    private String phoneNumber;
+
+    @Column(nullable = false)
+    private String address;
 
     @OneToMany(mappedBy = "user")
     private List<Loan> loans;
 
+    private boolean isActive = true;
 
 }
+
