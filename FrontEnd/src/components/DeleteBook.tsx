@@ -8,13 +8,14 @@ interface Props {
 
 const DeleteBook: React.FC<Props> = ({ id, setIsModalDeleteOpen }: Props) => {
   const { fetch } = useUser()
-  const handleDelete = () => {
+  const handleDeleteBook = () => {
     fetch(`http://localhost:3000/books/${id}`, {
       method: 'DELETE'
     }).catch(error => {
       console.error(error)
     })
     toast('Su libro ha sido eliminado', { duration: 3000, position: 'top-center', icon: '♻' })
+    
     setIsModalDeleteOpen(false)
   }
 
@@ -31,7 +32,7 @@ const DeleteBook: React.FC<Props> = ({ id, setIsModalDeleteOpen }: Props) => {
         <div className="flex w-full items-center justify-around gap-2">
           <button
             className="flex  w-[350px] items-center justify-center rounded-[32px] border-none bg-blueDark py-5 text-[17px] font-bold leading-normal text-white shadow-btn hover:cursor-pointer disabled:cursor-not-allowed disabled:opacity-50"
-            onClick={handleDelete}
+            onClick={handleDeleteBook}
           >
             Si
           </button>

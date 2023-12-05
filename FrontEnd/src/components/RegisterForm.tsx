@@ -9,8 +9,8 @@ import toast from 'react-hot-toast'
 
 interface RegisterFormType {
   title: string
-  author: null
-  editorial: null
+  idAuthor: null | number
+  idEditorial: null | number
   genre: string
   quantity: number
   image: string
@@ -18,8 +18,8 @@ interface RegisterFormType {
 
 const initialValues: RegisterFormType = {
   title: '',
-  author: null,
-  editorial: null,
+  idAuthor: null,
+  idEditorial: null,
   genre: '',
   quantity: 0,
   image: ''
@@ -39,10 +39,10 @@ const mockGenres = [
 const validationSchema = Yup.object({
   title: Yup.string().required('El titulo es requerido'),
   quantity: Yup.number().min(1, 'El valor debe ser mayor a 0').required('Cantidad es requerida'),
-  author: Yup.string().required('El nombre del autor es requerido'),
+  idAuthor: Yup.number().required('El autor es requerido'),
   genre: Yup.string().required('El genero es requerido'),
-  editorial: Yup.string().required('La editorial es requerido')
-})
+  idEditorial: Yup.number().required('La editorial es requerida'),
+});
 
 export default function RegisterForm() {
   const [authors, setAuthors] = useState<Author[]>([])
@@ -77,21 +77,32 @@ export default function RegisterForm() {
 
   async function onSubmit(values: FormikValues) {
     console.log(values)
-    console.log(author)
-    toast.success('Su libro se agregó correctamente', { duration: 4000, position: 'top-center' })
-
-    /* try {
-      const postOptions = {
+    /*
+    try {
+      const formData = new FormData();
+      formData.append('title', values.title);
+      formData.append('quantity', values.quantity);
+      formData.append('idAuthor', values.idAuthor);
+      formData.append('genre', values.genre);
+      formData.append('idEditorial', values.idEditorial);
+      formData.append('image', values.image);
+  
+      const response = await fetch('http://localhost:3000/books', {
         method: 'POST',
-        body: JSON.stringify(newBook)
+        body: formData,
+      });
+  
+      if (response.ok) {
+        toast.success('Su libro se agregó correctamente', { duration: 4000, position: 'top-center' });
+      } else {
+        toast.error('Error al agregar el libro', { duration: 4000, position: 'top-center' });
       }
-      const postResponse = await fetch('http://localhost:3000/books', postOptions)
-      console.log(postResponse)
     } catch (error) {
-      console.error(error)
-    } */
+      console.error(error);
+      toast.error('Error al agregar el libro', { duration: 4000, position: 'top-center' });
+    }
+    */
   }
-
   return (
     <div className="px-2 py-10">
       <div className="mx-auto w-full rounded-[40px] bg-grey  sm:max-w-[70%]">
@@ -137,7 +148,7 @@ export default function RegisterForm() {
           <div className="relative mb-14 flex h-8 w-full items-center gap-2 border-0 border-b-2 border-solid border-blueDark">
             <select
               className="w-full border-0 bg-grey text-base font-[400] leading-[normal] text-blueDark placeholder-[#ABABAB] focus:outline-none"
-              name="author"
+              name="idAuthor"
               defaultValue=""
               onChange={handleChange}
             >
@@ -151,7 +162,7 @@ export default function RegisterForm() {
               ))}
             </select>
             <small className="absolute -bottom-6 text-xs font-bold text-red-500">
-              {errors?.author}
+              {errors?.idAuthor}
             </small>
           </div>
           <label className="text-base font-bold leading-[normal] text-blueLight" htmlFor="genre">
@@ -186,7 +197,7 @@ export default function RegisterForm() {
           <div className="relative mb-14 flex h-8 w-full items-center gap-2 border-0 border-b-2 border-solid border-blueDark">
             <select
               className="w-full border-0 bg-grey text-base font-[400] leading-[normal] text-blueDark placeholder-[#ABABAB] focus:outline-none"
-              name="editorial"
+              name="idEditorial"
               defaultValue=""
               onChange={handleChange}
             >
@@ -200,7 +211,7 @@ export default function RegisterForm() {
               ))}
             </select>
             <small className="absolute -bottom-6 text-xs font-bold text-red-500">
-              {errors?.editorial}
+              {errors?.idEditorial}
             </small>
           </div>
           <label className="text-base font-bold leading-[normal] text-blueLight" htmlFor="image">

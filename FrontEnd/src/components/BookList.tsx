@@ -25,6 +25,8 @@ const BookList: React.FC = () => {
 
   const handleSearchResults = (results: any) => {
     setSearchResults(results)
+
+    /*setBooks(results)*/
   }
 
   if (books.length === 0) return <p>Loading</p>
