@@ -4,7 +4,7 @@ import imgDelete from '../assets/icons/delete.svg'
 import imgEditar from '../assets/icons/Edit.svg'
 import { IoMdClose } from 'react-icons/io'
 import EditBook from './EditBook'
-import DeleteBook from './DeleteBook'
+import DeleteModal from './DeleteModal'
 
 interface Props extends Book {
   refresh: () => void
@@ -101,7 +101,12 @@ const BookCard: React.FC<Props> = ({
       )}
       {isModalDeleteOpen && (
         <div className="fixed inset-0 z-50  bg-white opacity-100">
-          <DeleteBook id={bookData.id} setIsModalDeleteOpen={setIsModalDeleteOpen} deleteEntity='book' refresh={refresh}/>
+          <DeleteModal
+            id={bookData.idBook}
+            setIsModalDeleteOpen={setIsModalDeleteOpen}
+            deleteEntity="book"
+            refresh={refresh}
+          />
           <div
             className="absolute right-4 top-4 cursor-pointer text-5xl font-semibold text-black hover:scale-125"
             onClick={() => {
