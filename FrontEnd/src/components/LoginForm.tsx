@@ -100,9 +100,6 @@ export const LoginForm: React.FC = () => {
           type="submit"
           disabled={signInWaiting}
         >
-          {/*
-            eslint-disable-next-line multiline-ternary
-          */}
           {signInWaiting ? (
             <div className="absolute h-4 w-4 animate-spin rounded-full border-solid border-x-blueDark"></div>
           ) : (

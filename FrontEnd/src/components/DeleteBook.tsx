@@ -4,18 +4,26 @@ import toast from 'react-hot-toast'
 interface Props {
   id: number
   setIsModalDeleteOpen: (value: boolean) => void
+  refresh: () => void
 }
 
-const DeleteBook: React.FC<Props> = ({ id, setIsModalDeleteOpen }: Props) => {
+const DeleteBook: React.FC<Props> = ({ id, setIsModalDeleteOpen, refresh }: Props) => {
   const { fetch } = useUser()
   const handleDeleteBook = () => {
-    fetch(`http://localhost:3000/books/${id}`, {
+    fetch(`http://localhost:3000/books/delete/${id}`, {
       method: 'DELETE'
-    }).catch(error => {
-      console.error(error)
     })
-    toast('Su libro ha sido eliminado', { duration: 3000, position: 'top-center', icon: '♻' })
-
+      .catch(error => {
+        console.error(error)
+      })
+      .then(() => {
+        refresh()
+        toast.success('Su libro ha sido eliminado', {
+          duration: 3000,
+          position: 'top-center',
+          icon: '♻'
+        })
+      })
     setIsModalDeleteOpen(false)
   }
 
