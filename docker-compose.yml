@@ -7,9 +7,9 @@ services:
       - 3306:3306
     environment:
       - MYSQL_ALLOW_EMPTY_PASSWORD=yes
-      - MYSQL_USER
-      - MYSQL_PASSWORD
-      - MYSQL_DATABASE
+      - MYSQL_USER=juan
+      - MYSQL_PASSWORD=perez
+      - MYSQL_DATABASE=bibliotech
     volumes:
       - type: volume
         source: mysql-data
@@ -40,9 +40,9 @@ services:
     environment:
       - DB_HOSTNAME=mysql
       - DB_PORT=3306
-      - DB_USERNAME
-      - DB_PASSWORD
-      - DB_DATABASE
+      - DB_USERNAME=juan
+      - DB_PASSWORD=perez
+      - DB_DATABASE=bibliotech
     ports:
       - "8080:8080"
     networks:
@@ -56,6 +56,8 @@ services:
       context: ./FrontEnd
       dockerfile: Dockerfile
     restart: always
+    environment:
+      - VITE_BACKEND_HOST=http://localhost:8080
     ports:
       - "80:80"
     networks:
