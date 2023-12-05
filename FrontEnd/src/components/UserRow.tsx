@@ -5,7 +5,7 @@ import { IoMdClose } from 'react-icons/io'
 import { useState } from 'react'
 
 interface UserRowProps {
-  key: User['dni']
+  key: User['idUsers']
   user: User
   refresh: () => Promise<void>
 }
@@ -30,6 +30,9 @@ export default function UserRow({ user, refresh }: UserRowProps) {
         </td>
         <td className="border-[1px] border-x-0 border-solid border-slate-200  text-center">
           {user.address}
+        </td>
+        <td className="border-[1px] border-x-0 border-solid border-slate-200  text-center">
+          {user.email}
         </td>
         <td className="border-[1px] border-x-0 border-solid border-slate-200  text-center">
           <div className="text-base hover:cursor-pointer">
