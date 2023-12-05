@@ -1,9 +1,12 @@
-import { Login } from './routes/Login.tsx'
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
-import Layout from './components/Layout.tsx'
-import Home from './components/Home.tsx'
+import Layout from './components/Layout'
 import { useUser } from './context/UserContext.tsx'
-import Catalogue from './components/Catalogue.tsx'
+import { Login } from './pages/Login.tsx'
+import Home from './pages/Home.tsx'
+import Catalogue from './pages/Catalogue.tsx'
+import UsersTabs from './pages/UsersTabs.tsx'
+import { Toaster } from 'react-hot-toast'
+
 const App = () => {
   const { currentUser, setupComplete } = useUser()
 
@@ -23,9 +26,28 @@ const App = () => {
           <Route path="/home" element={<Home />} />
           <Route path="/libros" element={<Catalogue />} />
           <Route path="/prestamos" element={<p>Prestamos page</p>} />
-          <Route path="/usuarios" element={<p>Usuarios</p>} />
+          <Route path="/usuarios" element={<UsersTabs />} />
         </Route>
       </Routes>
+      <Toaster
+        toastOptions={{
+          success: {
+            style: {
+              background: 'rgb(214, 251, 214)',
+              border: '1px solid green'
+            }
+          },
+          error: {
+            style: {
+              background: 'rgb(253, 221, 221)',
+              border: '1px solid red'
+            }
+          },
+          style: {
+            border: '1px solid black'
+          }
+        }}
+      />
     </BrowserRouter>
   )
 }

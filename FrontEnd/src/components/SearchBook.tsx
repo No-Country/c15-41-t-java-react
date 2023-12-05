@@ -1,4 +1,3 @@
-import imgShlef from '../assets/img/shelf.png'
 import { GoSearch } from 'react-icons/go'
 
 export const SearchBook: React.FC = () => {
@@ -7,7 +6,7 @@ export const SearchBook: React.FC = () => {
       <div className="relative flex items-center justify-center">
         <img
           className="max-h-72 min-h-[8rem] w-full"
-          src={imgShlef}
+          src="/brand/shelf.png"
           alt="Repisa con lomos de libros"
         />
         <div className="absolute w-11/12 sm:w-10/12 sm:bg-[#052940CC] sm:p-4">

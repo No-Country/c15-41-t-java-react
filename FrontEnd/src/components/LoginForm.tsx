@@ -1,6 +1,6 @@
 import { IoEyeOffOutline, IoEyeOutline } from 'react-icons/io5'
-import lockIcon from '../assets/lock.svg'
-import mailIcon from '../assets/mail.svg'
+import lockIcon from '../assets/icons/lock.svg'
+import mailIcon from '../assets/icons/mail.svg'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import { useState } from 'react'
@@ -100,9 +100,6 @@ export const LoginForm: React.FC = () => {
           type="submit"
           disabled={signInWaiting}
         >
-          {/*
-            eslint-disable-next-line multiline-ternary
-          */}
           {signInWaiting ? (
             <div className="absolute h-4 w-4 animate-spin rounded-full border-solid border-x-blueDark"></div>
           ) : (

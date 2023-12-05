@@ -1,22 +1,16 @@
 import { useState, useEffect } from 'react'
-import { useFormik } from 'formik'
-import type { FormikValues } from 'formik'
-import * as Yup from 'yup'
 import type { Author, BookPost, Editorial } from '../types/types'
-import { useUser } from '../context/UserContext'
+import type { FormikValues } from 'formik'
+import { useFormik } from 'formik'
+import * as Yup from 'yup'
 import toast from 'react-hot-toast'
+import { useUser } from '../context/UserContext'
 
-const initialValues: BookPost = {
-  title: '',
-  idAuthor: -1,
-  idEditorial: -1,
-  isbn: '',
-  genre: '',
-  quantity: 0,
-  image: ''
+interface BookProps extends BookPost {
+  id: number
+  setIsModalOpen: (value: boolean) => void
+  refresh: () => void
 }
-
-const mockGenres = ['THRILLER', 'FANTASY', 'ADVENTURE', 'ACTION']
 
 const validationSchema = Yup.object({
   title: Yup.string().required('El titulo es requerido'),
@@ -27,7 +21,9 @@ const validationSchema = Yup.object({
   idEditorial: Yup.number().min(1, 'Seleccione editorial').required('La editorial es requerida')
 })
 
-export default function RegisterForm() {
+const mockGenres = ['THRILLER', 'FANTASY', 'ADVENTURE', 'ACTION']
+
+const EditBook: React.FC<BookProps> = props => {
   const [authors, setAuthors] = useState<Author[]>([])
   const [editorials, setEditorials] = useState<Editorial[]>([])
   const { fetch } = useUser()
@@ -52,8 +48,20 @@ export default function RegisterForm() {
     })
   }, [])
 
-  const { values, errors, handleChange, handleSubmit, resetForm } = useFormik({
-    initialValues,
+  useEffect(() => {
+    console.info('editorials', editorials)
+  }, [editorials])
+
+  const { values, errors, handleChange, handleSubmit, setFieldValue } = useFormik({
+    initialValues: {
+      title: props.title,
+      quantity: props.quantity,
+      idAuthor: props.idAuthor,
+      isbn: props.isbn,
+      genre: props.genre,
+      idEditorial: props.idEditorial,
+      image: props.image
+    },
     validationSchema,
     onSubmit
   })
@@ -61,23 +69,28 @@ export default function RegisterForm() {
   async function onSubmit(values: FormikValues) {
     try {
       const postOptions = {
-        method: 'POST',
+        method: 'PUT',
         body: JSON.stringify(values)
       }
-      await fetch('http://localhost:3000/books/save', postOptions)
-      resetForm()
-      toast.success('Su libro se agregó correctamente', { duration: 4000, position: 'top-center' })
+      await fetch(`http://localhost:3000/books/update/${props.id}`, postOptions)
+      props.setIsModalOpen(false)
+      props.refresh()
+      toast.success('Su libro se editó correctamente', { duration: 4000, position: 'top-center' })
     } catch (error) {
-      toast.error('Error al agregar el libro', { duration: 4000, position: 'top-center' })
+      toast.error('Hubo un error al intentar editar el libro', {
+        duration: 4000,
+        position: 'top-center'
+      })
     }
   }
+
   return (
-    <div className="px-2 py-10">
+    <div className="bg-white px-2 py-10">
       <div className="mx-auto w-full rounded-[40px] bg-grey  sm:max-w-[70%]">
         <h2 className="mx-auto w-10/12 py-8 text-2xl font-bold leading-normal text-blueDark">
-          Registro de un nuevo libro
+          Edicion del libro {props.title}
         </h2>
-        <form className="mx-auto w-10/12" onSubmit={handleSubmit}>
+        <form className="mx-auto w-10/12 " onSubmit={handleSubmit}>
           <label className="text-base font-bold leading-[normal] text-blueLight " htmlFor="title">
             Titulo
           </label>
@@ -185,7 +198,7 @@ export default function RegisterForm() {
               value={values.idEditorial}
               onChange={handleChange}
             >
-              <option value="-1" disabled>
+              <option value="" disabled>
                 Selecciona una editorial
               </option>
               {editorials.map(editorial => (
@@ -206,14 +219,15 @@ export default function RegisterForm() {
               className="w-full border-0 bg-grey text-base font-[400] leading-[normal] text-blueDark placeholder-[#ABABAB] focus:outline-none"
               type="file"
               name="image"
-              value={values.image}
-              onChange={handleChange}
-              accept=".jpg, .jpeg, .png"
+              onChange={event => {
+                const file = event.currentTarget.files?.[0]
+                if (file) {
+                  setFieldValue('image', file)
+                }
+              }}
             />
-
-            <small className="absolute -bottom-6 text-xs font-bold text-red-500">
-              {errors?.image}
-            </small>
+            {/* Muestra la imagen actual */}
+            {props.image && <img src={props.image} alt="Imagen actual" className="h-24 w-24" />}
           </div>
           <div className="pb-10">
             <button
@@ -228,3 +242,5 @@ export default function RegisterForm() {
     </div>
   )
 }
+
+export default EditBook
