@@ -35,15 +35,17 @@ const BookList: React.FC = () => {
     <div className="flex h-full w-full flex-col items-center">
       <SearchBookModify allBooks={books} onSearchResults={handleSearchResults} setPage={setPage} />
       <div className="grid w-full items-center justify-center gap-x-14 gap-y-5 py-5 align-middle lg:grid-cols-2">
-        {searchResults.length > 0
-          ? (searchResults.map((book, index) => {
-              if (index < page * PAGE_SIZE && index >= (page - 1) * PAGE_SIZE) {
-                return <BookCard key={book.id} {...book} />
-              } else {
-                return null
-              }
-            }))
-          : (<p>No se encontraron coincidencias</p>)}
+        {searchResults.length > 0 ? (
+          searchResults.map((book, index) => {
+            if (index < page * PAGE_SIZE && index >= (page - 1) * PAGE_SIZE) {
+              return <BookCard key={book.id} {...book} />
+            } else {
+              return null
+            }
+          })
+        ) : (
+          <p>No se encontraron coincidencias</p>
+        )}
       </div>
       <div className="justify-self-end pb-8">
         <Pagination
