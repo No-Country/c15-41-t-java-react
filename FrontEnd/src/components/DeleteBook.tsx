@@ -5,16 +5,17 @@ interface Props {
   id: number
   setIsModalDeleteOpen: (value: boolean) => void
   deleteEntity: string
+  refresh: () => void
 }
 
-const DeleteBook: React.FC<Props> = ({ id, setIsModalDeleteOpen, deleteEntity }: Props) => {
+const DeleteBook: React.FC<Props> = ({ id, setIsModalDeleteOpen, refresh, deleteEntity }: Props) => {
   const { fetch } = useUser()
   let spanishDeleteEntity: string = ''
   let deleteUrl: string = ''
   switch (deleteEntity) {
     case 'book':
       spanishDeleteEntity = 'libro'
-      deleteUrl = `http://localhost:3000/books/${id}` // cambiar por api de books
+      deleteUrl = `http://localhost:3000/books/delete/${id}` // cambiar por api de books
       break
     case 'user':
       spanishDeleteEntity = 'usuario'
@@ -26,15 +27,18 @@ const DeleteBook: React.FC<Props> = ({ id, setIsModalDeleteOpen, deleteEntity }:
   const handleDeleteBook = () => {
     fetch(deleteUrl, {
       method: 'DELETE'
-    }).catch(error => {
-      console.error(error)
     })
-    toast(`Su ${spanishDeleteEntity} ha sido eliminado`, {
-      duration: 3000,
-      position: 'top-center',
-      icon: '♻'
-    })
-
+      .catch(error => {
+        console.error(error)
+      })
+      .then(() => {
+        refresh()
+        toast.success('Su libro ha sido eliminado', {
+          duration: 3000,
+          position: 'top-center',
+          icon: '♻'
+        })
+      })
     setIsModalDeleteOpen(false)
   }
 

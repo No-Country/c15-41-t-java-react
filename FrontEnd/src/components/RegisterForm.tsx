@@ -6,35 +6,25 @@ import type { Author, BookPost, Editorial } from '../types/types'
 import { useUser } from '../context/UserContext'
 import toast from 'react-hot-toast'
 
-
 const initialValues: BookPost = {
   title: '',
-  idAuthor: null,
-  idEditorial: null,
+  idAuthor: -1,
+  idEditorial: -1,
   isbn: '',
   genre: '',
   quantity: 0,
   image: ''
 }
 
-const mockGenres = [
-  'Filosofia',
-  'Ciencia',
-  'Novela',
-  'Historia',
-  'Ciencia ficcion',
-  'Religion',
-  'Gastronimia',
-  'Arte'
-]
+const mockGenres = ['THRILLER', 'FANTASY', 'ADVENTURE', 'ACTION']
 
 const validationSchema = Yup.object({
   title: Yup.string().required('El titulo es requerido'),
+  isbn: Yup.string().required('El isbn es requerido'),
   quantity: Yup.number().min(1, 'El valor debe ser mayor a 0').required('Cantidad es requerida'),
-  idAuthor: Yup.number().required('El autor es requerido'),
+  idAuthor: Yup.number().min(1, 'Seleccione autor').required('El autor es requerido'),
   genre: Yup.string().required('El genero es requerido'),
-  idEditorial: Yup.number().required('La editorial es requerida'),
-  isbn: Yup.string().required('El isbn es requerido')
+  idEditorial: Yup.number().min(1, 'Seleccione editorial').required('La editorial es requerida')
 })
 
 export default function RegisterForm() {
@@ -44,7 +34,7 @@ export default function RegisterForm() {
 
   useEffect(() => {
     const getAuthors = async () => {
-      const data = await fetch('http://localhost:3000/authors')
+      const data = await fetch('http://localhost:3000/authors/all')
       setAuthors(data)
     }
     getAuthors().catch(error => {
@@ -54,7 +44,7 @@ export default function RegisterForm() {
 
   useEffect(() => {
     const getEditorials = async () => {
-      const data = await fetch('http://localhost:3000/editorials')
+      const data = await fetch('http://localhost:3000/editorials/all')
       setEditorials(data)
     }
     getEditorials().catch(error => {
@@ -62,40 +52,24 @@ export default function RegisterForm() {
     })
   }, [])
 
-  const { values, errors, handleChange, handleSubmit } = useFormik({
+  const { values, errors, handleChange, handleSubmit, resetForm } = useFormik({
     initialValues,
     validationSchema,
     onSubmit
   })
 
   async function onSubmit(values: FormikValues) {
-    console.log(values)
-    /*
     try {
-      const formData = new FormData();
-      formData.append('title', values.title);
-      formData.append('quantity', values.quantity);
-      formData.append('idAuthor', values.idAuthor);
-      formData.append('genre', values.genre);
-      formData.append('isbn', values.isbn);
-      formData.append('idEditorial', values.idEditorial);
-      formData.append('image', values.image);
-  
-      const response = await fetch('http://localhost:3000/books', {
+      const postOptions = {
         method: 'POST',
-        body: formData,
-      });
-  
-      if (response.ok) {
-        toast.success('Su libro se agregó correctamente', { duration: 4000, position: 'top-center' });
-      } else {
-        toast.error('Error al agregar el libro', { duration: 4000, position: 'top-center' });
+        body: JSON.stringify(values)
       }
+      await fetch('http://localhost:3000/books/save', postOptions)
+      resetForm()
+      toast.success('Su libro se agregó correctamente', { duration: 4000, position: 'top-center' })
     } catch (error) {
-      console.error(error);
-      toast.error('Error al agregar el libro', { duration: 4000, position: 'top-center' });
+      toast.error('Error al agregar el libro', { duration: 4000, position: 'top-center' })
     }
-    */
   }
   return (
     <div className="px-2 py-10">
@@ -159,10 +133,10 @@ export default function RegisterForm() {
             <select
               className="w-full border-0 bg-grey text-base font-[400] leading-[normal] text-blueDark placeholder-[#ABABAB] focus:outline-none"
               name="idAuthor"
-              defaultValue=""
+              value={values.idAuthor}
               onChange={handleChange}
             >
-              <option value="" disabled>
+              <option value="-1" disabled>
                 Selecciona un autor
               </option>
               {authors.map(author => (
@@ -190,7 +164,7 @@ export default function RegisterForm() {
               </option>
               {mockGenres.map(genre => (
                 <option key={genre} value={genre}>
-                  {genre}
+                  {genre.charAt(0) + genre.toLowerCase().slice(1)}
                 </option>
               ))}
             </select>
@@ -208,10 +182,10 @@ export default function RegisterForm() {
             <select
               className="w-full border-0 bg-grey text-base font-[400] leading-[normal] text-blueDark placeholder-[#ABABAB] focus:outline-none"
               name="idEditorial"
-              defaultValue=""
+              value={values.idEditorial}
               onChange={handleChange}
             >
-              <option value="" disabled>
+              <option value="-1" disabled>
                 Selecciona una editorial
               </option>
               {editorials.map(editorial => (

@@ -1,54 +1,36 @@
 import { useState, useEffect } from 'react'
-import type { Author, Editorial } from '../types/types'
+import type { Author, BookPost, Editorial } from '../types/types'
 import type { FormikValues } from 'formik'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
-import { useUser } from '../context/UserContext'
 import toast from 'react-hot-toast'
-import { imageListClasses } from '@mui/material'
+import { useUser } from '../context/UserContext'
 
-interface EditBookProps {
+interface BookProps extends BookPost {
   id: number
-  title: string
-  idAuthor: number
-  IdEditorial: number
-  genre: string
-  isbn: string
-  quantity: number
-  image: string
-  editorialDto: Editorial
-  authorDto: Author
   setIsModalOpen: (value: boolean) => void
+  refresh: () => void
 }
 
 const validationSchema = Yup.object({
   title: Yup.string().required('El titulo es requerido'),
   isbn: Yup.string().required('El isbn es requerido'),
   quantity: Yup.number().min(1, 'El valor debe ser mayor a 0').required('Cantidad es requerida'),
-  idAuthor: Yup.number().required('El autor es requerido'),
+  idAuthor: Yup.number().min(1, 'Seleccione autor').required('El autor es requerido'),
   genre: Yup.string().required('El genero es requerido'),
-  idEditorial: Yup.number().required('La editorial es requerida')
+  idEditorial: Yup.number().min(1, 'Seleccione editorial').required('La editorial es requerida')
 })
 
-const mockGenres = [
-  'Filosofia',
-  'Ciencia',
-  'Novela',
-  'Historia',
-  'Ciencia ficcion',
-  'Religion',
-  'Gastronimia',
-  'Arte'
-]
+const mockGenres = ['THRILLER', 'FANTASY', 'ADVENTURE', 'ACTION']
 
-const EditBook: React.FC<EditBookProps> = props => {
+const EditBook: React.FC<BookProps> = props => {
   const [authors, setAuthors] = useState<Author[]>([])
   const [editorials, setEditorials] = useState<Editorial[]>([])
   const { fetch } = useUser()
 
   useEffect(() => {
     const getAuthors = async () => {
-      const data = await fetch('http://localhost:3000/authors')
+      const data = await fetch('http://localhost:3000/authors/all')
       setAuthors(data)
     }
     getAuthors().catch(error => {
@@ -58,13 +40,17 @@ const EditBook: React.FC<EditBookProps> = props => {
 
   useEffect(() => {
     const getEditorials = async () => {
-      const data = await fetch('http://localhost:3000/editorials')
+      const data = await fetch('http://localhost:3000/editorials/all')
       setEditorials(data)
     }
     getEditorials().catch(error => {
       console.log(error)
     })
   }, [])
+
+  useEffect(() => {
+    console.info('editorials', editorials)
+  }, [editorials])
 
   const { values, errors, handleChange, handleSubmit, setFieldValue } = useFormik({
     initialValues: {
@@ -73,7 +59,7 @@ const EditBook: React.FC<EditBookProps> = props => {
       idAuthor: props.idAuthor,
       isbn: props.isbn,
       genre: props.genre,
-      idEditorial: props.IdEditorial,
+      idEditorial: props.idEditorial,
       image: props.image
     },
     validationSchema,
@@ -81,39 +67,21 @@ const EditBook: React.FC<EditBookProps> = props => {
   })
 
   async function onSubmit(values: FormikValues) {
-    console.log(values)
-    props.setIsModalOpen(false)
-    /*
-  try {
-    const formData = new FormData();
-    formData.append('title', values.title);
-    formData.append('isbn', values.isbn);
-    formData.append('quantity', values.quantity.toString());
-    formData.append('idAuthor', values.idAuthor.toString()); // Ajusta según sea necesario
-    formData.append('genre', values.genre);
-    formData.append('idEditorial', values.idEditorial.toString()); // Ajusta según sea necesario
-    formData.append('image', values.image); // Asumiendo que `values.image` es un archivo
-
-    const putOptions = {
-      method: 'PUT',
-      body: formData,
-    };
-
-    const putResponse = await fetch(`http://localhost:3000/books/${props.id}`, putOptions);
-
-    if (putResponse.ok) {
-      props.setIsModalOpen(false);
-      toast.success('Su libro se editó correctamente', { duration: 4000, position: 'top-center' });
-    } else {
-      console.error('Error al actualizar el libro');
-      toast.error('Hubo un error al intentar editar el libro', { duration: 4000, position: 'top-center' });
+    try {
+      const postOptions = {
+        method: 'PUT',
+        body: JSON.stringify(values)
+      }
+      await fetch(`http://localhost:3000/books/update/${props.id}`, postOptions)
+      props.setIsModalOpen(false)
+      props.refresh()
+      toast.success('Su libro se editó correctamente', { duration: 4000, position: 'top-center' })
+    } catch (error) {
+      toast.error('Hubo un error al intentar editar el libro', {
+        duration: 4000,
+        position: 'top-center'
+      })
     }
-  } catch (error) {
-    console.error(error);
-    toast.error('Hubo un error al intentar editar el libro', { duration: 4000, position: 'top-center' });
-  }
-}
-    */
   }
 
   return (
@@ -181,7 +149,7 @@ const EditBook: React.FC<EditBookProps> = props => {
               value={values.idAuthor}
               onChange={handleChange}
             >
-              <option value="" disabled>
+              <option value="-1" disabled>
                 Selecciona un autor
               </option>
               {authors.map(author => (
@@ -209,7 +177,7 @@ const EditBook: React.FC<EditBookProps> = props => {
               </option>
               {mockGenres.map(genre => (
                 <option key={genre} value={genre}>
-                  {genre}
+                  {genre.charAt(0) + genre.toLowerCase().slice(1)}
                 </option>
               ))}
             </select>
@@ -227,7 +195,7 @@ const EditBook: React.FC<EditBookProps> = props => {
             <select
               className="w-full border-0 bg-grey text-base font-[400] leading-[normal] text-blueDark placeholder-[#ABABAB] focus:outline-none"
               name="idEditorial"
-              defaultValue={values.idEditorial}
+              value={values.idEditorial}
               onChange={handleChange}
             >
               <option value="" disabled>
