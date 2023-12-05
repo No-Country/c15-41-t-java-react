@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react'
-import { FormikValues, useFormik } from 'formik'
+import { useFormik } from 'formik'
+import type { FormikValues } from 'formik'
 import * as Yup from 'yup'
-import { Author, Editorial } from '../types/types'
+import type { Author, Editorial } from '../types/types'
+import { useUser } from '../context/UserContext'
 
 interface RegisterFormType {
   title: string
@@ -21,21 +23,6 @@ const initialValues: RegisterFormType = {
   image: ''
 }
 
-// DEBERIAN SER PROPORCIONADOS POR BACKEND
-/*const mockAuthors: Author[] = [
-  { name: 'Paulo', lastName: 'Coelho', id: 25452 },
-  { name: 'Edgar Allan', lastName: 'Poe', id: 4435 },
-  { name: 'Jane', lastName: 'Austen', id: 55646 }
-]/*
-
-/*onst mockEditorials: Editorial[] = [
-  { name: 'Planeta', id: 1001 },
-  { name: 'Austral', id: 1005 },
-  { name: 'BlackList', id: 1006 },
-  { name: 'El Aleph editores', id: 1007 },
-  { name: 'Ariel', id: 1002 }
-]
-*/
 const mockGenres = [
   'Filosofia',
   'Ciencia',
@@ -58,25 +45,26 @@ const validationSchema = Yup.object({
 export default function RegisterForm() {
   const [authors, setAuthors] = useState<Author[]>([])
   const [editorials, setEditorials] = useState<Editorial[]>([])
-  const [author, setAuthor] = useState<Author | null>(null)
-  const [editorial, setEditorial] = useState<Editorial | null>(null)
+  const { fetch } = useUser()
 
   useEffect(() => {
     const getAuthors = async () => {
-      const response = await fetch('http://localhost:3000/authors')
-      const data = await response.json()
+      const data = await fetch('http://localhost:3000/authors')
       setAuthors(data)
     }
-    getAuthors()
+    getAuthors().catch(error => {
+      console.log(error)
+    })
   }, [])
 
   useEffect(() => {
     const getEditorials = async () => {
-      const response = await fetch('http://localhost:3000/editorials')
-      const data = await response.json()
+      const data = await fetch('http://localhost:3000/editorials')
       setEditorials(data)
     }
-    getEditorials()
+    getEditorials().catch(error => {
+      console.log(error)
+    })
   }, [])
 
   const { values, errors, handleChange, handleSubmit, setFieldValue } = useFormik({
@@ -84,12 +72,10 @@ export default function RegisterForm() {
     validationSchema,
     onSubmit
   })
-  /*   const { fetch } = useUser() */
 
   async function onSubmit(values: FormikValues) {
     console.log(values)
     console.log(author)
-
     /* try {
       const postOptions = {
         method: 'POST',
