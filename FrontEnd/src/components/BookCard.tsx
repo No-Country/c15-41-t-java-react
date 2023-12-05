@@ -105,7 +105,7 @@ const BookCard: React.FC<Book> = ({
       )}
       {isModalDeleteOpen && (
         <div className="fixed inset-0 z-50  bg-white opacity-100">
-          <DeleteBook id={bookData.id} setIsModalDeleteOpen={setIsModalDeleteOpen} />
+          <DeleteBook id={bookData.id} setIsModalDeleteOpen={setIsModalDeleteOpen} deleteEntity='book'/>
           <div
             className="absolute right-4 top-4 cursor-pointer text-5xl font-semibold text-black hover:scale-125"
             onClick={() => {
