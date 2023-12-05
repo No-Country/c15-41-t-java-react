@@ -10,7 +10,7 @@
     "preview": "vite preview",
     "format": "prettier --write ./src/**/*.{ts,tsx,js,jsx,json,css}",
     "json-server": "json-server --watch db.json --port 3000",
-    "dev:prod": "vite --mode production"
+    "dev:java": "vite --mode production"
   },
   "dependencies": {
     "@emotion/react": "^11.11.1",
