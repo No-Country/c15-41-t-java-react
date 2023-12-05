@@ -53,8 +53,13 @@ public class LoanCrudRepositoryImpl implements LoanCrudRepository {
         return null;
     }
 
-    @Override//TODO
+    @Override
     public boolean delete(Long idLoan) {
-                return false;
+        Optional<LoanDto> optLoan = this.getLoan(idLoan);
+        if(optLoan.isPresent()){
+            loanRepository.deleteById(idLoan);
+            return true;
+        }
+        return false;
     }
 }
