@@ -24,7 +24,7 @@ const initialUserState: UserState = {
 
 const UserContext = createContext<IUserContext | null>(null)
 const LOCAL_STORAGE_KEY = 'currentUser'
-const BACKEND_HOST = import.meta.env.VITE_BACKEND_HOST
+const BACKEND_HOST = 'http://localhost:8080/bibliotech/api' //import.meta.env.VITE_BACKEND_HOST
 const MODE = import.meta.env.MODE
 
 /*
