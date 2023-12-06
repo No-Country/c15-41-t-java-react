@@ -70,18 +70,16 @@ export default function UserRow({ user, refresh }: UserRowProps) {
         </div>
       )}
       {isModalOpen && (
-        <div className='fixed inset-0 z-50  bg-white opacity-100'>
-            <UserRegisterForm 
-            user={user}
-            setIsModalOpen={setIsModalOpen}/>
-            <div
-             className="absolute right-4 top-4 cursor-pointer text-5xl font-semibold text-black hover:scale-125"
-             onClick={() => {
-               setIsModalOpen(false)
-             }}
-            >
-               <IoMdClose />
-            </div>
+        <div className="fixed inset-0 z-50  bg-white opacity-100">
+          <UserRegisterForm user={user} setIsModalOpen={setIsModalOpen} />
+          <div
+            className="absolute right-4 top-4 cursor-pointer text-5xl font-semibold text-black hover:scale-125"
+            onClick={() => {
+              setIsModalOpen(false)
+            }}
+          >
+            <IoMdClose />
+          </div>
         </div>
       )}
     </>

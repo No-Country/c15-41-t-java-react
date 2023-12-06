@@ -13,7 +13,7 @@ const initialValues: User = {
   email: '',
   address: '',
   loansDto: [],
-  active: true,
+  active: true
 }
 
 const UsersTabs = () => {
