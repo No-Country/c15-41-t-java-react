@@ -20,11 +20,11 @@ const DeleteModal: React.FC<Props> = ({
   switch (deleteEntity) {
     case 'book':
       spanishDeleteEntity = 'libro'
-      deleteUrl = `http://localhost:3000/books/delete/${id}` // cambiar por api de books
+      deleteUrl = `http://localhost:3000/books/delete/${id}`
       break
     case 'user':
       spanishDeleteEntity = 'usuario'
-      deleteUrl = `http://localhost:3000/users/${id}` // cambiar por api de users
+      deleteUrl = `http://localhost:3000/users/delete/${id}`
       break
     default:
       break
@@ -49,7 +49,6 @@ const DeleteModal: React.FC<Props> = ({
         })
         console.error(error)
       })
-
     setIsModalDeleteOpen(false)
   }
 

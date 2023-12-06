@@ -5,7 +5,7 @@ import UserRegisterForm from '../components/UserRegisterForm'
 import { User } from '../types/types'
 
 const initialValues: User = {
-  idUsers: 0,
+  idUser: 0,
   dni: '',
   name: '',
   lastName: '',
@@ -13,7 +13,7 @@ const initialValues: User = {
   email: '',
   address: '',
   loansDto: [],
-  active: true,
+  active: true
 }
 
 const UsersTabs = () => {

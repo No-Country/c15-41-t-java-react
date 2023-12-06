@@ -5,7 +5,7 @@ import DeleteModal from './DeleteModal'
 import { IoMdClose } from 'react-icons/io'
 
 interface UserCardProps {
-  key: User['idUsers']
+  key: User['idUser']
   user: User
   refresh: () => Promise<void>
 }
@@ -32,7 +32,7 @@ export default function UserCard({ user, refresh }: UserCardProps) {
       <div className="flex-col p-4">
         <p>
           <span className="font-medium text-black">ID: </span>
-          {user.idUsers}
+          {user.idUser}
         </p>
         <p>
           <span className="font-medium text-black">Celular: </span>
@@ -50,7 +50,7 @@ export default function UserCard({ user, refresh }: UserCardProps) {
       {isModalDeleteOpen && (
         <div className="fixed inset-0 z-50  bg-white opacity-100">
           <DeleteModal
-            id={user.idUsers}
+            id={user.idUser}
             setIsModalDeleteOpen={setIsModalDeleteOpen}
             deleteEntity="user"
             refresh={refresh}
