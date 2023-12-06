@@ -8,6 +8,7 @@ import { User } from '../types/types'
 interface UserProps {
   user: User
   setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>
+  refresh: () => void
 }
 function generateTempId() {
   return new Date().getTime()
@@ -29,7 +30,7 @@ const validationSchema = Yup.object({
   address: Yup.string().required('La dirección es obligatoria')
 })
 
-const UserRegisterForm: React.FC<UserProps> = ({ user, setIsModalOpen }: UserProps) => {
+const UserRegisterForm: React.FC<UserProps> = ({ user, setIsModalOpen, refresh }: UserProps) => {
   const { fetch } = useUser()
 
   const isEditMode = !!user.idUser
@@ -59,7 +60,8 @@ const UserRegisterForm: React.FC<UserProps> = ({ user, setIsModalOpen }: UserPro
             'Content-Type': 'application/json'
           }
         }
-        await fetch(`http://localhost:3000/Users/${values.idUser}`, putOptions)
+        await fetch(`http://localhost:3000/users/update/${values.idUser}`, putOptions)
+        refresh()
         toast.success('El Socio se editó correctamente', {
           duration: 4000,
           position: 'top-center'
@@ -109,7 +111,7 @@ const UserRegisterForm: React.FC<UserProps> = ({ user, setIsModalOpen }: UserPro
               className="w-full border-0 bg-grey text-base font-[400] leading-[normal] text-[#263238] placeholder-[#ABABAB] focus:outline-none"
               name="dni"
               type="text"
-              disabled={isEditMode}
+              // disabled={isEditMode}
               placeholder="0"
               value={values.dni}
               onChange={handleChange}
