@@ -22,11 +22,12 @@ export interface BookPost {
 }
 
 export interface User {
-  dni: number
+  dni: string
   name: string
   lastName: string
-  phoneNumber: number
+  phoneNumber: string
   address: string
+  email: string
 }
 
 export interface Author {

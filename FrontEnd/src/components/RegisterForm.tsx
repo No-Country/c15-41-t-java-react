@@ -36,8 +36,13 @@ const mockGenres = [
 ]
 
 const validationSchema = Yup.object({
-  title: Yup.string().required('El titulo es requerido'),
-  quantity: Yup.number().min(1, 'El valor debe ser mayor a 0').required('Cantidad es requerida'),
+  title: Yup.string()
+  .max(50, '50 caracteres maximo')
+  .required('El titulo es requerido'),
+  quantity: Yup.number()
+  .required('Cantidad es requerida')
+  .min(1, 'El valor debe ser mayor a 0')
+  .max(1000, '1000 copias  maximo'),
   idAuthor: Yup.number().required('El autor es requerido'),
   genre: Yup.string().required('El genero es requerido'),
   idEditorial: Yup.number().required('La editorial es requerida')
@@ -76,6 +81,8 @@ export default function RegisterForm() {
 
   async function onSubmit(values: FormikValues) {
     console.log(values)
+    toast.success('Su libro se agregó correctamente', { duration: 4000, position: 'top-center' });
+      
     /*
     try {
       const formData = new FormData();
@@ -110,7 +117,7 @@ export default function RegisterForm() {
         </h2>
         <form className="mx-auto w-10/12" onSubmit={handleSubmit}>
           <label className="text-base font-bold leading-[normal] text-blueLight " htmlFor="title">
-            Titulo
+             Titulo <span className='text-red-500'>*</span>
           </label>
           <div className="relative mb-14 flex h-8 w-full items-center gap-2 border-0 border-b-2 border-solid border-blueDark">
             <input
@@ -133,8 +140,8 @@ export default function RegisterForm() {
               className="w-full  border-0 bg-grey text-base font-[400] leading-[normal] text-[#263238] placeholder-[#ABABAB] focus:outline-none"
               name="quantity"
               type="number"
-              placeholder="Ingresá la cantidad"
-              value={values.quantity}
+              placeholder="0"
+              
               onChange={handleChange}
             />
             <small className="absolute -bottom-6 text-xs font-bold text-red-500">
