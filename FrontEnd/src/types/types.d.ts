@@ -1,33 +1,42 @@
 export interface Book {
-  id: number
+  idBook: number
   title: string
+  isbn: string
   quantity: number
   idAuthor: number
-  IdEditorial: number
+  idEditorial: number
   genre: string
   quantity: number
   image: string
+  isbn: string
   editorialDto: Editorial
   authorDto: Author
 }
 
-export interface BookPost {
-  title: string
-  quantity: number
-  idAuthor: number
-  IdEditorial: number
-  genre: string
-  quantity: number
-  image: string
-}
+export type BookPost = Omit<Book, 'editorialDto' | 'authorDto' | 'idBook'>
 
 export interface User {
+  idUsers: number
   dni: string
   name: string
   lastName: string
+  email: string
   phoneNumber: string
   address: string
-  email: string
+  loansDto: Loan[] | []
+  active: boolean
+}
+
+export interface Loan {
+  isLoan: boolean
+  loanDate: string
+  returnExpectedDate: string
+  isBook: number
+  isAdmin: number
+  isUser: number
+  bookDto: null
+  adminDto: null
+  userDto: null
 }
 
 export interface Author {

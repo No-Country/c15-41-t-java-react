@@ -24,6 +24,8 @@ const initialUserState: UserState = {
 
 const UserContext = createContext<IUserContext | null>(null)
 const LOCAL_STORAGE_KEY = 'currentUser'
+const BACKEND_HOST = 'http://localhost:8080/bibliotech/api' //import.meta.env.VITE_BACKEND_HOST
+const MODE = import.meta.env.MODE
 
 /*
 const authenticateUser = async (email: string, password: string) => {
@@ -134,6 +136,11 @@ export const UserProvider: FC<{
   const fetchHOF: IUserContext['fetch'] = async (url, options = {}) => {
     if (currentUser.authToken === null) {
       throw new Error('Error de autenticación')
+    }
+
+    if (MODE === 'production' && BACKEND_HOST !== undefined) {
+      const pathname = new URL(url).pathname
+      url = `${BACKEND_HOST}${pathname}`
     }
 
     const { headers, ...otherOptions } = options

@@ -1,8 +1,9 @@
 {
   "books": [
     {
-      "id": 1,
+      "idBook": 1,
       "title": "Cien años de soledad",
+      "isbn": "5451651651",
       "quantity": 10,
       "idEditorial": 1,
       "idAuthor": 1,
@@ -20,8 +21,9 @@
       }
     },
     {
-      "id": 2,
+      "idBook": 2,
       "title": "1984",
+      "isbn": "541414151",
       "quantity": 1,
       "idEditorial": 2,
       "idAuthor": 2,
@@ -39,8 +41,9 @@
       }
     },
     {
-      "id": 3,
+      "idBook": 3,
       "title": "El amor en los tiempos del cólera",
+      "isbn": "51771651651",
       "quantity": 3,
       "idEditorial": 3,
       "idAuthor": 3,
@@ -58,8 +61,9 @@
       }
     },
     {
-      "id": 4,
+      "idBook": 4,
       "title": "La sombra del viento",
+      "isbn": "5451651651222",
       "quantity": 8,
       "idEditorial": 5,
       "idAuthor": 5,
@@ -77,8 +81,9 @@
       }
     },
     {
-      "id": 5,
+      "idBook": 5,
       "title": "Harry Potter y la piedra filosofal",
+      "isbn": "545165165187877",
       "quantity": 5,
       "idEditorial": 4,
       "idAuthor": 4,
@@ -96,8 +101,9 @@
       }
     },
     {
-      "id": 6,
+      "idBook": 6,
       "title": "El principito",
+      "isbn": "542871951651651",
       "quantity": 5,
       "idEditorial": 6,
       "idAuthor": 6,
@@ -166,44 +172,56 @@
   ],
   "Users": [
     {
+      "idUsers": 6565655,
       "dni": "12345678",
       "name": "John",
       "lastName": "Doe",
+      "email": "johndoe@gmail",
       "phoneNumber": "123456789",
       "address": "123 Main St"
     },
     {
+      "idUsers": 656565,
       "dni": "87654321",
       "name": "Jane",
       "lastName": "Smith",
+      "email": "janesmith@gmail",
       "phoneNumber": "987654321",
       "address": "456 Elm St"
     },
     {
+      "idUsers": 656545,
       "dni": "98765432",
       "name": "Alice",
+      "email": "alicejohnson@gmail",
       "lastName": "Johnson",
       "phoneNumber": "567890123",
       "address": "789 Oak St"
     },
     {
+      "idUsers": 6565659,
       "dni": "54321678",
       "name": "Bob",
       "lastName": "Williams",
+      "email": "bobwilliams@gmail",
       "phoneNumber": "654321098",
       "address": "321 Pine St"
     },
     {
+      "idUsers": 6565454,
       "dni": "34567812",
       "name": "Sarah",
       "lastName": "Taylor",
+      "email": "sarahtaylor@gmail",
       "phoneNumber": "908765432",
       "address": "567 Maple St"
     },
     {
-      "dni": "87654321",
+      "idUsers": 1465655,
+      "dni": "87654329",
       "name": "Michael",
       "lastName": "Brown",
+      "email": "michaelbrown@gmail",
       "phoneNumber": "234567890",
       "address": "901 Cedar St"
     }
