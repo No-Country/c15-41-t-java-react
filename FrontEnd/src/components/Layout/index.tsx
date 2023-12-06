@@ -9,11 +9,9 @@ export default function Layout() {
   return (
     <>
       <header className="flex h-36 items-center justify-start">
-        <img
-          src="/brand/isologotipo.png"
-          alt="logo"
-          className="h-full pl-24 max-lg:h-24 max-lg:pl-12 max-sm:pl-6"
-        />
+        <Link to="/home" className="ml-24 h-full max-lg:ml-12 max-lg:h-24 max-sm:ml-6">
+          <img src="/brand/isologotipo.png" alt="logo" className="h-full w-auto" />
+        </Link>
         <Link
           to="/home"
           className="p-8 text-center text-2xl text-black no-underline hover:underline max-lg:hidden"
@@ -36,7 +34,7 @@ export default function Layout() {
           to="/usuarios"
           className="p-8 text-center text-2xl text-black no-underline hover:underline max-lg:hidden"
         >
-          Usuarios
+          Socios
         </Link>
         <button
           className="border-none bg-white hover:cursor-pointer max-lg:ml-auto max-lg:mr-12 max-sm:mr-6"

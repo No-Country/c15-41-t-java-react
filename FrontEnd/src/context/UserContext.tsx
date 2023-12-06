@@ -24,7 +24,7 @@ const initialUserState: UserState = {
 
 const UserContext = createContext<IUserContext | null>(null)
 const LOCAL_STORAGE_KEY = 'currentUser'
-const RELATIVE_PATH = "/bibliotech/api"
+const RELATIVE_PATH = '/bibliotech/api'
 const BACKEND_HOST = import.meta.env.VITE_BACKEND_HOST
 const MODE = import.meta.env.MODE
 
@@ -159,7 +159,14 @@ export const UserProvider: FC<{
       throw new Error('Error de autenticación')
     }
 
-    return await response.json()
+    // TODO Temporalmente, mientras no se implemente el backend(en DELETE)
+    try {
+      return await response.json()
+    } catch (error) {
+      return {
+        message: 'Operación exitosa'
+      }
+    }
   }
 
   return (
