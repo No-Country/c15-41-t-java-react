@@ -55,9 +55,9 @@ services:
     build:
       context: ./FrontEnd
       dockerfile: Dockerfile
+      args:
+        - VITE_BACKEND_HOST=http://localhost:8080
     restart: always
-    environment:
-      - VITE_BACKEND_HOST=http://localhost:8080
     ports:
       - "80:80"
     networks:
