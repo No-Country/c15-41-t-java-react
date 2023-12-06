@@ -25,7 +25,4 @@ services:
     rootDir: ./FrontEnd
     envVars:
       - key: VITE_BACKEND_HOST
-        fromService:
-          type: web
-          name: backend
-          property: hostport
+        sync: false

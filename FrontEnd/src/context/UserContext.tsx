@@ -24,6 +24,7 @@ const initialUserState: UserState = {
 
 const UserContext = createContext<IUserContext | null>(null)
 const LOCAL_STORAGE_KEY = 'currentUser'
+const RELATIVE_PATH = "/bibliotech/api"
 const BACKEND_HOST = import.meta.env.VITE_BACKEND_HOST
 const MODE = import.meta.env.MODE
 
@@ -140,7 +141,7 @@ export const UserProvider: FC<{
 
     if (MODE === 'production' && BACKEND_HOST !== undefined) {
       const pathname = new URL(url).pathname
-      url = `${BACKEND_HOST}${pathname}`
+      url = `${BACKEND_HOST}${RELATIVE_PATH}${pathname}`
     }
 
     const { headers, ...otherOptions } = options
