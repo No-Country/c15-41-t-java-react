@@ -1,14 +1,15 @@
 services:
-  - type: pserv
+  - type: web
     name: mysql
     runtime: docker
     autoDeploy: false
+    plan: free
     branch: docker
     rootDir: ./database
-    disk:
-      name: mysql-data
-      mountPath: /var/lib/mysql
-      sizeGB: 5
+    # disk:
+    #   name: mysql-data
+    #   mountPath: /var/lib/mysql
+    #   sizeGB: 5
     envVars:
       - key: MYSQL_DATABASE
         value: bibliotech
@@ -23,37 +24,38 @@ services:
     name: backend
     runtime: docker
     autoDeploy: false
+    plan: free
     branch: docker
     rootDir: ./LibraryBackend
     envVars:
       - key: DB_HOSTNAME
         fromService:
-          type: pserv
+          type: web
           name: mysql
           property: host
       - key: DB_PORT
         fromService:
-          type: pserv
+          type: web
           name: mysql
           property: port
       - key: DB_DATABASE
         fromService:
-          type: pserv
+          type: web
           name: mysql
           envVarKey: MYSQL_DATABASE
       - key: DB_USERNAME
         fromService:
-          type: pserv
+          type: web
           name: mysql
           envVarKey: MYSQL_USER
       - key: DB_PASSWORD
         fromService:
-          type: pserv
+          type: web
           name: mysql
           envVarKey: MYSQL_PASSWORD
       - key: DB_ROOT_PASSWORD
         fromService:
-          type: pserv
+          type: web
           name: mysql
           envVarKey: MYSQL_ROOT_PASSWORD
 
@@ -61,6 +63,7 @@ services:
     name: frontend
     runtime: docker
     autoDeploy: false
+    plan: free
     branch: docker
     rootDir: ./FrontEnd
     envVars:
