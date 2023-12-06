@@ -17,14 +17,14 @@ export default function UserCard({ user, refresh }: UserCardProps) {
     <div className="flex-col p-3">
       <div className="flex w-96 items-center rounded-lg border-[1px] border-solid border-slate-200 p-2 px-4">
         <h1 className="flex-grow text-base font-medium text-blueLight">{`${user.name} ${user.lastName}`}</h1>
-        <div className="hover:cursor-pointer px-0.5">
+        <div className="px-0.5 hover:cursor-pointer">
           <IoPencil size={20} />
         </div>
         <div
           onClick={() => {
             setIsModalDeleteOpen(true)
           }}
-          className="hover:cursor-pointer px-0.5"
+          className="px-0.5 hover:cursor-pointer"
         >
           <IoTrashOutline size={20} />
         </div>
