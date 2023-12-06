@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import type { User } from '../types/types'
 import { Pagination } from '@mui/material'
 import SearchUser from './SearchUser'
+import UserCard from './UserCard'
 
 
 export default function UsersList() {
@@ -46,7 +47,7 @@ export default function UsersList() {
     <div>
       <SearchUser allUsers={users} onSearchResults={handleSearchResults} setPage={setPage} />
       <div className="min-h-64 my-10 flex flex-col items-center justify-evenly">
-        <table className="min-w-full table-auto border-collapse rounded border-[1px] border-solid border-slate-800">
+        <table className="min-w-full  table-auto border-collapse rounded border-[1px] border-solid border-slate-800 max-lg:hidden">
           <thead className="p-10">
             <tr>
               <th>ID</th>
@@ -68,6 +69,14 @@ export default function UsersList() {
             })}
           </tbody>
         </table>
+        <div className='lg:hidden p-5'>            
+            {searchResults.map((user, index) => {
+              if (index < page * PAGE_SIZE && index >= (page - 1) * PAGE_SIZE) {
+                return <UserCard key={user.idUsers} user={user} refresh={fetchUsers}/>
+              } else {
+                return null
+              }
+            })}</div>
         <div className="justify-self-end pb-8">
           <Pagination
             count={Math.ceil(searchResults.length / PAGE_SIZE)}
