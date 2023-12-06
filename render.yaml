@@ -1,9 +1,10 @@
 services:
   - type: pserv
     name: mysql
-    runtime: image
+    runtime: docker
     autoDeploy: false
-    url: docker.io/_/mysql:8.2
+    branch: docker
+    rootDir: ./database
     disk:
       name: mysql-data
       mountPath: /var/lib/mysql
