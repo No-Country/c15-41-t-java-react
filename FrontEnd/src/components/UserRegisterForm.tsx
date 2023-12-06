@@ -36,7 +36,7 @@ const UserRegisterForm: React.FC<UserProps> = ({ user, setIsModalOpen }: UserPro
 
   const { values, errors, handleChange, handleSubmit, resetForm } = useFormik({
     initialValues: {
-      idUsers: isEditMode ? user.idUser : generateTempId(),
+      idUser: isEditMode ? user.idUser : generateTempId(),
       dni: user.dni || '',
       name: user.name || '',
       lastName: user.lastName || '',
@@ -59,16 +59,17 @@ const UserRegisterForm: React.FC<UserProps> = ({ user, setIsModalOpen }: UserPro
             'Content-Type': 'application/json'
           }
         }
-        await fetch(`http://localhost:3000/Users/${values.idUsers}`, putOptions)
+        await fetch(`http://localhost:3000/Users/${values.idUser}`, putOptions)
         toast.success('El Socio se editó correctamente', {
           duration: 4000,
           position: 'top-center'
         })
       } else {
         // Si no estamos en modo edición, estamos registrando un nuevo usuario
+        const { idUser, ...rest } = values
         const postOptions = {
           method: 'POST',
-          body: JSON.stringify(values),
+          body: JSON.stringify(rest),
           headers: {
             'Content-Type': 'application/json'
           }

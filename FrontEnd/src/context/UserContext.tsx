@@ -159,7 +159,14 @@ export const UserProvider: FC<{
       throw new Error('Error de autenticación')
     }
 
-    return await response.json()
+    // TODO Temporalmente, mientras no se implemente el backend(en DELETE)
+    try {
+      return await response.json()
+    } catch (error) {
+      return {
+        message: 'Operación exitosa'
+      }
+    }
   }
 
   return (

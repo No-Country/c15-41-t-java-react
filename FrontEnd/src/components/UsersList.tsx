@@ -22,8 +22,10 @@ export default function UsersList() {
     try {
       setFetchError(false)
       const users = await fetch('http://localhost:3000/users/all')
-      setUsers(users)
-      setSearchResults(users)
+      //FIXME Remover cuando backend devuelva automáticamente solo los activos
+      const userFiltered = users.filter((user: User) => user.active === true)
+      setUsers(userFiltered)
+      setSearchResults(userFiltered)
     } catch (error) {
       console.error(error)
       setFetchError(true)

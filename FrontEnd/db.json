@@ -172,7 +172,7 @@
   ],
   "Users": [
     {
-      "idUsers": 6565655,
+      "idUser": 6565655,
       "dni": "12345678",
       "name": "John",
       "lastName": "Doe",
@@ -181,7 +181,7 @@
       "address": "123 Main St"
     },
     {
-      "idUsers": 656565,
+      "idUser": 656565,
       "dni": "87654321",
       "name": "Jane",
       "lastName": "Smith",
@@ -190,7 +190,7 @@
       "address": "456 Elm St"
     },
     {
-      "idUsers": 656545,
+      "idUser": 656545,
       "dni": "98765432",
       "name": "Alice",
       "email": "alicejohnson@gmail",
@@ -199,7 +199,7 @@
       "address": "789 Oak St"
     },
     {
-      "idUsers": 6565659,
+      "idUser": 6565659,
       "dni": "54321678",
       "name": "Bob",
       "lastName": "Williams",
@@ -208,7 +208,7 @@
       "address": "321 Pine St"
     },
     {
-      "idUsers": 6565454,
+      "idUser": 6565454,
       "dni": "34567812",
       "name": "Sarah",
       "lastName": "Taylor",
@@ -217,7 +217,7 @@
       "address": "567 Maple St"
     },
     {
-      "idUsers": 1465655,
+      "idUser": 1465655,
       "dni": "87654329",
       "name": "Michael",
       "lastName": "Brown",
@@ -226,7 +226,7 @@
       "address": "901 Cedar St"
     },
     {
-      "idUsers": 1701877619270,
+      "idUser": 1701877619270,
       "dni": "32705806",
       "name": "Lohana",
       "lastName": "Orellano",
@@ -245,7 +245,7 @@
       "address": "BOLIVAR 207"
     },
     {
-      "idUsers": 1701883501989,
+      "idUser": 1701883501989,
       "dni": "78945612",
       "name": "GUILLERMO GUSTAVO",
       "lastName": "MEDRANO",
@@ -255,7 +255,7 @@
       "id": 1701880193246
     },
     {
-      "idUsers": 1701887278151,
+      "idUser": 1701887278151,
       "dni": "12345678",
       "name": "GUILLERMO GUSTAVO",
       "lastName": "MEDRANO",
