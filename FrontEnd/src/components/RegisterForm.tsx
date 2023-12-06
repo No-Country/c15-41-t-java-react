@@ -16,8 +16,6 @@ const initialValues: BookPost = {
   image: ''
 }
 
-const mockGenres = ['THRILLER', 'FANTASY', 'ADVENTURE', 'ACTION']
-
 const validationSchema = Yup.object({
   title: Yup.string().required('El titulo es requerido'),
   isbn: Yup.string().required('El isbn es requerido'),
@@ -30,6 +28,7 @@ const validationSchema = Yup.object({
 export default function RegisterForm() {
   const [authors, setAuthors] = useState<Author[]>([])
   const [editorials, setEditorials] = useState<Editorial[]>([])
+  const [mockGenres, setMockGenres] = useState<string[]>([])
   const { fetch } = useUser()
 
   useEffect(() => {
@@ -48,6 +47,16 @@ export default function RegisterForm() {
       setEditorials(data)
     }
     getEditorials().catch(error => {
+      console.log(error)
+    })
+  }, [])
+
+  useEffect(() => {
+    const getGenres = async () => {
+      const data = await fetch('http://localhost:3000/books/genres')
+      setMockGenres(data)
+    }
+    getGenres().catch(error => {
       console.log(error)
     })
   }, [])
@@ -163,8 +172,8 @@ export default function RegisterForm() {
                 Selecciona un genero
               </option>
               {mockGenres.map(genre => (
-                <option key={genre} value={genre}>
-                  {genre.charAt(0) + genre.toLowerCase().slice(1)}
+                <option key={genre} value={genre.toUpperCase()}>
+                  {genre}
                 </option>
               ))}
             </select>

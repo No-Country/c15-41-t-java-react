@@ -21,11 +21,10 @@ const validationSchema = Yup.object({
   idEditorial: Yup.number().min(1, 'Seleccione editorial').required('La editorial es requerida')
 })
 
-const mockGenres = ['THRILLER', 'FANTASY', 'ADVENTURE', 'ACTION']
-
 const EditBook: React.FC<BookProps> = props => {
   const [authors, setAuthors] = useState<Author[]>([])
   const [editorials, setEditorials] = useState<Editorial[]>([])
+  const [mockGenres, setMockGenres] = useState<string[]>([])
   const { fetch } = useUser()
 
   useEffect(() => {
@@ -44,6 +43,16 @@ const EditBook: React.FC<BookProps> = props => {
       setEditorials(data)
     }
     getEditorials().catch(error => {
+      console.log(error)
+    })
+  }, [])
+
+  useEffect(() => {
+    const getGenres = async () => {
+      const data = await fetch('http://localhost:3000/books/genres')
+      setMockGenres(data)
+    }
+    getGenres().catch(error => {
       console.log(error)
     })
   }, [])
@@ -172,8 +181,8 @@ const EditBook: React.FC<BookProps> = props => {
                 Selecciona un genero
               </option>
               {mockGenres.map(genre => (
-                <option key={genre} value={genre}>
-                  {genre.charAt(0) + genre.toLowerCase().slice(1)}
+                <option key={genre} value={genre.toUpperCase()}>
+                  {genre}
                 </option>
               ))}
             </select>
