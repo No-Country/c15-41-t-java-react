@@ -1,5 +1,8 @@
 package c1541tjavareact.library.persistence.entity.enums;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public enum Genre {
     THRILLER("Thriller"),
     FANTASY("Fantasy"),

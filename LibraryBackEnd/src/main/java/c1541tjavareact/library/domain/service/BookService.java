@@ -2,9 +2,12 @@ package c1541tjavareact.library.domain.service;
 
 import c1541tjavareact.library.domain.dto.BookDto;
 import c1541tjavareact.library.domain.repository.BookCrudRepository;
+import c1541tjavareact.library.persistence.entity.enums.Genre;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -34,4 +37,9 @@ public class BookService {
         return bookCrudRepository.delete(idBook);
     }
 
+    public List<String> getBookGenres() {
+        return Arrays.stream(Genre.values())
+                        .map(Genre::getValue)
+                        .toList();
+    }
 }

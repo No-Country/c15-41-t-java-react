@@ -2,9 +2,7 @@ package c1541tjavareact.library.persistence.entity;
 
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -20,6 +18,9 @@ public class BookReturn implements Serializable {
     @Column(name = "id_return")
     private Long idReturn;
 
+    @Column(name = "id_loan",nullable = false)
+    private Long idLoan;
+
     @Column(nullable = false)
     private Boolean status; // TODO en false
 
@@ -31,7 +32,7 @@ public class BookReturn implements Serializable {
 
     @OneToOne
     @JoinColumn(name = "id_loan", nullable = false,
-        referencedColumnName = "id_loan")
+            insertable = false, updatable = false)
     private Loan loan;
 
     @OneToOne(mappedBy = "bookReturn")
