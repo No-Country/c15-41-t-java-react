@@ -2,6 +2,19 @@ import { Tab, Tabs as ReactTabs, TabList, TabPanel } from 'react-tabs'
 import 'react-tabs/style/react-tabs.css'
 import UsersList from '../components/UsersList'
 import UserRegisterForm from '../components/UserRegisterForm'
+import { User } from '../types/types'
+
+const initialValues: User = {
+  idUsers: 0,
+  dni: '',
+  name: '',
+  lastName: '',
+  phoneNumber: '',
+  email: '',
+  address: '',
+  loansDto: [],
+  active: true,
+}
 
 const UsersTabs = () => {
   return (
@@ -21,7 +34,7 @@ const UsersTabs = () => {
         <UsersList />
       </TabPanel>
       <TabPanel>
-        <UserRegisterForm />
+        <UserRegisterForm user={initialValues} setIsModalOpen={() => {}} />
       </TabPanel>
     </ReactTabs>
   )
