@@ -6,7 +6,6 @@ import { Pagination } from '@mui/material'
 import SearchUser from './SearchUser'
 import UserCard from './UserCard'
 
-
 export default function UsersList() {
   const { fetch } = useUser()
   const [users, setUsers] = useState<User[] | []>([])
@@ -62,21 +61,22 @@ export default function UsersList() {
           <tbody>
             {searchResults.map((user, index) => {
               if (index < page * PAGE_SIZE && index >= (page - 1) * PAGE_SIZE) {
-                return <UserRow key={user.idUsers} user={user} refresh={fetchUsers}/>
+                return <UserRow key={user.idUsers} user={user} refresh={fetchUsers} />
               } else {
                 return null
               }
             })}
           </tbody>
         </table>
-        <div className='lg:hidden p-5'>            
-            {searchResults.map((user, index) => {
-              if (index < page * PAGE_SIZE && index >= (page - 1) * PAGE_SIZE) {
-                return <UserCard key={user.idUsers} user={user} refresh={fetchUsers}/>
-              } else {
-                return null
-              }
-            })}</div>
+        <div className="p-5 lg:hidden">
+          {searchResults.map((user, index) => {
+            if (index < page * PAGE_SIZE && index >= (page - 1) * PAGE_SIZE) {
+              return <UserCard key={user.idUsers} user={user} refresh={fetchUsers} />
+            } else {
+              return null
+            }
+          })}
+        </div>
         <div className="justify-self-end pb-8">
           <Pagination
             count={Math.ceil(searchResults.length / PAGE_SIZE)}
