@@ -77,7 +77,7 @@ export default function UsersList() {
             }
           })}
         </div>
-        <div className="justify-self-end pb-8">
+        <div className="mt-4 justify-self-end pb-8">
           <Pagination
             count={Math.ceil(searchResults.length / PAGE_SIZE)}
             variant="outlined"
