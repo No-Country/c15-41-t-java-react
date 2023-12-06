@@ -8,7 +8,7 @@ import { User } from '../types/types'
 interface UserProps {
   user: User
   setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>
-  refresh: () => void
+  refresh?: () => void
 }
 function generateTempId() {
   return new Date().getTime()
@@ -61,7 +61,7 @@ const UserRegisterForm: React.FC<UserProps> = ({ user, setIsModalOpen, refresh }
           }
         }
         await fetch(`http://localhost:3000/users/update/${values.idUser}`, putOptions)
-        refresh()
+        if (refresh) refresh()
         toast.success('El Socio se editó correctamente', {
           duration: 4000,
           position: 'top-center'
