@@ -8,7 +8,12 @@ interface Props {
   refresh: () => void
 }
 
-const DeleteModal: React.FC<Props> = ({ id, setIsModalDeleteOpen, refresh, deleteEntity }: Props) => {
+const DeleteModal: React.FC<Props> = ({
+  id,
+  setIsModalDeleteOpen,
+  refresh,
+  deleteEntity
+}: Props) => {
   const { fetch } = useUser()
   let spanishDeleteEntity: string = ''
   let deleteUrl: string = ''
@@ -28,17 +33,23 @@ const DeleteModal: React.FC<Props> = ({ id, setIsModalDeleteOpen, refresh, delet
     fetch(deleteUrl, {
       method: 'DELETE'
     })
-      .catch(error => {
-        console.error(error)
-      })
       .then(() => {
         refresh()
-        toast.success('Su libro ha sido eliminado', {
+        toast.success(`Su ${spanishDeleteEntity} ha sido eliminado`, {
           duration: 3000,
           position: 'top-center',
           icon: '♻'
         })
       })
+      .catch(error => {
+        toast.error(`Hubo un error eliminando su ${spanishDeleteEntity}`, {
+          duration: 3000,
+          position: 'top-center',
+          icon: '♻'
+        })
+        console.error(error)
+      })
+
     setIsModalDeleteOpen(false)
   }
 
