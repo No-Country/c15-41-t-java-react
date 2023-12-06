@@ -6,7 +6,7 @@ import { useState } from 'react'
 import UserRegisterForm from './UserRegisterForm'
 
 interface UserRowProps {
-  key: User['idUsers']
+  key: User['idUser']
   user: User
   refresh: () => Promise<void>
 }
@@ -19,7 +19,7 @@ export default function UserRow({ user, refresh }: UserRowProps) {
     <>
       <tr>
         <td className="border-[1px] border-x-0 border-solid border-slate-200 text-center">
-          {user.idUsers}
+          {user.idUser}
         </td>
         <td className="border-[1px] border-x-0 border-solid border-slate-200 text-center">
           {user.name}
@@ -54,7 +54,7 @@ export default function UserRow({ user, refresh }: UserRowProps) {
       {isModalDeleteOpen && (
         <div className="fixed inset-0 z-50  bg-white opacity-100">
           <DeleteModal
-            id={user.idUsers}
+            id={user.idUser}
             setIsModalDeleteOpen={setIsModalDeleteOpen}
             deleteEntity="user"
             refresh={refresh}

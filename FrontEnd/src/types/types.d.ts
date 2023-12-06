@@ -16,7 +16,7 @@ export interface Book {
 export type BookPost = Omit<Book, 'editorialDto' | 'authorDto' | 'idBook'>
 
 export interface User {
-  idUsers: number
+  idUser: number
   dni: string
   name: string
   lastName: string

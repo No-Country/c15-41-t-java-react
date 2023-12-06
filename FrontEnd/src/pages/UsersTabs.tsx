@@ -5,7 +5,7 @@ import UserRegisterForm from '../components/UserRegisterForm'
 import { User } from '../types/types'
 
 const initialValues: User = {
-  idUsers: 0,
+  idUser: 0,
   dni: '',
   name: '',
   lastName: '',

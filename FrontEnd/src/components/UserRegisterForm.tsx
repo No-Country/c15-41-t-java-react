@@ -32,11 +32,11 @@ const validationSchema = Yup.object({
 const UserRegisterForm: React.FC<UserProps> = ({ user, setIsModalOpen }: UserProps) => {
   const { fetch } = useUser()
 
-  const isEditMode = !!user.idUsers
+  const isEditMode = !!user.idUser
 
   const { values, errors, handleChange, handleSubmit, resetForm } = useFormik({
     initialValues: {
-      idUsers: isEditMode ? user.idUsers : generateTempId(),
+      idUsers: isEditMode ? user.idUser : generateTempId(),
       dni: user.dni || '',
       name: user.name || '',
       lastName: user.lastName || '',
@@ -49,7 +49,6 @@ const UserRegisterForm: React.FC<UserProps> = ({ user, setIsModalOpen }: UserPro
   })
 
   async function onSubmit(values: FormikValues) {
-    console.log(values)
     try {
       if (isEditMode) {
         // Si estamos en modo edición
@@ -74,7 +73,7 @@ const UserRegisterForm: React.FC<UserProps> = ({ user, setIsModalOpen }: UserPro
             'Content-Type': 'application/json'
           }
         }
-        await fetch('http://localhost:3000/Users', postOptions)
+        await fetch('http://localhost:3000/users/save', postOptions)
         toast.success('El Socio se agregó correctamente', {
           duration: 4000,
           position: 'top-center'
@@ -171,7 +170,7 @@ const UserRegisterForm: React.FC<UserProps> = ({ user, setIsModalOpen }: UserPro
             className="text-base font-bold leading-[normal] text-blueLight"
             htmlFor="editorial"
           >
-            Direccion <span className="text-red-500">*</span>
+            Dirección <span className="text-red-500">*</span>
           </label>
           <div className="relative mb-14 flex h-8 w-full items-center gap-2 border-0 border-b-2 border-solid border-blueDark">
             <input
