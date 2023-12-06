@@ -39,8 +39,7 @@ services:
       context: ./LibraryBackEnd
       dockerfile: Dockerfile
     environment:
-      - DB_HOSTNAME=mysql
-      - DB_PORT=3306
+      - DB_HOSTNAME=mysql:3306
       - DB_USERNAME=juan
       - DB_PASSWORD=perez
       - DB_DATABASE=bibliotech
