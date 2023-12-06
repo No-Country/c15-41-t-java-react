@@ -1,0 +1,70 @@
+services:
+  - type: pserv
+    name: mysql
+    runtime: image
+    autoDeploy: false
+    url: docker.io/_/mysql:8.2
+    disk:
+      name: mysql-data
+      mountPath: /var/lib/mysql
+      sizeGB: 5
+    envVars:
+      - key: MYSQL_DATABASE
+        value: bibliotech
+      - key: MYSQL_USER
+        value: bibliotech
+      - key: MYSQL_PASSWORD
+        generateValue: true
+      - key: MYSQL_ROOT_PASSWORD
+        generateValue: true
+
+  - type: web
+    name: backend
+    runtime: docker
+    autoDeploy: false
+    branch: docker
+    rootDir: ./LibraryBackend
+    envVars:
+      - key: DB_HOSTNAME
+        fromService:
+          type: pserv
+          name: mysql
+          property: host
+      - key: DB_PORT
+        fromService:
+          type: pserv
+          name: mysql
+          property: port
+      - key: DB_DATABASE
+        fromService:
+          type: pserv
+          name: mysql
+          envVarKey: MYSQL_DATABASE
+      - key: DB_USERNAME
+        fromService:
+          type: pserv
+          name: mysql
+          envVarKey: MYSQL_USER
+      - key: DB_PASSWORD
+        fromService:
+          type: pserv
+          name: mysql
+          envVarKey: MYSQL_PASSWORD
+      - key: DB_ROOT_PASSWORD
+        fromService:
+          type: pserv
+          name: mysql
+          envVarKey: MYSQL_ROOT_PASSWORD
+
+  - type: web
+    name: frontend
+    runtime: docker
+    autoDeploy: false
+    branch: docker
+    rootDir: ./FrontEnd
+    envVars:
+      - key: REACT_APP_API_URL
+        fromService:
+          type: web
+          name: backend
+          property: url
