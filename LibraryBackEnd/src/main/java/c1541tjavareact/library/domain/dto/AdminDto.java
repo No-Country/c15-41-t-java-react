@@ -20,11 +20,11 @@ public class AdminDto {
     private Long idAdmin;
 
     @NotBlank
-    @Pattern(regexp = "^[a-zA-Z ]{3,}$")
+    @Pattern(regexp = "^[a-zA-ZáéíóúÁÉÍÓÚüÜ ]{3,}$")
     private String name;
 
     @NotBlank
-    @Pattern(regexp = "^[a-zA-Z ]{3,}$")
+    @Pattern(regexp = "^[a-zA-ZáéíóúÁÉÍÓÚüÜ ]{3,}$")
     private String lastName;
 
     @NotBlank
