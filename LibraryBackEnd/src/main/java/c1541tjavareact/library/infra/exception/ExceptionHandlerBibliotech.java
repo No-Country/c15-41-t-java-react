@@ -21,20 +21,23 @@ import java.util.Map;
 public class ExceptionHandlerBibliotech {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<List<DataError>> argumentGotcha(MethodArgumentNotValidException exception){
-        var errors=exception.getFieldErrors().stream().map(DataError::new).toList();
+    public ResponseEntity<List<DataError>> handleValidationException(
+            MethodArgumentNotValidException exception){
+        var errors=exception.getFieldErrors()
+                .stream().
+                map(DataError::new)
+                .toList();
         return ResponseEntity.badRequest().body(errors);
     }
 
     @ExceptionHandler(SQLIntegrityConstraintViolationException.class)
-    public ResponseEntity<Map<String, Object>> argumentGotcha2(SQLIntegrityConstraintViolationException exception){
-        System.out.println(exception.getMessage());
-        int first=exception.getMessage().indexOf(" '");
-        int second=exception.getMessage().indexOf("' ");
-        String message= exception.getMessage().substring(first+2,second);
+    public ResponseEntity<Map<String, Object>> handleConstraintViolationException(
+            SQLIntegrityConstraintViolationException exception){
         Map<String, Object> errors = new HashMap<>();
-        errors.put("valorDuplicado", message);
-
+        errors.put("valorDuplicado", exception.getMessage().substring(
+                exception.getMessage().indexOf(" '") + 2,
+                exception.getMessage().indexOf("' ")
+        ));
         return ResponseEntity.badRequest().body(errors);
     }
 
