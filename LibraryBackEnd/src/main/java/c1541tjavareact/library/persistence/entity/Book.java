@@ -42,11 +42,11 @@ public class Book implements Serializable {
     @OneToMany(mappedBy = "book")
     private List<Loan> loanList;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_editorial", nullable = false, insertable = false, updatable = false)
     private Editorial editorial;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_author", nullable = false, insertable = false, updatable = false)
     private Author author;
 

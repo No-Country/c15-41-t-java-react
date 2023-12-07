@@ -34,17 +34,17 @@ public class Loan implements Serializable {
     @Column(name = "id_user")
     private Long idUser;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_book",nullable = false,
                 insertable = false, updatable = false)
     private Book book;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_admin",nullable = false,
                 insertable = false, updatable = false)
     private Admin admin;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_user",nullable = false,
                 insertable = false, updatable = false)
     private User user;
