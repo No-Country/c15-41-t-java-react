@@ -17,11 +17,18 @@ const initialValues: BookPost = {
 }
 
 const mockGenres = ['THRILLER', 'FANTASY', 'ADVENTURE', 'ACTION']
+const ISBN_REGEX = /^(?:ISBN(?:-1[03])?:?\ )?(?=[0-9X]{10}$|(?=(?:[0-9]+[-\ ]){3})[-\ 0-9X]{13}$|97[89][0-9]{10}$|(?=(?:[0-9]+[-\ ]){4})[-\ 0-9]{17}$)(?:97[89][- ]?[0-9]{1,5}[- ]?[0-9]+[- ]?[0-9]+[- ]?[0-9X]|(?:[0-9]+[-\ ]){3}[0-9X][- ]?[0-9]+[- ]?[0-9]+[- ]?[0-9X])$/
 
 const validationSchema = Yup.object({
-  title: Yup.string().required('El titulo es requerido'),
-  isbn: Yup.string().required('El isbn es requerido'),
-  quantity: Yup.number().min(1, 'El valor debe ser mayor a 0').required('Cantidad es requerida'),
+  title: Yup.string().required('El titulo es requerido')
+    .matches(/^[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ\s]+$/, 'Ingresa un nombre válido')
+    .max(50, 'El nombre es demasiado extenso'),
+  isbn: Yup.string().required('El isbn es requerido')
+    .matches(ISBN_REGEX, 'El ISBN no es valido'),
+  quantity: Yup.number().required('Cantidad es requerida')
+  .min(1, 'El valor debe ser mayor a 0')
+  .max(1000, 'El maximo que puede ingresar son 1000 copias')
+  .typeError('El valor debe ser numérico'),
   idAuthor: Yup.number().min(1, 'Seleccione autor').required('El autor es requerido'),
   genre: Yup.string().required('El genero es requerido'),
   idEditorial: Yup.number().min(1, 'Seleccione editorial').required('La editorial es requerida')
@@ -76,6 +83,7 @@ export default function RegisterForm() {
       <div className="mx-auto w-full rounded-[40px] bg-grey  sm:max-w-[70%]">
         <h2 className="mx-auto w-10/12 py-8 text-2xl font-bold leading-normal text-blueDark">
           Registro de un nuevo libro
+          <span className="text-sm text-red-500"> (Los campos con * son obligatorios) </span>
         </h2>
         <form className="mx-auto w-10/12" onSubmit={handleSubmit}>
           <label className="text-base font-bold leading-[normal] text-blueLight " htmlFor="title">
