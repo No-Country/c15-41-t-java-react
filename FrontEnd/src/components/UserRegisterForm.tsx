@@ -100,7 +100,7 @@ const UserRegisterForm: React.FC<UserProps> = ({ user, setIsModalOpen, refresh }
           {user.name
             ? `Actualización del Socio: ${user.name} ${user.lastName}`
             : 'Registro de un Socio Nuevo'}
-          <span className="text-sm text-red-500"> (Los campos con * son obligatorios) </span>
+          <span className="text-sm text-blueDark"> (Los campos con * son obligatorios) </span>
         </h2>
         <form className="mx-auto w-10/12" onSubmit={handleSubmit}>
           <label className="text-base font-bold leading-[normal] text-blueLight " htmlFor="title">
