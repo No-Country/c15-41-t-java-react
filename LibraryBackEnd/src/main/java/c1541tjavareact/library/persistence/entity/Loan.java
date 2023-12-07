@@ -25,13 +25,13 @@ public class Loan implements Serializable {
     @Column(name = "return_expected_date", nullable = false)
     private LocalDate returnExpectedDate;
 
-    @Column(name = "id_book")
+    @Column(name = "id_book", nullable = false)
     private Long idBook;
 
-    @Column(name = "id_admin")
+    @Column(name = "id_admin", nullable = false)
     private Long idAdmin;
 
-    @Column(name = "id_user")
+    @Column(name = "id_user", nullable = false)
     private Long idUser;
 
     @ManyToOne(fetch = FetchType.LAZY)
