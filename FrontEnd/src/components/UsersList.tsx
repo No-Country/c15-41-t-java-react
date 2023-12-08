@@ -21,7 +21,7 @@ export default function UsersList() {
   async function fetchUsers(): Promise<void> {
     try {
       setFetchError(false)
-      const users = await fetch('http://localhost:3000/users')
+      const users = await fetch('http://localhost:3000/users/all')
       setUsers(users)
       setSearchResults(users)
     } catch (error) {
@@ -36,10 +36,10 @@ export default function UsersList() {
   }, [])
 
   if (fetchError) {
-    return <p> Error cargando usuarios </p>
+    return <p>Error cargando usuarios </p>
   }
   if (users.length === 0) {
-    return <p>Loading</p>
+    return <p className="mt-4">No hay registros</p>
   }
 
   return (
@@ -61,7 +61,7 @@ export default function UsersList() {
           <tbody>
             {searchResults.map((user, index) => {
               if (index < page * PAGE_SIZE && index >= (page - 1) * PAGE_SIZE) {
-                return <UserRow key={user.idUsers} user={user} refresh={fetchUsers} />
+                return <UserRow key={user.idUser} user={user} refresh={fetchUsers} />
               } else {
                 return null
               }
@@ -71,13 +71,13 @@ export default function UsersList() {
         <div className="p-5 shrink lg:hidden">
           {searchResults.map((user, index) => {
             if (index < page * PAGE_SIZE && index >= (page - 1) * PAGE_SIZE) {
-              return <UserCard key={user.idUsers} user={user} refresh={fetchUsers} />
+              return <UserCard key={user.idUser} user={user} refresh={fetchUsers} />
             } else {
               return null
             }
           })}
         </div>
-        <div className="justify-self-end pb-8">
+        <div className="mt-4 justify-self-end pb-8">
           <Pagination
             count={Math.ceil(searchResults.length / PAGE_SIZE)}
             variant="outlined"

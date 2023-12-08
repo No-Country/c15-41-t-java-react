@@ -3,7 +3,13 @@ import type { FormikValues } from 'formik'
 import * as Yup from 'yup'
 import { useUser } from '../context/UserContext'
 import toast from 'react-hot-toast'
+import { User } from '../types/types'
 
+interface UserProps {
+  user: User
+  setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>
+  refresh?: () => void
+}
 function generateTempId() {
   return new Date().getTime()
 }
@@ -20,49 +26,81 @@ const validationSchema = Yup.object({
   email: Yup.string().email('El email no es valido').required('El email es obligatorio'),
   phoneNumber: Yup.string()
     .required('El celular es obligatorio')
-    .matches(/^\d{10}$/, 'Ingresa un número de celular válido')
-    .typeError('Ingresa un número válido'),
+    .matches(/^\d{10}$/, 'Ingresa un número de celular válido'),
   address: Yup.string().required('La dirección es obligatoria')
 })
 
-const UserRegisterForm: React.FC = () => {
+const UserRegisterForm: React.FC<UserProps> = ({ user, setIsModalOpen, refresh }: UserProps) => {
   const { fetch } = useUser()
+
+  const isEditMode = !!user.idUser
 
   const { values, errors, handleChange, handleSubmit, resetForm } = useFormik({
     initialValues: {
-      id: generateTempId(),
-      dni: '',
-      name: '',
-      lastName: '',
-      email: '',
-      phoneNumber: '',
-      address: ''
+      idUser: isEditMode ? user.idUser : generateTempId(),
+      dni: user.dni || '',
+      name: user.name || '',
+      lastName: user.lastName || '',
+      email: user.email || '',
+      phoneNumber: user.phoneNumber || '',
+      address: user.address || ''
     },
     validationSchema,
     onSubmit
   })
 
   async function onSubmit(values: FormikValues) {
-    console.log(values)
     try {
-      const postOptions = {
-        method: 'POST',
-        body: JSON.stringify(values)
+      if (isEditMode) {
+        // Si estamos en modo edición
+        const putOptions = {
+          method: 'PUT',
+          body: JSON.stringify(values),
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        }
+        await fetch(`http://localhost:3000/users/update/${values.idUser}`, putOptions)
+        if (refresh) refresh()
+        toast.success('El Socio se editó correctamente', {
+          duration: 4000,
+          position: 'top-center'
+        })
+      } else {
+        // Si no estamos en modo edición, estamos registrando un nuevo usuario
+        const { idUser, ...rest } = values
+        const postOptions = {
+          method: 'POST',
+          body: JSON.stringify(rest),
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        }
+        await fetch('http://localhost:3000/users/save', postOptions)
+        toast.success('El Socio se agregó correctamente', {
+          duration: 4000,
+          position: 'top-center'
+        })
       }
-      await fetch('http://localhost:3000/Users', postOptions)
+
       resetForm()
-      toast.success('El Socio se agregó correctamente', { duration: 4000, position: 'top-center' })
+      setIsModalOpen(false) // Cerrar el modal después de enviar el formulario
     } catch (error) {
-      toast.error('Error al agregar el Socio', { duration: 4000, position: 'top-center' })
+      toast.error('Error al procesar la solicitud', {
+        duration: 4000,
+        position: 'top-center'
+      })
     }
   }
 
   return (
     <div className="px-2 py-10">
-      <div className="mx-auto w-full rounded-[40px] bg-grey  sm:max-w-[70%]">
+      <div className="mx-auto w-full rounded-[40px] bg-grey  sm:max-w-[70%] sm:max-h[40%]">
         <h2 className="mx-auto w-10/12 py-8 text-2xl font-bold leading-normal text-blueDark">
-          Registro de un Socio Nuevo{' '}
-          <span className="text-sm text-red-500"> (Los campos con * son obligatorios) </span>
+          {user.name
+            ? `Actualización del Socio: ${user.name} ${user.lastName}`
+            : 'Registro de un Socio Nuevo'}
+          <span className="text-sm text-blueDark"> (Los campos con * son obligatorios) </span>
         </h2>
         <form className="mx-auto w-10/12" onSubmit={handleSubmit}>
           <label className="text-base font-bold leading-[normal] text-blueLight " htmlFor="title">
@@ -73,6 +111,7 @@ const UserRegisterForm: React.FC = () => {
               className="w-full border-0 bg-grey text-base font-[400] leading-[normal] text-[#263238] placeholder-[#ABABAB] focus:outline-none"
               name="dni"
               type="text"
+              // disabled={isEditMode}
               placeholder="0"
               value={values.dni}
               onChange={handleChange}
@@ -82,7 +121,7 @@ const UserRegisterForm: React.FC = () => {
             </small>
           </div>
           <label className="text-base font-bold leading-[normal] text-blueLight" htmlFor="quantity">
-            Nombre
+            Nombre <span className="text-red-500">*</span>
           </label>
           <div className="relative mb-14 flex h-8 w-full items-center gap-2 border-0 border-b-2 border-solid border-blueDark">
             <input
@@ -98,7 +137,7 @@ const UserRegisterForm: React.FC = () => {
             </small>
           </div>
           <label className="text-base font-bold leading-[normal] text-blueLight" htmlFor="author">
-            Apellido
+            Apellido <span className="text-red-500">*</span>
           </label>
           <div className="relative mb-14 flex h-8 w-full items-center gap-2 border-0 border-b-2 border-solid border-blueDark">
             <input
@@ -115,7 +154,7 @@ const UserRegisterForm: React.FC = () => {
           </div>
 
           <label className="text-base font-bold leading-[normal] text-blueLight" htmlFor="genre">
-            Celular
+            Celular <span className="text-red-500">*</span>
           </label>
           <div className="relative mb-14 flex h-8 w-full items-center gap-2 border-0 border-b-2 border-solid border-blueDark">
             <input
@@ -134,7 +173,7 @@ const UserRegisterForm: React.FC = () => {
             className="text-base font-bold leading-[normal] text-blueLight"
             htmlFor="editorial"
           >
-            Direccion
+            Dirección <span className="text-red-500">*</span>
           </label>
           <div className="relative mb-14 flex h-8 w-full items-center gap-2 border-0 border-b-2 border-solid border-blueDark">
             <input

@@ -3,21 +3,23 @@ import type { User } from '../types/types'
 import DeleteModal from './DeleteModal'
 import { IoMdClose } from 'react-icons/io'
 import { useState } from 'react'
+import UserRegisterForm from './UserRegisterForm'
 
 interface UserRowProps {
-  key: User['idUsers']
+  key: User['idUser']
   user: User
   refresh: () => Promise<void>
 }
 
 export default function UserRow({ user, refresh }: UserRowProps) {
   const [isModalDeleteOpen, setIsModalDeleteOpen] = useState(false)
+  const [isModalOpen, setIsModalOpen] = useState(false)
 
   return (
     <>
       <tr>
         <td className="border-[1px] border-x-0 border-solid border-slate-200 text-center">
-          {user.idUsers}
+          {user.idUser}
         </td>
         <td className="border-[1px] border-x-0 border-solid border-slate-200 text-center">
           {user.name}
@@ -35,9 +37,10 @@ export default function UserRow({ user, refresh }: UserRowProps) {
           {user.email}
         </td>
         <td className="border-[1px] border-x-0 border-solid border-slate-200  text-center">
-          <div className="text-base hover:cursor-pointer">
+          <div className="text-base hover:cursor-pointer" onClick={() => setIsModalOpen(true)}>
             <IoPencil size={20} />
           </div>
+
           <div
             onClick={() => {
               setIsModalDeleteOpen(true)
@@ -51,7 +54,7 @@ export default function UserRow({ user, refresh }: UserRowProps) {
       {isModalDeleteOpen && (
         <div className="fixed inset-0 z-50  bg-white opacity-100">
           <DeleteModal
-            id={user.idUsers}
+            id={user.idUser}
             setIsModalDeleteOpen={setIsModalDeleteOpen}
             deleteEntity="user"
             refresh={refresh}
@@ -60,6 +63,19 @@ export default function UserRow({ user, refresh }: UserRowProps) {
             className="absolute right-4 top-4 cursor-pointer text-5xl font-semibold text-black hover:scale-125"
             onClick={() => {
               setIsModalDeleteOpen(false)
+            }}
+          >
+            <IoMdClose />
+          </div>
+        </div>
+      )}
+      {isModalOpen && (
+        <div className="absolute inset-0 z-50 bg-white opacity-100">
+          <UserRegisterForm user={user} setIsModalOpen={setIsModalOpen} refresh={refresh} />
+          <div
+            className="absolute right-4 top-4 cursor-pointer text-5xl font-semibold text-black hover:scale-125"
+            onClick={() => {
+              setIsModalOpen(false)
             }}
           >
             <IoMdClose />
