@@ -68,7 +68,7 @@ export default function UsersList() {
             })}
           </tbody>
         </table>
-        <div className="p-5 lg:hidden">
+        <div className="p-5 shrink lg:hidden">
           {searchResults.map((user, index) => {
             if (index < page * PAGE_SIZE && index >= (page - 1) * PAGE_SIZE) {
               return <UserCard key={user.idUsers} user={user} refresh={fetchUsers} />
