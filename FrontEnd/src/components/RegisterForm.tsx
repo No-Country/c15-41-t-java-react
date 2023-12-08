@@ -76,10 +76,11 @@ export default function RegisterForm() {
       <div className="mx-auto w-full rounded-[40px] bg-grey  sm:max-w-[70%]">
         <h2 className="mx-auto w-10/12 py-8 text-2xl font-bold leading-normal text-blueDark">
           Registro de un nuevo libro
+          <span className="text-sm text-red-500"> (Los campos con * son obligatorios) </span>
         </h2>
         <form className="mx-auto w-10/12" onSubmit={handleSubmit}>
           <label className="text-base font-bold leading-[normal] text-blueLight " htmlFor="title">
-            Titulo
+            Titulo <span className="text-red-500">*</span>
           </label>
           <div className="relative mb-14 flex h-8 w-full items-center gap-2 border-0 border-b-2 border-solid border-blueDark">
             <input
@@ -95,7 +96,7 @@ export default function RegisterForm() {
             </small>
           </div>
           <label className="text-base font-bold leading-[normal] text-blueLight " htmlFor="isbn">
-            ISBN
+            ISBN <span className="text-red-500">*</span>
           </label>
           <div className="relative mb-14 flex h-8 w-full items-center gap-2 border-0 border-b-2 border-solid border-blueDark">
             <input
@@ -111,7 +112,7 @@ export default function RegisterForm() {
             </small>
           </div>
           <label className="text-base font-bold leading-[normal] text-blueLight" htmlFor="quantity">
-            Cantidad
+            Cantidad <span className="text-red-500">*</span>
           </label>
           <div className="relative mb-14 flex h-8 w-full items-center gap-2 border-0 border-b-2 border-solid border-blueDark">
             <input
@@ -127,7 +128,7 @@ export default function RegisterForm() {
             </small>
           </div>
           <label className="text-base font-bold leading-[normal] text-blueLight" htmlFor="idAuthor">
-            Autor
+            Autor <span className="text-red-500">*</span>
           </label>
           <div className="relative mb-14 flex h-8 w-full items-center gap-2 border-0 border-b-2 border-solid border-blueDark">
             <select
@@ -150,7 +151,7 @@ export default function RegisterForm() {
             </small>
           </div>
           <label className="text-base font-bold leading-[normal] text-blueLight" htmlFor="genre">
-            Género
+            Género <span className="text-red-500">*</span>
           </label>
           <div className="relative mb-14 flex h-8 w-full items-center gap-2 border-0 border-b-2 border-solid border-blueDark">
             <select
@@ -176,7 +177,7 @@ export default function RegisterForm() {
             className="text-base font-bold leading-[normal] text-blueLight"
             htmlFor="idEditorial"
           >
-            Editorial
+            Editorial <span className="text-red-500">*</span>
           </label>
           <div className="relative mb-14 flex h-8 w-full items-center gap-2 border-0 border-b-2 border-solid border-blueDark">
             <select
