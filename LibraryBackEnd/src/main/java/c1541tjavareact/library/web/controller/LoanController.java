@@ -49,7 +49,7 @@ public class LoanController {
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Loan> deleteLoan(@PathVariable("id") Long idLoan){//TODO
         if(loanService.delete(idLoan)){
-            return ResponseEntity.ok().build();
+            return ResponseEntity.noContent().build();
         }
         return ResponseEntity.notFound().build();
     }
