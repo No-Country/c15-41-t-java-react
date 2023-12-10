@@ -5,6 +5,7 @@ import type { User } from '../types/types'
 import { Pagination } from '@mui/material'
 import SearchUser from './SearchUser'
 import UserCard from './UserCard'
+import Spinner from './Spinner'
 
 export default function UsersList() {
   const { fetch } = useUser()
@@ -13,6 +14,7 @@ export default function UsersList() {
   const [page, setPage] = useState(1)
   const PAGE_SIZE = 4
   const [searchResults, setSearchResults] = useState<User[] | []>([])
+  const [isLoading, setIsLoading] = useState<boolean>(false)
 
   const handleSearchResults = (results: any) => {
     setSearchResults(results)
@@ -20,6 +22,7 @@ export default function UsersList() {
 
   async function fetchUsers(): Promise<void> {
     try {
+      setIsLoading(true)
       setFetchError(false)
       const users = await fetch('http://localhost:3000/users/all')
       setUsers(users)
@@ -27,6 +30,8 @@ export default function UsersList() {
     } catch (error) {
       console.error(error)
       setFetchError(true)
+    } finally {
+      setIsLoading(false)
     }
   }
   useEffect(() => {
@@ -45,6 +50,8 @@ export default function UsersList() {
   return (
     <div>
       <SearchUser allUsers={users} onSearchResults={handleSearchResults} setPage={setPage} />
+      {isLoading? <Spinner />
+      :
       <div className="min-h-64 my-10 flex flex-col items-center justify-evenly">
         <table className="min-w-full  table-auto border-collapse rounded border-[1px] border-solid border-slate-800 max-lg:hidden">
           <thead className="p-10">
@@ -90,6 +97,7 @@ export default function UsersList() {
           />
         </div>
       </div>
+}
     </div>
   )
 }

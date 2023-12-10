@@ -16,19 +16,19 @@ const initialValues: BookPost = {
   image: ''
 }
 
-const ISBN_REGEX =
-  /^(?:ISBN(?:-1[03])?:?\ )?(?=[0-9X]{10}$|(?=(?:[0-9]+[-\ ]){3})[-\ 0-9X]{13}$|97[89][0-9]{10}$|(?=(?:[0-9]+[-\ ]){4})[-\ 0-9]{17}$)(?:97[89][- ]?[0-9]{1,5}[- ]?[0-9]+[- ]?[0-9]+[- ]?[0-9X]|(?:[0-9]+[-\ ]){3}[0-9X][- ]?[0-9]+[- ]?[0-9]+[- ]?[0-9X])$/
+const ISBN_REGEX =/^(?:-1[03])?:?(?=[0-9X]{10}$|(?=(?:[0-9]+-){3})[-0-9X]{13}$|97[89][0-9]{10}$|(?=(?:[0-9]+-){4})[-0-9]{17}$)(?:97[89]-)?[0-9]{1,5}-[0-9]+-[0-9]+-[0-9X]$/
 
 const validationSchema = Yup.object({
   title: Yup.string()
     .required('El titulo es requerido')
-    .matches(/^[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ\s]+$/, 'Ingresa un nombre válido')
+    .matches(/^[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ0-9\s]+$/, 'Ingresa un nombre válido')
+    .min(3, 'El nombre es demasiado corto')
     .max(50, 'El nombre es demasiado extenso'),
   isbn: Yup.string().required('El isbn es requerido').matches(ISBN_REGEX, 'El ISBN no es valido'),
   quantity: Yup.number()
     .required('Cantidad es requerida')
     .min(1, 'El valor debe ser mayor a 0')
-    .max(1000, 'El maximo que puede ingresar son 1000 copias')
+    .max(100, 'El maximo que puede ingresar son 1000 copias')
     .typeError('El valor debe ser numérico'),
   idAuthor: Yup.number().min(1, 'Seleccione autor').required('El autor es requerido'),
   genre: Yup.string().required('El genero es requerido'),
@@ -122,7 +122,7 @@ export default function RegisterForm() {
               className="w-full border-0 bg-grey text-base font-[400] leading-[normal] text-[#263238] placeholder-[#ABABAB] focus:outline-none"
               name="isbn"
               type="text"
-              placeholder="Ingresá el isbn"
+              placeholder="ISBN 13: 978-0-596-52068-7 - ISBN 10: 0-321-48410-7 "
               value={values.isbn}
               onChange={handleChange}
             />
