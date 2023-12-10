@@ -43,3 +43,7 @@
   border-left: 15px solid transparent;
   z-index: 10;
 }
+
+.increase-scale:hover {
+  transform: scale(110%);
+}

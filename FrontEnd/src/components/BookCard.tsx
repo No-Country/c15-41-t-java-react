@@ -23,6 +23,7 @@ const BookCard: React.FC<Props> = ({
 }) => {
   const [isModalOpen, setIsModalOpen] = React.useState(false)
   const [isModalDeleteOpen, setIsModalDeleteOpen] = React.useState(false)
+  const [isModalDetails, setIsModalDetails] = React.useState(false)
   const bookData: Book = {
     idBook,
     image,
@@ -38,39 +39,44 @@ const BookCard: React.FC<Props> = ({
 
   return (
     <div>
-      <div className="flex h-full justify-between gap-3 border-0 border-b border-solid border-black p-3">
-        <div className="bg-cover">
-          <img
-            className="h-[145px] w-[95px] shadow-lg"
-            src={image ?? '/sample/image3.png'}
-            alt={title}
-          />
-        </div>
-        <div className="xs:text-sm flex h-auto w-full flex-col lg:gap-2">
-          <h3 className="text-lg text-blueLight"> Titulo: {title}</h3>
-          <p className="">
-            <span className="font-bold text-black">Autor: </span>
-            {`${authorDto.name}  ${authorDto.lastName}`}
-          </p>
-          <p>
-            <span className="font-bold text-black">Genero: </span>
-            {genre.charAt(0) + genre.toLowerCase().slice(1)}
-          </p>
-          <p>
-            <span className="font-bold text-black">Editorial: </span>
-            {editorialDto.name}
-          </p>
+      <div className="flex h-full justify-between gap-3 border-0 border-b border-solid border-black p-3 ">
+        <div
+          className="flex h-full w-full cursor-pointer justify-between gap-3 hover:shadow-xl "
+          onClick={() => setIsModalDetails(true)}
+        >
+          <div className="bg-cover">
+            <img
+              className="h-[145px] w-[95px] shadow-lg "
+              src={image ?? '/sample/image3.png'}
+              alt={title}
+            />
+          </div>
+          <div className="xs:text-sm flex h-auto w-full flex-col lg:gap-2">
+            <h3 className="text-lg text-blueLight"> Titulo: {title}</h3>
+            <p className="">
+              <span className="font-bold text-black">Autor: </span>
+              {`${authorDto.name}  ${authorDto.lastName}`}
+            </p>
+            <p>
+              <span className="font-bold text-black">Genero: </span>
+              {genre.charAt(0) + genre.toLowerCase().slice(1)}
+            </p>
+            <p>
+              <span className="font-bold text-black">Editorial: </span>
+              {editorialDto.name}
+            </p>
+          </div>
         </div>
         <div className="flex flex-col align-middle">
           <div
-            className="hover:cursor-pointer"
+            className="increase-scale hover:cursor-pointer"
             onClick={() => {
               setIsModalOpen(true)
             }}
           >
             <img src={imgEditar} alt="icono editar" />
           </div>
-          <div className="hover:cursor-pointer">
+          <div className="increase-scale hover:cursor-pointer">
             <img
               src={imgDelete}
               alt="icono eliminar"
@@ -90,7 +96,7 @@ const BookCard: React.FC<Props> = ({
             refresh={refresh}
           />
           <div
-            className="absolute right-4 top-4 cursor-pointer text-5xl font-semibold text-black hover:scale-125"
+            className="increase-scale absolute right-4 top-4 cursor-pointer text-5xl font-semibold text-black"
             onClick={() => {
               setIsModalOpen(false)
             }}
@@ -108,12 +114,59 @@ const BookCard: React.FC<Props> = ({
             refresh={refresh}
           />
           <div
-            className="absolute right-4 top-4 cursor-pointer text-5xl font-semibold text-black hover:scale-125"
+            className="increase-scale absolute right-4 top-4 cursor-pointer text-5xl font-semibold text-black"
             onClick={() => {
               setIsModalDeleteOpen(false)
             }}
           >
             <IoMdClose />
+          </div>
+        </div>
+      )}
+      {isModalDetails && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-white">
+          <div className="relative flex h-full w-11/12 flex-row items-center justify-center">
+            <div className="flex flex-col items-center rounded-xl border-[1px] border-solid border-[#c6e9ff] bg-[#0A7ABF] bg-opacity-5 p-6 shadow-2xl">
+              <div className="bg-cover">
+                <img
+                  className="h-[145px] w-[95px] shadow-lg "
+                  src={image ?? '/sample/image3.png'}
+                  alt={title}
+                />
+              </div>
+              <div className="xs:text-sm flex h-auto w-full flex-col lg:gap-2">
+                <h3 className="text-lg text-blueLight"> Titulo: {title}</h3>
+                <p className="">
+                  <span className="font-bold text-black">Autor: </span>
+                  {`${authorDto.name}  ${authorDto.lastName}`}
+                </p>
+                <p>
+                  <span className="font-bold text-black">Genero: </span>
+                  {genre.charAt(0) + genre.toLowerCase().slice(1)}
+                </p>
+                <p>
+                  <span className="font-bold text-black">Editorial: </span>
+                  {editorialDto.name}
+                </p>
+                <p>
+                  <span className="font-bold text-black">ISBN: </span>
+                  {isbn}
+                </p>
+                <br />
+                <p>
+                  <span className="font-bold text-black">Cantidad: </span>
+                  {quantity}
+                </p>
+              </div>
+            </div>
+            <div
+              className="increase-scale absolute right-0 top-2 cursor-pointer text-5xl font-semibold text-black"
+              onClick={() => {
+                setIsModalDetails(false)
+              }}
+            >
+              <IoMdClose />
+            </div>
           </div>
         </div>
       )}

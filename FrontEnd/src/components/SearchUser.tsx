@@ -65,7 +65,7 @@ const SearchUser: React.FC<SearchUserProps> = ({ allUsers, onSearchResults, setP
         </button>
         <div
           id="search-help"
-          className="absolute right-0 top-14 z-10 hidden w-[50vw] rounded-md bg-[#0A7ABF] p-4 text-white shadow-xl group-hover:block min-[750px]:w-[25vw]"
+          className="absolute right-0 top-14 z-10 hidden w-[60vw] rounded-md bg-[#0A7ABF] p-4 text-white shadow-xl group-hover:block min-[750px]:w-[35vw]"
         >
           <p>
             Puede escribir las palabras de su búsqueda en
