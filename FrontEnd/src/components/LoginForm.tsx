@@ -18,10 +18,20 @@ const initialValues = {
 }
 
 const validationSchema = Yup.object({
-  email: Yup.string().email('El email no es valido').required('El email es requerido'),
+  email: Yup.string()
+    .email('El email no es valido')
+    .required('El email es obligatorio')
+    .matches(
+      /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.(com|co|es|it|net|org|gov|edu|mil|io|xyz|info|biz|mx|ar)$/,
+      'El email no es válido'
+    ),
   password: Yup.string()
     .min(8, 'La contraseña es muy corta')
     .max(20, '20 carateres  maximo')
+    .matches(
+      /^(?=.*[A-Z])(?=.*\d)[a-zA-Z0-9.!@#$&*%_\-=]+$/,
+      'La contraseña debe tener una Mayuscula y al menos  un numero'
+    )
     .required('La contraseña es requerida')
 })
 
