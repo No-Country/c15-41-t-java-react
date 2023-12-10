@@ -65,7 +65,9 @@ const BookCard: React.FC<Props> = ({
               <span className="font-bold text-black">Editorial: </span>
               {editorialDto.name}
             </p>
+            <p className='text-blueDark font-bold'>Cantidad disponible de copias: <span className='font-normal'>{quantity}</span></p>
           </div>
+        
         </div>
         <div className="flex flex-col align-middle">
           <div
@@ -170,6 +172,7 @@ const BookCard: React.FC<Props> = ({
           </div>
         </div>
       )}
+      
     </div>
   )
 }
