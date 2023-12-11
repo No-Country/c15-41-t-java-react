@@ -27,7 +27,9 @@ public class LoanController {
     }
     @PostMapping("/save")
     public ResponseEntity<?> save(@RequestBody @Valid LoanDto loanDto) {
-        return new ResponseEntity<>(loanService.save(loanDto), HttpStatus.CREATED);
+
+            return new ResponseEntity<>(loanService.save(loanDto), HttpStatus.CREATED);
+
     }
 
     @GetMapping("/{id}")

@@ -1,18 +1,24 @@
 package c1541tjavareact.library.persistence.crud;
 
+import c1541tjavareact.library.domain.dto.BookDto;
 import c1541tjavareact.library.domain.dto.LoanDto;
 import c1541tjavareact.library.domain.repository.LoanCrudRepository;
 import c1541tjavareact.library.domain.repository.LoanRepository;
+import c1541tjavareact.library.infra.exception.BookException;
 import c1541tjavareact.library.persistence.entity.Loan;
 import c1541tjavareact.library.persistence.mapper.LoanDaoMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @Repository
 public class LoanCrudRepositoryImpl implements LoanCrudRepository {
+
+    @Autowired
+    private BookCrudRepositoryImpl bookCrudRepository;
     
     @Autowired
     private LoanRepository loanRepository;
@@ -28,7 +34,26 @@ public class LoanCrudRepositoryImpl implements LoanCrudRepository {
 
     @Override
     public LoanDto save(LoanDto loanDto) {
+
+
         Loan loan = loanDaoMapper.toLoan(loanDto);
+
+        Optional<BookDto> bookDto = bookCrudRepository.getBook(loanDto.getIdBook());
+
+        if(bookDto.isPresent()){
+
+            if(bookDto.get().getQuantity() > 1){
+                bookDto.get().setQuantity(bookDto.get().getQuantity() - 1);
+                bookCrudRepository.save(bookDto.get());
+            } else {
+
+                throw new BookException("No hay suficientes libros, para realizar un prestamo");
+
+            }
+
+        }
+
+
         return loanDaoMapper.toLoanDto(loanRepository.save(loan));
     }
 
