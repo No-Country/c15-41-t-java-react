@@ -1,3 +1,4 @@
+/*
 package c1541tjavareact.library.persistence.mapper;
 
 import c1541tjavareact.library.domain.dto.BookReturnDto;
@@ -22,3 +23,4 @@ public interface BookReturnDaoMapper {
     BookReturn toBookReturn(BookReturnDto bookReturnDto);
 
 }
+*/

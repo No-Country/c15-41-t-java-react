@@ -1,3 +1,4 @@
+/*
 package c1541tjavareact.library.domain.repository;
 
 import c1541tjavareact.library.domain.dto.BookReturnDto;
@@ -18,3 +19,4 @@ public interface BookReturnCrudRepository {
 
     Boolean delete(Long idBookReturn);
 }
+*/

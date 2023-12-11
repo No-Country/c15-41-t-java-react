@@ -1,4 +1,4 @@
-package c1541tjavareact.library.persistence.crud;
+/*package c1541tjavareact.library.persistence.crud;
 
 import c1541tjavareact.library.domain.dto.BookReturnDto;
 import c1541tjavareact.library.domain.repository.BookReturnCrudRepository;
@@ -64,3 +64,4 @@ public class BookReturnCrudRepositoryImpl implements BookReturnCrudRepository {
         return false;
     }
 }
+*/

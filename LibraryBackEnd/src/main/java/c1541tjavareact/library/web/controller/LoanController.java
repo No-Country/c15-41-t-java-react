@@ -1,7 +1,6 @@
 package c1541tjavareact.library.web.controller;
 
 import c1541tjavareact.library.domain.dto.LoanDto;
-import c1541tjavareact.library.domain.service.BookReturnService;
 import c1541tjavareact.library.domain.service.LoanService;
 import c1541tjavareact.library.persistence.entity.Loan;
 import jakarta.validation.Valid;
@@ -17,9 +16,6 @@ import java.util.List;
 public class LoanController {
     @Autowired
     private LoanService loanService;
-
-    @Autowired
-    private BookReturnService bookReturnService;
 
     @GetMapping("/all")
     public ResponseEntity<List<LoanDto>> getAll() {

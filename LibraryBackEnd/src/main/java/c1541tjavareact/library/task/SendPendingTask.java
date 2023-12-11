@@ -1,11 +1,8 @@
 package c1541tjavareact.library.task;
 
-import c1541tjavareact.library.domain.dto.BookReturnDto;
 import c1541tjavareact.library.domain.dto.LoanDto;
 import c1541tjavareact.library.domain.dto.UserDto;
-import c1541tjavareact.library.domain.service.BookReturnService;
 import c1541tjavareact.library.domain.service.LoanService;
-import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
@@ -21,8 +18,7 @@ public class SendPendingTask {
 
     @Autowired
     private LoanService loanService;
-    @Autowired
-    private BookReturnService bookReturnService;
+
     @Autowired
     private JavaMailSender javaMailSender;
 

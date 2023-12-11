@@ -1,3 +1,4 @@
+/*
 package c1541tjavareact.library.domain.dto;
 
 import jakarta.validation.constraints.NotBlank;
@@ -28,3 +29,4 @@ public class BookReturnDto {
 
     private PendingDto pendingDto;
 }
+*/
