@@ -25,6 +25,9 @@ public class Loan implements Serializable {
     @Column(name = "return_expected_date", nullable = false)
     private LocalDate returnExpectedDate;
 
+    @Column(name = "return_effective_date")
+    private LocalDate returnEffectiveDate;
+
     @Column(name = "id_book", nullable = false)
     private Long idBook;
 
@@ -50,7 +53,6 @@ public class Loan implements Serializable {
     private User user;
 
     @OneToOne(mappedBy = "loan")
-    private BookReturn bookReturn;
-
+    private Pending pending;
 
 }
