@@ -14,6 +14,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * @author jdmon on 10/12/2023
  * @project LibraryBackEnd
@@ -29,7 +32,7 @@ public class AuthController {
         this.tokenService = tokenService;
     }
     @PostMapping("/login")
-    public ResponseEntity<AuthDto> authenticateUser(
+    public ResponseEntity<Object> authenticateUser(
             @RequestBody @Valid LoginDto loginDto){
         Authentication authToken = new UsernamePasswordAuthenticationToken(
                 loginDto.getUserName(),
@@ -38,15 +41,14 @@ public class AuthController {
         try{
             var adminAuthenticated = authenticationManager.authenticate(authToken);
             var jwtToken = tokenService.generateToken((Admin) adminAuthenticated.getPrincipal());
-            return ResponseEntity.ok(new AuthDto(jwtToken));
+            Long idAdmin = ((Admin) adminAuthenticated.getPrincipal()).getIdAdmin();
+            String name = ((Admin) adminAuthenticated.getPrincipal()).getName();
+            return ResponseEntity.ok(new AuthDto(jwtToken,idAdmin,name));
         } catch (RuntimeException ignore){
-            return ResponseEntity.badRequest().body(
-                    new AuthDto("Invalid Credentials")
-            );
+            Map<String,String> responseError = new HashMap<>();
+            responseError.put("message","Credenciales invalidas");
+            return ResponseEntity.badRequest().body(responseError);
         }
 
     }
-
-
-
 }

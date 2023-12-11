@@ -13,4 +13,6 @@ import lombok.Setter;
 @AllArgsConstructor
 public class AuthDto {
     String jwtToken;
+    Long idAdmin;
+    String name;
 }

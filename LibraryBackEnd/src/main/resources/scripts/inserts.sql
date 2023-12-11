@@ -27,3 +27,5 @@ INSERT IGNORE INTO books (id_book, title, isbn, genre, quantity, id_author, id_e
 INSERT IGNORE INTO books (id_book, title, isbn, genre, quantity, id_author, id_editorial) VALUES (4, 'Martín Fierro', '978-9871135477', 'ADVENTURE', 8, 4, 4);
 INSERT IGNORE INTO books (id_book, title, isbn, genre, quantity, id_author, id_editorial) VALUES (5, 'Don Quijote de la Mancha', '978-8424172629', 'ACTION', 12, 5, 5);
 INSERT IGNORE INTO books (id_book, title, isbn, genre, quantity, id_author, id_editorial) VALUES (6, 'Fahrenheit 451', '978-8490321478', 'Fantasy', 6, 1, 2);
+
+INSERT IGNORE INTO admins (id_admin, name, last_name, email, password) VALUES (1, 'José', 'Lara', 'jose.lara@gmail.com', '$2a$10$nFqAPEAI/QjNNunc1q3yt.jm8WKW/iNU9.ee0WamKdwqLnp2Ai4jK');
