@@ -20,7 +20,7 @@ const Home: React.FC = () => {
         <p className="text-justify text-lg">
           En Bibliotech vas a poder agregar y actualizar fácilmente libros, buscar en el catálogo
           por género, editorial y título, registrar préstamos con fechas precisas, gestionar
-          usuarios, editar sus datos y enviarles recordatorios automáticos para devoluciones.
+          miembros, editar sus datos y enviarles recordatorios automáticos para devoluciones.
         </p>
       </div>
     </div>
