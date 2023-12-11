@@ -24,7 +24,7 @@ export default function UsersList() {
     try {
       setIsLoading(true)
       setIsError(false)
-      const users = await fetch('http://localhost:3000/users')
+      const users = await fetch('http://localhost:3000/users/all')
       setUsers(users)
       setSearchResults(users)
     } catch (error) {
@@ -46,7 +46,7 @@ export default function UsersList() {
       {isLoading ? (
         <Spinner />
       ) : isError ? (
-        <p className="p-10 text-center">Error cargando usuarios</p>
+        <p className="p-10 text-center">Error cargando miembros</p>
       ) : (
         <div className="min-h-64 my-10 flex flex-col items-center justify-evenly">
           <table className="min-w-full  table-auto border-collapse rounded border-[1px] border-solid border-slate-800 max-lg:hidden">

@@ -105,7 +105,8 @@ const EditBook: React.FC<BookProps> = props => {
     <div className="bg-white px-2 py-10">
       <div className="mx-auto w-full rounded-[40px] bg-grey  sm:max-w-[70%]">
         <h2 className="mx-auto w-10/12 py-8 text-2xl font-bold leading-normal text-blueDark">
-          Edicion del libro {props.title} <span className="text-sm text-red-500"> (Los campos con * son obligatorios) </span>
+          Edicion del libro {props.title}{' '}
+          <span className="text-sm text-red-500"> (Los campos con * son obligatorios) </span>
         </h2>
         <form className="mx-auto w-10/12 " onSubmit={handleSubmit}>
           <label className="text-base font-bold leading-[normal] text-blueLight " htmlFor="title">
