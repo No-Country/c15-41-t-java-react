@@ -16,7 +16,8 @@ const initialValues: BookPost = {
   image: ''
 }
 
-const ISBN_REGEX =/^(?:-1[03])?:?(?=[0-9X]{10}$|(?=(?:[0-9]+-){3})[-0-9X]{13}$|97[89][0-9]{10}$|(?=(?:[0-9]+-){4})[-0-9]{17}$)(?:97[89]-)?[0-9]{1,5}-[0-9]+-[0-9]+-[0-9X]$/
+const ISBN_REGEX =
+  /^(?:-1[03])?:?(?=[0-9X]{10}$|(?=(?:[0-9]+-){3})[-0-9X]{13}$|97[89][0-9]{10}$|(?=(?:[0-9]+-){4})[-0-9]{17}$)(?:97[89]-)?[0-9]{1,5}-[0-9]+-[0-9]+-[0-9X]$/
 
 const validationSchema = Yup.object({
   title: Yup.string()
@@ -35,7 +36,7 @@ const validationSchema = Yup.object({
   idEditorial: Yup.number().min(1, 'Seleccione editorial').required('La editorial es requerida')
 })
 
-export default function RegisterForm() {
+export default function RegisterForm({ onSuccess }: { onSuccess: () => void }) {
   const [authors, setAuthors] = useState<Author[]>([])
   const [editorials, setEditorials] = useState<Editorial[]>([])
   const [mockGenres, setMockGenres] = useState<string[]>([])
@@ -86,6 +87,7 @@ export default function RegisterForm() {
       await fetch('http://localhost:3000/books/save', postOptions)
       resetForm()
       toast.success('Su libro se agregó correctamente', { duration: 4000, position: 'top-center' })
+      onSuccess()
     } catch (error) {
       toast.error('Error al agregar el libro', { duration: 4000, position: 'top-center' })
     }

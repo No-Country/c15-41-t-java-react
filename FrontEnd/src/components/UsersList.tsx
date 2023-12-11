@@ -24,7 +24,7 @@ export default function UsersList() {
     try {
       setIsLoading(true)
       setIsError(false)
-      const users = await fetch('http://localhost:3000/users')
+      const users = await fetch('http://localhost:3000/users/all')
       setUsers(users)
       setSearchResults(users)
     } catch (error) {

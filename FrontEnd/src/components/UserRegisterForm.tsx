@@ -9,6 +9,7 @@ interface UserProps {
   user: User
   setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>
   refresh?: () => void
+  onSuccess?: () => void
 }
 function generateTempId() {
   return new Date().getTime()
@@ -24,16 +25,24 @@ const validationSchema = Yup.object({
     .required('El apellido es obligatorio')
     .matches(/^[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ'\s]+$/, 'Ingresa un nombre válido'),
   email: Yup.string()
-  .email('El email no es valido').required('El email es obligatorio')
-  .matches(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.(com|co|es|it|net|org|gov|edu|mil|io|xyz|info|biz|mx|ar)$/,
-    'El email no es válido'),
+    .email('El email no es valido')
+    .required('El email es obligatorio')
+    .matches(
+      /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.(com|co|es|it|net|org|gov|edu|mil|io|xyz|info|biz|mx|ar)$/,
+      'El email no es válido'
+    ),
   phoneNumber: Yup.string()
     .required('El celular es obligatorio')
     .matches(/^\d{10}$/, 'Ingresa un número de celular válido'),
   address: Yup.string().required('La dirección es obligatoria')
 })
 
-const UserRegisterForm: React.FC<UserProps> = ({ user, setIsModalOpen, refresh }: UserProps) => {
+const UserRegisterForm: React.FC<UserProps> = ({
+  user,
+  setIsModalOpen,
+  refresh,
+  onSuccess
+}: UserProps) => {
   const { fetch } = useUser()
 
   const isEditMode = !!user.idUser
@@ -65,6 +74,7 @@ const UserRegisterForm: React.FC<UserProps> = ({ user, setIsModalOpen, refresh }
         }
         await fetch(`http://localhost:3000/users/update/${values.idUser}`, putOptions)
         if (refresh) refresh()
+        if (onSuccess) onSuccess()
         toast.success('El Socio se editó correctamente', {
           duration: 4000,
           position: 'top-center'

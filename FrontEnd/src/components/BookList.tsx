@@ -18,7 +18,7 @@ const BookList: React.FC = () => {
   const getBooks = useCallback(async () => {
     try {
       setIsLoading(true)
-      const books = await fetch('http://localhost:3000/books')
+      const books = await fetch('http://localhost:3000/books/all')
       setBooks(books)
       setSearchResults(books)
     } catch (error) {
@@ -45,7 +45,7 @@ const BookList: React.FC = () => {
       {isLoading ? (
         <Spinner />
       ) : isError ? (
-        <p className="text-center p-10">Error cargando libros</p>
+        <p className="p-10 text-center">Error cargando libros</p>
       ) : searchResults.length > 0 ? (
         <div className="grid w-full items-center justify-center gap-x-14 gap-y-5 py-5 align-middle lg:grid-cols-2">
           {searchResults.map((book, index) => {
@@ -57,7 +57,7 @@ const BookList: React.FC = () => {
           })}
         </div>
       ) : (
-        <p className="text-center p-10">No se encontraron coincidencias</p>
+        <p className="p-10 text-center">No se encontraron coincidencias</p>
       )}
       <div className="justify-self-end pb-8">
         <Pagination
