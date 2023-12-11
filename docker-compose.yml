@@ -43,6 +43,7 @@ services:
       - DB_USERNAME=juan
       - DB_PASSWORD=perez
       - DB_DATABASE=bibliotech
+      - API_SECURITY_SECRET=secret
     ports:
       - "8080:8080"
     networks:
