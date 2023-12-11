@@ -43,8 +43,7 @@ public class SecurityConfigurations {
             })
             .authorizeHttpRequests(auth -> auth
                     .requestMatchers(HttpMethod.POST,
-                            "/auth/login",
-                            "/admins/save")
+                            "/auth/login")
                     .permitAll()
                     .anyRequest().authenticated()
             )
@@ -68,7 +67,8 @@ public class SecurityConfigurations {
             public void addCorsMappings(@NotNull CorsRegistry registry) {
                 registry.addMapping("/**")
                         .allowedOrigins("https://frontend-27zf.onrender.com/",
-                                "http://localhost:8080/")
+                                "http://localhost:8080/",
+                                "http://localhost:5173")
                         .allowedMethods("GET", "POST", "PUT", "DELETE","OPTIONS")
                         .allowCredentials(true);
             }

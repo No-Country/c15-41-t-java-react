@@ -35,9 +35,15 @@ public class AuthController {
                 loginDto.getUserName(),
                 loginDto.getPassword()
         );
-        var adminAuthenticated = authenticationManager.authenticate(authToken);
-        var jwtToken = tokenService.generateToken((Admin) adminAuthenticated.getPrincipal());
-        return ResponseEntity.ok(new AuthDto(jwtToken));
+        try{
+            var adminAuthenticated = authenticationManager.authenticate(authToken);
+            var jwtToken = tokenService.generateToken((Admin) adminAuthenticated.getPrincipal());
+            return ResponseEntity.ok(new AuthDto(jwtToken));
+        } catch (RuntimeException ignore){
+            return ResponseEntity.badRequest().body(
+                    new AuthDto("Invalid Credential")
+            );
+        }
 
     }
 
