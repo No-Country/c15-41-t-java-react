@@ -15,7 +15,7 @@ export default function UserCard({ user, refresh }: UserCardProps) {
 
   return (
     <div className="flex-col p-3">
-      <div className="flex w-96 items-center rounded-lg border-[1px] border-solid border-slate-200 p-2 px-4">
+      <div className="flex w-96 max-sm:w-[auto] flex-shrink items-center rounded-lg border-[1px] border-solid border-slate-200 p-2 px-4">
         <h1 className="flex-grow text-base font-medium text-blueLight">{`${user.name} ${user.lastName}`}</h1>
         <div className="px-0.5 hover:cursor-pointer">
           <IoPencil size={20} />

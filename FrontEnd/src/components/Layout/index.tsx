@@ -43,7 +43,7 @@ export default function Layout() {
           <img src="/icons/Logout.png" alt="logout" />
         </button>
       </header>
-      <main className="min-h-[calc(100vh-9rem-4rem)] max-lg:min-h-[calc(100vh-9rem-104px)]">
+      <main className="min-h-[calc(100vh-9rem-4rem)] max-lg:mb-40 max-lg:min-h-[calc(100vh-9rem-104px)]">
         <Outlet />
       </main>
       <NavBarMobile />

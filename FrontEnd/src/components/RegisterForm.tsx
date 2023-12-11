@@ -17,25 +17,26 @@ const initialValues: BookPost = {
 }
 
 const ISBN_REGEX =
-  /^(?:ISBN(?:-1[03])?:?\ )?(?=[0-9X]{10}$|(?=(?:[0-9]+[-\ ]){3})[-\ 0-9X]{13}$|97[89][0-9]{10}$|(?=(?:[0-9]+[-\ ]){4})[-\ 0-9]{17}$)(?:97[89][- ]?[0-9]{1,5}[- ]?[0-9]+[- ]?[0-9]+[- ]?[0-9X]|(?:[0-9]+[-\ ]){3}[0-9X][- ]?[0-9]+[- ]?[0-9]+[- ]?[0-9X])$/
+  /^(?:-1[03])?:?(?=[0-9X]{10}$|(?=(?:[0-9]+-){3})[-0-9X]{13}$|97[89][0-9]{10}$|(?=(?:[0-9]+-){4})[-0-9]{17}$)(?:97[89]-)?[0-9]{1,5}-[0-9]+-[0-9]+-[0-9X]$/
 
 const validationSchema = Yup.object({
   title: Yup.string()
     .required('El titulo es requerido')
-    .matches(/^[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ\s]+$/, 'Ingresa un nombre válido')
+    .matches(/^[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ0-9\s]+$/, 'Ingresa un nombre válido')
+    .min(3, 'El nombre es demasiado corto')
     .max(50, 'El nombre es demasiado extenso'),
   isbn: Yup.string().required('El isbn es requerido').matches(ISBN_REGEX, 'El ISBN no es valido'),
   quantity: Yup.number()
     .required('Cantidad es requerida')
     .min(1, 'El valor debe ser mayor a 0')
-    .max(1000, 'El maximo que puede ingresar son 1000 copias')
+    .max(100, 'El maximo que puede ingresar son 1000 copias')
     .typeError('El valor debe ser numérico'),
   idAuthor: Yup.number().min(1, 'Seleccione autor').required('El autor es requerido'),
   genre: Yup.string().required('El genero es requerido'),
   idEditorial: Yup.number().min(1, 'Seleccione editorial').required('La editorial es requerida')
 })
 
-export default function RegisterForm() {
+export default function RegisterForm({ onSuccess }: { onSuccess: () => void }) {
   const [authors, setAuthors] = useState<Author[]>([])
   const [editorials, setEditorials] = useState<Editorial[]>([])
   const [mockGenres, setMockGenres] = useState<string[]>([])
@@ -86,6 +87,7 @@ export default function RegisterForm() {
       await fetch('http://localhost:3000/books/save', postOptions)
       resetForm()
       toast.success('Su libro se agregó correctamente', { duration: 4000, position: 'top-center' })
+      onSuccess()
     } catch (error) {
       toast.error('Error al agregar el libro', { duration: 4000, position: 'top-center' })
     }
@@ -99,7 +101,7 @@ export default function RegisterForm() {
         </h2>
         <form className="mx-auto w-10/12" onSubmit={handleSubmit}>
           <label className="text-base font-bold leading-[normal] text-blueLight " htmlFor="title">
-            Titulo
+            Titulo <span className="text-red-500">*</span>
           </label>
           <div className="relative mb-14 flex h-8 w-full items-center gap-2 border-0 border-b-2 border-solid border-blueDark">
             <input
@@ -115,14 +117,14 @@ export default function RegisterForm() {
             </small>
           </div>
           <label className="text-base font-bold leading-[normal] text-blueLight " htmlFor="isbn">
-            ISBN
+            ISBN <span className="text-red-500">*</span>
           </label>
           <div className="relative mb-14 flex h-8 w-full items-center gap-2 border-0 border-b-2 border-solid border-blueDark">
             <input
               className="w-full border-0 bg-grey text-base font-[400] leading-[normal] text-[#263238] placeholder-[#ABABAB] focus:outline-none"
               name="isbn"
               type="text"
-              placeholder="Ingresá el isbn"
+              placeholder="ISBN 13: 978-0-596-52068-7 - ISBN 10: 0-321-48410-7 "
               value={values.isbn}
               onChange={handleChange}
             />
@@ -131,7 +133,7 @@ export default function RegisterForm() {
             </small>
           </div>
           <label className="text-base font-bold leading-[normal] text-blueLight" htmlFor="quantity">
-            Cantidad
+            Cantidad <span className="text-red-500">*</span>
           </label>
           <div className="relative mb-14 flex h-8 w-full items-center gap-2 border-0 border-b-2 border-solid border-blueDark">
             <input
@@ -147,7 +149,7 @@ export default function RegisterForm() {
             </small>
           </div>
           <label className="text-base font-bold leading-[normal] text-blueLight" htmlFor="idAuthor">
-            Autor
+            Autor <span className="text-red-500">*</span>
           </label>
           <div className="relative mb-14 flex h-8 w-full items-center gap-2 border-0 border-b-2 border-solid border-blueDark">
             <select
@@ -170,7 +172,7 @@ export default function RegisterForm() {
             </small>
           </div>
           <label className="text-base font-bold leading-[normal] text-blueLight" htmlFor="genre">
-            Género
+            Género <span className="text-red-500">*</span>
           </label>
           <div className="relative mb-14 flex h-8 w-full items-center gap-2 border-0 border-b-2 border-solid border-blueDark">
             <select
@@ -196,7 +198,7 @@ export default function RegisterForm() {
             className="text-base font-bold leading-[normal] text-blueLight"
             htmlFor="idEditorial"
           >
-            Editorial
+            Editorial <span className="text-red-500">*</span>
           </label>
           <div className="relative mb-14 flex h-8 w-full items-center gap-2 border-0 border-b-2 border-solid border-blueDark">
             <select
