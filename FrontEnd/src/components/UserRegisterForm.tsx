@@ -16,7 +16,7 @@ function generateTempId() {
 const validationSchema = Yup.object({
   dni: Yup.string()
     .required('El DNI es obligatorio')
-    .matches(/^(?:\d{7}|\d{8}|\d{10})$/, 'El DNI debe tener 8 dígitos numéricos'),
+    .matches(/^(?:\d{7}|\d{8}|\d{10})$/, 'El DNI debe tener 7, 8 o 10 dígitos numéricos'),
   name: Yup.string()
     .required('El nombre es obligatorio')
     .matches(/^[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ\s]+$/, 'Ingresa un nombre válido'),

@@ -16,8 +16,9 @@ const initialValues: BookPost = {
   image: ''
 }
 
-const ISBN_REGEX =/^(?:-1[03])?:?(?=[0-9X]{10}$|(?=(?:[0-9]+-){3})[-0-9X]{13}$|97[89][0-9]{10}$|(?=(?:[0-9]+-){4})[-0-9]{17}$)(?:97[89]-)?[0-9]{1,5}-[0-9]+-[0-9]+-[0-9X]$/
-
+const ISBN_REGEX =
+  /^(?:-1[03])?:?(?=[0-9X]{10}$|(?=(?:[0-9]+-){3})[-0-9X]{13}$|97[89][0-9]{10}$|(?=(?:[0-9]+-){4})[-0-9]{17}$)(?:97[89]-)?[0-9]{1,5}-[0-9]+-[0-9]+-[0-9X]$/
+ 
 const validationSchema = Yup.object({
   title: Yup.string()
     .required('El titulo es requerido')
@@ -26,10 +27,11 @@ const validationSchema = Yup.object({
     .max(50, 'El nombre es demasiado extenso'),
   isbn: Yup.string().required('El isbn es requerido').matches(ISBN_REGEX, 'El ISBN no es valido'),
   quantity: Yup.number()
-    .required('Cantidad es requerida')
-    .min(1, 'El valor debe ser mayor a 0')
-    .max(100, 'El maximo que puede ingresar son 1000 copias')
-    .typeError('El valor debe ser numérico'),
+  .required('Cantidad es requerida')
+  .min(1, 'El valor debe ser mayor a 0')
+  .max(100, 'El máximo que puede ingresar son 100 copias')
+  .typeError('El valor debe ser numérico')
+  .test('isNumber', 'El valor debe ser numérico', value => value.toString().includes('e')),
   idAuthor: Yup.number().min(1, 'Seleccione autor').required('El autor es requerido'),
   genre: Yup.string().required('El genero es requerido'),
   idEditorial: Yup.number().min(1, 'Seleccione editorial').required('La editorial es requerida')
