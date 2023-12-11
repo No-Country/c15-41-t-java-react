@@ -2,17 +2,21 @@ package c1541tjavareact.library.domain.service;
 
 import c1541tjavareact.library.domain.dto.AdminDto;
 import c1541tjavareact.library.domain.repository.AdminCrudRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
 @Service
 public class AdminService {
-    @Autowired
-    private AdminCrudRepository adminCrudRepository;
+
+    private final AdminCrudRepository adminCrudRepository;
+
+    public AdminService(AdminCrudRepository adminCrudRepository) {
+        this.adminCrudRepository = adminCrudRepository;
+    }
+
     public AdminDto save(AdminDto adminDto) {
-        //TODO adminDto.setPassword(); settear password codificada
         return adminCrudRepository.save(adminDto);
     }
     public Optional<AdminDto> getAdminDto(Long idAdmin){
@@ -25,6 +29,10 @@ public class AdminService {
 
     public void delete(Long idAdmin){
         adminCrudRepository.delete(idAdmin);
+    }
+
+    public UserDetails findByUserName(String userName){
+        return adminCrudRepository.findByUserName(userName);
     }
 
 }
