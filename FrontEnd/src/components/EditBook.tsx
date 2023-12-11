@@ -12,10 +12,22 @@ interface BookProps extends BookPost {
   refresh: () => void
 }
 
+const ISBN_REGEX =
+  /^(?:-1[03])?:?(?=[0-9X]{10}$|(?=(?:[0-9]+-){3})[-0-9X]{13}$|97[89][0-9]{10}$|(?=(?:[0-9]+-){4})[-0-9]{17}$)(?:97[89]-)?[0-9]{1,5}-[0-9]+-[0-9]+-[0-9X]$/
+ 
 const validationSchema = Yup.object({
-  title: Yup.string().required('El titulo es requerido'),
-  isbn: Yup.string().required('El isbn es requerido'),
-  quantity: Yup.number().min(1, 'El valor debe ser mayor a 0').required('Cantidad es requerida'),
+  title: Yup.string()
+    .required('El titulo es requerido')
+    .matches(/^[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ0-9\s]+$/, 'Ingresa un nombre válido')
+    .min(3, 'El nombre es demasiado corto')
+    .max(50, 'El nombre es demasiado extenso'),
+  isbn: Yup.string().required('El isbn es requerido').matches(ISBN_REGEX, 'El ISBN no es valido'),
+  quantity: Yup.number()
+  .required('Cantidad es requerida')
+  .min(1, 'El valor debe ser mayor a 0')
+  .max(100, 'El máximo que puede ingresar son 100 copias')
+  .typeError('El valor debe ser numérico')
+  .test('isNumber', 'El valor debe ser numérico', value => value.toString().includes('e')),
   idAuthor: Yup.number().min(1, 'Seleccione autor').required('El autor es requerido'),
   genre: Yup.string().required('El genero es requerido'),
   idEditorial: Yup.number().min(1, 'Seleccione editorial').required('La editorial es requerida')
