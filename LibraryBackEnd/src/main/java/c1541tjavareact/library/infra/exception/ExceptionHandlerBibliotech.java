@@ -1,7 +1,5 @@
 package c1541tjavareact.library.infra.exception;
 
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.validation.UnexpectedTypeException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -40,6 +38,15 @@ public class ExceptionHandlerBibliotech {
         ));
         return ResponseEntity.badRequest().body(errors);
     }
+
+    @ExceptionHandler(BookException.class)
+    public ResponseEntity<Map<String, Object>> handleBookException(
+            BookException exception){
+        Map<String, Object> errors = new HashMap<>();
+        errors.put("CantidadLibros", exception.getMessage());
+        return ResponseEntity.badRequest().body(errors);
+    }
+
 
     private record DataError(String field, String error){
         public DataError(FieldError error){

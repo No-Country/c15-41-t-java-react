@@ -6,6 +6,7 @@ import c1541tjavareact.library.domain.repository.AdminRepository;
 import c1541tjavareact.library.persistence.entity.Admin;
 import c1541tjavareact.library.persistence.mapper.AdminDaoMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
@@ -18,6 +19,10 @@ public class AdminCrudRepositoryImpl implements AdminCrudRepository {
 
     @Autowired
     private AdminDaoMapper adminDaoMapper;
+    @Override
+    public UserDetails findByUserName(String userName) {
+        return adminRepository.findByEmail(userName);
+    }
 
     @Override
     public AdminDto save(AdminDto adminDto) {
