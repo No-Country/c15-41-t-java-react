@@ -41,7 +41,7 @@ export default function UsersList() {
   }, [])
 
   return (
-    <div className="flex h-full w-full flex-col items-center">
+    <div>
       <SearchUser allUsers={users} onSearchResults={handleSearchResults} setPage={setPage} />
       {isLoading ? (
         <Spinner />
@@ -82,7 +82,7 @@ export default function UsersList() {
           </div>
         </div>
       )}
-      <div className="justify-self-end pb-8">
+      <div className="flex items-center justify-center pb-8">
         <Pagination
           count={Math.ceil(searchResults.length / PAGE_SIZE)}
           variant="outlined"
