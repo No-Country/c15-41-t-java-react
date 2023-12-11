@@ -41,7 +41,7 @@ public class AuthController {
             return ResponseEntity.ok(new AuthDto(jwtToken));
         } catch (RuntimeException ignore){
             return ResponseEntity.badRequest().body(
-                    new AuthDto("Invalid Credential")
+                    new AuthDto("Invalid Credentials")
             );
         }
 

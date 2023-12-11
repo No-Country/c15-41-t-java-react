@@ -13,6 +13,4 @@ public interface AdminCrudRepository {
     AdminDto update(Long idAdmin, AdminDto adminDto);
     void delete(Long idAdmin);
 
-
-    //TODO Update
 }

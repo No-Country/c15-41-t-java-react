@@ -21,7 +21,6 @@ public class AdminCrudRepositoryImpl implements AdminCrudRepository {
     private AdminDaoMapper adminDaoMapper;
     @Override
     public UserDetails findByUserName(String userName) {
-        //TODO generar login fallido
         return adminRepository.findByEmail(userName);
     }
 
