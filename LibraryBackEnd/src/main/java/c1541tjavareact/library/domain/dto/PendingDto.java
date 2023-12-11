@@ -20,8 +20,11 @@ public class PendingDto {
     private LocalDate localPendingDate;
 
     @NotNull
-    private Long idReturn;
+    private Boolean status;
+
+    @NotNull
+    private Long idLoan;
     
-//    private BookReturnDto bookReturnDto; //TODO
+    private LoanDto loanDto;
 
 }

@@ -24,6 +24,10 @@ public class LoanDto {
     private LocalDate returnExpectedDate;
 
     @NotNull
+    @Future
+    private LocalDate returnEffectiveDate;
+
+    @NotNull
     private Long idBook;
 
     @NotNull
@@ -37,7 +41,5 @@ public class LoanDto {
     private AdminDto adminDto;
 
     private UserDto userDto;
-
-//    private BookReturnDto bookReturnDto; //TODO
 
 }

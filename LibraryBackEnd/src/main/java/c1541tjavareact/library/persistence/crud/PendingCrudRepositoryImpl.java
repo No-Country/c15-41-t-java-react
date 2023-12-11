@@ -44,7 +44,7 @@ public class PendingCrudRepositoryImpl implements PendingCrudRepository {
             PendingDto pendingToUpdate = optPending.get();
             pendingToUpdate.setMessage(pendingDto.getMessage());
             pendingToUpdate.setLocalPendingDate(pendingDto.getLocalPendingDate());
-            pendingToUpdate.setIdReturn(pendingDto.getIdReturn());
+            //pendingToUpdate.setIdReturn(pendingDto.getIdReturn());
             return this.save(pendingToUpdate);
         }
         return null;
