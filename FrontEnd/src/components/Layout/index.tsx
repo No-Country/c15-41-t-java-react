@@ -22,13 +22,13 @@ export default function Layout() {
           to="/libros"
           className="p-8 text-center text-2xl text-black no-underline hover:underline max-lg:hidden"
         >
-          Libros y catalogo
+          Libros y catálogo
         </Link>
         <Link
           to="/prestamos"
           className="p-8 text-center text-2xl text-black no-underline hover:underline max-lg:hidden"
         >
-          Prestamos
+          Préstamos
         </Link>
         <Link
           to="/usuarios"
