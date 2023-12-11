@@ -23,7 +23,7 @@ const DeleteModal: React.FC<Props> = ({
       deleteUrl = `http://localhost:3000/books/delete/${id}`
       break
     case 'user':
-      spanishDeleteEntity = 'usuario'
+      spanishDeleteEntity = 'miembro'
       deleteUrl = `http://localhost:3000/users/delete/${id}`
       break
     default:
