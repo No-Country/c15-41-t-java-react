@@ -23,7 +23,7 @@ public class Pending implements Serializable {
     @Column(nullable = false)
     private String message;
 
-    @Column(name = "id_return")
+    @Column(name = "id_return", nullable = false)
     private Long idReturn;
 
     @Column(name = "local_pending_date",nullable = false)

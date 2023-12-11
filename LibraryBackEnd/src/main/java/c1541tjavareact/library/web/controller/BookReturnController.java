@@ -47,7 +47,7 @@ public class BookReturnController {
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<BookReturnDto> delete(@PathVariable("id") Long idBookReturn) {
         if(bookReturnService.delete(idBookReturn)){
-            return ResponseEntity.ok().build();
+            return ResponseEntity.noContent().build();
         }
         return ResponseEntity.notFound().build();
     }
