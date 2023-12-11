@@ -5,6 +5,7 @@ import c1541tjavareact.library.domain.service.AdminService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -14,8 +15,13 @@ public class AdminController {
     @Autowired
     private AdminService adminService;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     @PostMapping("/save")
     public ResponseEntity<AdminDto> save(@RequestBody @Valid AdminDto adminDto) {
+        String passEncoded = passwordEncoder.encode(adminDto.getPassword());
+        adminDto.setPassword(passEncoded);
         return ResponseEntity.ok(adminService.save(adminDto));
     }
     @GetMapping("/{id}")

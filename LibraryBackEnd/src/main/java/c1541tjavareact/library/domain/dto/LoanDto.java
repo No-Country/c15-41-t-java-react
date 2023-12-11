@@ -1,9 +1,5 @@
 package c1541tjavareact.library.domain.dto;
 
-import c1541tjavareact.library.persistence.entity.Admin;
-import c1541tjavareact.library.persistence.entity.BookReturn;
-import c1541tjavareact.library.persistence.entity.User;
-import jakarta.persistence.Column;
 import jakarta.validation.constraints.Future;
 import jakarta.validation.constraints.NotNull;
 import lombok.Builder;

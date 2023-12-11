@@ -27,7 +27,9 @@ public class LoanController {
     }
     @PostMapping("/save")
     public ResponseEntity<?> save(@RequestBody @Valid LoanDto loanDto) {
-        return new ResponseEntity<>(loanService.save(loanDto), HttpStatus.CREATED);
+
+            return new ResponseEntity<>(loanService.save(loanDto), HttpStatus.CREATED);
+
     }
 
     @GetMapping("/{id}")
@@ -49,7 +51,7 @@ public class LoanController {
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Loan> deleteLoan(@PathVariable("id") Long idLoan){//TODO
         if(loanService.delete(idLoan)){
-            return ResponseEntity.ok().build();
+            return ResponseEntity.noContent().build();
         }
         return ResponseEntity.notFound().build();
     }

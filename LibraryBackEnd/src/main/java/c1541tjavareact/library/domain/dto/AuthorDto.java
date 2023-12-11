@@ -13,10 +13,12 @@ public class AuthorDto {
     private Long idAuthor;
 
     @NotBlank
-    @Pattern(regexp = "^[a-zA-Z ]{3,}$")
+    @Pattern(regexp = "^[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ' ]{3,50}$",
+            message = "The field contains invalid characters")
     private String name;
 
     @NotBlank
-    @Pattern(regexp = "^[a-zA-Z ]{3,}$")
+    @Pattern(regexp = "^[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ' ]{3,50}$",
+            message = "The field contains invalid characters")
     private String lastName;
 }
