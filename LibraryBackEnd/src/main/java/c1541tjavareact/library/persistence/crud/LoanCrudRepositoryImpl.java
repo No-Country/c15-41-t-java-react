@@ -4,6 +4,7 @@ import c1541tjavareact.library.domain.dto.BookDto;
 import c1541tjavareact.library.domain.dto.LoanDto;
 import c1541tjavareact.library.domain.repository.LoanCrudRepository;
 import c1541tjavareact.library.domain.repository.LoanRepository;
+import c1541tjavareact.library.infra.exception.BookException;
 import c1541tjavareact.library.persistence.entity.Loan;
 import c1541tjavareact.library.persistence.mapper.LoanDaoMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,12 +43,11 @@ public class LoanCrudRepositoryImpl implements LoanCrudRepository {
         if(bookDto.isPresent()){
 
             if(bookDto.get().getQuantity() > 1){
-
                 bookDto.get().setQuantity(bookDto.get().getQuantity() - 1);
                 bookCrudRepository.save(bookDto.get());
             } else {
 
-                throw new RuntimeException("No hay mas libros");
+                throw new BookException("No hay suficientes libros, para realizar un prestamo");
 
             }
 

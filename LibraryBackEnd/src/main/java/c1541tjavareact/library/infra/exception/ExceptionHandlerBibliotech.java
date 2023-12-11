@@ -41,6 +41,15 @@ public class ExceptionHandlerBibliotech {
         return ResponseEntity.badRequest().body(errors);
     }
 
+    @ExceptionHandler(BookException.class)
+    public ResponseEntity<Map<String, Object>> handleBookException(
+            BookException exception){
+        Map<String, Object> errors = new HashMap<>();
+        errors.put("CantidadLibros", exception.getMessage());
+        return ResponseEntity.badRequest().body(errors);
+    }
+
+
     private record DataError(String field, String error){
         public DataError(FieldError error){
             this(error.getField(),error.getDefaultMessage());
