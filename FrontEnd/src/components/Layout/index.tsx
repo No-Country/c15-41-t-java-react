@@ -31,10 +31,10 @@ export default function Layout() {
           Préstamos
         </Link>
         <Link
-          to="/usuarios"
+          to="/miembros"
           className="p-8 text-center text-2xl text-black no-underline hover:underline max-lg:hidden"
         >
-          Socios
+          Miembros
         </Link>
         <button
           className="border-none bg-white hover:cursor-pointer max-lg:ml-auto max-lg:mr-12 max-sm:mr-6"
