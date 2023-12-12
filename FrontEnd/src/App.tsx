@@ -6,6 +6,7 @@ import Home from './pages/Home.tsx'
 import Catalogue from './pages/Catalogue.tsx'
 import UsersTabs from './pages/UsersTabs.tsx'
 import { Toaster } from 'react-hot-toast'
+import LoanRoute from './components/LoanRoute.tsx'
 
 const App = () => {
   const { currentUser, setupComplete } = useUser()
@@ -25,7 +26,7 @@ const App = () => {
         <Route element={<PrivateLayout />}>
           <Route path="/home" element={<Home />} />
           <Route path="/libros" element={<Catalogue />} />
-          <Route path="/prestamos" element={<p>Prestamos page</p>} />
+          <Route path="/prestamos" element={<LoanRoute />} />
           <Route path="/usuarios" element={<UsersTabs />} />
         </Route>
       </Routes>
