@@ -36,7 +36,7 @@ Matías Francisco Luengo</a>
 ![Java](https://img.shields.io/badge/-Java-%20%23abb2b9%20?style=for-the-badge&logo=CoffeeScript&logoColor=blue)
 ![Spring](https://img.shields.io/badge/Spring-6DB33F?style=for-the-badge&logo=spring&logoColor=white)
 ![Spring Boot](https://img.shields.io/badge/-Spring%20Boot-6DB33F?style=for-the-badge&logo=Spring%20Boot&logoColor=white)
-![Spring Security](https://img.shields.io/badge/-Spring%20Boot-6DB33F?style=for-the-badge&logo=Spring%20Security&logoColor=white)
+![Spring Security](https://img.shields.io/badge/-Spring%20Security-6DB33F?style=for-the-badge&logo=Spring%20Security&logoColor=white)
 ![JWT](https://img.shields.io/badge/JWT-black?style=for-the-badge&logo=JSON%20web%20tokens)
 ![Hibernate](https://img.shields.io/badge/Hibernate-59666C?style=for-the-badge&logo=Hibernate&logoColor=white)
 ![MySQL](https://img.shields.io/badge/-MySQL-%234479A1?style=for-the-badge&logo=MySQL&logoColor=white)
@@ -45,7 +45,7 @@ Matías Francisco Luengo</a>
 Jean Carlo</a> / <a  href="">
 Efrén Morales</a> / <a  href="">
 Jeyson Velázquez</a> / <a  href="">
-German Anselmo</a> / <a  href="">
+German Anselmo</a> / <a  href="https://github.com/jdmonroyg">
 Jesús Monroy</a>
 
 # Stack QA
