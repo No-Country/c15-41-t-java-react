@@ -9,7 +9,6 @@ import java.time.LocalDate;
 
 @Getter
 @Setter
-@Builder
 public class LoanDto {
 
     private Long idLoan;
@@ -35,7 +34,5 @@ public class LoanDto {
     private AdminDto adminDto;
 
     private UserDto userDto;
-
-    private PendingDto pendingDto;
 
 }
