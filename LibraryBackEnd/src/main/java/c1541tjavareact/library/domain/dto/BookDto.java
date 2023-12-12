@@ -5,6 +5,8 @@ import jakarta.validation.constraints.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import static c1541tjavareact.library.domain.util.constant.Constants.*;
+
 @Getter
 @Setter
 public class BookDto {
@@ -13,7 +15,7 @@ public class BookDto {
 
     @NotBlank
     @Pattern(regexp = "[a-zA-Z0-9áéíóúüñÁÉÍÓÚÜÑ ]{3,50}",
-            message = "The field contains invalid characters")
+            message = INVALID_CHARACTERS)
     private String title;
 
     @NotNull
@@ -28,15 +30,15 @@ public class BookDto {
             "|97[89][0-9]{10}$" +
             "|(?=(?:[0-9]+-){4})[-0-9]{17}$)" +
             "(?:97[89]-)?[0-9]{1,5}-[0-9]+-[0-9]+-[0-9X]$",
-            message = "Isbn is not valid")
+            message = INVALID_ISBN)
     private String isbn;
 
     @NotNull
     private Genre genre;
 
     @NotNull
-    @Min(value = 1, message = "The quantity must be greater than 0")
-    @Max(value = 999, message = "The quantity must be less than 999")
+    @Min(value = 1, message = MIN_QUANTITY)
+    @Max(value = 999, message = MAX_QUANTITY)
     private Integer quantity;
 
     private EditorialDto editorialDto;

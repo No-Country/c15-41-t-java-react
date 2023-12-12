@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.validator.constraints.Length;
 
+import static c1541tjavareact.library.domain.util.constant.Constants.*;
+
 /**
  * @author jdmon on 10/12/2023
  * @project LibraryBackEnd
@@ -17,14 +19,12 @@ public class LoginDto {
     @Pattern(regexp = "^[a-zA-Z0-9._%+-]+" +
             "@[a-zA-Z0-9.-]+" +
             ".(com|co|es|it|net|org|gov|edu|mil|io|xyz|info|biz|mx|ar)$",
-            message = "Email is not valid")
+            message = INVALID_EMAIL)
     private String userName;
 
     @NotBlank
     @Pattern(regexp = "^(?=.*[A-Z])(?=.*\\d)[a-zA-Z0-9.!@#$&*%_\\-=]+$",
-            message = "The field must have a minimum of 8 characters," +
-                    " at least one uppercase letter," +
-                    " and only some special characters are allowed")
+            message = INVALID_PASSWORD)
     @Length(min = 8)
     private String password;
 }

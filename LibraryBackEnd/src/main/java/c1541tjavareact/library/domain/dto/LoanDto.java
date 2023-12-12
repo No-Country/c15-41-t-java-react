@@ -1,11 +1,13 @@
 package c1541tjavareact.library.domain.dto;
 
+import jakarta.validation.constraints.Future;
 import jakarta.validation.constraints.NotNull;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDate;
+
+import static c1541tjavareact.library.domain.util.constant.Constants.INVALID_FUTURE_DATE;
 
 @Getter
 @Setter
@@ -16,6 +18,7 @@ public class LoanDto {
     private LocalDate loanDate;
 
     @NotNull
+    @Future(message = INVALID_FUTURE_DATE)
     private LocalDate returnExpectedDate;
 
     private LocalDate returnEffectiveDate;

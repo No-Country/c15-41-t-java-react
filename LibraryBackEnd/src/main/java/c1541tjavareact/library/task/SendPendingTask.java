@@ -1,3 +1,4 @@
+/*
 package c1541tjavareact.library.task;
 
 import c1541tjavareact.library.domain.dto.LoanDto;
@@ -39,9 +40,13 @@ public class SendPendingTask {
 
         for (LoanDto ld : loans) {
             LocalDate alertDate = ld.getReturnExpectedDate().minusDays(3);
-            /*BookReturnDto bookReturn = bookReturns.stream().filter(br -> br.getIdLoan().equals(ld.getIdLoan()))
-                                                            .toList().get(0);*/
-            if (currentDate.equals(alertDate) /*&& bookReturn.getReturnDate() == null*/) {
+            */
+/*BookReturnDto bookReturn = bookReturns.stream().filter(br -> br.getIdLoan().equals(ld.getIdLoan()))
+                                                            .toList().get(0);*//*
+
+            if (currentDate.equals(alertDate) */
+/*&& bookReturn.getReturnDate() == null*//*
+) {
                 this.sendMail(ld);
             }
         }
@@ -79,3 +84,4 @@ public class SendPendingTask {
     }
 }
 
+*/
