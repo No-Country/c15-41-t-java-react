@@ -5,6 +5,7 @@ interface UserState {
   isLoggedIn: boolean
   authToken: string | null
   userName: string | null
+  idAdmin: number | null
 }
 
 interface IUserContext {
@@ -19,7 +20,8 @@ interface IUserContext {
 const initialUserState: UserState = {
   authToken: null,
   isLoggedIn: false,
-  userName: null
+  userName: null,
+  idAdmin: null
 }
 
 const UserContext = createContext<IUserContext | null>(null)
@@ -28,23 +30,35 @@ const RELATIVE_PATH = '/bibliotech/api'
 const BACKEND_HOST = import.meta.env.VITE_BACKEND_HOST
 const MODE = import.meta.env.MODE
 
-/*
-const authenticateUser = async (email: string, password: string) => {
-  const response = await fetch('http://localhost:3000/api/auth/login', {
+const fixURL = (url: string) => {
+  if (MODE === 'production' && BACKEND_HOST !== undefined) {
+    const pathname = new URL(url).pathname
+    url = `${BACKEND_HOST}${RELATIVE_PATH}${pathname}`
+  }
+  return url
+}
+
+const authenticateUser = async (userName: string, password: string) => {
+  const response = await fetch(fixURL('http://localhost:3000/auth/login'), {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({ email, password })
+    body: JSON.stringify({ userName, password })
   })
 
   if (!response.ok) {
-    throw new Error('Error de autenticación')
+    return {
+      error: true,
+      ...(await response.json())
+    }
   }
 
-  return await response.json()
+  return {
+    message: 'Login exitoso',
+    data: await response.json()
+  }
 }
-*/
 
 const fakeAuthenticateUser = async (
   email: string,
@@ -53,7 +67,8 @@ const fakeAuthenticateUser = async (
   error?: boolean
   message?: string
   data?: {
-    token: string
+    jwtToken: string
+    idAdmin: number
     name: string
   }
 }> =>
@@ -66,9 +81,10 @@ const fakeAuthenticateUser = async (
         })
       } else {
         resolve({
-          message: 'Autenticación exitosa',
+          message: 'Login exitoso',
           data: {
-            token: '123456789',
+            jwtToken: '123456789',
+            idAdmin: 1,
             name: 'Maria'
           }
         })
@@ -85,30 +101,33 @@ export const UserProvider: FC<{
   const [setupComplete, setSetupComplete] = useState<boolean>(true)
 
   const signIn: IUserContext['signIn'] = async (email, password, navigate) => {
-    try {
-      setSignInWaiting(true)
-      const apiResponse = await fakeAuthenticateUser(email, password)
+    setSignInWaiting(true)
 
-      if (apiResponse.error === true) {
-        alert(apiResponse.message)
-        return
-      }
-
-      if (apiResponse.data !== undefined) {
-        const loggedInUser = {
-          authToken: apiResponse.data.token,
-          isLoggedIn: true,
-          userName: apiResponse.data.name
-        }
-        localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(loggedInUser))
-        setCurrentUser(loggedInUser)
-        navigate('/home')
-      }
-    } catch (error) {
-      alert(error)
-    } finally {
-      setSignInWaiting(false)
+    let apiResponse
+    if (MODE === 'development') {
+      apiResponse = await fakeAuthenticateUser(email, password)
+    } else {
+      apiResponse = await authenticateUser(email, password)
     }
+
+    if (apiResponse.error === true) {
+      setSignInWaiting(false)
+      throw new Error(apiResponse.message)
+    }
+
+    if (apiResponse.data !== undefined) {
+      const loggedInUser = {
+        authToken: apiResponse.data.jwtToken,
+        isLoggedIn: true,
+        idAdmin: apiResponse.data.idAdmin,
+        userName: apiResponse.data.name
+      }
+      localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(loggedInUser))
+      setCurrentUser(loggedInUser)
+      navigate('/home')
+    }
+
+    setSignInWaiting(false)
   }
 
   const signOut = () => {
@@ -139,10 +158,7 @@ export const UserProvider: FC<{
       throw new Error('Error de autenticación')
     }
 
-    if (MODE === 'production' && BACKEND_HOST !== undefined) {
-      const pathname = new URL(url).pathname
-      url = `${BACKEND_HOST}${RELATIVE_PATH}${pathname}`
-    }
+    url = fixURL(url)
 
     const { headers, ...otherOptions } = options
 
