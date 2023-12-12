@@ -44,7 +44,7 @@ export default function LoanRoute() {
       ) : isError ? (
         <p>Error cargando prestamos</p>
       ) : (
-        <div className="grid w-full justify-items-center gap-y-5 py-5 align-middle lg:grid-cols-2">
+        <div className="grid w-full justify-items-center gap-y-5 py-5 align-middle md:grid-cols-2">
           {searchResults.map(loan => (
             <LoanCard key={loan.idLoan} loan={loan} />
           ))}

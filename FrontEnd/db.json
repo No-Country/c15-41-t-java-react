@@ -273,6 +273,15 @@
       "idBook": 1,
       "idAdmin": 1,
       "idUser": 3,
+      "userDto": {
+        "idUser": 3,
+        "dni": "98765432",
+        "name": "Alice",
+        "email": "alicejohnson@gmail",
+        "lastName": "Johnson",
+        "phoneNumber": "567890123",
+        "address": "789 Oak St"
+      },
       "bookDto": {
         "idBook": 1,
         "title": "Cien años de soledad",
@@ -301,6 +310,15 @@
       "idBook": 3,
       "idAdmin": 1,
       "idUser": 2,
+      "userDto": {
+        "idUser": 2,
+        "dni": "87654321",
+        "name": "Jane",
+        "lastName": "Smith",
+        "email": "janesmith@gmail",
+        "phoneNumber": "987654321",
+        "address": "456 Elm St"
+      },
       "bookDto": {
         "idBook": 3,
         "title": "El amor en los tiempos del cólera",
@@ -329,6 +347,15 @@
       "idBook": 2,
       "idAdmin": 1,
       "idUser": 3,
+      "userDto": {
+        "idUser": 3,
+        "dni": "98765432",
+        "name": "Alice",
+        "email": "alicejohnson@gmail",
+        "lastName": "Johnson",
+        "phoneNumber": "567890123",
+        "address": "789 Oak St"
+      },
       "bookDto": {
         "idBook": 2,
         "title": "1984",
