@@ -14,7 +14,7 @@ export default function LoanRoute() {
   const [searchResults, setSearchResults] = useState<Loan[] | []>([])
   const [isLoading, setIsLoading] = useState<boolean>(false)
 
-  async function fetchUsers(): Promise<void> {
+  async function fetchLoans(): Promise<void> {
     try {
       setIsLoading(true)
       setIsError(false)
@@ -29,7 +29,7 @@ export default function LoanRoute() {
     }
   }
   useEffect(() => {
-    fetchUsers().catch(error => {
+    fetchLoans().catch(error => {
       console.log(error)
     })
   }, [])
@@ -46,7 +46,7 @@ export default function LoanRoute() {
       ) : (
         <div className="grid w-full justify-items-center gap-y-5 py-5 align-middle md:grid-cols-2">
           {searchResults.map(loan => (
-            <LoanCard key={loan.idLoan} loan={loan} />
+            <LoanCard key={loan.idLoan} loan={loan} refresh={fetchLoans} />
           ))}
         </div>
       )}
