@@ -16,4 +16,6 @@ public interface LoanCrudRepository {
 
     LoanDto update(Long idLoan, LoanDto loanDto);
     boolean delete(Long idLoan);
+
+    LoanDto returnBookLoan(Long idLoan);
 }

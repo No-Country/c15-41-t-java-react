@@ -1,5 +1,6 @@
 package c1541tjavareact.library.domain.dto;
 
+import static c1541tjavareact.library.domain.util.constant.Constants.*;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
@@ -16,26 +17,24 @@ public class AdminDto {
 
     @NotBlank
     @Pattern(regexp = "^[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ' ]{3,50}$",
-            message = "The field contains invalid characters")
+            message = INVALID_CHARACTERS)
     private String name;
 
     @NotBlank
     @Pattern(regexp = "^[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ' ]{3,50}$",
-            message = "The field contains invalid characters")
+            message = INVALID_CHARACTERS)
     private String lastName;
 
     @NotBlank
     @Pattern(regexp = "^[a-zA-Z0-9._%+-]+" +
             "@[a-zA-Z0-9.-]+" +
             ".(com|co|es|it|net|org|gov|edu|mil|io|xyz|info|biz|mx|ar)$",
-        message = "Email is not valid")
+        message = INVALID_EMAIL)
     private String email;
 
     @NotBlank
     @Pattern(regexp = "^(?=.*[A-Z])(?=.*\\d)[a-zA-Z0-9.!@#$&*%_\\-=]+$",
-            message = "The field must have a minimum of 8 characters," +
-                    " at least one uppercase letter," +
-                    " and only some special characters are allowed")
+            message = INVALID_PASSWORD)
     @Length(min = 8)
     private String password;
 }

@@ -12,7 +12,10 @@ public interface PendingCrudRepository {
 
     Optional<PendingDto> getPending(Long idPending);
 
+    Optional<PendingDto> findByIdLoan(Long idLoan);
+
     PendingDto update(Long idPending, PendingDto pendingDto);
     boolean delete(Long idPending);
+
 
 }

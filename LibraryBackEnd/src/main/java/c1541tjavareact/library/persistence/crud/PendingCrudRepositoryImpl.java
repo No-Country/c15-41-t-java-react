@@ -38,13 +38,18 @@ public class PendingCrudRepositoryImpl implements PendingCrudRepository {
     }
 
     @Override
+    public Optional<PendingDto> findByIdLoan(Long idLoan) {
+        return pendingRepository.findByIdLoan(idLoan).map(p -> pendingDaoMapper.toPendingDto(p));
+    }
+
+    @Override
     public PendingDto update(Long idPending, PendingDto pendingDto) {
         Optional<PendingDto> optPending = this.getPending(idPending);
         if(optPending.isPresent()){
             PendingDto pendingToUpdate = optPending.get();
             pendingToUpdate.setMessage(pendingDto.getMessage());
             pendingToUpdate.setLocalPendingDate(pendingDto.getLocalPendingDate());
-            pendingToUpdate.setIdReturn(pendingDto.getIdReturn());
+            //pendingToUpdate.setIdReturn(pendingDto.getIdReturn());
             return this.save(pendingToUpdate);
         }
         return null;

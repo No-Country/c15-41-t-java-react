@@ -25,6 +25,9 @@ public class Loan implements Serializable {
     @Column(name = "return_expected_date", nullable = false)
     private LocalDate returnExpectedDate;
 
+    @Column(name = "return_effective_date")
+    private LocalDate returnEffectiveDate;
+
     @Column(name = "id_book", nullable = false)
     private Long idBook;
 
@@ -34,23 +37,22 @@ public class Loan implements Serializable {
     @Column(name = "id_user", nullable = false)
     private Long idUser;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_book",nullable = false,
                 insertable = false, updatable = false)
     private Book book;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_admin",nullable = false,
                 insertable = false, updatable = false)
     private Admin admin;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_user",nullable = false,
                 insertable = false, updatable = false)
     private User user;
 
     @OneToOne(mappedBy = "loan")
-    private BookReturn bookReturn;
-
+    private Pending pending;
 
 }
