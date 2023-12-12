@@ -5,6 +5,7 @@ import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import toast from 'react-hot-toast'
 import { useUser } from '../context/UserContext'
+import { blockNonNumericInput } from '../utils/input'
 
 interface BookProps extends BookPost {
   id: number
@@ -14,7 +15,7 @@ interface BookProps extends BookPost {
 
 const ISBN_REGEX =
   /^(?:-1[03])?:?(?=[0-9X]{10}$|(?=(?:[0-9]+-){3})[-0-9X]{13}$|97[89][0-9]{10}$|(?=(?:[0-9]+-){4})[-0-9]{17}$)(?:97[89]-)?[0-9]{1,5}-[0-9]+-[0-9]+-[0-9X]$/
- 
+
 const validationSchema = Yup.object({
   title: Yup.string()
     .required('El titulo es requerido')
@@ -23,11 +24,9 @@ const validationSchema = Yup.object({
     .max(50, 'El nombre es demasiado extenso'),
   isbn: Yup.string().required('El isbn es requerido').matches(ISBN_REGEX, 'El ISBN no es valido'),
   quantity: Yup.number()
-  .required('Cantidad es requerida')
-  .min(1, 'El valor debe ser mayor a 0')
-  .max(100, 'El máximo que puede ingresar son 100 copias')
-  .typeError('El valor debe ser numérico')
-  .test('isNumber', 'El valor debe ser numérico', value => value.toString().includes('e')),
+    .required('Cantidad es requerida')
+    .min(1, 'El valor debe ser mayor a 0')
+    .max(100, 'El máximo que puede ingresar son 100 copias'),
   idAuthor: Yup.number().min(1, 'Seleccione autor').required('El autor es requerido'),
   genre: Yup.string().required('El genero es requerido'),
   idEditorial: Yup.number().min(1, 'Seleccione editorial').required('La editorial es requerida')
@@ -152,6 +151,7 @@ const EditBook: React.FC<BookProps> = props => {
               placeholder="Ingresá la cantidad"
               value={values.quantity}
               onChange={handleChange}
+              onKeyDown={blockNonNumericInput}
             />
             <small className="absolute -bottom-6 text-xs font-bold text-red-500">
               {errors?.quantity}
