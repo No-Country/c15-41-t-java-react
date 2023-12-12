@@ -1,6 +1,5 @@
 package c1541tjavareact.library.domain.dto;
 
-import jakarta.validation.constraints.Future;
 import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
 import lombok.Getter;
@@ -15,16 +14,11 @@ public class LoanDto {
 
     private Long idLoan;
 
-    @NotNull
-    @Future
     private LocalDate loanDate;
 
     @NotNull
-    @Future
     private LocalDate returnExpectedDate;
 
-    @NotNull
-    @Future
     private LocalDate returnEffectiveDate;
 
     @NotNull
@@ -41,5 +35,7 @@ public class LoanDto {
     private AdminDto adminDto;
 
     private UserDto userDto;
+
+    private PendingDto pendingDto;
 
 }

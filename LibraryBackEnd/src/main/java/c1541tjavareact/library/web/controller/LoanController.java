@@ -44,6 +44,15 @@ public class LoanController {
         return ResponseEntity.notFound().build();
     }
 
+    @PutMapping("/return/{id}")
+    public ResponseEntity<LoanDto> returnBookLoan(@PathVariable("id") Long idLoan){
+        LoanDto loanUpdated = loanService.returnBookLoan(idLoan);
+        if(loanUpdated!=null){
+            return ResponseEntity.ok(loanUpdated);
+        }
+        return ResponseEntity.notFound().build();
+    }
+
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Loan> deleteLoan(@PathVariable("id") Long idLoan){//TODO
         if(loanService.delete(idLoan)){
