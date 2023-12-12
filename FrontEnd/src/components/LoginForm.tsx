@@ -6,6 +6,7 @@ import * as Yup from 'yup'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useUser } from '../context/UserContext'
+import toast from 'react-hot-toast'
 
 interface typeInitialValues {
   email: string
@@ -43,7 +44,18 @@ export const LoginForm: React.FC = () => {
   const navigate = useNavigate()
 
   const onSubmit = async (values: typeInitialValues) => {
-    await signIn(values.email, values.password, navigate)
+    try {
+      await signIn(values.email, values.password, navigate)
+    } catch (error: any) {
+      if (error.message !== undefined && typeof error.message === 'string' && error.message !== '')
+        toast.error(error.message, {
+          duration: 2000
+        })
+      else
+        toast.error('Error al iniciar sesión', {
+          duration: 2000
+        })
+    }
   }
 
   const { values, errors, handleChange, handleSubmit } = useFormik({
@@ -58,14 +70,14 @@ export const LoginForm: React.FC = () => {
         Iniciar sesión
       </h2>
 
-      <form className="mx-auto w-10/12" action="" onSubmit={handleSubmit}>
+      <form className="mx-auto w-10/12" onSubmit={handleSubmit}>
         <label className="text-base font-[500] leading-[normal] text-blueDark" htmlFor="email">
           Mail
         </label>
         <div className="relative mb-14 flex h-8 w-full items-center gap-2 border-0 border-b-2 border-solid border-[#999] hover:border-blueDark active:border-blueDark">
           <img src={mailIcon} alt="Mail Icon" />
           <input
-            className="w-full border-0 text-base font-[400] leading-[normal] text-[#263238] placeholder-[#ABABAB] focus:outline-none"
+            className="w-full border-0 text-base font-[400] leading-[normal] text-[#263238] placeholder-[#ABABAB] focus:outline-none disabled:opacity-50"
             name="email"
             type="email"
             placeholder="Ingresá tu email"
@@ -84,7 +96,7 @@ export const LoginForm: React.FC = () => {
         <div className="relative mb-14 flex h-8 w-full items-center gap-2 border-0 border-b-2 border-solid border-[#999] hover:border-blueDark">
           <img src={lockIcon} alt="Lock Icon" />
           <input
-            className="w-full border-0 text-base font-[400] leading-[normal] text-[#263238] placeholder-[#ABABAB] focus:outline-none"
+            className="w-full border-0 text-base font-[400] leading-[normal] text-[#263238] placeholder-[#ABABAB] focus:outline-none disabled:opacity-50"
             name="password"
             type={showPass ? 'text' : 'password'}
             placeholder="Ingresá tu contraseña"

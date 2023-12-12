@@ -264,5 +264,91 @@
       "address": "BOLIVAR 207",
       "id": 1701880193247
     }
+  ],
+  "loans": [
+    {
+      "idLoan": 1515158,
+      "loanDate": "15-12-2023",
+      "returnExpectedDate": "04-01-2024",
+      "idBook": 1,
+      "idAdmin": 1,
+      "idUser": 3,
+      "bookDto": {
+        "idBook": 1,
+        "title": "Cien años de soledad",
+        "isbn": "5451651651",
+        "quantity": 10,
+        "idEditorial": 1,
+        "idAuthor": 1,
+        "genre": "Editorial Sudamericana",
+        "image": "/sample/imagen1.png",
+        "authorDto": {
+          "idAuthor": 1,
+          "name": "Gabriel",
+          "lastName": "García Márquez"
+        },
+        "editorialDto": {
+          "idEditorial": 1,
+          "name": "Realismo mágico",
+          "establishedDate": "1990-01-17"
+        }
+      }
+    },
+    {
+      "idLoan": 1515151,
+      "loanDate": "17-12-2023",
+      "returnExpectedDate": "06-01-2024",
+      "idBook": 3,
+      "idAdmin": 1,
+      "idUser": 2,
+      "bookDto": {
+        "idBook": 3,
+        "title": "El amor en los tiempos del cólera",
+        "isbn": "51771651651",
+        "quantity": 3,
+        "idEditorial": 3,
+        "idAuthor": 3,
+        "genre": "Realismo mágico",
+        "image": "/sample/image3.png",
+        "authorDto": {
+          "idAuthor": 3,
+          "name": "Gabriel",
+          "lastName": "García Márquez"
+        },
+        "editorialDto": {
+          "idEditorial": 3,
+          "name": "Editorial Sudamericana",
+          "establishedDate": "1990-01-17"
+        }
+      }
+    },
+    {
+      "idLoan": 5515151,
+      "loanDate": "15-12-2023",
+      "returnExpectedDate": "04-01-2024",
+      "idBook": 2,
+      "idAdmin": 1,
+      "idUser": 3,
+      "bookDto": {
+        "idBook": 2,
+        "title": "1984",
+        "isbn": "541414151",
+        "quantity": 1,
+        "idEditorial": 2,
+        "idAuthor": 2,
+        "genre": "Distopía",
+        "image": "/sample/imagen2.png",
+        "authorDto": {
+          "idAuthor": 2,
+          "name": "George",
+          "lastName": "Orwell"
+        },
+        "editorialDto": {
+          "idEditorial": 2,
+          "name": "De Bolsillo",
+          "establishedDate": "1990-01-17"
+        }
+      }
+    }
   ]
 }

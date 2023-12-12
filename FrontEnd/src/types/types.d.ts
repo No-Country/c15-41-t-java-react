@@ -1,3 +1,5 @@
+
+
 export interface Book {
   idBook: number
   title: string
@@ -28,16 +30,22 @@ export interface User {
 }
 
 export interface Loan {
-  isLoan: boolean
+  idLoan: number
   loanDate: string
   returnExpectedDate: string
-  isBook: number
-  isAdmin: number
-  isUser: number
-  bookDto: null
-  adminDto: null
-  userDto: null
+  idBook: number
+  idAdmin: number
+  idUser: number
+  bookDto: Book
+  adminDto: Admin
+  userDto: User
 }
+
+export interface Admin {
+  idAdmin: number
+  username: string
+}
+
 
 export interface Author {
   name: string

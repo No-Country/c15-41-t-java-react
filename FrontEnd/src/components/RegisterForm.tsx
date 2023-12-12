@@ -5,6 +5,7 @@ import * as Yup from 'yup'
 import type { Author, BookPost, Editorial } from '../types/types'
 import { useUser } from '../context/UserContext'
 import toast from 'react-hot-toast'
+import { blockNonNumericInput } from '../utils/input'
 
 const initialValues: BookPost = {
   title: '',
@@ -27,11 +28,9 @@ const validationSchema = Yup.object({
     .max(50, 'El nombre es demasiado extenso'),
   isbn: Yup.string().required('El isbn es requerido').matches(ISBN_REGEX, 'El ISBN no es valido'),
   quantity: Yup.number()
-  .required('Cantidad es requerida')
-  .min(1, 'El valor debe ser mayor a 0')
-  .max(100, 'El máximo que puede ingresar son 100 copias')
-  .typeError('El valor debe ser numérico')
-  .test('isNumber', 'El valor debe ser numérico', value => value.toString().includes('e')),
+    .required('Cantidad es requerida')
+    .min(1, 'El valor debe ser mayor a 0')
+    .max(100, 'El máximo que puede ingresar son 100 copias'),
   idAuthor: Yup.number().min(1, 'Seleccione autor').required('El autor es requerido'),
   genre: Yup.string().required('El genero es requerido'),
   idEditorial: Yup.number().min(1, 'Seleccione editorial').required('La editorial es requerida')
@@ -144,6 +143,7 @@ export default function RegisterForm({ onSuccess }: { onSuccess: () => void }) {
               placeholder="Ingresá la cantidad"
               value={values.quantity}
               onChange={handleChange}
+              onKeyDown={blockNonNumericInput}
             />
             <small className="absolute -bottom-6 text-xs font-bold text-red-500">
               {errors?.quantity}
