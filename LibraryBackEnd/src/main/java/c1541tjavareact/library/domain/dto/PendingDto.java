@@ -1,7 +1,5 @@
 package c1541tjavareact.library.domain.dto;
 
-import c1541tjavareact.library.persistence.entity.BookReturn;
-import jakarta.persistence.Column;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
@@ -22,8 +20,11 @@ public class PendingDto {
     private LocalDate localPendingDate;
 
     @NotNull
-    private Long idReturn;
+    private Boolean status;
+
+    @NotNull
+    private Long idLoan;
     
-//    private BookReturnDto bookReturnDto; //TODO
+    private LoanDto loanDto;
 
 }

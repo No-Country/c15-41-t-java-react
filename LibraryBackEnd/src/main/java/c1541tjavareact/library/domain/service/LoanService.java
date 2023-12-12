@@ -30,4 +30,8 @@ public class LoanService {
     public boolean delete(Long idLoan){
         return loanCrudRepository.delete(idLoan);
     }
+
+    public LoanDto returnBookLoan(Long idLoan) {
+        return loanCrudRepository.returnBookLoan(idLoan);
+    }
 }

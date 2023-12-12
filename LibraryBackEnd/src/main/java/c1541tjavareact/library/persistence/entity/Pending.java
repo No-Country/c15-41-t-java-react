@@ -23,15 +23,17 @@ public class Pending implements Serializable {
     @Column(nullable = false)
     private String message;
 
-    @Column(name = "id_return", nullable = false)
-    private Long idReturn;
-
     @Column(name = "local_pending_date",nullable = false)
     private LocalDate localPendingDate;
 
-    @OneToOne
-    @JoinColumn(name = "id_return",nullable = false,
-                insertable = false, updatable = false)
-    private BookReturn bookReturn;
+    @Column(nullable = false)
+    private Boolean status;
 
+    @Column(name = "id_loan", nullable = false)
+    private Long idLoan;
+
+    @OneToOne
+    @JoinColumn(name = "id_loan",nullable = false,
+            insertable = false, updatable = false)
+    private Loan loan;
 }
