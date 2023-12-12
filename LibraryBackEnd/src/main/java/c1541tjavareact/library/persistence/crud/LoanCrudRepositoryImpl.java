@@ -53,6 +53,7 @@ public class LoanCrudRepositoryImpl implements LoanCrudRepository {
                 bookDto.get().setQuantity(bookDto.get().getQuantity() - 1);
                 bookCrudRepository.save(bookDto.get());
 
+                loan.setLoanDate(LocalDate.now());
                 Loan loanSaved = loanRepository.save(loan);
 
                 //Save Pending
