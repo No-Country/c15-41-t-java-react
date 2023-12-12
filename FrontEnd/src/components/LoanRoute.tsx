@@ -7,7 +7,7 @@ import Spinner from './Spinner'
 
 export default function LoanRoute() {
   const { fetch } = useUser()
-  const [loans, setUsers] = useState<Loan[] | []>([])
+  const [_, setUsers] = useState<Loan[] | []>([])
   const [isError, setIsError] = useState(false)
   const [page, setPage] = useState(1)
   const PAGE_SIZE = 4
