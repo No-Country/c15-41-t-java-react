@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react'
 import { GoSearch } from 'react-icons/go'
 import type { Book } from '../types/types'
+import { arraysAreEqual, searchIncludes } from '../utils/searchFunctions'
+
 interface SearchBookModifyProps {
   allBooks: Book[]
   onSearchResults: (results: Book[]) => void
@@ -14,21 +16,6 @@ const SearchBookModify: React.FC<SearchBookModifyProps> = ({
 }) => {
   const [filteredProducts, setFilteredProducts] = useState<Book[] | []>([])
   const [searchTerm, setSearchTerm] = useState('')
-
-  function arraysAreEqual(array1: any, array2: any) {
-    return JSON.stringify(array1) === JSON.stringify(array2)
-  }
-
-  function normalizeString(string: string): string {
-    return string
-      .toLowerCase()
-      .normalize('NFD')
-      .replace(/[\u0300-\u036f]/g, '')
-  }
-
-  function searchIncludes(stringSearch: string, stringInclude: string): boolean {
-    return normalizeString(stringSearch).includes(normalizeString(stringInclude))
-  }
 
   useEffect(() => {
     if (searchTerm !== '') {
@@ -73,12 +60,12 @@ const SearchBookModify: React.FC<SearchBookModifyProps> = ({
           className="absolute right-0 top-14 z-10 hidden w-[60vw] rounded-md bg-[#0A7ABF] p-4 text-white shadow-xl group-hover:block min-[750px]:w-[35vw]"
         >
           <p>
+            Puede buscar por <b>Título de la obra, Autor, Género o Editorial.</b>
+            <br />
+            <br />
             Puede escribir las palabras de su búsqueda en
             <b> mayúscula o minúscula, con o sin tilde</b>, y el catálogo recuperará todos los
             resultados.
-            <br />
-            <br />
-            Puede buscar por <b>Título de la obra, Autor, Género o Editorial.</b>
             <br />
             <br />
             Por ejemplo, si busca la palabra "Química", se localizarán también "quimica, Quimica,
