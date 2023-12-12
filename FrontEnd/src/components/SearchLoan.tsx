@@ -18,14 +18,14 @@ const SearchLoan: React.FC<SearchLoanProps> = ({ allLoans, onSearchResults, setP
       setPage(1)
       const filtered = allLoans.filter(
         loan =>
-          loan.idUser.toString().includes(searchTerm) ||
           searchIncludes(loan.bookDto.title, searchTerm) ||
           searchIncludes(loan.bookDto.genre, searchTerm) ||
           searchIncludes(loan.bookDto.editorialDto.name, searchTerm) ||
           searchIncludes(
             `${loan.bookDto.authorDto.name} ${loan.bookDto.authorDto.lastName}`,
             searchTerm
-          )
+          ) ||
+          searchIncludes(`${loan.userDto.name} ${loan.userDto.lastName}`, searchTerm)
       )
       if (!arraysAreEqual(filtered, filteredLoan)) {
         setFilteredLoan(filtered)
@@ -61,10 +61,7 @@ const SearchLoan: React.FC<SearchLoanProps> = ({ allLoans, onSearchResults, setP
         >
           <p>
             Puede buscar por{' '}
-            <b>
-              Nombre y/o Apellido del autor, título, editorial o género de la obra, o Id del
-              miembro.
-            </b>
+            <b>Nombre y/o Apellido del miembro o autor, título, editorial o género de la obra.</b>
             <br />
             <br />
             Puede escribir las palabras de su búsqueda en
