@@ -74,7 +74,6 @@ const UserRegisterForm: React.FC<UserProps> = ({
         }
         await fetch(`http://localhost:3000/users/update/${values.idUser}`, putOptions)
         if (refresh) refresh()
-        if (onSuccess) onSuccess()
         toast.success('El Miembro se editó correctamente', {
           duration: 4000,
           position: 'top-center'
@@ -90,6 +89,7 @@ const UserRegisterForm: React.FC<UserProps> = ({
           }
         }
         await fetch('http://localhost:3000/users/save', postOptions)
+        if (onSuccess) onSuccess()
         toast.success('El Miembro se agregó correctamente', {
           duration: 4000,
           position: 'top-center'
