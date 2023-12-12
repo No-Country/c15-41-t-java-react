@@ -118,15 +118,22 @@ public class LoanCrudRepositoryImpl implements LoanCrudRepository {
             LoanDto loanToUpdate = optLoan.get();
             loanToUpdate.setReturnEffectiveDate(LocalDate.now());
 
-            //Delete pending
+            //Cambio Status Pending a False
             //if(pendingCrudRepository.delete(loanToUpdate.getPendingDto().getIdPending())) {
+            //pendingCrudRepository.fin
+            Optional<PendingDto> optPending = pendingCrudRepository.findByIdLoan(idLoan);
+            if(optPending.isPresent()) {
+                PendingDto pendingDto = optPending.get();
                 BookDto bookDto = loanToUpdate.getBookDto();
                 bookDto.setQuantity(bookDto.getQuantity() + 1);
                 bookCrudRepository.save(bookDto);
 
+                pendingDto.setStatus(Boolean.FALSE);
+                pendingCrudRepository.save(pendingDto);
                 //loanToUpdate.setPendingDto(null);
                 Loan loan = loanDaoMapper.toLoan(loanToUpdate);
                 return loanDaoMapper.toLoanDto(loanRepository.save(loan));
+            }
             //}
 
 

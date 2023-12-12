@@ -38,6 +38,11 @@ public class PendingCrudRepositoryImpl implements PendingCrudRepository {
     }
 
     @Override
+    public Optional<PendingDto> findByIdLoan(Long idLoan) {
+        return pendingRepository.findByIdLoan(idLoan).map(p -> pendingDaoMapper.toPendingDto(p));
+    }
+
+    @Override
     public PendingDto update(Long idPending, PendingDto pendingDto) {
         Optional<PendingDto> optPending = this.getPending(idPending);
         if(optPending.isPresent()){
