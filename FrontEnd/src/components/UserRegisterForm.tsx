@@ -9,6 +9,7 @@ interface UserProps {
   user: User
   setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>
   refresh?: () => void
+  onSuccess?: () => void
 }
 function generateTempId() {
   return new Date().getTime()
@@ -16,7 +17,7 @@ function generateTempId() {
 const validationSchema = Yup.object({
   dni: Yup.string()
     .required('El DNI es obligatorio')
-    .matches(/^(?:\d{7}|\d{8}|\d{10})$/, 'El DNI debe tener 8 dígitos numéricos'),
+    .matches(/^(?:\d{7}|\d{8}|\d{10})$/, 'El DNI debe tener 7, 8 o 10 dígitos numéricos'),
   name: Yup.string()
     .required('El nombre es obligatorio')
     .matches(/^[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ\s]+$/, 'Ingresa un nombre válido'),
@@ -36,7 +37,12 @@ const validationSchema = Yup.object({
   address: Yup.string().required('La dirección es obligatoria')
 })
 
-const UserRegisterForm: React.FC<UserProps> = ({ user, setIsModalOpen, refresh }: UserProps) => {
+const UserRegisterForm: React.FC<UserProps> = ({
+  user,
+  setIsModalOpen,
+  refresh,
+  onSuccess
+}: UserProps) => {
   const { fetch } = useUser()
 
   const isEditMode = !!user.idUser
@@ -68,12 +74,12 @@ const UserRegisterForm: React.FC<UserProps> = ({ user, setIsModalOpen, refresh }
         }
         await fetch(`http://localhost:3000/users/update/${values.idUser}`, putOptions)
         if (refresh) refresh()
-        toast.success('El Socio se editó correctamente', {
+        toast.success('El Miembro se editó correctamente', {
           duration: 4000,
           position: 'top-center'
         })
       } else {
-        // Si no estamos en modo edición, estamos registrando un nuevo usuario
+        // Si no estamos en modo edición, estamos registrando un nuevo miembroo
         const { idUser, ...rest } = values
         const postOptions = {
           method: 'POST',
@@ -83,7 +89,8 @@ const UserRegisterForm: React.FC<UserProps> = ({ user, setIsModalOpen, refresh }
           }
         }
         await fetch('http://localhost:3000/users/save', postOptions)
-        toast.success('El Socio se agregó correctamente', {
+        if (onSuccess) onSuccess()
+        toast.success('El Miembro se agregó correctamente', {
           duration: 4000,
           position: 'top-center'
         })
@@ -104,8 +111,8 @@ const UserRegisterForm: React.FC<UserProps> = ({ user, setIsModalOpen, refresh }
       <div className="sm:max-h[40%]  rounded-[40px] bg-grey sm:max-w-[70%] xl:w-full">
         <h2 className="mx-auto w-10/12 py-8 text-2xl font-bold leading-normal text-blueDark">
           {user.name
-            ? `Actualización del Socio: ${user.name} ${user.lastName}`
-            : 'Registro de un Socio Nuevo'}
+            ? `Actualización del Miembro: ${user.name} ${user.lastName}`
+            : 'Registro de un Miembro Nuevo'}
           <span className="text-sm text-blueDark"> (Los campos con * son obligatorios) </span>
         </h2>
         <form className="mx-auto w-10/12 " onSubmit={handleSubmit}>

@@ -5,6 +5,7 @@ import * as Yup from 'yup'
 import type { Author, BookPost, Editorial } from '../types/types'
 import { useUser } from '../context/UserContext'
 import toast from 'react-hot-toast'
+import { blockNonNumericInput } from '../utils/input'
 
 const initialValues: BookPost = {
   title: '',
@@ -29,14 +30,13 @@ const validationSchema = Yup.object({
   quantity: Yup.number()
     .required('Cantidad es requerida')
     .min(1, 'El valor debe ser mayor a 0')
-    .max(100, 'El maximo que puede ingresar son 1000 copias')
-    .typeError('El valor debe ser numérico'),
+    .max(100, 'El máximo que puede ingresar son 100 copias'),
   idAuthor: Yup.number().min(1, 'Seleccione autor').required('El autor es requerido'),
   genre: Yup.string().required('El genero es requerido'),
   idEditorial: Yup.number().min(1, 'Seleccione editorial').required('La editorial es requerida')
 })
 
-export default function RegisterForm() {
+export default function RegisterForm({ onSuccess }: { onSuccess: () => void }) {
   const [authors, setAuthors] = useState<Author[]>([])
   const [editorials, setEditorials] = useState<Editorial[]>([])
   const [mockGenres, setMockGenres] = useState<string[]>([])
@@ -87,6 +87,7 @@ export default function RegisterForm() {
       await fetch('http://localhost:3000/books/save', postOptions)
       resetForm()
       toast.success('Su libro se agregó correctamente', { duration: 4000, position: 'top-center' })
+      onSuccess()
     } catch (error) {
       toast.error('Error al agregar el libro', { duration: 4000, position: 'top-center' })
     }
@@ -142,6 +143,7 @@ export default function RegisterForm() {
               placeholder="Ingresá la cantidad"
               value={values.quantity}
               onChange={handleChange}
+              onKeyDown={blockNonNumericInput}
             />
             <small className="absolute -bottom-6 text-xs font-bold text-red-500">
               {errors?.quantity}

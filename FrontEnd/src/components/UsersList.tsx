@@ -10,7 +10,7 @@ import Spinner from './Spinner'
 export default function UsersList() {
   const { fetch } = useUser()
   const [users, setUsers] = useState<User[] | []>([])
-  const [fetchError, setFetchError] = useState(false)
+  const [isError, setIsError] = useState(false)
   const [page, setPage] = useState(1)
   const PAGE_SIZE = 4
   const [searchResults, setSearchResults] = useState<User[] | []>([])
@@ -23,13 +23,13 @@ export default function UsersList() {
   async function fetchUsers(): Promise<void> {
     try {
       setIsLoading(true)
-      setFetchError(false)
-      const users = await fetch('http://localhost:3000/users')
+      setIsError(false)
+      const users = await fetch('http://localhost:3000/users/all')
       setUsers(users)
       setSearchResults(users)
     } catch (error) {
       console.error(error)
-      setFetchError(true)
+      setIsError(true)
     } finally {
       setIsLoading(false)
     }
@@ -40,18 +40,13 @@ export default function UsersList() {
     })
   }, [])
 
-  if (fetchError) {
-    return <p>Error cargando usuarios </p>
-  }
-  if (users.length === 0) {
-    return <p className="mt-4">No hay registros</p>
-  }
-
   return (
     <div>
       <SearchUser allUsers={users} onSearchResults={handleSearchResults} setPage={setPage} />
       {isLoading ? (
         <Spinner />
+      ) : isError ? (
+        <p className="p-10 text-center">Error cargando miembros</p>
       ) : (
         <div className="min-h-64 my-10 flex flex-col items-center justify-evenly">
           <table className="min-w-full  table-auto border-collapse rounded border-[1px] border-solid border-slate-800 max-lg:hidden">
@@ -85,20 +80,20 @@ export default function UsersList() {
               }
             })}
           </div>
-          <div className="mt-4 justify-self-end pb-8">
-            <Pagination
-              count={Math.ceil(searchResults.length / PAGE_SIZE)}
-              variant="outlined"
-              shape="rounded"
-              color="primary"
-              page={page}
-              onChange={(_, value) => {
-                setPage(value)
-              }}
-            />
-          </div>
         </div>
       )}
+      <div className="flex items-center justify-center pb-8">
+        <Pagination
+          count={Math.ceil(searchResults.length / PAGE_SIZE)}
+          variant="outlined"
+          shape="rounded"
+          color="primary"
+          page={page}
+          onChange={(_, value) => {
+            setPage(value)
+          }}
+        />
+      </div>
     </div>
   )
 }

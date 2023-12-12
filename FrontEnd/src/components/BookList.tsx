@@ -11,16 +11,18 @@ const BookList: React.FC = () => {
   const [searchResults, setSearchResults] = useState<Book[] | []>([])
   const [page, setPage] = useState(1)
   const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [isError, setIsError] = useState(false)
   const PAGE_SIZE = 6 // podemos ponerlo como variable de entorno
   const { fetch } = useUser()
 
   const getBooks = useCallback(async () => {
     try {
       setIsLoading(true)
-      const books = await fetch('http://localhost:3000/books')
+      const books = await fetch('http://localhost:3000/books/all')
       setBooks(books)
       setSearchResults(books)
     } catch (error) {
+      setIsError(true)
       console.error(error)
     } finally {
       setIsLoading(false)
@@ -40,21 +42,23 @@ const BookList: React.FC = () => {
   return (
     <div className="flex h-full w-full flex-col items-center">
       <SearchBookModify allBooks={books} onSearchResults={handleSearchResults} setPage={setPage} />
-      <div className="grid w-full items-center justify-center gap-x-14 gap-y-5 py-5 align-middle lg:grid-cols-2">
-        {isLoading ? (
-          <Spinner />
-        ) : searchResults.length > 0 ? (
-          searchResults.map((book, index) => {
+      {isLoading ? (
+        <Spinner />
+      ) : isError ? (
+        <p className="p-10 text-center">Error cargando libros</p>
+      ) : searchResults.length > 0 ? (
+        <div className="grid w-full items-center justify-center gap-x-14 gap-y-5 py-5 align-middle lg:grid-cols-2">
+          {searchResults.map((book, index) => {
             if (index < page * PAGE_SIZE && index >= (page - 1) * PAGE_SIZE) {
               return <BookCard key={book.idBook} {...book} refresh={getBooks} />
             } else {
               return null
             }
-          })
-        ) : (
-          <p>No se encontraron coincidencias</p>
-        )}
-      </div>
+          })}
+        </div>
+      ) : (
+        <p className="p-10 text-center">No se encontraron coincidencias</p>
+      )}
       <div className="justify-self-end pb-8">
         <Pagination
           count={Math.ceil(searchResults.length / PAGE_SIZE)}
