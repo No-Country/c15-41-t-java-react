@@ -36,6 +36,9 @@ export default function LoanRoute() {
 
   return (
     <div className="flex h-full w-full flex-col items-center px-24 max-lg:px-12 max-sm:px-6">
+      <h2 className="w-10/12 py-8 text-2xl font-bold leading-normal text-blueDark">
+        Libros en prestamo
+      </h2>
       {isLoading ? (
         <Spinner />
       ) : isError ? (
