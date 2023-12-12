@@ -25,7 +25,11 @@ Ver Historias de Usuarios</a>
 ![TypeScript](https://img.shields.io/badge/TypeScript-blue.svg?style=for-the-badge&logo=TypeScript&logoColor=white)
 ![Tailwind](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)   
 
- Roció Alcalá / Lohana Orellano / Jhordy Gavinchu / Matías Francisco Luengo
+ <a  href="https://github.com/rocio-alcala">
+Rocio Alcala</a> /  <a  href="">
+Lohana Orellano</a>  / <a  href="">
+Jhordy Gavinchu </a>/ <a  href="">
+Matías Francisco Luengo</a>
 
 
 # Stack backend
@@ -34,7 +38,12 @@ Ver Historias de Usuarios</a>
 ![Hibernate](https://img.shields.io/badge/Hibernate-59666C?style=for-the-badge&logo=Hibernate&logoColor=white)
 ![JWT](https://img.shields.io/badge/JWT-black?style=for-the-badge&logo=JSON%20web%20tokens)
 
-Jean Carlo / Efrén Morales / Jeyson Velázquez / German Anselmo / Jesús Monroy
+<a  href="">
+Jean Carlo</a> / <a  href="">
+Efrén Morales</a> / <a  href="">
+Jeyson Velázquez</a> / <a  href="">
+German Anselmo</a> / <a  href="">
+Jesús Monroy</a>
 
 # Stack QA
 <div align="start">
@@ -42,7 +51,9 @@ Jean Carlo / Efrén Morales / Jeyson Velázquez / German Anselmo / Jesús Monroy
 <img width="50"  src="https://img.shields.io/badge/Excel-green"/>
 <img width="50"  src="https://img.shields.io/badge/Word-blue"/>
 </div>
-Pedro Quirós / Claudia Sánchez
+<a  href="">
+Pedro Quirós</a> / <a href="">
+Claudia Sánchez</a>
 
 # Stack Diseño UX/UI
 <div>
@@ -51,10 +62,12 @@ Pedro Quirós / Claudia Sánchez
  <img width="80"  src="https://img.shields.io/badge/Notion-black"/>
  <img width="80" height="20"  src="https://img.shields.io/badge/Adobe%20Photoshop-red"/>
 </div>
-Milagros Cifre.
+<a href="">
+Milagros Cifre</a>
 
 # Project Manager:  
-José Lara.
+<a href="">
+José Lara</a>
 
 # Gestion y comunicación
 
