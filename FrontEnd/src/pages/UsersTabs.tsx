@@ -35,10 +35,10 @@ const UsersTabs = () => {
           className="flex w-full flex-col flex-wrap items-center justify-center bg-[#E6E7E9] px-2 text-center text-base font-[500] leading-[24px] text-blueLight hover:cursor-pointer aria-selected:bg-blueLight aria-selected:text-white"
           selectedClassName="bg-blueLight"
         >
-          <span className="inline">Socios registrados</span>
+          <span className="inline">Miembros registrados</span>
         </Tab>
         <Tab className="flex w-full flex-col flex-wrap items-center justify-center bg-[#E6E7E9] px-2 text-center text-base font-[500] leading-[24px] text-blueLight hover:cursor-pointer aria-selected:bg-blueLight aria-selected:text-white">
-          Registrar nuevo Socio
+          Registrar nuevo Miembro
         </Tab>
       </TabList>
       <TabPanel>

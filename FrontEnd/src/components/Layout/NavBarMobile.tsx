@@ -22,14 +22,14 @@ export const NavBarMobile: React.FC = () => {
         className="text-md mx-auto flex w-12 flex-col items-center gap-y-2 text-center font-bold text-white no-underline hover:underline"
       >
         <img className="w-full" src="/icons/mobile/Book.png" alt="Icono de libro" />
-        Prestamos
+        Préstamos
       </Link>
       <Link
-        to="/usuarios"
+        to="/miembros"
         className="text-md mx-auto flex w-12 flex-col items-center gap-y-2 text-center font-bold text-white no-underline hover:underline"
       >
-        <img className="w-full" src="/icons/mobile/Customer.png" alt="Icono de usuario" />
-        Socios
+        <img className="w-full" src="/icons/mobile/Customer.png" alt="Icono de miembro" />
+        Miembros
       </Link>
     </nav>
   )
