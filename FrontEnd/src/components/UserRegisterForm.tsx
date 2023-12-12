@@ -24,9 +24,12 @@ const validationSchema = Yup.object({
     .required('El apellido es obligatorio')
     .matches(/^[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ'\s]+$/, 'Ingresa un nombre válido'),
   email: Yup.string()
-  .email('El email no es valido').required('El email es obligatorio')
-  .matches(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.(com|co|es|it|net|org|gov|edu|mil|io|xyz|info|biz|mx|ar)$/,
-    'El email no es válido'),
+    .email('El email no es valido')
+    .required('El email es obligatorio')
+    .matches(
+      /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.(com|co|es|it|net|org|gov|edu|mil|io|xyz|info|biz|mx|ar)$/,
+      'El email no es válido'
+    ),
   phoneNumber: Yup.string()
     .required('El celular es obligatorio')
     .matches(/^\d{10}$/, 'Ingresa un número de celular válido'),
