@@ -43,7 +43,6 @@ public class LoanCrudRepositoryImpl implements LoanCrudRepository {
     @Override
     public LoanDto save(LoanDto loanDto) {
 
-
         Loan loan = loanDaoMapper.toLoan(loanDto);
 
         Optional<BookDto> bookDto = bookCrudRepository.getBook(loanDto.getIdBook());
@@ -96,7 +95,9 @@ public class LoanCrudRepositoryImpl implements LoanCrudRepository {
             loanToUpdate.setIdBook(loanDto.getIdBook());
             loanToUpdate.setIdAdmin(loanDto.getIdAdmin());
             loanToUpdate.setIdUser(loanDto.getIdUser());
-            return this.save(loanToUpdate);
+
+            Loan loan = loanDaoMapper.toLoan(loanToUpdate);
+            return loanDaoMapper.toLoanDto(loanRepository.save(loan));
         }
         return null;
     }
@@ -119,8 +120,6 @@ public class LoanCrudRepositoryImpl implements LoanCrudRepository {
             loanToUpdate.setReturnEffectiveDate(LocalDate.now());
 
             //Cambio Status Pending a False
-            //if(pendingCrudRepository.delete(loanToUpdate.getPendingDto().getIdPending())) {
-            //pendingCrudRepository.fin
             Optional<PendingDto> optPending = pendingCrudRepository.findByIdLoan(idLoan);
             if(optPending.isPresent()) {
                 PendingDto pendingDto = optPending.get();
@@ -134,9 +133,6 @@ public class LoanCrudRepositoryImpl implements LoanCrudRepository {
                 Loan loan = loanDaoMapper.toLoan(loanToUpdate);
                 return loanDaoMapper.toLoanDto(loanRepository.save(loan));
             }
-            //}
-
-
         }
         return null;
     }
