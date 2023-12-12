@@ -33,10 +33,13 @@ Matías Francisco Luengo</a>
 
 
 # Stack backend
+![Java](https://img.shields.io/badge/-Java-%20%23abb2b9%20?style=for-the-badge&logo=CoffeeScript&logoColor=blue)
 ![Spring](https://img.shields.io/badge/Spring-6DB33F?style=for-the-badge&logo=spring&logoColor=white)
-![Java](https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=java&logoColor=white)
-![Hibernate](https://img.shields.io/badge/Hibernate-59666C?style=for-the-badge&logo=Hibernate&logoColor=white)
+![Spring Boot](https://img.shields.io/badge/-Spring%20Boot-6DB33F?style=for-the-badge&logo=Spring%20Boot&logoColor=white)
+![Spring Security](https://img.shields.io/badge/-Spring%20Boot-6DB33F?style=for-the-badge&logo=Spring%20Security&logoColor=white)
 ![JWT](https://img.shields.io/badge/JWT-black?style=for-the-badge&logo=JSON%20web%20tokens)
+![Hibernate](https://img.shields.io/badge/Hibernate-59666C?style=for-the-badge&logo=Hibernate&logoColor=white)
+![MySQL](https://img.shields.io/badge/-MySQL-%234479A1?style=for-the-badge&logo=MySQL&logoColor=white)
 
 <a  href="">
 Jean Carlo</a> / <a  href="">
