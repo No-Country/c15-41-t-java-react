@@ -1,4 +1,4 @@
-import { IoTrashOutline, IoPencil } from 'react-icons/io5'
+import { IoTrashOutline, IoPencil, IoEyeOutline } from 'react-icons/io5'
 import type { User } from '../types/types'
 import DeleteModal from './DeleteModal'
 import { IoMdClose } from 'react-icons/io'
@@ -19,42 +19,49 @@ export default function UserRow({ user, refresh }: UserRowProps) {
 
   return (
     <>
-      <tr>
-        <td
-          onClick={() => {
-            setIsModalLoansOpen(true)
-          }}
-          className="cursor-pointer border-[1px] border-x-0 border-solid border-slate-200 text-center"
-        >
+      <tr className="h-12">
+        <td className="border-[1px] border-x-0 border-solid border-slate-200 text-center">
           {user.idUser}
         </td>
         <td className="border-[1px] border-x-0 border-solid border-slate-200 text-center">
           {user.name}
         </td>
-        <td className="border-[1px] border-x-0 border-solid border-slate-200  text-center">
+        <td className="border-[1px] border-x-0 border-solid border-slate-200 text-center">
           {user.lastName}
         </td>
         <td className="border-[1px] border-x-0 border-solid border-slate-200 text-center">
           {user.phoneNumber}
         </td>
-        <td className="border-[1px] border-x-0 border-solid border-slate-200  text-center">
+        <td className="border-[1px] border-x-0 border-solid border-slate-200 text-center">
           {user.address}
         </td>
-        <td className="border-[1px] border-x-0 border-solid border-slate-200  text-center">
+        <td className="border-[1px] border-x-0 border-solid border-slate-200 text-center">
           {user.email}
         </td>
-        <td className="border-[1px] border-x-0 border-solid border-slate-200  text-center">
-          <div className="text-base hover:cursor-pointer" onClick={() => setIsModalOpen(true)}>
-            <IoPencil size={20} />
-          </div>
-
-          <div
-            onClick={() => {
-              setIsModalDeleteOpen(true)
-            }}
-            className="hover:cursor-pointer"
-          >
-            <IoTrashOutline size={20} />
+        <td className="border-[1px] border-x-0 border-solid border-slate-200 text-center">
+          <div className="flex items-center justify-end">
+            <div
+              onClick={() => {
+                setIsModalLoansOpen(true)
+              }}
+              className="increase-scale mr-1 h-full hover:cursor-pointer"
+            >
+              <IoEyeOutline size={20} />
+            </div>
+            <div
+              className="increase-scale mr-1 text-base hover:cursor-pointer"
+              onClick={() => setIsModalOpen(true)}
+            >
+              <IoPencil size={20} />
+            </div>
+            <div
+              onClick={() => {
+                setIsModalDeleteOpen(true)
+              }}
+              className="increase-scale mr-1 hover:cursor-pointer"
+            >
+              <IoTrashOutline size={20} />
+            </div>
           </div>
         </td>
       </tr>
