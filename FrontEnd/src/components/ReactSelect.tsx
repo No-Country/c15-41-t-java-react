@@ -28,13 +28,13 @@ export const ReactSelect: React.FC<ReactSelectProps> = ({
           unstyled={true}
           className="reactSelect"
           styles={{
-            menu: provided => ({
+            menu: (provided: any) => ({
               ...provided,
               backgroundColor: 'rgb(230,231,233)',
               border: '1px solid',
               color: 'rgb(5,41,64)'
             }),
-            option: provided => ({
+            option: (provided: any) => ({
               ...provided,
               paddingLeft: '2px',
               '&:hover': {
