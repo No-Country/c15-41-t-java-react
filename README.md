@@ -19,6 +19,8 @@ Poder planificar mejoras en el servicio y la adquisición de nuevos materiales.
 <a  href="https://docs.google.com/document/d/1sUp5d79Wj9pCMmNlVJ3CasRsjxBZpcl_KA0-kB5ck0M/edit?usp=sharing">
 Ver Historias de Usuarios</a>
 <div>
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/trello/trello-plain-wordmark.svg" alt="Logo" width="90" height="90">
+<img width="50"  src="https://img.shields.io/badge/Google Sheets-green"/>
 
 # Stack Frontend
 ![React](https://img.shields.io/badge/-ReactJs-61DAFB?logo=react&logoColor=white&style=for-the-badge)           
@@ -50,13 +52,17 @@ Jesús Monroy</a>
 
 # Stack QA
 <div align="start">
-<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/trello/trello-plain-wordmark.svg" alt="Logo" width="90" height="90">
-<img width="50"  src="https://img.shields.io/badge/Excel-green"/>
-<img width="50"  src="https://img.shields.io/badge/Word-blue"/>
+
+<img width="120" src="https://img.shields.io/badge/Google%20Sheets-34A853?style=for-the-badge&logo=google-sheets&logoColor=white"/>
+<img width="90" src="https://img.shields.io/badge/Google%20Docs-blue?style=flat-square"/>
+<img width="80" src="https://img.shields.io/badge/Lightshot%20-purple?style=flat-square"/>
+
 </div>
 <a  href="">
-Pedro Quirós</a> / <a href="">
-Claudia Sánchez</a>
+Pedro Quirós</a> / <a href="https://www.linkedin.com/in/pedroquiros/">
+Claudia Sánchez</a> <a  href="https://www.linkedin.com/in/claudia-rita-s%C3%A1nchez-9b021876/">
+
+
 
 # Stack Diseño UX/UI
 <div>
