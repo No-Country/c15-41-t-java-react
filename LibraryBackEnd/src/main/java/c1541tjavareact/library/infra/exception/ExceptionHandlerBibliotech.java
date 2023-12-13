@@ -29,13 +29,19 @@ public class ExceptionHandlerBibliotech {
     }
 
     @ExceptionHandler(SQLIntegrityConstraintViolationException.class)
-    public ResponseEntity<Map<String, Object>> handleConstraintViolationException(
+    public ResponseEntity<Map<String, String>> handleConstraintViolationException(
             SQLIntegrityConstraintViolationException exception){
-        Map<String, Object> errors = new HashMap<>();
-        errors.put("valorDuplicado", exception.getMessage().substring(
-                exception.getMessage().indexOf(" '") + 2,
-                exception.getMessage().indexOf("' ")
-        ));
+        Map<String, String> errors = new HashMap<>();
+        String message = exception.getMessage();
+        if (message != null && message.startsWith("Duplicate")) {
+            errors.put("valorDuplicado", message.substring(
+                    message.indexOf(" '") + 2,
+                    message.indexOf("' ")
+            ));
+        } else if (message != null && message.startsWith("Cannot")){
+            errors.put("message", "Acción no permitida");
+        }
+        else errors.put("message","Error de restricción de integridad" + message);
         return ResponseEntity.badRequest().body(errors);
     }
 
