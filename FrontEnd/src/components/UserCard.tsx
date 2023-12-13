@@ -3,6 +3,7 @@ import { User } from '../types/types'
 import { useState } from 'react'
 import DeleteModal from './DeleteModal'
 import { IoMdClose } from 'react-icons/io'
+import UserLoans from './UserLoans'
 
 interface UserCardProps {
   key: User['idUser']
@@ -12,6 +13,7 @@ interface UserCardProps {
 
 export default function UserCard({ user, refresh }: UserCardProps) {
   const [isModalDeleteOpen, setIsModalDeleteOpen] = useState(false)
+  const [isModalLoansOpen, setIsModalLoansOpen] = useState(false)
 
   return (
     <div className="flex-col p-3">
@@ -29,7 +31,12 @@ export default function UserCard({ user, refresh }: UserCardProps) {
           <IoTrashOutline size={20} />
         </div>
       </div>
-      <div className="flex-col p-4">
+      <div
+        onClick={() => {
+          setIsModalLoansOpen(true)
+        }}
+        className="cursor-pointer flex-col p-4"
+      >
         <p>
           <span className="font-medium text-black">ID: </span>
           {user.idUser}
@@ -59,6 +66,19 @@ export default function UserCard({ user, refresh }: UserCardProps) {
             className="absolute right-4 top-4 cursor-pointer text-5xl font-semibold text-black hover:scale-125"
             onClick={() => {
               setIsModalDeleteOpen(false)
+            }}
+          >
+            <IoMdClose />
+          </div>
+        </div>
+      )}
+      {isModalLoansOpen && (
+        <div className="fixed inset-0 z-50  bg-white opacity-100">
+          <UserLoans user={user} />
+          <div
+            className="increase-scale absolute right-2 top-2 cursor-pointer text-5xl font-semibold text-black"
+            onClick={() => {
+              setIsModalLoansOpen(false)
             }}
           >
             <IoMdClose />
