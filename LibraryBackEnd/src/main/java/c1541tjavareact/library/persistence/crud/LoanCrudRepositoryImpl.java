@@ -3,12 +3,17 @@ package c1541tjavareact.library.persistence.crud;
 import c1541tjavareact.library.domain.dto.BookDto;
 import c1541tjavareact.library.domain.dto.LoanDto;
 import c1541tjavareact.library.domain.dto.PendingDto;
+import c1541tjavareact.library.domain.dto.UserDto;
 import c1541tjavareact.library.domain.repository.LoanCrudRepository;
 import c1541tjavareact.library.domain.repository.LoanRepository;
 import c1541tjavareact.library.infra.exception.BookException;
+import c1541tjavareact.library.infra.exception.EmailException;
 import c1541tjavareact.library.persistence.entity.Loan;
 import c1541tjavareact.library.persistence.mapper.LoanDaoMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.MailException;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
@@ -29,6 +34,9 @@ public class LoanCrudRepositoryImpl implements LoanCrudRepository {
 
     @Autowired
     private PendingCrudRepositoryImpl pendingCrudRepository;
+
+    @Autowired
+    private JavaMailSender javaMailSender;
 
     @Override
     public List<LoanDto> getAll() {
@@ -134,4 +142,46 @@ public class LoanCrudRepositoryImpl implements LoanCrudRepository {
         }
         return null;
     }
+
+    @Override
+    public void sendMail(Long idLoan) {
+        Optional<LoanDto> optLoanDto = this.getLoan(idLoan);
+        if(optLoanDto.isPresent()) {
+            LoanDto loanDto = optLoanDto.get();
+            this.sendTaskMail(loanDto);
+        }
+    }
+
+    //Funcion envio email
+    public void sendTaskMail(LoanDto loanDto){
+        try {
+            SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
+            UserDto userDto = loanDto.getUserDto();
+
+            simpleMailMessage.setTo(userDto.getEmail());
+            simpleMailMessage.setFrom(loanDto.getAdminDto().getEmail());
+            simpleMailMessage.setSubject("Recordatorio devolucion de libro ");
+            simpleMailMessage.setText("""
+                    Hola %s %s,
+                                        
+                    La devolucion del libro %s es el dia %s.
+                                        
+                    Gracias,
+                                        
+                    %s %s
+                    Grupo Bibliotech
+                    """
+                    .formatted(userDto.getName(), userDto.getLastName(),
+                            loanDto.getBookDto().getTitle(),
+                            loanDto.getReturnExpectedDate(),
+                            loanDto.getAdminDto().getName(), loanDto.getAdminDto().getLastName()
+                    )
+            );
+
+            javaMailSender.send(simpleMailMessage);
+        }catch (MailException e) {
+            throw new EmailException("Error durante el envio de un email");
+        }
+    }
+
 }

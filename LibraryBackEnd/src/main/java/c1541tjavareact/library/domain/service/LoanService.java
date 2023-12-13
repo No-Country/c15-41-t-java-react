@@ -34,4 +34,8 @@ public class LoanService {
     public LoanDto returnBookLoan(Long idLoan) {
         return loanCrudRepository.returnBookLoan(idLoan);
     }
+
+    public void sendMail(Long idLoan) {
+        loanCrudRepository.sendMail(idLoan);
+    }
 }

@@ -19,7 +19,7 @@ INSERT IGNORE INTO users (id_user, dni, email, name, last_name, phone_number, ad
 INSERT IGNORE INTO users (id_user, dni, email, name, last_name, phone_number, address, is_active) VALUES (7, '777778', 'martin.gonzalez17@gmail.com', 'Martin', 'Gonzalez', '777777778', 'Calle bombonera 901', true);
 INSERT IGNORE INTO users (id_user, dni, email, name, last_name, phone_number, address, is_active) VALUES (8, '888889', 'valentina.diaz18@gmail.com', 'Valentina', 'Diaz', '888888889', 'Calle del oceano 234', true);
 INSERT IGNORE INTO users (id_user, dni, email, name, last_name, phone_number, address, is_active) VALUES (9, '999990', 'facundo.fernandez19@gmail.com', 'Facundo', 'Fernandez', '999999990', 'Calle del norte 567', true);
-INSERT IGNORE INTO users (id_user, dni, email, name, last_name, phone_number, address, is_active) VALUES (10, '101011', 'natalia.molina20@gmail.com', 'Natalia', 'Molina', '101010111', 'Calle ultima', true);
+INSERT IGNORE INTO users (id_user, dni, email, name, last_name, phone_number, address, is_active) VALUES (10, '101011', 'perritogarces@gmail.com', 'Natalia', 'Molina', '101010111', 'Calle ultima', true);
 
 INSERT IGNORE INTO books (id_book, title, isbn, genre, quantity, id_author, id_editorial) VALUES (1, 'Harry Potter 1', '978-665527862', 'ACTION', 2, 1, 1);
 INSERT IGNORE INTO books (id_book, title, isbn, genre, quantity, id_author, id_editorial) VALUES (2, 'Cien años de soledad', '978-0307474729', 'FANTASY', 5, 2, 2);
@@ -29,3 +29,4 @@ INSERT IGNORE INTO books (id_book, title, isbn, genre, quantity, id_author, id_e
 INSERT IGNORE INTO books (id_book, title, isbn, genre, quantity, id_author, id_editorial) VALUES (6, 'Fahrenheit 451', '978-8490321478', 'Fantasy', 6, 1, 2);
 
 INSERT IGNORE INTO admins (id_admin, name, last_name, email, password) VALUES (1, 'José', 'Lara', 'jose.lara@gmail.com', '$2a$10$nFqAPEAI/QjNNunc1q3yt.jm8WKW/iNU9.ee0WamKdwqLnp2Ai4jK');
+INSERT IGNORE INTO admins (id_admin, name, last_name, email, password) VALUES (2, 'José', 'Lara', 'bibliotech.c15@gmail.com', '$2a$12$YWG.dX4vnhM/1sMIwvsee.lYghep2sVhgcmghaoFxESPnnIeOSwgK');

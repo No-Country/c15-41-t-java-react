@@ -53,6 +53,13 @@ public class ExceptionHandlerBibliotech {
         return ResponseEntity.badRequest().body(errors);
     }
 
+    @ExceptionHandler(EmailException.class)
+    public ResponseEntity<Map<String, Object>> handleEmailException(BookException exception){
+        Map<String, Object> errors = new HashMap<>();
+        errors.put("ErrorEmail", exception.getMessage());
+        return ResponseEntity.badRequest().body(errors);
+    }
+
 
     private record DataError(String field, String error){
         public DataError(FieldError error){
