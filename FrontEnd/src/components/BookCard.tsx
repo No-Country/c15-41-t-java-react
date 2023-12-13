@@ -5,6 +5,7 @@ import imgEditar from '../assets/icons/Edit.svg'
 import { IoMdClose } from 'react-icons/io'
 import EditBook from './EditBook'
 import DeleteModal from './DeleteModal'
+import BookDetail from './BookDetail'
 
 interface Props extends Book {
   refresh: () => void
@@ -127,54 +128,23 @@ const BookCard: React.FC<Props> = ({
         </div>
       )}
       {isModalDetails && (
-        <div className="fixed inset-0 z-50 bg-white">
-          <div className="relative flex h-full w-full items-center justify-center">
-            <div className=" flex h-fit w-11/12 flex-row justify-center pb-10 lg:pb-0">
-              <div className="flex flex-col items-center bg-[#0A7ABF] bg-opacity-5 p-6 min-[400px]:min-w-[300px]">
-                <div className="bg-cover">
-                  <img
-                    className="h-[145px] w-[95px] shadow-lg "
-                    src={image ?? '/sample/image3.png'}
-                    alt={title}
-                  />
-                </div>
-                <div className="xs:text-sm flex h-auto w-full flex-col lg:gap-2">
-                  <h3 className="text-lg text-blueLight"> Titulo: {title}</h3>
-                  <p className="">
-                    <span className="font-bold text-black">Autor: </span>
-                    {`${authorDto.name}  ${authorDto.lastName}`}
-                  </p>
-                  <p>
-                    <span className="font-bold text-black">Genero: </span>
-                    {genre.charAt(0) + genre.toLowerCase().slice(1)}
-                  </p>
-                  <p>
-                    <span className="font-bold text-black">Editorial: </span>
-                    {editorialDto.name}
-                  </p>
-                  <p>
-                    <span className="font-bold text-black">ISBN: </span>
-                    {isbn}
-                  </p>
-                  <br />
-                  <p>
-                    <span className="font-bold text-black">Cantidad: </span>
-                    {quantity}
-                  </p>
-                  <br />
-                  <button className="text-md flex h-10 w-full items-center justify-center rounded-[32px] border-none bg-blueDark font-extrabold leading-normal text-white shadow-btn hover:cursor-pointer xl:h-12">
-                    Prestar libro
-                  </button>
-                </div>
-              </div>
-              <div
-                className="increase-scale absolute right-0 top-2 cursor-pointer text-5xl font-semibold text-black"
-                onClick={() => {
-                  setIsModalDetails(false)
-                }}
-              >
-                <IoMdClose />
-              </div>
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-white">
+          <div className="relative flex h-full w-11/12 flex-row items-center justify-center">
+            <BookDetail
+              id={bookData.idBook}
+              {...bookData}
+              refresh={() => {
+                refresh()
+                setIsModalDetails(false)
+              }}
+            />
+            <div
+              className="increase-scale absolute right-0 top-2 cursor-pointer text-5xl font-semibold text-black"
+              onClick={() => {
+                setIsModalDetails(false)
+              }}
+            >
+              <IoMdClose />
             </div>
           </div>
         </div>

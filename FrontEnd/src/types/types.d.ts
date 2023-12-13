@@ -1,5 +1,3 @@
-
-
 export interface Book {
   idBook: number
   title: string
@@ -45,7 +43,6 @@ export interface Admin {
   idAdmin: number
   username: string
 }
-
 
 export interface Author {
   name: string

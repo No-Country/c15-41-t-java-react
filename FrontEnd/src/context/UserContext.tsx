@@ -172,7 +172,13 @@ export const UserProvider: FC<{
     })
 
     if (!response.ok) {
-      throw new Error('Error de autenticación')
+      try {
+        const error = await response.json()
+        throw new Error(error)
+      } catch (error) {
+        // console.log('error', error)
+        throw new Error('Request error')
+      }
     }
 
     // TODO Temporalmente, mientras no se implemente el backend(en DELETE)
