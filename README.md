@@ -34,10 +34,9 @@ Poder planificar mejoras en el servicio y la adquisición de nuevos materiales.
 ![React Router](https://img.shields.io/badge/React_Router-CA4245?style=for-the-badge&logo=react-router&logoColor=white)
 ![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white)
 
-<a href="https://github.com/rocio-alcala">Rocio Alcala</a> /
-<a href="">Lohana Orellano</a> /
-<a href="">Jhordy Gavinchu </a> /
-<a href="">Matías Francisco Luengo</a>
+| **Rocio Alcala** | **Lohana Orellano** | **Jhordy Gavinchu** | **Matías Luengo** |
+| :---: | :---: | :---: | :---: |
+| <a href="https://github.com/rocio-alcala"><img src="https://img.shields.io/badge/-GitHub-181717?style=flat-square&logo=github&logoColor=white"></a> | <a href="https://github.com/LohanaO"><img src="https://img.shields.io/badge/-GitHub-181717?style=flat-square&logo=github&logoColor=white"></a> | <a href="https://github.com/jhordyess"><img src="https://img.shields.io/badge/-GitHub-181717?style=flat-square&logo=github&logoColor=white"></a> | <a href="https://github.com/MatiasLuengo"><img src="https://img.shields.io/badge/-GitHub-181717?style=flat-square&logo=github&logoColor=white"></a> |
 
 ## Stack Backend
 
@@ -49,11 +48,9 @@ Poder planificar mejoras en el servicio y la adquisición de nuevos materiales.
 ![Hibernate](https://img.shields.io/badge/Hibernate-59666C?style=for-the-badge&logo=Hibernate&logoColor=white)
 ![MySQL](https://img.shields.io/badge/-MySQL-4479A1?style=for-the-badge&logo=MySQL&logoColor=white)
 
-<a href="">Jean Carlo</a> /
-<a href="">Efrén Morales</a> /
-<a href="">Jeyson Velázquez</a> /
-<a href="">German Anselmo</a> /
-<a href="https://github.com/jdmonroyg">Jesús Monroy</a>
+| **Jean Carlo** | **Efrén Morales** | **Jeyson Velázquez** | **German Anselmo** | **Jesús Monroy** |
+| :---: | :---: | :---: | :---: | :---: |
+| <a href=""><img src="https://img.shields.io/badge/-GitHub-181717?style=flat-square&logo=github&logoColor=white"></a> | <a href=""><img src="https://img.shields.io/badge/-GitHub-181717?style=flat-square&logo=github&logoColor=white"></a> | <a href=""><img src="https://img.shields.io/badge/-GitHub-181717?style=flat-square&logo=github&logoColor=white"></a> | <a href=""><img src="https://img.shields.io/badge/-GitHub-181717?style=flat-square&logo=github&logoColor=white"></a> | <a href="https://github.com/jdmonroyg"><img src="https://img.shields.io/badge/-GitHub-181717?style=flat-square&logo=github&logoColor=white"></a> |
 
 ## Stack QA
 
@@ -61,8 +58,9 @@ Poder planificar mejoras en el servicio y la adquisición de nuevos materiales.
 ![Google Docs](https://img.shields.io/badge/Google%20Docs-4285F4?style=for-the-badge&logo=google-docs&logoColor=white)
 ![Lightshot](https://img.shields.io/badge/Lightshot-purple?style=for-the-badge)
 
-<a href="https://www.linkedin.com/in/pedroquiros/">Pedro Quirós</a> /
-<a href="https://www.linkedin.com/in/claudia-rita-s%C3%A1nchez-9b021876/">Claudia Sánchez</a>
+| **Pedro Quirós** | **Claudia Sánchez** |
+| :---: | :---: |
+| <a href="https://www.linkedin.com/in/pedroquiros/"><img src="https://img.shields.io/badge/-LinkedIn-0A66C2?style=flat-square&logo=linkedin&logoColor=white"></a> | <a href="https://www.linkedin.com/in/claudia-rita-s%C3%A1nchez-9b021876/"><img src="https://img.shields.io/badge/-LinkedIn-0A66C2?style=flat-square&logo=linkedin&logoColor=white"></a> |
 
 ## Stack Diseño UX/UI
 
@@ -71,13 +69,15 @@ Poder planificar mejoras en el servicio y la adquisición de nuevos materiales.
 ![Whimsical](https://img.shields.io/badge/Whimsical-purple?style=for-the-badge&logo=whimsical&logoColor=white)
 ![Adobe Photoshop](https://img.shields.io/badge/Adobe%20Photoshop-31A8FF?style=for-the-badge&logo=adobe%20photoshop&logoColor=white)
 
-Milagros Cifre:
-<a href="https://www.behance.net/milagroscifre">Portfolio</a>
-<a href="https://www.linkedin.com/in/milagros-mar%C3%ADa-cifre-/">LinkedIn</a>
+| **Milagros Cifre** |
+| :---: |
+| <a href="https://www.behance.net/milagroscifre"><img src="https://img.shields.io/badge/-Behance-1769FF?style=flat-square&logo=behance&logoColor=white"></a><br/><a href="https://www.linkedin.com/in/milagros-mar%C3%ADa-cifre-/"> <img src="https://img.shields.io/badge/-LinkedIn-0A66C2?style=flat-square&logo=linkedin&logoColor=white"></a>|
 
 ## Project Manager  
 
-<a href="">José Lara</a>
+| **José Lara** |
+| :---: |
+| <a href=""><img src="https://img.shields.io/badge/-LinkedIn-0A66C2?style=flat-square&logo=linkedin&logoColor=white"></a> |
 
 ## Gestión y comunicación
 
