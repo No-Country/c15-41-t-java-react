@@ -4,6 +4,7 @@ import DeleteModal from './DeleteModal'
 import { IoMdClose } from 'react-icons/io'
 import { useState } from 'react'
 import UserRegisterForm from './UserRegisterForm'
+import UserLoans from './UserLoans'
 
 interface UserRowProps {
   key: User['idUser']
@@ -14,11 +15,17 @@ interface UserRowProps {
 export default function UserRow({ user, refresh }: UserRowProps) {
   const [isModalDeleteOpen, setIsModalDeleteOpen] = useState(false)
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const [isModalLoansOpen, setIsModalLoansOpen] = useState(false)
 
   return (
     <>
       <tr>
-        <td className="border-[1px] border-x-0 border-solid border-slate-200 text-center">
+        <td
+          onClick={() => {
+            setIsModalLoansOpen(true)
+          }}
+          className="cursor-pointer border-[1px] border-x-0 border-solid border-slate-200 text-center"
+        >
           {user.idUser}
         </td>
         <td className="border-[1px] border-x-0 border-solid border-slate-200 text-center">
@@ -76,6 +83,19 @@ export default function UserRow({ user, refresh }: UserRowProps) {
             className="absolute right-4 top-4 cursor-pointer text-5xl font-semibold text-black hover:scale-125"
             onClick={() => {
               setIsModalOpen(false)
+            }}
+          >
+            <IoMdClose />
+          </div>
+        </div>
+      )}
+      {isModalLoansOpen && (
+        <div className="fixed inset-0 z-50  bg-white opacity-100">
+          <UserLoans user={user} />
+          <div
+            className="increase-scale absolute right-2 top-2 cursor-pointer text-5xl font-semibold text-black"
+            onClick={() => {
+              setIsModalLoansOpen(false)
             }}
           >
             <IoMdClose />
