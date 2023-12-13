@@ -65,8 +65,9 @@ Claudia Sánchez</a>
  <img width="80"  src="https://img.shields.io/badge/Notion-black"/>
  <img width="80" height="20"  src="https://img.shields.io/badge/Adobe%20Photoshop-red"/>
 </div>
-<a href="">
-Milagros Cifre</a>
+Milagros Cifre:
+<a href="https://www.behance.net/milagroscifre">Portfolio</a> 
+<a href="www.linkedin.com/in/milagros-maría-cifre">LinkedIn</a>
 
 # Project Manager:  
 <a href="">
