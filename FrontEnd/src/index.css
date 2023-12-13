@@ -48,16 +48,15 @@
   transform: scale(110%);
 }
 
-.reactSelect{
+.reactSelect {
   @apply w-full border-0 bg-grey text-base font-[400] leading-[normal] text-blueDark placeholder-[#ABABAB] focus:outline-none;
 }
-.divContent{
+.divContent {
   @apply relative mb-14 flex h-10 w-full items-center gap-2 border-0 border-b-2 border-solid border-blueDark;
 }
-.errorContainer{
+.errorContainer {
   @apply absolute -bottom-6 text-xs font-bold text-red-500;
 }
-.labelForm{
+.labelForm {
   @apply text-base font-bold leading-[normal] text-blueLight;
 }
-
