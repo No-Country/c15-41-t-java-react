@@ -67,7 +67,7 @@ Claudia Sánchez</a>
 </div>
 Milagros Cifre:
 <a href="https://www.behance.net/milagroscifre">Portfolio</a> 
-<a href="www.linkedin.com/in/milagros-maría-cifre">LinkedIn</a>
+<a href="https://www.linkedin.com/in/milagros-mar%C3%ADa-cifre-/">LinkedIn</a>
 
 # Project Manager:  
 <a href="">
