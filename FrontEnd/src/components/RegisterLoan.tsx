@@ -20,7 +20,7 @@ const validationSchema = Yup.object({
   returnExpectedDate: Yup.date()
     .required('La fecha de devolución es requerida')
     .min(new Date(), 'La fecha de devolución no puede ser menor a la fecha actual'),
-  idUser: Yup.number().required('El usuario es requerido').min(1, 'El usuario es requerido'),
+  idUser: Yup.number().required('El miembro es requerido').min(1, 'El miembro es requerido'),
   idBook: Yup.number().required('El libro es requerido')
 })
 
@@ -262,7 +262,7 @@ const RegisterLoan: React.FC<propsLoan> = props => {
               onChange={handleChange}
             >
               <option value="-1" disabled>
-                Selecciona un usuario
+                Selecciona un miembro
               </option>
               {users.map((user: User) => (
                 <option key={user.idUser} value={user.idUser}>
