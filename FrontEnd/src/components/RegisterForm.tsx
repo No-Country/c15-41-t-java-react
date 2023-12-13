@@ -6,6 +6,7 @@ import type { Author, BookPost, Editorial } from '../types/types'
 import { useUser } from '../context/UserContext'
 import toast from 'react-hot-toast'
 import { blockNonNumericInput } from '../utils/input'
+import { ReactSelect } from './ReactSelect'
 
 const initialValues: BookPost = {
   title: '',
@@ -38,6 +39,9 @@ const validationSchema = Yup.object({
 
 export default function RegisterForm({ onSuccess }: { onSuccess: () => void }) {
   const [authors, setAuthors] = useState<Author[]>([])
+  const [authorsOptions, setAuthorsOptions] = useState<{ value: number; label: string }[]>([])
+  const [genresOptions, setGenresOptions] = useState<{ value: string; label: string }[]>([])
+  const [editorialsOptions, setEditorialsOptions] = useState<{ value: number; label: string }[]>([])
   const [editorials, setEditorials] = useState<Editorial[]>([])
   const [mockGenres, setMockGenres] = useState<string[]>([])
   const { fetch } = useUser()
@@ -72,7 +76,29 @@ export default function RegisterForm({ onSuccess }: { onSuccess: () => void }) {
     })
   }, [])
 
-  const { values, errors, handleChange, handleSubmit, resetForm } = useFormik({
+  useEffect(() => {
+    const options = authors.map(author => ({
+      value: author.idAuthor,
+      label: `${author.name} ${author.lastName}`
+    }))
+    setAuthorsOptions(options)
+  }, [authors])
+  useEffect(() => {
+    const options = mockGenres.map(mockGenre => ({
+      value: mockGenre,
+      label: `${mockGenre}`
+    }))
+    setGenresOptions(options)
+  }, [mockGenres])
+  useEffect(() => {
+    const options = editorials.map(editorial => ({
+      value: editorial.idEditorial,
+      label: `${editorial.name}`
+    }))
+    setEditorialsOptions(options)
+  }, [editorials])
+
+  const { values, errors, handleChange, handleSubmit, resetForm, setFieldValue } = useFormik({
     initialValues,
     validationSchema,
     onSubmit
@@ -100,44 +126,40 @@ export default function RegisterForm({ onSuccess }: { onSuccess: () => void }) {
           <span className="text-sm text-red-500"> (Los campos con * son obligatorios) </span>
         </h2>
         <form className="mx-auto w-10/12" onSubmit={handleSubmit}>
-          <label className="text-base font-bold leading-[normal] text-blueLight " htmlFor="title">
+          <label className="labelForm " htmlFor="title">
             Titulo <span className="text-red-500">*</span>
           </label>
-          <div className="relative mb-14 flex h-8 w-full items-center gap-2 border-0 border-b-2 border-solid border-blueDark">
+          <div className="divContent">
             <input
-              className="w-full border-0 bg-grey text-base font-[400] leading-[normal] text-[#263238] placeholder-[#ABABAB] focus:outline-none"
+              className="reactSelect"
               name="title"
               type="text"
               placeholder="Ingresá el titulo"
               value={values.title}
               onChange={handleChange}
             />
-            <small className="absolute -bottom-6 text-xs font-bold text-red-500">
-              {errors?.title}
-            </small>
+            <small className="errorContainer">{errors?.title}</small>
           </div>
-          <label className="text-base font-bold leading-[normal] text-blueLight " htmlFor="isbn">
+          <label className="labelForm " htmlFor="isbn">
             ISBN <span className="text-red-500">*</span>
           </label>
-          <div className="relative mb-14 flex h-8 w-full items-center gap-2 border-0 border-b-2 border-solid border-blueDark">
+          <div className="divContent">
             <input
-              className="w-full border-0 bg-grey text-base font-[400] leading-[normal] text-[#263238] placeholder-[#ABABAB] focus:outline-none"
+              className="reactSelect"
               name="isbn"
               type="text"
               placeholder="ISBN 13: 978-0-596-52068-7 - ISBN 10: 0-321-48410-7 "
               value={values.isbn}
               onChange={handleChange}
             />
-            <small className="absolute -bottom-6 text-xs font-bold text-red-500">
-              {errors?.isbn}
-            </small>
+            <small className="errorContainer">{errors?.isbn}</small>
           </div>
-          <label className="text-base font-bold leading-[normal] text-blueLight" htmlFor="quantity">
+          <label className="labelForm" htmlFor="quantity">
             Cantidad <span className="text-red-500">*</span>
           </label>
-          <div className="relative mb-14 flex h-8 w-full items-center gap-2 border-0 border-b-2 border-solid border-blueDark">
+          <div className="divContent">
             <input
-              className="w-full  border-0 bg-grey text-base font-[400] leading-[normal] text-[#263238] placeholder-[#ABABAB] focus:outline-none"
+              className="reactSelect"
               name="quantity"
               type="number"
               placeholder="Ingresá la cantidad"
@@ -145,98 +167,45 @@ export default function RegisterForm({ onSuccess }: { onSuccess: () => void }) {
               onChange={handleChange}
               onKeyDown={blockNonNumericInput}
             />
-            <small className="absolute -bottom-6 text-xs font-bold text-red-500">
-              {errors?.quantity}
-            </small>
+            <small className="errorContainer">{errors?.quantity}</small>
           </div>
-          <label className="text-base font-bold leading-[normal] text-blueLight" htmlFor="idAuthor">
-            Autor <span className="text-red-500">*</span>
-          </label>
-          <div className="relative mb-14 flex h-8 w-full items-center gap-2 border-0 border-b-2 border-solid border-blueDark">
-            <select
-              className="w-full border-0 bg-grey text-base font-[400] leading-[normal] text-blueDark placeholder-[#ABABAB] focus:outline-none"
-              name="idAuthor"
-              value={values.idAuthor}
-              onChange={handleChange}
-            >
-              <option value="-1" disabled>
-                Selecciona un autor
-              </option>
-              {authors.map(author => (
-                <option key={author.idAuthor} value={author.idAuthor}>
-                  {`${author.name} ${author.lastName}`}
-                </option>
-              ))}
-            </select>
-            <small className="absolute -bottom-6 text-xs font-bold text-red-500">
-              {errors?.idAuthor}
-            </small>
-          </div>
-          <label className="text-base font-bold leading-[normal] text-blueLight" htmlFor="genre">
-            Género <span className="text-red-500">*</span>
-          </label>
-          <div className="relative mb-14 flex h-8 w-full items-center gap-2 border-0 border-b-2 border-solid border-blueDark">
-            <select
-              className="w-full border-0 bg-grey text-base font-[400] leading-[normal] text-blueDark placeholder-[#ABABAB] focus:outline-none"
-              name="genre"
-              value={values.genre}
-              onChange={handleChange}
-            >
-              <option value="" disabled>
-                Selecciona un genero
-              </option>
-              {mockGenres.map(genre => (
-                <option key={genre} value={genre.toUpperCase()}>
-                  {genre}
-                </option>
-              ))}
-            </select>
-            <small className="absolute -bottom-6 text-xs font-bold text-red-500">
-              {errors?.genre}
-            </small>
-          </div>
-          <label
-            className="text-base font-bold leading-[normal] text-blueLight"
-            htmlFor="idEditorial"
-          >
-            Editorial <span className="text-red-500">*</span>
-          </label>
-          <div className="relative mb-14 flex h-8 w-full items-center gap-2 border-0 border-b-2 border-solid border-blueDark">
-            <select
-              className="w-full border-0 bg-grey text-base font-[400] leading-[normal] text-blueDark placeholder-[#ABABAB] focus:outline-none"
-              name="idEditorial"
-              value={values.idEditorial}
-              onChange={handleChange}
-            >
-              <option value="-1" disabled>
-                Selecciona una editorial
-              </option>
-              {editorials.map(editorial => (
-                <option key={editorial.idEditorial} value={editorial.idEditorial}>
-                  {editorial.name}
-                </option>
-              ))}
-            </select>
-            <small className="absolute -bottom-6 text-xs font-bold text-red-500">
-              {errors?.idEditorial}
-            </small>
-          </div>
-          <label className="text-base font-bold leading-[normal] text-blueLight" htmlFor="image">
+          <ReactSelect
+            label="Autor"
+            placeHolder="Selecciona un autor"
+            selectName="idAuthor"
+            options={authorsOptions}
+            setFieldValue={setFieldValue}
+            errors={errors.idAuthor}
+          />
+          <ReactSelect
+            label="Género"
+            placeHolder="Selecciona un genero"
+            selectName="genre"
+            options={genresOptions}
+            setFieldValue={setFieldValue}
+            errors={errors.genre}
+          />
+          <ReactSelect
+            label="Editorial"
+            placeHolder="Selecciona una editorial"
+            selectName="idEditorial"
+            options={editorialsOptions}
+            setFieldValue={setFieldValue}
+            errors={errors.idEditorial}
+          />
+          <label className="labelForm" htmlFor="image">
             Agrega una imagen
           </label>
-          <div className="relative mb-14 flex h-8 w-full items-center gap-2 border-0 border-b-2 border-solid border-blueDark">
+          <div className="divContent">
             <input
-              className="w-full border-0 bg-grey text-base font-[400] leading-[normal] text-blueDark placeholder-[#ABABAB] focus:outline-none"
+              className="reactSelect"
               type="file"
               name="image"
               value={values.image}
               onChange={handleChange}
               accept=".jpg, .jpeg, .png"
             />
-
-            <small className="absolute -bottom-6 text-xs font-bold text-red-500">
-              {errors?.image}
-            </small>
+            <small className="errorContainer">{errors?.image}</small>
           </div>
           <div className="pb-10">
             <button
