@@ -4,7 +4,6 @@ import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import { Book, User } from '../types/types'
 import { useUser } from '../context/UserContext'
-import { getFormattedTodayDate } from '../utils/dateNow'
 
 interface propsLoan extends Book {}
 
@@ -22,22 +21,19 @@ const validationSchema = Yup.object({
 
 const RegisterLoan: React.FC<propsLoan> = props => {
   const [users, setUsers] = useState<User[]>([])
+  const [todayDate] = useState(new Date().toISOString().split('T')[0])
   const { fetch, currentUser } = useUser()
 
-  async function fetchUsers(): Promise<void> {
+  async function getUsers(): Promise<void> {
     try {
-  
-  
       const users = await fetch('http://localhost:3000/users')
       setUsers(users)
-     
     } catch (error) {
       console.error(error)
-  
-    } 
+    }
   }
   useEffect(() => {
-    fetchUsers().catch(error => {
+    getUsers().catch(error => {
       console.log(error)
     })
   }, [])
@@ -49,9 +45,9 @@ const RegisterLoan: React.FC<propsLoan> = props => {
       genre: props.genre,
       isbn: props.isbn,
       editorial: props.editorialDto.name,
-      loanDate: getFormattedTodayDate(),
+      loanDate: todayDate,
       returnExpectedDate: '',
-      idUser: 0,
+      idUser: -1,
       idBook: props.idBook
     },
     validationSchema,
@@ -59,11 +55,16 @@ const RegisterLoan: React.FC<propsLoan> = props => {
   })
 
   async function onSubmit(values: FormikValues) {
+    const returnExpectedDate = new Date(values.returnExpectedDate)
+    const formattedExpectedDate = `${returnExpectedDate.getFullYear()}-${
+      returnExpectedDate.getMonth() + 1
+    }-${returnExpectedDate.getDate()}`
+
     const loan = {
       idBook: values.idBook,
       idUser: values.idUser,
       idAdmin: currentUser.idAdmin,
-      returExpectedDate: values.returnExpectedDate
+      returnExpectedDate: formattedExpectedDate
     }
     console.log(loan)
     /*
@@ -78,8 +79,6 @@ const RegisterLoan: React.FC<propsLoan> = props => {
         console.log(error)
       }*/
   }
-
-
 
   return (
     <div className="flex justify-center overflow-y-auto px-2 py-10">
@@ -211,7 +210,7 @@ const RegisterLoan: React.FC<propsLoan> = props => {
                   type="text"
                   value={values.loanDate}
                   onChange={handleChange}
-                  disabled
+                  readOnly
                   placeholder="Ingresá la fecha Actual"
                 />
                 <small className="absolute -bottom-6 text-xs font-bold text-red-500"></small>
@@ -231,9 +230,7 @@ const RegisterLoan: React.FC<propsLoan> = props => {
                   type="date"
                   placeholder="Ingresá el ISBN"
                 />
-                <small className="absolute -bottom-6 text-xs font-bold text-red-500">
-                  
-                </small>
+                <small className="absolute -bottom-6 text-xs font-bold text-red-500"></small>
               </div>
             </div>
           </div>
@@ -252,13 +249,13 @@ const RegisterLoan: React.FC<propsLoan> = props => {
               </option>
               {users.map((user: User) => (
                 <option key={user.idUser} value={user.idUser}>
-                    {`${user.name} ${user.lastName}`}       
+                  {`${user.name} ${user.lastName}`}
                 </option>
               ))}
             </select>
 
             <small className="absolute -bottom-6 text-xs font-bold text-red-500">
-              {errors?.idUser}
+     
             </small>
           </div>
           <div className="pb-10">
