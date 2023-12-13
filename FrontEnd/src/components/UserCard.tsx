@@ -1,4 +1,4 @@
-import { IoPencil, IoTrashOutline } from 'react-icons/io5'
+import { IoPencil, IoTrashOutline, IoEyeOutline } from 'react-icons/io5'
 import { User } from '../types/types'
 import { useState } from 'react'
 import DeleteModal from './DeleteModal'
@@ -19,6 +19,14 @@ export default function UserCard({ user, refresh }: UserCardProps) {
     <div className="flex-col p-3">
       <div className="flex w-96 flex-shrink items-center rounded-lg border-[1px] border-solid border-slate-200 p-2 px-4 max-sm:w-[auto]">
         <h1 className="flex-grow text-base font-medium text-blueLight">{`${user.name} ${user.lastName}`}</h1>
+        <div
+          onClick={() => {
+            setIsModalLoansOpen(true)
+          }}
+          className="px-0.5 hover:cursor-pointer"
+        >
+          <IoEyeOutline size={20} />
+        </div>
         <div className="px-0.5 hover:cursor-pointer">
           <IoPencil size={20} />
         </div>
@@ -31,12 +39,7 @@ export default function UserCard({ user, refresh }: UserCardProps) {
           <IoTrashOutline size={20} />
         </div>
       </div>
-      <div
-        onClick={() => {
-          setIsModalLoansOpen(true)
-        }}
-        className="cursor-pointer flex-col p-4"
-      >
+      <div className="flex-col p-4">
         <p>
           <span className="font-medium text-black">ID: </span>
           {user.idUser}
