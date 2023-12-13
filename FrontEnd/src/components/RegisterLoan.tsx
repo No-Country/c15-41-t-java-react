@@ -4,6 +4,7 @@ import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import { Book, User } from '../types/types'
 import { useUser } from '../context/UserContext'
+import { toast } from 'react-hot-toast'
 
 interface propsLoan extends Book {
   refresh: () => void
@@ -29,7 +30,7 @@ const RegisterLoan: React.FC<propsLoan> = props => {
 
   async function getUsers(): Promise<void> {
     try {
-      const users = await fetch('http://localhost:3000/users')
+      const users = await fetch('http://localhost:3000/users/all')
       setUsers(users)
     } catch (error) {
       console.error(error)
@@ -69,19 +70,28 @@ const RegisterLoan: React.FC<propsLoan> = props => {
       idAdmin: currentUser.idAdmin,
       returnExpectedDate: formattedExpectedDate
     }
-    console.log(loan)
-    props.refresh()
-    /*
-      try {
-        const postOptions = {
-          method: 'POST',
-          body: JSON.stringify(loan)
-        }
-        const data = await fetch('/loans', postOptions)
-        console.log(data)
-      }catch(error){
-        console.log(error)
-      }*/
+
+    try {
+      const postOptions = {
+        method: 'POST',
+        body: JSON.stringify(loan)
+      }
+      await fetch('http://localhost:3000/loans/save', postOptions)
+      toast.success('Prestamo registrado con éxito', {
+        duration: 1500
+      })
+      props.refresh()
+    } catch (error: any) {
+      if (error.message !== undefined && typeof error.message === 'string' && error.message !== '')
+        toast.error(error.message, {
+          duration: 2000,
+          position: 'top-center'
+        })
+      else
+        toast.error('Error al registrar el prestamo', {
+          duration: 1500
+        })
+    }
   }
 
   return (
