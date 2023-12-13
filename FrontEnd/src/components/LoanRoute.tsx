@@ -4,6 +4,7 @@ import LoanCard from './LoanCard'
 import { Loan } from '../types/types'
 import { Pagination } from '@mui/material'
 import Spinner from './Spinner'
+import SearchLoan from './SearchLoan'
 
 export default function LoanRoute() {
   const { fetch } = useUser()
@@ -14,7 +15,7 @@ export default function LoanRoute() {
   const [searchResults, setSearchResults] = useState<Loan[] | []>([])
   const [isLoading, setIsLoading] = useState<boolean>(false)
 
-  async function fetchUsers(): Promise<void> {
+  async function fetchLoans(): Promise<void> {
     try {
       setIsLoading(true)
       setIsError(false)
@@ -29,24 +30,29 @@ export default function LoanRoute() {
     }
   }
   useEffect(() => {
-    fetchUsers().catch(error => {
+    fetchLoans().catch(error => {
       console.log(error)
     })
   }, [])
+
+  const handleSearchResults = (results: any) => {
+    setSearchResults(results)
+  }
 
   return (
     <div className="flex h-full w-full flex-col items-center px-24 max-lg:px-12 max-sm:px-6">
       <h2 className="w-10/12 py-8 text-2xl font-bold leading-normal text-blueDark">
         Libros en prestamo
       </h2>
+      <SearchLoan allLoans={loans} onSearchResults={handleSearchResults} setPage={setPage} />
       {isLoading ? (
         <Spinner />
       ) : isError ? (
         <p>Error cargando prestamos</p>
       ) : (
-        <div className="grid w-full justify-items-center gap-y-5 py-5 align-middle lg:grid-cols-2">
+        <div className="grid w-full justify-items-center gap-y-5 py-5 align-middle md:grid-cols-2">
           {searchResults.map(loan => (
-            <LoanCard key={loan.idLoan} loan={loan} />
+            <LoanCard key={loan.idLoan} loan={loan} refresh={fetchLoans} />
           ))}
         </div>
       )}
