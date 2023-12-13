@@ -11,14 +11,11 @@ export default function LoanCard({ loan, refresh }: LoanCardProps) {
   const { fetch } = useUser()
 
   async function handleReturn(loan: Loan) {
-    const { loanDate, returnExpectedDate, idBook, idAdmin, idUser } = loan
-    const loanReturnBody = { loanDate, returnExpectedDate, idBook, idAdmin, idUser }
     const putOptions = {
-      method: 'PUT',
-      body: JSON.stringify(loanReturnBody)
+      method: 'PUT'
     }
     try {
-      await fetch(`http://localhost:8080/bibliotech/api/loans/update/${loan.idLoan}`, putOptions)
+      await fetch(`http://localhost:3000/loans/return/${loan.idLoan}`, putOptions)
       refresh()
       toast.success('Se realizo la devolucion correctamente', {
         duration: 4000,
