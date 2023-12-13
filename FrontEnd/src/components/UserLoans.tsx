@@ -18,7 +18,7 @@ export default function UserLoans({ user }: UserLoansProps) {
     try {
       setIsLoading(true)
       setIsError(false)
-      const loans = await fetch('http://localhost:3000/loans')
+      const loans = await fetch('http://localhost:3000/loans/all')
       setAllLoans(loans)
     } catch (error) {
       console.error(error)
