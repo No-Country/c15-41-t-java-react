@@ -5,8 +5,6 @@ import c1541tjavareact.library.domain.dto.LoanDto;
 import c1541tjavareact.library.domain.dto.PendingDto;
 import c1541tjavareact.library.domain.repository.LoanCrudRepository;
 import c1541tjavareact.library.domain.repository.LoanRepository;
-import c1541tjavareact.library.domain.repository.PendingCrudRepository;
-import c1541tjavareact.library.domain.service.PendingService;
 import c1541tjavareact.library.infra.exception.BookException;
 import c1541tjavareact.library.persistence.entity.Loan;
 import c1541tjavareact.library.persistence.mapper.LoanDaoMapper;
@@ -14,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -90,9 +87,9 @@ public class LoanCrudRepositoryImpl implements LoanCrudRepository {
         Optional<LoanDto> optLoan = this.getLoan(idLoan);
         if(optLoan.isPresent()){
             LoanDto loanToUpdate = optLoan.get();
-            loanToUpdate.setLoanDate(loanDto.getLoanDate());
+//            loanToUpdate.setLoanDate(loanDto.getLoanDate());
             loanToUpdate.setReturnExpectedDate(loanDto.getReturnExpectedDate());
-            loanToUpdate.setReturnEffectiveDate(loanDto.getReturnEffectiveDate());
+//            loanToUpdate.setReturnEffectiveDate(loanDto.getReturnEffectiveDate());
             loanToUpdate.setIdBook(loanDto.getIdBook());
             loanToUpdate.setIdAdmin(loanDto.getIdAdmin());
             loanToUpdate.setIdUser(loanDto.getIdUser());
