@@ -5,6 +5,7 @@ import imgEditar from '../assets/icons/Edit.svg'
 import { IoMdClose } from 'react-icons/io'
 import EditBook from './EditBook'
 import DeleteModal from './DeleteModal'
+import BookDetail from './BookDetail'
 
 interface Props extends Book {
   refresh: () => void
@@ -129,39 +130,9 @@ const BookCard: React.FC<Props> = ({
       {isModalDetails && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-white">
           <div className="relative flex h-full w-11/12 flex-row items-center justify-center">
-            <div className="flex flex-col items-center rounded-xl border-[1px] border-solid border-[#c6e9ff] bg-[#0A7ABF] bg-opacity-5 p-6 shadow-2xl">
-              <div className="bg-cover">
-                <img
-                  className="h-[145px] w-[95px] shadow-lg "
-                  src={image ?? '/sample/image3.png'}
-                  alt={title}
-                />
-              </div>
-              <div className="xs:text-sm flex h-auto w-full flex-col lg:gap-2">
-                <h3 className="text-lg text-blueLight"> Titulo: {title}</h3>
-                <p className="">
-                  <span className="font-bold text-black">Autor: </span>
-                  {`${authorDto.name}  ${authorDto.lastName}`}
-                </p>
-                <p>
-                  <span className="font-bold text-black">Genero: </span>
-                  {genre.charAt(0) + genre.toLowerCase().slice(1)}
-                </p>
-                <p>
-                  <span className="font-bold text-black">Editorial: </span>
-                  {editorialDto.name}
-                </p>
-                <p>
-                  <span className="font-bold text-black">ISBN: </span>
-                  {isbn}
-                </p>
-                <br />
-                <p>
-                  <span className="font-bold text-black">Cantidad: </span>
-                  {quantity}
-                </p>
-              </div>
-            </div>
+           <BookDetail 
+            id={bookData.idBook}
+            {...bookData} />
             <div
               className="increase-scale absolute right-0 top-2 cursor-pointer text-5xl font-semibold text-black"
               onClick={() => {
