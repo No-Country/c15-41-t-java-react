@@ -19,8 +19,16 @@ Poder planificar mejoras en el servicio y la adquisición de nuevos materiales.
 <a  href="https://docs.google.com/document/d/1sUp5d79Wj9pCMmNlVJ3CasRsjxBZpcl_KA0-kB5ck0M/edit?usp=sharing">
 Ver Historias de Usuarios</a>
 <div>
-<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/trello/trello-plain-wordmark.svg" alt="Logo" width="90" height="90">
-<img width="50"  src="https://img.shields.io/badge/Google Sheets-green"/>
+
+## Plan de pruebas
+<a  href="https://docs.google.com/document/d/1HdavsOvJlU8eJ29ynkniEQwkwIKrznZo1_Oj-0dnyMA/edit?usp=sharing">
+Ver Plan de pruebas</a>
+<div>
+
+## Casos de pruebas
+<a  href="https://docs.google.com/spreadsheets/d/1WwwZNct-rgo3cJoCeri07BVksg9rOFvy/edit?usp=sharing&ouid=102442372613982485496&rtpof=true&sd=true">
+Ver Casos de pruebas</a>
+<div>
 
 # Stack Frontend
 ![React](https://img.shields.io/badge/-ReactJs-61DAFB?logo=react&logoColor=white&style=for-the-badge)           
@@ -34,7 +42,7 @@ Jhordy Gavinchu </a>/ <a  href="">
 Matías Francisco Luengo</a>
 
 
-# Stack backend
+# Stack Backend
 ![Java](https://img.shields.io/badge/-Java-%20%23abb2b9%20?style=for-the-badge&logo=CoffeeScript&logoColor=blue)
 ![Spring](https://img.shields.io/badge/Spring-6DB33F?style=for-the-badge&logo=spring&logoColor=white)
 ![Spring Boot](https://img.shields.io/badge/-Spring%20Boot-6DB33F?style=for-the-badge&logo=Spring%20Boot&logoColor=white)
@@ -53,15 +61,14 @@ Jesús Monroy</a>
 # Stack QA
 <div align="start">
 
-<img width="120" src="https://img.shields.io/badge/Google%20Sheets-34A853?style=for-the-badge&logo=google-sheets&logoColor=white"/>
+<img width="130" src="https://img.shields.io/badge/Google%20Sheets-34A853?style=for-the-badge&logo=google-sheets&logoColor=white"/>
 <img width="90" src="https://img.shields.io/badge/Google%20Docs-blue?style=flat-square"/>
 <img width="80" src="https://img.shields.io/badge/Lightshot%20-purple?style=flat-square"/>
 
 </div>
 <a  href="">
-Pedro Quirós</a> / <a href="https://www.linkedin.com/in/pedroquiros/">
-Claudia Sánchez</a> <a  href="https://www.linkedin.com/in/claudia-rita-s%C3%A1nchez-9b021876/">
-
+<a href="https://www.linkedin.com/in/pedroquiros/">Pedro Quirós</a> /
+<a href="https://www.linkedin.com/in/claudia-rita-s%C3%A1nchez-9b021876/">Claudia Sánchez</a> 
 
 
 # Stack Diseño UX/UI
