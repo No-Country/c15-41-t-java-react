@@ -36,7 +36,7 @@ Poder planificar mejoras en el servicio y la adquisición de nuevos materiales.
 
 | **Rocio Alcala** | **Lohana Orellano** | **Jhordy Gavinchu** | **Matías Luengo** |
 | :---: | :---: | :---: | :---: |
-| <a href="https://github.com/rocio-alcala"><img src="https://img.shields.io/badge/-GitHub-181717?style=flat-square&logo=github&logoColor=white"></a> | <a href="https://github.com/LohanaO"><img src="https://img.shields.io/badge/-GitHub-181717?style=flat-square&logo=github&logoColor=white"></a> | <a href="https://github.com/jhordyess"><img src="https://img.shields.io/badge/-GitHub-181717?style=flat-square&logo=github&logoColor=white"></a> | <a href="https://github.com/MatiasLuengo"><img src="https://img.shields.io/badge/-GitHub-181717?style=flat-square&logo=github&logoColor=white"></a> |
+| <a href="https://github.com/rocio-alcala"><img src="https://img.shields.io/badge/-GitHub-181717?style=flat-square&logo=github&logoColor=white"></a> | <a href="https://github.com/LohanaO"><img src="https://img.shields.io/badge/-GitHub-181717?style=flat-square&logo=github&logoColor=white"></a> | <a href="https://github.com/jhordyess"><img src="https://img.shields.io/badge/-GitHub-181717?style=flat-square&logo=github&logoColor=white"></a> | <a href="https://matiasluengo.com/"><img src="https://img.shields.io/badge/-Portfolio-181717?style=flat-square&logoColor=white"></a> |
 
 ## Stack Backend
 
