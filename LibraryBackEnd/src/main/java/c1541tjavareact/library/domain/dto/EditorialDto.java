@@ -11,6 +11,8 @@ import lombok.Setter;
 
 import java.time.LocalDate;
 
+import static c1541tjavareact.library.domain.util.constant.Constants.*;
+
 @Getter
 @Setter
 public class EditorialDto {
@@ -19,11 +21,11 @@ public class EditorialDto {
 
     @NotBlank
     @Pattern(regexp = "^[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ' ]{3,50}$",
-            message = "The field contains invalid characters")
+            message = INVALID_CHARACTERS)
     private String name;
 
     @NotNull
-    @Past(message = "Date must be before current date")
+    @Past(message = INVALID_PAST_DATE)
     private LocalDate establishedDate;
 
 }

@@ -2,6 +2,7 @@ package c1541tjavareact.library.domain.service;
 
 import c1541tjavareact.library.domain.dto.PendingDto;
 import c1541tjavareact.library.domain.repository.PendingCrudRepository;
+import c1541tjavareact.library.persistence.entity.Pending;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +25,11 @@ public class PendingService {
     public Optional<PendingDto> getPending(Long idPending){
         return pendingCrudRepository.getPending(idPending);
     }
+
+    public Optional<PendingDto> findByIdLoan(Long idLoan){
+        return pendingCrudRepository.findByIdLoan(idLoan);
+    }
+
 
     public PendingDto update(Long idPending, PendingDto pendingDto){
         return pendingCrudRepository.update(idPending, pendingDto);

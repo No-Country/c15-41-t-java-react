@@ -7,6 +7,8 @@ import lombok.Setter;
 
 import java.util.List;
 
+import static c1541tjavareact.library.domain.util.constant.Constants.*;
+
 @Getter
 @Setter
 public class UserDto {
@@ -15,29 +17,29 @@ public class UserDto {
 
     @NotBlank
     @Pattern(regexp = "^(?:\\d{7}|\\d{8}|\\d{10})$",
-            message = "Dni is not valid")
+            message = INVALID_DNI)
     private String dni;
 
     @NotBlank
     @Pattern(regexp = "^[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ' ]{3,50}$",
-            message = "The field contains invalid characters")
+            message = INVALID_CHARACTERS)
     private String name;
 
     @NotBlank
     @Pattern(regexp = "^[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ' ]{3,50}$",
-            message = "The field contains invalid characters")
+            message = INVALID_CHARACTERS)
     private String lastName;
 
     @NotBlank
     @Pattern(regexp = "^[a-zA-Z0-9._%+-]+" +
             "@[a-zA-Z0-9.-]+" +
             ".(com|co|es|it|net|org|gov|edu|mil|io|xyz|info|biz|mx|ar)$",
-            message = "Email is not valid")
+            message = INVALID_EMAIL)
     private String email;
 
     @NotBlank
     @Pattern(regexp = "^\\d{10}$",
-            message = "PhoneNumber is not valid")
+            message = INVALID_PHONE_NUMBER)
     private String phoneNumber;
 
     @NotBlank
