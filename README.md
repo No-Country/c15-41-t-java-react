@@ -2,11 +2,10 @@
 
   Bibliotech es una plataforma integral de gestión bibliotecaria que permite  buscar y registrar libros, controlar préstamos con fechas y usuarios, además de enviar recordatorios automáticos para devolver los libros a tiempo.
 
-
 Problema:
   Analizando la experiencia del usuario en bibliotecas, identificamos un obstáculo: muchos procesos de gestión se realizan manualmente. Aunque esta modalidad ha sido efectiva en algunos aspectos, sufre de problemas que afectan directamente a los usuarios. Tareas como la catalogación de libros, seguimiento de préstamos y devoluciones, y la gestión de inventario son laboriosas y propensas a errores, lo que impacta la productividad interna y puede causar tiempos de espera prolongados, dificultades para encontrar materiales y limitaciones en los servicios ofrecidos a los usuarios.
 
-# Solución:
+# Solución
 
   Para mejorar la experiencia del usuario y optimizar la eficiencia interna, proponemos la implementación de soluciones de automatización. La introducción de una plataforma podría agilizar estos procesos, minimizar errores y liberar recursos para brindar un servicio más rápido y preciso a los usuarios.
 
@@ -15,82 +14,81 @@ Objetivos:
 Brindar un acceso fácil y amigable a los usuarios para buscar y solicitar préstamos de libros
 Poder planificar mejoras en el servicio y la adquisición de nuevos materiales.
 
-## Historias de Usuarios
-<a  href="https://docs.google.com/document/d/1sUp5d79Wj9pCMmNlVJ3CasRsjxBZpcl_KA0-kB5ck0M/edit?usp=sharing">
-Ver Historias de Usuarios</a>
-<div>
+## Documentación
 
-## Plan de pruebas
-<a  href="https://docs.google.com/document/d/1HdavsOvJlU8eJ29ynkniEQwkwIKrznZo1_Oj-0dnyMA/edit?usp=sharing">
-Ver Plan de pruebas</a>
-<div>
+<a href="https://docs.google.com/document/d/1sUp5d79Wj9pCMmNlVJ3CasRsjxBZpcl_KA0-kB5ck0M/edit?usp=sharing">
+  <img src="https://img.shields.io/badge/-Ver%20Historias%20de%20Usuarios-4285F4?style=for-the-badge&logo=google-docs&logoColor=white"/>
+</a>
+<a href="https://docs.google.com/document/d/1HdavsOvJlU8eJ29ynkniEQwkwIKrznZo1_Oj-0dnyMA/edit?usp=sharing">
+  <img src="https://img.shields.io/badge/-Ver%20Plan%20de%20Pruebas-4285F4?style=for-the-badge&logo=google-docs&logoColor=white"/>
+</a>
+<a href="https://docs.google.com/spreadsheets/d/1WwwZNct-rgo3cJoCeri07BVksg9rOFvy/edit?usp=sharing&ouid=102442372613982485496&rtpof=true&sd=true">
+  <img src="https://img.shields.io/badge/-Ver%20Casos%20de%20Pruebas-34A853?style=for-the-badge&logo=google-sheets&logoColor=white"/>
+</a>
 
-## Casos de pruebas
-<a  href="https://docs.google.com/spreadsheets/d/1WwwZNct-rgo3cJoCeri07BVksg9rOFvy/edit?usp=sharing&ouid=102442372613982485496&rtpof=true&sd=true">
-Ver Casos de pruebas</a>
-<div>
+## Stack Frontend
 
-# Stack Frontend
-![React](https://img.shields.io/badge/-ReactJs-61DAFB?logo=react&logoColor=white&style=for-the-badge)           
-![TypeScript](https://img.shields.io/badge/TypeScript-blue.svg?style=for-the-badge&logo=TypeScript&logoColor=white)
-![Tailwind](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)   
+![React](https://img.shields.io/badge/-ReactJs-61DAFB?logo=react&logoColor=black&style=for-the-badge)
+![TypeScript](https://img.shields.io/badge/TypeScript-3178C6.svg?style=for-the-badge&logo=TypeScript&logoColor=white)
+![Tailwind](https://img.shields.io/badge/Tailwind_CSS-06B6D4?style=for-the-badge&logo=tailwind-css&logoColor=white)
+![React Router](https://img.shields.io/badge/React_Router-CA4245?style=for-the-badge&logo=react-router&logoColor=white)
+![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white)
 
- <a  href="https://github.com/rocio-alcala">
-Rocio Alcala</a> /  <a  href="">
-Lohana Orellano</a>  / <a  href="">
-Jhordy Gavinchu </a>/ <a  href="">
-Matías Francisco Luengo</a>
+| **Rocio Alcala** | **Lohana Orellano** | **Jhordy Gavinchu** | **Matías Luengo** |
+| :---: | :---: | :---: | :---: |
+| <a href="https://github.com/rocio-alcala"><img src="https://img.shields.io/badge/-GitHub-181717?style=flat-square&logo=github&logoColor=white"></a> | <a href="https://github.com/LohanaO"><img src="https://img.shields.io/badge/-GitHub-181717?style=flat-square&logo=github&logoColor=white"></a> | <a href="https://github.com/jhordyess"><img src="https://img.shields.io/badge/-GitHub-181717?style=flat-square&logo=github&logoColor=white"></a> | <a href="https://github.com/MatiasLuengo"><img src="https://img.shields.io/badge/-GitHub-181717?style=flat-square&logo=github&logoColor=white"></a> |
 
+## Stack Backend
 
-# Stack Backend
-![Java](https://img.shields.io/badge/-Java-%20%23abb2b9%20?style=for-the-badge&logo=CoffeeScript&logoColor=blue)
+![Java](https://img.shields.io/badge/Java-437291?style=for-the-badge&logo=OpenJDK&logoColor=white)
 ![Spring](https://img.shields.io/badge/Spring-6DB33F?style=for-the-badge&logo=spring&logoColor=white)
 ![Spring Boot](https://img.shields.io/badge/-Spring%20Boot-6DB33F?style=for-the-badge&logo=Spring%20Boot&logoColor=white)
 ![Spring Security](https://img.shields.io/badge/-Spring%20Security-6DB33F?style=for-the-badge&logo=Spring%20Security&logoColor=white)
 ![JWT](https://img.shields.io/badge/JWT-black?style=for-the-badge&logo=JSON%20web%20tokens)
 ![Hibernate](https://img.shields.io/badge/Hibernate-59666C?style=for-the-badge&logo=Hibernate&logoColor=white)
-![MySQL](https://img.shields.io/badge/-MySQL-%234479A1?style=for-the-badge&logo=MySQL&logoColor=white)
+![MySQL](https://img.shields.io/badge/-MySQL-4479A1?style=for-the-badge&logo=MySQL&logoColor=white)
 
-<a  href="">
-Jean Carlo</a> / <a  href="">
-Efrén Morales</a> / <a  href="">
-Jeyson Velázquez</a> / <a  href="">
-German Anselmo</a> / <a  href="https://github.com/jdmonroyg">
-Jesús Monroy</a>
+| **Jean Carlo** | **Efrén Morales** | **Jeyson Velázquez** | **German Anselmo** | **Jesús Monroy** |
+| :---: | :---: | :---: | :---: | :---: |
+| <a href=""><img src="https://img.shields.io/badge/-GitHub-181717?style=flat-square&logo=github&logoColor=white"></a> | <a href=""><img src="https://img.shields.io/badge/-GitHub-181717?style=flat-square&logo=github&logoColor=white"></a> | <a href=""><img src="https://img.shields.io/badge/-GitHub-181717?style=flat-square&logo=github&logoColor=white"></a> | <a href=""><img src="https://img.shields.io/badge/-GitHub-181717?style=flat-square&logo=github&logoColor=white"></a> | <a href="https://github.com/jdmonroyg"><img src="https://img.shields.io/badge/-GitHub-181717?style=flat-square&logo=github&logoColor=white"></a> |
 
-# Stack QA
-<div align="start">
+## Stack QA
 
-<img width="130" src="https://img.shields.io/badge/Google%20Sheets-34A853?style=for-the-badge&logo=google-sheets&logoColor=white"/>
-<img width="90" src="https://img.shields.io/badge/Google%20Docs-blue?style=flat-square"/>
-<img width="80" src="https://img.shields.io/badge/Lightshot%20-purple?style=flat-square"/>
+![Google Sheets](https://img.shields.io/badge/Google%20Sheets-34A853?style=for-the-badge&logo=google-sheets&logoColor=white)
+![Google Docs](https://img.shields.io/badge/Google%20Docs-4285F4?style=for-the-badge&logo=google-docs&logoColor=white)
+![Lightshot](https://img.shields.io/badge/Lightshot-purple?style=for-the-badge)
 
-</div>
-<a  href="">
-<a href="https://www.linkedin.com/in/pedroquiros/">Pedro Quirós</a> /
-<a href="https://www.linkedin.com/in/claudia-rita-s%C3%A1nchez-9b021876/">Claudia Sánchez</a> 
+| **Pedro Quirós** | **Claudia Sánchez** |
+| :---: | :---: |
+| <a href="https://www.linkedin.com/in/pedroquiros/"><img src="https://img.shields.io/badge/-LinkedIn-0A66C2?style=flat-square&logo=linkedin&logoColor=white"></a> | <a href="https://www.linkedin.com/in/claudia-rita-s%C3%A1nchez-9b021876/"><img src="https://img.shields.io/badge/-LinkedIn-0A66C2?style=flat-square&logo=linkedin&logoColor=white"></a> |
 
+## Stack Diseño UX/UI
 
-# Stack Diseño UX/UI
-<div>
- <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" alt="Logo" width="60" height="60">
- <img width="80"  src="https://img.shields.io/badge/Whimsical-purple"/>
- <img width="80"  src="https://img.shields.io/badge/Notion-black"/>
- <img width="80" height="20"  src="https://img.shields.io/badge/Adobe%20Photoshop-red"/>
-</div>
-Milagros Cifre:
-<a href="https://www.behance.net/milagroscifre">Portfolio</a> 
-<a href="https://www.linkedin.com/in/milagros-mar%C3%ADa-cifre-/">LinkedIn</a>
+![Figma](https://img.shields.io/badge/Figma-F24E1E?style=for-the-badge&logo=figma&logoColor=white)
+![Notion](https://img.shields.io/badge/Notion-black?style=for-the-badge&logo=notion&logoColor=white)
+![Whimsical](https://img.shields.io/badge/Whimsical-purple?style=for-the-badge&logo=whimsical&logoColor=white)
+![Adobe Photoshop](https://img.shields.io/badge/Adobe%20Photoshop-31A8FF?style=for-the-badge&logo=adobe%20photoshop&logoColor=white)
 
-# Project Manager:  
-<a href="">
-José Lara</a>
+| **Milagros Cifre** |
+| :---: |
+| <a href="https://www.behance.net/milagroscifre"><img src="https://img.shields.io/badge/-Behance-1769FF?style=flat-square&logo=behance&logoColor=white"></a><br/><a href="https://www.linkedin.com/in/milagros-mar%C3%ADa-cifre-/"> <img src="https://img.shields.io/badge/-LinkedIn-0A66C2?style=flat-square&logo=linkedin&logoColor=white"></a>|
 
-# Gestion y comunicación
+## Project Manager  
 
-<DIV>
- <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/trello/trello-plain-wordmark.svg" alt="Logo" width="90" height="90">
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" alt="Logo" width="60" height="60">
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/slack/slack-original.svg" alt="Logo" width="60" height="60">
-<img src="https://img.icons8.com/color/480/discord-new-logo.png" alt="Logo" width="60" height="60">
-</DIV>
+| **José Lara** |
+| :---: |
+| <a href=""><img src="https://img.shields.io/badge/-LinkedIn-0A66C2?style=flat-square&logo=linkedin&logoColor=white"></a> |
+
+## Gestión y comunicación
+
+![Trello](https://img.shields.io/badge/Trello-0052CC?style=for-the-badge&logo=trello&logoColor=white)
+![Slack](https://img.shields.io/badge/Slack-4A154B?style=for-the-badge&logo=slack&logoColor=white)
+![Discord](https://img.shields.io/badge/Discord-5865F2?style=for-the-badge&logo=discord&logoColor=white)
+
+## Deploy y Hosting
+
+![Render](https://img.shields.io/badge/Render-46E3B7?style=for-the-badge&logo=render&logoColor=white)
+![Railway](https://img.shields.io/badge/Railway-0B0D0E?style=for-the-badge&logo=railway&logoColor=white)
+![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
+![ENV](https://img.shields.io/badge/.ENV-ECD53F?style=for-the-badge&logo=.env&logoColor=black)
+![Nginx](https://img.shields.io/badge/NGINX-009639?style=for-the-badge&logo=nginx&logoColor=white)
