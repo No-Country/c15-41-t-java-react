@@ -17,7 +17,7 @@ public class Constants {
     public final static String MIN_QUANTITY = "La cantidad debe ser mayor de 0";
     public final static String MAX_QUANTITY = "La cantidad debe ser menor de 999";
     public final static String INVALID_PAST_DATE = "La fecha debe ser anterior a la fecha actual";
-
+    public final static String INVALID_LOAN_DAYS = "La fecha de devolucion supera los 15 dias limites permitidos";
     public final static String INVALID_FUTURE_DATE = "La fecha debe ser posterior a la fecha actual";
     public final static String INVALID_DNI = "El DNI no es valido";
     public final static String INVALID_PHONE_NUMBER = "El numero de telefono no es valido";

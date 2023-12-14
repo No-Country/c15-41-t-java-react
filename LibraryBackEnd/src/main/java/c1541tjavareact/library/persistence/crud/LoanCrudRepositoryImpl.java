@@ -19,6 +19,8 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
+import static c1541tjavareact.library.domain.util.constant.Constants.INVALID_LOAN_DAYS;
+
 @Repository
 public class LoanCrudRepositoryImpl implements LoanCrudRepository {
 
@@ -46,6 +48,10 @@ public class LoanCrudRepositoryImpl implements LoanCrudRepository {
 
     @Override
     public LoanDto save(LoanDto loanDto) {
+        LocalDate today = LocalDate.now();
+        if(loanDto.getReturnExpectedDate().isAfter(today.plusDays(15))) {
+            throw new BibliotechException(INVALID_LOAN_DAYS);
+        }
 
         Loan loan = loanDaoMapper.toLoan(loanDto);
 
@@ -57,13 +63,13 @@ public class LoanCrudRepositoryImpl implements LoanCrudRepository {
                 bookDto.get().setQuantity(bookDto.get().getQuantity() - 1);
                 bookCrudRepository.save(bookDto.get());
 
-                loan.setLoanDate(LocalDate.now());
+                loan.setLoanDate(today);
                 Loan loanSaved = loanRepository.save(loan);
 
                 //Save Pending
                 PendingDto pendingToSave = new PendingDto();
                 pendingToSave.setIdLoan(loanSaved.getIdLoan());
-                pendingToSave.setLocalPendingDate(LocalDate.now());
+                pendingToSave.setLocalPendingDate(today);
                 pendingToSave.setStatus(Boolean.TRUE);
                 pendingToSave.setMessage("""
                         Libro %S se tiene regresar el dia: %S
