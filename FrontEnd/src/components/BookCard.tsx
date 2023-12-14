@@ -130,9 +130,14 @@ const BookCard: React.FC<Props> = ({
       {isModalDetails && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-white">
           <div className="relative flex h-full w-11/12 flex-row items-center justify-center">
-           <BookDetail 
-            id={bookData.idBook}
-            {...bookData} />
+            <BookDetail
+              id={bookData.idBook}
+              {...bookData}
+              refresh={() => {
+                refresh()
+                setIsModalDetails(false)
+              }}
+            />
             <div
               className="increase-scale absolute right-0 top-2 cursor-pointer text-5xl font-semibold text-black"
               onClick={() => {

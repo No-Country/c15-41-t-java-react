@@ -1,8 +1,9 @@
-import { IoPencil, IoTrashOutline } from 'react-icons/io5'
+import { IoPencil, IoTrashOutline, IoEyeOutline } from 'react-icons/io5'
 import { User } from '../types/types'
 import { useState } from 'react'
 import DeleteModal from './DeleteModal'
 import { IoMdClose } from 'react-icons/io'
+import UserLoans from './UserLoans'
 
 interface UserCardProps {
   key: User['idUser']
@@ -12,11 +13,20 @@ interface UserCardProps {
 
 export default function UserCard({ user, refresh }: UserCardProps) {
   const [isModalDeleteOpen, setIsModalDeleteOpen] = useState(false)
+  const [isModalLoansOpen, setIsModalLoansOpen] = useState(false)
 
   return (
     <div className="flex-col p-3">
       <div className="flex w-96 flex-shrink items-center rounded-lg border-[1px] border-solid border-slate-200 p-2 px-4 max-sm:w-[auto]">
         <h1 className="flex-grow text-base font-medium text-blueLight">{`${user.name} ${user.lastName}`}</h1>
+        <div
+          onClick={() => {
+            setIsModalLoansOpen(true)
+          }}
+          className="px-0.5 hover:cursor-pointer"
+        >
+          <IoEyeOutline size={20} />
+        </div>
         <div className="px-0.5 hover:cursor-pointer">
           <IoPencil size={20} />
         </div>
@@ -59,6 +69,19 @@ export default function UserCard({ user, refresh }: UserCardProps) {
             className="absolute right-4 top-4 cursor-pointer text-5xl font-semibold text-black hover:scale-125"
             onClick={() => {
               setIsModalDeleteOpen(false)
+            }}
+          >
+            <IoMdClose />
+          </div>
+        </div>
+      )}
+      {isModalLoansOpen && (
+        <div className="fixed inset-0 z-50  bg-white opacity-100">
+          <UserLoans user={user} />
+          <div
+            className="increase-scale absolute right-2 top-2 cursor-pointer text-5xl font-semibold text-black"
+            onClick={() => {
+              setIsModalLoansOpen(false)
             }}
           >
             <IoMdClose />

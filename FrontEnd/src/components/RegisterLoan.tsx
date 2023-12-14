@@ -4,8 +4,11 @@ import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import { Book, User } from '../types/types'
 import { useUser } from '../context/UserContext'
+import { toast } from 'react-hot-toast'
 
-interface propsLoan extends Book {}
+interface propsLoan extends Book {
+  refresh: () => void
+}
 
 const validationSchema = Yup.object({
   title: Yup.string().required('El titulo es requerido'),
@@ -14,19 +17,20 @@ const validationSchema = Yup.object({
   editorial: Yup.string().required('la editorial es requerida'),
   isbn: Yup.string().required('El ISBN es requerido'),
   loanDate: Yup.string().required('La fecha de prestamo es requerida'),
-  returnExpectedDate: Yup.date().required('La fecha de devolucin es requerida'),
-  idUser: Yup.number().required('El usuario es requerido'),
+  returnExpectedDate: Yup.date()
+    .required('La fecha de devolución es requerida')
+    .min(new Date(), 'La fecha de devolución no puede ser menor a la fecha actual'),
+  idUser: Yup.number().required('El miembro es requerido').min(1, 'El miembro es requerido'),
   idBook: Yup.number().required('El libro es requerido')
 })
 
 const RegisterLoan: React.FC<propsLoan> = props => {
   const [users, setUsers] = useState<User[]>([])
-  const [todayDate] = useState(new Date().toISOString().split('T')[0])
   const { fetch, currentUser } = useUser()
 
   async function getUsers(): Promise<void> {
     try {
-      const users = await fetch('http://localhost:3000/users')
+      const users = await fetch('http://localhost:3000/users/all')
       setUsers(users)
     } catch (error) {
       console.error(error)
@@ -45,7 +49,7 @@ const RegisterLoan: React.FC<propsLoan> = props => {
       genre: props.genre,
       isbn: props.isbn,
       editorial: props.editorialDto.name,
-      loanDate: todayDate,
+      loanDate: new Date().toISOString().split('T')[0],
       returnExpectedDate: '',
       idUser: -1,
       idBook: props.idBook
@@ -66,18 +70,28 @@ const RegisterLoan: React.FC<propsLoan> = props => {
       idAdmin: currentUser.idAdmin,
       returnExpectedDate: formattedExpectedDate
     }
-    console.log(loan)
-    /*
-      try {
-        const postOptions = {
-          method: 'POST',
-          body: JSON.stringify(loan)
-        }
-        const data = await fetch('/loans', postOptions)
-        console.log(data)
-      }catch(error){
-        console.log(error)
-      }*/
+
+    try {
+      const postOptions = {
+        method: 'POST',
+        body: JSON.stringify(loan)
+      }
+      await fetch('http://localhost:3000/loans/save', postOptions)
+      toast.success('Prestamo registrado con éxito', {
+        duration: 1500
+      })
+      props.refresh()
+    } catch (error: any) {
+      if (error.message !== undefined && typeof error.message === 'string' && error.message !== '')
+        toast.error(error.message, {
+          duration: 2000,
+          position: 'top-center'
+        })
+      else
+        toast.error('Error al registrar el prestamo', {
+          duration: 1500
+        })
+    }
   }
 
   return (
@@ -94,7 +108,7 @@ const RegisterLoan: React.FC<propsLoan> = props => {
 
           <div className="relative mb-14 flex h-8 w-full items-center gap-2 border-0 border-b-2 border-solid border-blueDark">
             <input
-              className="w-full border-0 bg-grey text-base font-[400] leading-[normal] text-[#263238] placeholder-[#ABABAB] focus:outline-none"
+              className="w-full border-0 bg-grey text-base font-[400] leading-[normal] text-[#263238] placeholder-[#ABABAB] focus:outline-none disabled:cursor-not-allowed"
               name="title"
               type="text"
               value={values.title}
@@ -116,7 +130,7 @@ const RegisterLoan: React.FC<propsLoan> = props => {
               </label>
               <div className="relative mb-14 flex h-8 w-full items-center gap-2 border-0 border-b-2 border-solid border-blueDark sm:w-[85%]">
                 <input
-                  className="w-full  border-0 bg-grey text-base font-[400] leading-[normal] text-[#263238] placeholder-[#ABABAB] focus:outline-none"
+                  className="w-full  border-0 bg-grey text-base font-[400] leading-[normal] text-[#263238] placeholder-[#ABABAB] focus:outline-none disabled:cursor-not-allowed"
                   name="author"
                   value={values.author}
                   onChange={handleChange}
@@ -138,7 +152,7 @@ const RegisterLoan: React.FC<propsLoan> = props => {
               </label>
               <div className="relative mb-14 flex h-8 w-full items-center gap-2 border-0 border-b-2 border-solid border-blueDark">
                 <input
-                  className="w-full  border-0 bg-grey text-base font-[400] leading-[normal] text-[#263238] placeholder-[#ABABAB] focus:outline-none"
+                  className="w-full  border-0 bg-grey text-base font-[400] leading-[normal] text-[#263238] placeholder-[#ABABAB] focus:outline-none disabled:cursor-not-allowed"
                   name="genre"
                   type="text"
                   value={values.genre}
@@ -162,7 +176,7 @@ const RegisterLoan: React.FC<propsLoan> = props => {
               </label>
               <div className="relative mb-14 flex h-8 w-full items-center gap-2 border-0 border-b-2 border-solid border-blueDark sm:w-[85%]">
                 <input
-                  className="w-full  border-0 bg-grey text-base font-[400] leading-[normal] text-[#263238] placeholder-[#ABABAB] focus:outline-none"
+                  className="w-full  border-0 bg-grey text-base font-[400] leading-[normal] text-[#263238] placeholder-[#ABABAB] focus:outline-none disabled:cursor-not-allowed"
                   name="editorial"
                   type="text"
                   value={values.editorial}
@@ -181,7 +195,7 @@ const RegisterLoan: React.FC<propsLoan> = props => {
               </label>
               <div className="relative mb-14 flex h-8 w-full items-center gap-2 border-0 border-b-2 border-solid border-blueDark">
                 <input
-                  className="w-full  border-0 bg-grey text-base font-[400] leading-[normal] text-[#263238] placeholder-[#ABABAB] focus:outline-none"
+                  className="w-full  border-0 bg-grey text-base font-[400] leading-[normal] text-[#263238] placeholder-[#ABABAB] focus:outline-none disabled:cursor-not-allowed"
                   name="isbn"
                   type="text"
                   value={values.isbn}
@@ -205,12 +219,12 @@ const RegisterLoan: React.FC<propsLoan> = props => {
               </label>
               <div className="relative mb-14 flex h-8 w-full items-center gap-2 border-0 border-b-2 border-solid border-blueDark sm:w-[85%]">
                 <input
-                  className="w-full  border-0 bg-grey text-base font-[400] leading-[normal] text-[#263238] placeholder-[#ABABAB] focus:outline-none"
+                  className="w-full  border-0 bg-grey text-base font-[400] leading-[normal] text-[#263238] placeholder-[#ABABAB] focus:outline-none disabled:cursor-not-allowed"
                   name="loanDate"
                   type="text"
                   value={values.loanDate}
                   onChange={handleChange}
-                  readOnly
+                  disabled
                   placeholder="Ingresá la fecha Actual"
                 />
                 <small className="absolute -bottom-6 text-xs font-bold text-red-500"></small>
@@ -228,9 +242,12 @@ const RegisterLoan: React.FC<propsLoan> = props => {
                   className="w-full  border-0 bg-grey text-base font-[400] leading-[normal] text-[#263238] placeholder-[#ABABAB] focus:outline-none"
                   name="returnExpectedDate"
                   type="date"
-                  placeholder="Ingresá el ISBN"
+                  value={values.returnExpectedDate}
+                  onChange={handleChange}
                 />
-                <small className="absolute -bottom-6 text-xs font-bold text-red-500"></small>
+                <small className="absolute -bottom-6 text-xs font-bold text-red-500">
+                  {errors?.returnExpectedDate}
+                </small>
               </div>
             </div>
           </div>
@@ -245,7 +262,7 @@ const RegisterLoan: React.FC<propsLoan> = props => {
               onChange={handleChange}
             >
               <option value="-1" disabled>
-                Selecciona un usuario
+                Selecciona un miembro
               </option>
               {users.map((user: User) => (
                 <option key={user.idUser} value={user.idUser}>
@@ -255,7 +272,7 @@ const RegisterLoan: React.FC<propsLoan> = props => {
             </select>
 
             <small className="absolute -bottom-6 text-xs font-bold text-red-500">
-     
+              {errors?.idUser}
             </small>
           </div>
           <div className="pb-10">

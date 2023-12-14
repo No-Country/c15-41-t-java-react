@@ -108,7 +108,10 @@ export default function RegisterForm({ onSuccess }: { onSuccess: () => void }) {
     try {
       const postOptions = {
         method: 'POST',
-        body: JSON.stringify(values)
+        body: JSON.stringify({
+          ...values,
+          genre: values.genre.toUpperCase()
+        })
       }
       await fetch('http://localhost:3000/books/save', postOptions)
       resetForm()

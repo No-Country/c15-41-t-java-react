@@ -11,14 +11,11 @@ export default function LoanCard({ loan, refresh }: LoanCardProps) {
   const { fetch } = useUser()
 
   async function handleReturn(loan: Loan) {
-    const { loanDate, returnExpectedDate, idBook, idAdmin, idUser } = loan
-    const loanReturnBody = { loanDate, returnExpectedDate, idBook, idAdmin, idUser }
     const putOptions = {
-      method: 'PUT',
-      body: JSON.stringify(loanReturnBody)
+      method: 'PUT'
     }
     try {
-      await fetch(`http://localhost:8080/bibliotech/api/loans/update/${loan.idLoan}`, putOptions)
+      await fetch(`http://localhost:3000/loans/return/${loan.idLoan}`, putOptions)
       refresh()
       toast.success('Se realizo la devolucion correctamente', {
         duration: 4000,
@@ -61,11 +58,11 @@ export default function LoanCard({ loan, refresh }: LoanCardProps) {
             onClick={() => handleReturn(loan)}
             className="my-3 flex h-[53px] w-5/6 items-center justify-center gap-x-2 rounded-[32px] border-none bg-blueDark p-5 py-5 text-[17px] font-bold leading-normal text-white shadow-btn hover:cursor-pointer disabled:cursor-not-allowed disabled:opacity-50 max-md:mx-2"
           >
-            <img className="h-10 p-1 text-center" src="../../public/icons/Return.png"></img>
+            <img className="h-10 p-1 text-center" src="/icons/Return.png"></img>
             <p className="p-1">Devolver libro</p>
           </button>
           <button className="my-3 flex h-[53px] w-5/6 items-center justify-center gap-x-2 rounded-[32px] border-none bg-blueDark p-5 py-5 text-[17px] font-bold leading-normal text-white shadow-btn hover:cursor-pointer disabled:cursor-not-allowed disabled:opacity-50 max-md:mx-2">
-            <img className="h-10 p-1 text-center" src="../../public/icons/Notification.png"></img>
+            <img className="h-10 p-1 text-center" src="/icons/Notification.png"></img>
             <p className="p-1">Recordar devolución</p>
           </button>
         </div>

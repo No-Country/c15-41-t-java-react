@@ -19,7 +19,7 @@ export default function LoanRoute() {
     try {
       setIsLoading(true)
       setIsError(false)
-      const loans = await fetch('http://localhost:3000/loans')
+      const loans = await fetch('http://localhost:3000/loans/all')
       setUsers(loans)
       setSearchResults(loans)
     } catch (error) {
@@ -48,12 +48,14 @@ export default function LoanRoute() {
       {isLoading ? (
         <Spinner />
       ) : isError ? (
-        <p>Error cargando prestamos</p>
+        <p className="p-10 text-center">Error cargando prestamos</p>
       ) : (
         <div className="grid w-full justify-items-center gap-y-5 py-5 align-middle md:grid-cols-2">
-          {searchResults.map(loan => (
-            <LoanCard key={loan.idLoan} loan={loan} refresh={fetchLoans} />
-          ))}
+          {searchResults.map((loan, index) =>
+            index < page * PAGE_SIZE && index >= (page - 1) * PAGE_SIZE ? (
+              <LoanCard key={loan.idLoan} loan={loan} refresh={fetchLoans} />
+            ) : null
+          )}
         </div>
       )}
       <div className="justify-self-end pb-8">

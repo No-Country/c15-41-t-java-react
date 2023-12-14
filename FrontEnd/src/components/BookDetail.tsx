@@ -5,6 +5,7 @@ import { IoMdClose } from 'react-icons/io'
 
 interface PropsDetail extends Book {
   id: number
+  refresh: () => void
 }
 
 const BookDetail: React.FC<PropsDetail> = props => {
@@ -51,7 +52,7 @@ const BookDetail: React.FC<PropsDetail> = props => {
         Prestar Libro
       </button>
       {isLoan && (
-        <div className="fixed inset-0 z-50  bg-white opacity-100 overflow-y-auto">
+        <div className="fixed inset-0 z-50  overflow-y-auto bg-white opacity-100">
           <RegisterLoan {...props} />
           <div
             className="increase-scale absolute right-4 top-4 cursor-pointer text-5xl font-semibold text-black"

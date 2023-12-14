@@ -234,35 +234,6 @@
       "phoneNumber": "3791077529",
       "address": "Via proff sfameni 54",
       "id": 6565660
-    },
-    {
-      "id": 1701880193245,
-      "dni": "12345678",
-      "name": "GUILLERMO GUSTAVO",
-      "lastName": "MEDRANO",
-      "email": "guillermomedrano85@hotmail.com",
-      "phoneNumber": "3562443452",
-      "address": "BOLIVAR 207"
-    },
-    {
-      "idUser": 1701883501989,
-      "dni": "78945612",
-      "name": "GUILLERMO GUSTAVO",
-      "lastName": "MEDRANO",
-      "email": "guillermomedrano85@hotmail.com",
-      "phoneNumber": "3562443452",
-      "address": "BOLIVAR 207",
-      "id": 1701880193246
-    },
-    {
-      "idUser": 1701887278151,
-      "dni": "12345678",
-      "name": "GUILLERMO GUSTAVO",
-      "lastName": "MEDRANO",
-      "email": "guillermomedrano85@hotmail.com",
-      "phoneNumber": "3562443452",
-      "address": "BOLIVAR 207",
-      "id": 1701880193247
     }
   ],
   "loans": [
