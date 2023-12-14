@@ -1,11 +1,9 @@
 package c1541tjavareact.library.persistence.entity;
 
-import c1541tjavareact.library.persistence.entity.enums.Genre;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -32,10 +30,6 @@ public class Book implements Serializable {
     @Column(nullable = false,unique = true)
     private String isbn;
 
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private Genre genre;
-
     @Column(nullable = false)
     private Integer quantity;
 
@@ -49,5 +43,9 @@ public class Book implements Serializable {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_author", nullable = false, insertable = false, updatable = false)
     private Author author;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "id_genre", nullable = false, insertable = false, updatable = false)
+    private Genre genre;
 
 }

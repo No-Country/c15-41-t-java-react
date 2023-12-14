@@ -1,6 +1,6 @@
 package c1541tjavareact.library.domain.dto;
 
-import c1541tjavareact.library.persistence.entity.enums.Genre;
+import c1541tjavareact.library.persistence.entity.Genre;
 import jakarta.validation.constraints.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -34,7 +34,7 @@ public class BookDto {
     private String isbn;
 
     @NotNull
-    private Genre genre;
+    private Long idGenre;
 
     @NotNull
     @Min(value = 1, message = MIN_QUANTITY)
@@ -44,5 +44,7 @@ public class BookDto {
     private EditorialDto editorialDto;
 
     private AuthorDto authorDto;
+
+    private GenreDto genredto;
 
 }
