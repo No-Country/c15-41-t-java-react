@@ -6,10 +6,11 @@ import { IoMdClose } from 'react-icons/io'
 interface PropsDetail extends Book {
   id: number
   refresh: () => void
+  setIsModalDetails: (value: boolean) => void
 }
 
 const BookDetail: React.FC<PropsDetail> = props => {
-  const { title, image, authorDto, genre, editorialDto, isbn, quantity } = props
+  const { title, image, authorDto, genre, editorialDto, isbn, quantity,setIsModalDetails } = props
   const [isLoan, setIsLoan] = useState(false)
 
   return (
@@ -53,11 +54,12 @@ const BookDetail: React.FC<PropsDetail> = props => {
       </button>
       {isLoan && (
         <div className="fixed inset-0 z-50  overflow-y-auto bg-white opacity-100">
-          <RegisterLoan {...props} />
+          <RegisterLoan {...props}  />
           <div
             className="increase-scale absolute right-4 top-4 cursor-pointer text-5xl font-semibold text-black"
             onClick={() => {
               setIsLoan(!isLoan)
+              setIsModalDetails(false)
             }}
           >
             <IoMdClose />
