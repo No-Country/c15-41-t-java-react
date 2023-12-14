@@ -2,7 +2,6 @@ package c1541tjavareact.library.web.controller;
 
 import c1541tjavareact.library.domain.dto.BookDto;
 import c1541tjavareact.library.domain.service.BookService;
-import c1541tjavareact.library.persistence.entity.enums.Genre;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,10 +21,6 @@ public class BookController {
         return ResponseEntity.ok(bookService.getAll());
     }
 
-    @GetMapping("/genres")
-    public ResponseEntity<List<String>> getBookGenres() {
-        return ResponseEntity.ok(bookService.getBookGenres());
-    }
 
     @PostMapping("/save")
     public ResponseEntity<BookDto> save(@RequestBody @Valid BookDto bookDto) {

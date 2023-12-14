@@ -52,8 +52,10 @@ public class BookCrudRepositoryImpl implements BookCrudRepository {
             bookToUpdate.setTitle(bookDto.getTitle());
             bookToUpdate.setIdAuthor(bookDto.getIdAuthor());
             bookToUpdate.setIdEditorial(bookDto.getIdEditorial());
-            bookToUpdate.setIsbn(bookDto.getIsbn());
-            bookToUpdate.setGenre(bookDto.getGenre());
+            if(!bookToUpdate.getIsbn().equalsIgnoreCase(bookDto.getIsbn())){
+                bookToUpdate.setIsbn(bookDto.getIsbn());
+            }
+            bookToUpdate.setIdGenre(bookDto.getIdGenre());
             bookToUpdate.setQuantity(bookDto.getQuantity());
             return this.save(bookToUpdate);
         }

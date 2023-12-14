@@ -10,6 +10,11 @@ INSERT IGNORE INTO editorials (id_editorial, name) VALUES (3, 'Science Books');
 INSERT IGNORE INTO editorials (id_editorial, name) VALUES (4, 'Artistic Press');
 INSERT IGNORE INTO editorials (id_editorial, name) VALUES (5, 'Historical Editions');
 
+INSERT IGNORE INTO genres(id_genre, name) VALUES (1, 'Action');
+INSERT IGNORE INTO genres(id_genre, name) VALUES (2, 'Fantasy');
+INSERT IGNORE INTO genres(id_genre, name) VALUES (3, 'Thriller');
+INSERT IGNORE INTO genres(id_genre, name) VALUES (4, 'Adventure');
+
 INSERT IGNORE INTO users (id_user, dni, email, name, last_name, phone_number, address, is_active) VALUES (1, '1111121', 'juan.perez11@gmail.com', 'Juan', 'Perez', '1111111121', 'Calle Falsa 123', true);
 INSERT IGNORE INTO users (id_user, dni, email, name, last_name, phone_number, address, is_active) VALUES (2, '22222311', 'maria.gomez12@gmail.com', 'Maria', 'Gomez', '2222222231', 'Calle real 456', true);
 INSERT IGNORE INTO users (id_user, dni, email, name, last_name, phone_number, address, is_active) VALUES (3, '3333341', 'carlos.lopez13@gmail.com', 'Carlos', 'Lopez', '3333333341', 'Calle principal 789', true);
@@ -21,12 +26,12 @@ INSERT IGNORE INTO users (id_user, dni, email, name, last_name, phone_number, ad
 INSERT IGNORE INTO users (id_user, dni, email, name, last_name, phone_number, address, is_active) VALUES (9, '9999901112', 'perritogarces2@gmail.com', 'Facundo', 'Fernandez', '9999999901', 'Calle del norte 567', true);
 INSERT IGNORE INTO users (id_user, dni, email, name, last_name, phone_number, address, is_active) VALUES (10, '1010111211', 'perritogarces@gmail.com', 'Natalia', 'Molina', '1010101111', 'Calle ultima', true);
 
-INSERT IGNORE INTO books (id_book, title, isbn, genre, quantity, id_author, id_editorial) VALUES (1, 'Harry Potter 1', '978-3-16-148410-1', 'ACTION', 2, 1, 1);
-INSERT IGNORE INTO books (id_book, title, isbn, genre, quantity, id_author, id_editorial) VALUES (2, 'Cien años de soledad', '978-3-16-148410-2', 'FANTASY', 5, 2, 2);
-INSERT IGNORE INTO books (id_book, title, isbn, genre, quantity, id_author, id_editorial) VALUES (3, 'El túnel', '978-3-16-148410-3', 'THRILLER', 10, 3, 3);
-INSERT IGNORE INTO books (id_book, title, isbn, genre, quantity, id_author, id_editorial) VALUES (4, 'Martín Fierro', '978-3-16-148410-4', 'ADVENTURE', 8, 4, 4);
-INSERT IGNORE INTO books (id_book, title, isbn, genre, quantity, id_author, id_editorial) VALUES (5, 'Don Quijote de la Mancha', '978-3-16-148410-5', 'ACTION', 12, 5, 5);
-INSERT IGNORE INTO books (id_book, title, isbn, genre, quantity, id_author, id_editorial) VALUES (6, 'Fahrenheit 451', '978-3-16-148410-6', 'Fantasy', 6, 1, 2);
+INSERT IGNORE INTO books (id_book, title, isbn, id_genre, quantity, id_author, id_editorial) VALUES (1, 'Harry Potter 1', '978-3-16-148410-1', 1, 2, 1, 1);
+INSERT IGNORE INTO books (id_book, title, isbn, id_genre, quantity, id_author, id_editorial) VALUES (2, 'Cien años de soledad', '978-3-16-148410-2', 2, 5, 2, 2);
+INSERT IGNORE INTO books (id_book, title, isbn, id_genre, quantity, id_author, id_editorial) VALUES (3, 'El túnel', '978-3-16-148410-3', 3, 10, 3, 3);
+INSERT IGNORE INTO books (id_book, title, isbn, id_genre, quantity, id_author, id_editorial) VALUES (4, 'Martín Fierro', '978-3-16-148410-4', 4, 8, 4, 4);
+INSERT IGNORE INTO books (id_book, title, isbn, id_genre, quantity, id_author, id_editorial) VALUES (5, 'Don Quijote de la Mancha', '978-3-16-148410-5', 1, 12, 5, 5);
+INSERT IGNORE INTO books (id_book, title, isbn, id_genre, quantity, id_author, id_editorial) VALUES (6, 'Fahrenheit 451', '978-3-16-148410-6', 2, 6, 1, 2);
 
 INSERT IGNORE INTO admins (id_admin, name, last_name, email, password) VALUES (1, 'José', 'Lara', 'jose.lara@gmail.com', '$2a$10$nFqAPEAI/QjNNunc1q3yt.jm8WKW/iNU9.ee0WamKdwqLnp2Ai4jK');
 INSERT IGNORE INTO admins (id_admin, name, last_name, email, password) VALUES (2, 'José', 'Lara', 'bibliotech.c15@gmail.com', '$2a$12$YWG.dX4vnhM/1sMIwvsee.lYghep2sVhgcmghaoFxESPnnIeOSwgK');

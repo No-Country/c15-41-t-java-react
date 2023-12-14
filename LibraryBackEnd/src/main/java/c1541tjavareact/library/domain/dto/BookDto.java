@@ -45,6 +45,6 @@ public class BookDto {
 
     private AuthorDto authorDto;
 
-    private GenreDto genredto;
+    private GenreDto genreDto;
 
 }

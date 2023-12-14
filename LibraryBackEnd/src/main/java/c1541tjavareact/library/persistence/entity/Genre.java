@@ -19,9 +19,9 @@ public class Genre implements Serializable {
     @Column(name = "id_genre")
     private long idGenre;
 
-    @Column(nullable = false)
-    private String genre;
+    @Column(nullable = false, unique = true)
+    private String name;
 
-    @OneToMany(mappedBy = "genres")
+    @OneToMany(mappedBy = "genre")
     private List<Book> books;
 }

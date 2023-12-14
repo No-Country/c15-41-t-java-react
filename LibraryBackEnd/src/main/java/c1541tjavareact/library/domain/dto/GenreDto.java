@@ -9,7 +9,7 @@ import lombok.Setter;
 public class GenreDto {
 
     private long idGenre;
-    
+
     @NotBlank
-    private String genre;
+    private String name;
 }
