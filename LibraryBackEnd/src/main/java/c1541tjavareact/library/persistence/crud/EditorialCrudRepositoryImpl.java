@@ -40,8 +40,6 @@ public class EditorialCrudRepositoryImpl implements EditorialCrudRepository {
     public EditorialDto update(Long idEditorial, EditorialDto editorialDto) {
         return getEditorialDto(idEditorial).map(editorialDtoUpdate -> {
             editorialDtoUpdate.setName(editorialDtoUpdate.getName());
-            editorialDtoUpdate.setEstablishedDate(
-                    editorialDtoUpdate.getEstablishedDate());
             return save(editorialDtoUpdate);
         }).orElse(null);
     }

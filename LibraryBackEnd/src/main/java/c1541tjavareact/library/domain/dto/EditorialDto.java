@@ -24,8 +24,4 @@ public class EditorialDto {
             message = INVALID_CHARACTERS)
     private String name;
 
-    @NotNull
-    @Past(message = INVALID_PAST_DATE)
-    private LocalDate establishedDate;
-
 }

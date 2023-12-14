@@ -6,8 +6,7 @@ import c1541tjavareact.library.domain.dto.PendingDto;
 import c1541tjavareact.library.domain.dto.UserDto;
 import c1541tjavareact.library.domain.repository.LoanCrudRepository;
 import c1541tjavareact.library.domain.repository.LoanRepository;
-import c1541tjavareact.library.infra.exception.BookException;
-import c1541tjavareact.library.infra.exception.EmailException;
+import c1541tjavareact.library.infra.exception.BibliotechException;
 import c1541tjavareact.library.persistence.entity.Loan;
 import c1541tjavareact.library.persistence.mapper.LoanDaoMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -75,7 +74,7 @@ public class LoanCrudRepositoryImpl implements LoanCrudRepository {
                 return loanDaoMapper.toLoanDto(loanSaved);
             } else {
 
-                throw new BookException("No hay suficientes libros, para realizar un prestamo");
+                throw new BibliotechException("No hay suficientes libros, para realizar un prestamo");
 
             }
 
@@ -180,7 +179,7 @@ public class LoanCrudRepositoryImpl implements LoanCrudRepository {
 
             javaMailSender.send(simpleMailMessage);
         }catch (MailException e) {
-            throw new EmailException("Error durante el envio de un email");
+            throw new BibliotechException("Error durante el envio de un email");
         }
     }
 

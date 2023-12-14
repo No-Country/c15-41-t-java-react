@@ -24,9 +24,6 @@ public class Editorial implements Serializable {
     @Column(nullable = false)
     private String name;
 
-    @Column(name = "established_date",nullable = false)
-    private LocalDate establishedDate;
-
     @OneToMany(mappedBy = "editorial")
     private List<Book> books;
 

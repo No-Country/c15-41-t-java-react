@@ -45,21 +45,13 @@ public class ExceptionHandlerBibliotech {
         return ResponseEntity.badRequest().body(errors);
     }
 
-    @ExceptionHandler(BookException.class)
-    public ResponseEntity<Map<String, Object>> handleBookException(
-            BookException exception){
+    @ExceptionHandler(BibliotechException.class)
+    public ResponseEntity<Map<String, Object>> handleBibliotechException(
+            BibliotechException exception){
         Map<String, Object> errors = new HashMap<>();
-        errors.put("CantidadLibros", exception.getMessage());
+        errors.put("message", exception.getMessage());
         return ResponseEntity.badRequest().body(errors);
     }
-
-    @ExceptionHandler(EmailException.class)
-    public ResponseEntity<Map<String, Object>> handleEmailException(BookException exception){
-        Map<String, Object> errors = new HashMap<>();
-        errors.put("ErrorEmail", exception.getMessage());
-        return ResponseEntity.badRequest().body(errors);
-    }
-
 
     private record DataError(String field, String error){
         public DataError(FieldError error){
