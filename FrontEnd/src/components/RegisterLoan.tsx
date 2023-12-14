@@ -5,6 +5,7 @@ import * as Yup from 'yup'
 import { Book, User } from '../types/types'
 import { useUser } from '../context/UserContext'
 import { toast } from 'react-hot-toast'
+import { ReactSelect } from './ReactSelect'
 
 interface propsLoan extends Book {
   refresh: () => void
@@ -27,6 +28,7 @@ const validationSchema = Yup.object({
 const RegisterLoan: React.FC<propsLoan> = props => {
   const [users, setUsers] = useState<User[]>([])
   const { fetch, currentUser } = useUser()
+  const [usersOptions, setusersOptions] = useState<{ value: number; label: string }[]>([])
 
   async function getUsers(): Promise<void> {
     try {
@@ -42,7 +44,7 @@ const RegisterLoan: React.FC<propsLoan> = props => {
     })
   }, [])
 
-  const { values, errors, handleChange, handleSubmit } = useFormik({
+  const { values, errors, handleChange, handleSubmit, setFieldValue } = useFormik({
     initialValues: {
       title: props.title,
       author: props.authorDto.name + ' ' + props.authorDto.lastName,
@@ -93,6 +95,14 @@ const RegisterLoan: React.FC<propsLoan> = props => {
         })
     }
   }
+
+  useEffect(() => {
+    const options = users.map(user => ({
+      value: user.idUser,
+      label: `${user.name} ${user.lastName}`
+    }))
+    setusersOptions(options)
+  }, [users])
 
   return (
     <div className="flex justify-center overflow-y-auto px-2 py-10">
@@ -251,30 +261,14 @@ const RegisterLoan: React.FC<propsLoan> = props => {
               </div>
             </div>
           </div>
-          <label className="text-base font-bold leading-[normal] text-blueLight" htmlFor="idUser">
-            Nombre y apellido <span className="text-red-500">*</span>
-          </label>
-          <div className="relative mb-14 flex h-8 w-full items-center gap-2 border-0 border-b-2 border-solid border-blueDark">
-            <select
-              className="w-full border-0 bg-grey text-base font-[400] leading-[normal] text-blueDark placeholder-[#ABABAB] focus:outline-none"
-              name="idUser"
-              value={values.idUser}
-              onChange={handleChange}
-            >
-              <option value="-1" disabled>
-                Selecciona un miembro
-              </option>
-              {users.map((user: User) => (
-                <option key={user.idUser} value={user.idUser}>
-                  {`${user.name} ${user.lastName}`}
-                </option>
-              ))}
-            </select>
-
-            <small className="absolute -bottom-6 text-xs font-bold text-red-500">
-              {errors?.idUser}
-            </small>
-          </div>
+          <ReactSelect
+            label="Nombre y apellido"
+            placeHolder="Selecciona un miembro"
+            selectName="idUser"
+            options={usersOptions}
+            setFieldValue={setFieldValue}
+            errors={errors.idUser}
+          />
           <div className="pb-10">
             <button
               className="flex h-[53px] w-full items-center justify-center gap-x-2 rounded-[32px] border-none bg-blueDark py-5 text-[17px] font-bold leading-normal text-white shadow-btn hover:cursor-pointer disabled:cursor-not-allowed disabled:opacity-50"
