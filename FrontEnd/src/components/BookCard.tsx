@@ -135,8 +135,9 @@ const BookCard: React.FC<Props> = ({
               {...bookData}
               refresh={() => {
                 refresh()
-                setIsModalDetails(false)
+                
               }}
+              setIsModalDetails={setIsModalDetails}
             />
             <div
               className="increase-scale absolute right-0 top-2 cursor-pointer text-5xl font-semibold text-black"
