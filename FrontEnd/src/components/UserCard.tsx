@@ -4,6 +4,7 @@ import { useState } from 'react'
 import DeleteModal from './DeleteModal'
 import { IoMdClose } from 'react-icons/io'
 import UserLoans from './UserLoans'
+import UserRegisterForm from './UserRegisterForm'
 
 interface UserCardProps {
   key: User['idUser']
@@ -14,6 +15,7 @@ interface UserCardProps {
 export default function UserCard({ user, refresh }: UserCardProps) {
   const [isModalDeleteOpen, setIsModalDeleteOpen] = useState(false)
   const [isModalLoansOpen, setIsModalLoansOpen] = useState(false)
+  const [isModaEditlOpen, setIsModaEditOpen] = useState(false)	
 
   return (
     <div className="flex-col p-3">
@@ -23,18 +25,20 @@ export default function UserCard({ user, refresh }: UserCardProps) {
           onClick={() => {
             setIsModalLoansOpen(true)
           }}
-          className="px-0.5 hover:cursor-pointer"
+          className="px-0.5 hover:cursor-pointer increase-scale"
         >
           <IoEyeOutline size={20} />
         </div>
-        <div className="px-0.5 hover:cursor-pointer">
-          <IoPencil size={20} />
+        <div className="px-0.5 hover:cursor-pointer increase-scale">
+          <IoPencil 
+          size={20}
+          onClick={() => setIsModaEditOpen(true)} />
         </div>
         <div
           onClick={() => {
             setIsModalDeleteOpen(true)
           }}
-          className="px-0.5 hover:cursor-pointer"
+          className="px-0.5 hover:cursor-pointer increase-scale"
         >
           <IoTrashOutline size={20} />
         </div>
@@ -88,6 +92,19 @@ export default function UserCard({ user, refresh }: UserCardProps) {
           </div>
         </div>
       )}
+      {isModaEditlOpen && (
+         <div className="absolute inset-0 z-50 bg-white opacity-100">
+         <UserRegisterForm user={user} setIsModalOpen={setIsModaEditOpen} refresh={refresh} />
+         <div
+           className="absolute right-4 top-1 cursor-pointer text-3xl font-semibold text-black hover:scale-125"
+           onClick={() => {
+             setIsModaEditOpen(false)
+           }}
+         >
+           <IoMdClose />
+         </div>
+       </div>
+     )}
     </div>
   )
 }
