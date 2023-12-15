@@ -20,7 +20,7 @@ const validationSchema = Yup.object({
   loanDate: Yup.string().required('La fecha de prestamo es requerida'),
   returnExpectedDate: Yup.date()
     .required('La fecha de devolución es requerida')
-    .min(new Date(), 'La fecha de devolución no puede ser menor a la fecha actual'),
+    .min(new Date(), 'La fecha de devolución no puede ser menor o igual a la fecha actual'),
   idUser: Yup.number().required('El miembro es requerido').min(1, 'El miembro es requerido'),
   idBook: Yup.number().required('El libro es requerido')
 })
