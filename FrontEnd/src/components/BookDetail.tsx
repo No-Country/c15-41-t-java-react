@@ -49,9 +49,13 @@ const BookDetail: React.FC<PropsDetail> = props => {
       <button
         className="mt-5 flex h-[45px] w-full items-center justify-center gap-x-2 rounded-[32px] border-none bg-blueDark  py-3 text-[17px] font-bold leading-normal text-white shadow-btn hover:cursor-pointer disabled:cursor-not-allowed disabled:opacity-50"
         onClick={() => setIsLoan(!isLoan)}
+        disabled={quantity ===1}
       >
         Prestar Libro
       </button>
+      {quantity===1 ? (
+         <small className='text-red-500 text-sm'>la cantidad debe ser mayor a 1 <br/> para poder prestar este libro</small>
+      ):""}
       {isLoan && (
         <div className="fixed inset-0 z-50  overflow-y-auto bg-white opacity-100">
           <RegisterLoan {...props}  />
