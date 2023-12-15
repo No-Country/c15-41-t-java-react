@@ -2,8 +2,8 @@ import { useState } from 'react'
 import { IoEyeOffOutline, IoEyeOutline } from 'react-icons/io5'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
-import { useUser } from '../context/UserContext'
-import toast from 'react-hot-toast'
+//import { useUser } from '../context/UserContext'
+//import toast from 'react-hot-toast'
 
 interface FormValues {
   email: string
@@ -37,7 +37,7 @@ const validationSchema = Yup.object({
 
 const RegisterAdmin = () => {
   const [showPass, setShowPass] = useState(false)
-  const {fetch} = useUser()
+  //const {fetch} = useUser()
   const onSubmit = async (values: FormValues) => {
     const valuesToSend = {
       email: values.email,
