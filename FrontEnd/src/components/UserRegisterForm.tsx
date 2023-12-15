@@ -35,6 +35,8 @@ const validationSchema = Yup.object({
     .required('El celular es obligatorio')
     .matches(/^\d{10}$/, 'Ingresa un número de celular válido'),
   address: Yup.string().required('La dirección es obligatoria')
+  .matches(/^[A-Za-z0-9\sáéíóúÁÉÍÓÚñÑ,#-]{5,40}$/, 'Ingresa una dirección válida no puede superar los 40 caracteres')
+  
 })
 
 const UserRegisterForm: React.FC<UserProps> = ({
@@ -216,7 +218,7 @@ const UserRegisterForm: React.FC<UserProps> = ({
                   onChange={handleChange}
                   placeholder="Ingresá la direccion"
                 />
-                <small className="absolute -bottom-6 text-xs font-bold text-red-500">
+                <small className="absolute top-10 text-xs font-bold text-red-500">
                   {errors?.address}
                 </small>
               </div>

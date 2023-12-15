@@ -13,7 +13,7 @@ export default function Layout() {
 
   return (
     <>
-      <header className="flex h-36 items-center justify-start">
+      <header className="flex h-36 items-center justify-around">
         <Link to="/home" className="ml-24 h-full max-lg:ml-12 max-lg:h-24 max-sm:ml-6">
           <img src="/brand/isologotipo.png" alt="logo" className="h-full w-auto" />
         </Link>
@@ -41,7 +41,7 @@ export default function Layout() {
         >
           Miembros
         </Link>
-        <div className='flex ml-12'>
+        <div className='flex ml-12 sm:ml-20'>
         <button
           className="border-none bg-white hover:cursor-pointer  "
           onClick={signOut}

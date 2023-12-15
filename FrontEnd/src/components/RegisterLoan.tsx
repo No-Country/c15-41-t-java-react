@@ -21,7 +21,7 @@ const validationSchema = Yup.object({
   returnExpectedDate: Yup.date()
     .required('La fecha de devolución es requerida')
     .min(new Date(), 'La fecha de devolución no puede ser menor o igual a la fecha actual')
-    .test('15-dias', 'La diferencia debe ser de máximo 15 días', function (value) {
+    .test('15-dias', 'La fecha límite de la devolución son 15 días', function (value) {
       const currentDate = new Date()
 
   // Comprobar si loanDate es una fecha válida
@@ -33,7 +33,8 @@ const validationSchema = Yup.object({
 
   return true;
     }),
-  idUser: Yup.number().required('El miembro es requerido').min(1, 'El miembro es requerido'),
+  idUser: Yup.number().required('El miembro es requerido')
+  .min(1, 'El miembro es requerido'),
   idBook: Yup.number().required('El libro es requerido')
 })
 
