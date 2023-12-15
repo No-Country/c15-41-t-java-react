@@ -6,25 +6,22 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.util.List;
 
 @Entity
-@Table(name = "editorials")
+@Table(name = "genres")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Editorial implements Serializable {
-
+public class Genre implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_editorial")
-    private long idEditorial;
+    @Column(name = "id_genre")
+    private long idGenre;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String name;
 
-    @OneToMany(mappedBy = "editorial")
+    @OneToMany(mappedBy = "genre")
     private List<Book> books;
-
 }

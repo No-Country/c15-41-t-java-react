@@ -39,9 +39,7 @@ public class EditorialCrudRepositoryImpl implements EditorialCrudRepository {
     @Override
     public EditorialDto update(Long idEditorial, EditorialDto editorialDto) {
         return getEditorialDto(idEditorial).map(editorialDtoUpdate -> {
-            editorialDtoUpdate.setName(editorialDtoUpdate.getName());
-            editorialDtoUpdate.setEstablishedDate(
-                    editorialDtoUpdate.getEstablishedDate());
+            editorialDtoUpdate.setName(editorialDto.getName());
             return save(editorialDtoUpdate);
         }).orElse(null);
     }

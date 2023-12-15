@@ -13,6 +13,8 @@ import java.util.List;
 public interface BookDaoMapper {
     @Mapping(source = "author", target = "authorDto")
     @Mapping(source = "editorial", target = "editorialDto")
+    @Mapping(source = "genre",target = "genreDto")
+    @Mapping(source = "imageBook",target = "imageDto")
     BookDto toBookDto (Book book);
     List<BookDto> toBooksDto(List<Book> books);
     @InheritInverseConfiguration

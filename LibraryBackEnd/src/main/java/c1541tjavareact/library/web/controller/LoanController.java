@@ -61,5 +61,16 @@ public class LoanController {
         return ResponseEntity.notFound().build();
     }
 
+    @GetMapping("/sendMail/{id}")
+    public ResponseEntity<?> sendMail(@PathVariable("id") Long idLoan) {
+        try {
+            loanService.sendMail(idLoan);
+            return ResponseEntity.ok().build();
+        }catch(RuntimeException ignore){
+            return ResponseEntity.notFound().build();
+        }
+
+    }
+
 
 }

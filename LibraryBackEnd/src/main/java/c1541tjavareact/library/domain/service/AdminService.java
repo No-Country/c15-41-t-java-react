@@ -5,6 +5,7 @@ import c1541tjavareact.library.domain.repository.AdminCrudRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -35,4 +36,7 @@ public class AdminService {
         return adminCrudRepository.findByUserName(userName);
     }
 
+    public List<AdminDto> getAll() {
+        return adminCrudRepository.getAll();
+    }
 }

@@ -8,6 +8,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/admins")
 public class AdminController {
@@ -23,6 +25,10 @@ public class AdminController {
         String passEncoded = passwordEncoder.encode(adminDto.getPassword());
         adminDto.setPassword(passEncoded);
         return ResponseEntity.ok(adminService.save(adminDto));
+    }
+    @GetMapping("/all")
+    public ResponseEntity<List<AdminDto>> getAll (){
+        return ResponseEntity.ok(adminService.getAll());
     }
     @GetMapping("/{id}")
     public ResponseEntity<AdminDto> getAdminDto(@PathVariable Long id){
