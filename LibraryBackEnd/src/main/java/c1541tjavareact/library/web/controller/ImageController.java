@@ -2,7 +2,6 @@ package c1541tjavareact.library.web.controller;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.util.List;
 import java.util.Map;
 
 import javax.imageio.ImageIO;

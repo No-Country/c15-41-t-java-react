@@ -1,9 +1,14 @@
 package c1541tjavareact.library.domain.dto;
 
 import c1541tjavareact.library.persistence.entity.Genre;
+import c1541tjavareact.library.persistence.entity.Image;
 import jakarta.validation.constraints.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.core.io.InputStreamSource;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.File;
 
 import static c1541tjavareact.library.domain.util.constant.Constants.*;
 
@@ -36,6 +41,9 @@ public class BookDto {
     @NotNull
     private Long idGenre;
 
+    private File image;
+    private Long idImage;
+
     @NotNull
     @Min(value = 1, message = MIN_QUANTITY)
     @Max(value = 999, message = MAX_QUANTITY)
@@ -46,5 +54,7 @@ public class BookDto {
     private AuthorDto authorDto;
 
     private GenreDto genreDto;
+
+    private ImageDto imageDto;
 
 }

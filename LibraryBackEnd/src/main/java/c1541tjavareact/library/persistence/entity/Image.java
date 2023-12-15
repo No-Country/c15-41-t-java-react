@@ -3,6 +3,8 @@ package c1541tjavareact.library.persistence.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
+
 @Entity
 @Data
 @NoArgsConstructor
@@ -17,9 +19,12 @@ public class Image {
     @Column(nullable = false)
     private String name;
 
-    @Column(nullable = false)
+    @Column(name = "imagen_url", nullable = false)
     private String imagenUrl;
 
-    @Column(nullable = false)
+    @Column(name = "cloudinary_id", nullable = false)
     private String cloudinaryId;
+
+    @OneToMany(mappedBy = "imageBook")
+    private List<Book> books;
 }

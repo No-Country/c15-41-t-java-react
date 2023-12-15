@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -33,6 +34,11 @@ public class AdminCrudRepositoryImpl implements AdminCrudRepository {
     @Override
     public void delete(Long idAdmin) {
         adminRepository.deleteById(idAdmin);
+    }
+
+    @Override
+    public List<AdminDto> getAll() {
+        return adminDaoMapper.toAdminsDto(adminRepository.findAll());
     }
 
     @Override

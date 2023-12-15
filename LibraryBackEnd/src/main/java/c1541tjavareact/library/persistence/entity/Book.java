@@ -36,6 +36,9 @@ public class Book implements Serializable {
     @Column(name = "id_genre", nullable = false)
     private Long idGenre;
 
+    @Column(name = "id_image")
+    private Long idImage;
+
     @OneToMany(mappedBy = "book")
     private List<Loan> loanList;
 
@@ -50,5 +53,9 @@ public class Book implements Serializable {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_genre", nullable = false, insertable = false, updatable = false)
     private Genre genre;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "id_image", insertable = false, updatable = false)
+    private Image imageBook;
 
 }
