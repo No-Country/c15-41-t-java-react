@@ -1,11 +1,10 @@
 import { useState, useEffect } from 'react'
-import type { Author, BookPost, Editorial } from '../types/types'
-import type { FormikValues } from 'formik'
-import { useFormik } from 'formik'
+import { useFormik, type FormikValues } from 'formik'
 import * as Yup from 'yup'
 import toast from 'react-hot-toast'
-import { useUser } from '../context/UserContext'
-import { blockNonNumericInput } from '../utils/input'
+import type { Author, BookPost, Editorial } from '@/types/types'
+import { useUser } from '@/context/UserContext'
+import { blockNonNumericInput } from '@/utils/input'
 
 interface BookProps extends BookPost {
   id: number
