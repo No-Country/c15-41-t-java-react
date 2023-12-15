@@ -6,10 +6,11 @@ import { IoMdClose } from 'react-icons/io'
 interface PropsDetail extends Book {
   id: number
   refresh: () => void
+  setIsModalDetails: (value: boolean) => void
 }
 
 const BookDetail: React.FC<PropsDetail> = props => {
-  const { title, image, authorDto, genre, editorialDto, isbn, quantity } = props
+  const { title, image, authorDto, genre, editorialDto, isbn, quantity,setIsModalDetails } = props
   const [isLoan, setIsLoan] = useState(false)
 
   return (
@@ -48,16 +49,21 @@ const BookDetail: React.FC<PropsDetail> = props => {
       <button
         className="mt-5 flex h-[45px] w-full items-center justify-center gap-x-2 rounded-[32px] border-none bg-blueDark  py-3 text-[17px] font-bold leading-normal text-white shadow-btn hover:cursor-pointer disabled:cursor-not-allowed disabled:opacity-50"
         onClick={() => setIsLoan(!isLoan)}
+        disabled={quantity ===1}
       >
         Prestar Libro
       </button>
+      {quantity===1 ? (
+         <small className='text-red-500 text-sm'>la cantidad debe ser mayor a 1 <br/> para poder prestar este libro</small>
+      ):""}
       {isLoan && (
         <div className="fixed inset-0 z-50  overflow-y-auto bg-white opacity-100">
-          <RegisterLoan {...props} />
+          <RegisterLoan {...props}  />
           <div
-            className="increase-scale absolute right-4 top-4 cursor-pointer text-5xl font-semibold text-black"
+            className="increase-scale absolute right-4 sm:top-4 cursor-pointer sm:text-5xl font-semibold text-black top-2 text-3xl "
             onClick={() => {
               setIsLoan(!isLoan)
+              setIsModalDetails(false)
             }}
           >
             <IoMdClose />

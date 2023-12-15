@@ -528,5 +528,14 @@
         "active": true
       }
     }
+  ],
+
+  "admin": [
+    {
+      "name": "admin",
+      "lastName": "admin",
+      "email": "admin@admin.com",
+      "password": "Admin2023"
+    }
   ]
 }
