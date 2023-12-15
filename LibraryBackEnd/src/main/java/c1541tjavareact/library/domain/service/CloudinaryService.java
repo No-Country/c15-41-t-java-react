@@ -42,7 +42,6 @@ public class CloudinaryService {
     }
     public Map uploadPrueba(File file) throws IOException {
         Map result = cloudinary.uploader().upload(file, ObjectUtils.asMap("folder", "Bibliotech/"));
-        file.delete();
         return result;
     }
 

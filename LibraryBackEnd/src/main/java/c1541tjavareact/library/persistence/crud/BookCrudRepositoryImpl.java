@@ -12,15 +12,12 @@ import c1541tjavareact.library.persistence.entity.Book;
 import c1541tjavareact.library.persistence.entity.Image;
 import c1541tjavareact.library.persistence.mapper.BookDaoMapper;
 import c1541tjavareact.library.persistence.mapper.ImageDaoMapper;
-import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
@@ -56,7 +53,7 @@ public class BookCrudRepositoryImpl implements BookCrudRepository {
         Long idImage=0L;
         try {
             File fileBook=bookDto.getImage();
-            BufferedImage bi = ImageIO.read(new FileInputStream(fileBook));
+            BufferedImage bi = ImageIO.read(fileBook);
             Map result = cloudinaryService.uploadPrueba(fileBook);
             Image image = new Image();
             image.setName((String) result.get("original_filename"));
