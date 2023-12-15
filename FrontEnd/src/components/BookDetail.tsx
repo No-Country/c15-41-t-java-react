@@ -60,7 +60,7 @@ const BookDetail: React.FC<PropsDetail> = props => {
         <div className="fixed inset-0 z-50  overflow-y-auto bg-white opacity-100">
           <RegisterLoan {...props}  />
           <div
-            className="increase-scale absolute right-4 top-4 cursor-pointer text-5xl font-semibold text-black"
+            className="increase-scale absolute right-4 sm:top-4 cursor-pointer sm:text-5xl font-semibold text-black top-2 text-3xl "
             onClick={() => {
               setIsLoan(!isLoan)
               setIsModalDetails(false)
