@@ -9,7 +9,7 @@
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "format": "prettier --write ./src/**/*.{ts,tsx,js,jsx,json,css}",
-    "json-server": "json-server --watch db.json --port 3000",
+    "json-server": "json-server --watch db.json --port 3000 --routes routes.json",
     "dev:java": "vite --mode production"
   },
   "dependencies": {
