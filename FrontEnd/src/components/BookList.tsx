@@ -18,7 +18,7 @@ const BookList: React.FC = () => {
   const getBooks = useCallback(async () => {
     try {
       setIsLoading(true)
-      const books = await fetch('http://localhost:3000/books/all')
+      const books = await fetch('http://localhost:3000/books')
       setBooks(books)
       setSearchResults(books)
     } catch (error) {
