@@ -18,4 +18,7 @@ public interface LoanCrudRepository {
     boolean delete(Long idLoan);
 
     LoanDto returnBookLoan(Long idLoan);
+
+    void sendMail(Long idLoan);
+    void sendTaskMail(LoanDto loanDto);
 }

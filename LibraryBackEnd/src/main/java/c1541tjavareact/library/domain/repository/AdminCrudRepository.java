@@ -3,6 +3,7 @@ package c1541tjavareact.library.domain.repository;
 import c1541tjavareact.library.domain.dto.AdminDto;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.List;
 import java.util.Optional;
 
 
@@ -13,4 +14,5 @@ public interface AdminCrudRepository {
     AdminDto update(Long idAdmin, AdminDto adminDto);
     void delete(Long idAdmin);
 
+    List<AdminDto> getAll();
 }

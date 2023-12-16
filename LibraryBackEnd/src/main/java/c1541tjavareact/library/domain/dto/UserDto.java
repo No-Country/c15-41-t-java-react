@@ -43,6 +43,7 @@ public class UserDto {
     private String phoneNumber;
 
     @NotBlank
+    @Pattern(regexp = "[A-Za-z0-9 áéíóúÁÉÍÓÚñÑ,#\\-]{5,40}$")
     private String address;
 
     private List<LoanDto> loansDto;
