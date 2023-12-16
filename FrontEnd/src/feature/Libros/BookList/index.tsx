@@ -1,10 +1,10 @@
 import { useState, useEffect, useCallback } from 'react'
-import BookCard from './BookCard.tsx'
-import type { Book } from '../types/types'
-import SearchBookModify from './SearchBookModify'
 import Pagination from '@mui/material/Pagination'
-import { useUser } from '../context/UserContext.tsx'
-import Spinner from './Spinner.tsx'
+import { useUser } from '@/context/UserContext.tsx'
+import type { Book } from '@/types/types'
+import Spinner from '@/components/Spinner.tsx'
+import BookCard from './BookCard'
+import SearchBookModify from './SearchBookModify'
 
 const BookList: React.FC = () => {
   const [books, setBooks] = useState<Book[] | []>([])
