@@ -50,22 +50,21 @@ public class BookCrudRepositoryImpl implements BookCrudRepository {
 
     @Override
     public BookDto save(BookDto bookDto) {
-        Long idImage=0L;
-        try {
-            File fileBook=bookDto.getImage();
-            BufferedImage bi = ImageIO.read(fileBook);
-            Map result = cloudinaryService.uploadPrueba(fileBook);
-            Image image = new Image();
-            image.setName((String) result.get("original_filename"));
-            image.setImagenUrl((String) result.get("url"));
-            image.setCloudinaryId((String) result.get("public_id"));
-            ImageDto imageSaved = imageDaoMapper.toImageDto(imageRepository.save(image));
-            idImage = imageSaved.getIdImage();
-        } catch (IOException e) {
-            e.printStackTrace();
-            System.out.println("getme:   "+e.getMessage());
-            throw new BibliotechException("La imagen no se pudo leer o ya existe " +
-                    "No se pudo crear el libro");
+        Long idImage=1L;
+        if (!bookDto.getImage().isEmpty()){
+            try {
+                BufferedImage bi = ImageIO.read(bookDto.getImage().getInputStream());
+                Map result = cloudinaryService.upload(bookDto.getImage());
+                Image image = new Image();
+                image.setName((String) result.get("original_filename"));
+                image.setImagenUrl((String) result.get("url"));
+                image.setCloudinaryId((String) result.get("public_id"));
+                ImageDto imageSaved = imageDaoMapper.toImageDto(imageRepository.save(image));
+                idImage = imageSaved.getIdImage();
+            } catch (IOException e) {
+                throw new BibliotechException("La imagen no se pudo leer" +
+                        "No se pudo crear el libro");
+            }
         }
         bookDto.setIdImage(idImage);
 

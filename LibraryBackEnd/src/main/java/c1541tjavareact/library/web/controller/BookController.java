@@ -37,24 +37,10 @@ public class BookController {
 
 
     @PostMapping("/save")
-    public ResponseEntity<BookDto> save(@RequestBody @Valid BookDto bookDto) {
+    public ResponseEntity<BookDto> save(@RequestParam("image") MultipartFile multipartFile,
+                                        @ModelAttribute @Valid BookDto bookDto){
+        bookDto.setImage(multipartFile);
         return new ResponseEntity<>(bookService.save(bookDto), HttpStatus.CREATED);
-    }
-
-    @PostMapping("/prueba")
-    public ResponseEntity<?> prueba(@RequestBody @Valid BookDto bookDto) throws IOException {
-        BufferedImage bi = ImageIO.read(bookDto.getImage());
-        if (bi == null) {
-            return new ResponseEntity<>("imagen no válida", HttpStatus.BAD_REQUEST);
-        }
-        Map result = cloudinaryService.uploadPrueba(bookDto.getImage());
-        Image imageSaved = new Image();
-        imageSaved.setName((String) result.get("original_filename"));
-        imageSaved.setImagenUrl((String) result.get("url"));
-        imageSaved.setCloudinaryId((String) result.get("public_id"));
-
-        imageService.save(imageSaved);
-        return new ResponseEntity<>(imageSaved, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
