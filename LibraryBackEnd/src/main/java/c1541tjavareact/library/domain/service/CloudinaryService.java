@@ -40,10 +40,6 @@ public class CloudinaryService {
         file.delete();
         return result;
     }
-    public Map uploadPrueba(File file) throws IOException {
-        Map result = cloudinary.uploader().upload(file, ObjectUtils.asMap("folder", "Bibliotech/"));
-        return result;
-    }
 
     public Map delete(String id) throws IOException {
         Map result = cloudinary.uploader().destroy(id, ObjectUtils.emptyMap());

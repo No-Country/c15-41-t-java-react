@@ -41,7 +41,7 @@ public class BookDto {
     @NotNull
     private Long idGenre;
 
-    private File image;
+    private MultipartFile image;
     private Long idImage;
 
     @NotNull
