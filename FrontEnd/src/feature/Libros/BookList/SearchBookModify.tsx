@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { GoSearch } from 'react-icons/go'
-import type { Book } from '../types/types'
-import { arraysAreEqual, searchIncludes } from '../utils/searchFunctions'
+import type { Book } from '../../../types/types'
+import { arraysAreEqual, searchIncludes } from '../../../utils/searchFunctions'
 
 interface SearchBookModifyProps {
   allBooks: Book[]

@@ -1,12 +1,11 @@
 import { useState, useEffect } from 'react'
-import { useFormik } from 'formik'
-import type { FormikValues } from 'formik'
 import * as Yup from 'yup'
-import type { Author, BookPost, Editorial } from '../types/types'
-import { useUser } from '../context/UserContext'
+import { useFormik, type FormikValues } from 'formik'
 import toast from 'react-hot-toast'
-import { blockNonNumericInput } from '../utils/input'
-import { ReactSelect } from './ReactSelect'
+import { useUser } from '@/context/UserContext'
+import type { Author, BookPost, Editorial } from '@/types/types'
+import { blockNonNumericInput } from '@/utils/input'
+import { ReactSelect } from '@/components/ReactSelect'
 
 const initialValues: BookPost = {
   title: '',

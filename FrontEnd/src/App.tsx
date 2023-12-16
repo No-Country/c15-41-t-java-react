@@ -1,11 +1,11 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
-import Layout from './components/Layout'
 import { useUser } from './context/UserContext.tsx'
+import { Toaster } from 'react-hot-toast'
+import Layout from './feature/Layout/index.tsx'
 import { Login } from './pages/Login.tsx'
 import Home from './pages/Home.tsx'
 import Catalogue from './pages/Catalogue.tsx'
 import UsersTabs from './pages/UsersTabs.tsx'
-import { Toaster } from 'react-hot-toast'
 import LoanRoute from './components/LoanRoute.tsx'
 
 const App = () => {

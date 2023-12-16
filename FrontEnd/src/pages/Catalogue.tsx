@@ -1,8 +1,8 @@
+import { useState } from 'react'
 import { Tab, Tabs as ReactTabs, TabList, TabPanel } from 'react-tabs'
 import 'react-tabs/style/react-tabs.css'
-import RegisterForm from '../components/RegisterForm'
-import BookList from '../components/BookList'
-import { useState } from 'react'
+import RegisterForm from '@/feature/Libros/RegisterForm'
+import BookList from '@/feature/Libros/BookList'
 
 const Tabs = () => {
   const [tabIndex, setTabIndex] = useState(0)
