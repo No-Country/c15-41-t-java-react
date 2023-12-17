@@ -50,11 +50,17 @@ export interface Author {
   idAuthor: number
 }
 
+export interface AuthorPost {
+  name: string
+  lastName: string
+}
+
 export interface Editorial {
   name: string
   idEditorial: number
   establishedDate: string
 }
+
 
 export interface AdminPost{
   idAdmin: number,
@@ -63,4 +69,8 @@ export interface AdminPost{
   lastname: string,
   password: string,
 
+}
+export interface Genre {
+  name: string
+  idGenre: number
 }

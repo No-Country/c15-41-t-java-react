@@ -175,7 +175,6 @@
       "establishedDate": "2012-06-28"
     }
   ],
-  "genres": ["Thriller", "Fantasy", "Adventure", "Action"],
   "users": [
     {
       "idUser": 1,
@@ -538,5 +537,6 @@
       "lastName": "admin",
       "password": "Admin2023"
     }
-  ]
+  ],
+  "genres": [{"idGenre":1,"name":"Terror"}, {"idGenre":2,"name":"Fantasía"}, {"idGenre":3,"name":"Thriller"}]
 }
