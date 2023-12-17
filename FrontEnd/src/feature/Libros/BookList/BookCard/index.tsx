@@ -1,8 +1,7 @@
 import React from 'react'
 import { IoMdClose } from 'react-icons/io'
+import { IoPencil, IoTrashOutline } from 'react-icons/io5'
 import type { Book } from '@/types/types'
-import imgDelete from '@/assets/icons/delete.svg'
-import imgEditar from '@/assets/icons/Edit.svg'
 import DeleteModal from '@/components/DeleteModal'
 import EditBook from './EditBook'
 import BookDetail from './BookDetail'
@@ -78,21 +77,20 @@ const BookCard: React.FC<Props> = ({
               setIsModalOpen(true)
             }}
           >
-            <img src={imgEditar} alt="icono editar" />
+            <IoPencil size={23} />
           </div>
-          <div className="increase-scale hover:cursor-pointer">
-            <img
-              src={imgDelete}
-              alt="icono eliminar"
-              onClick={() => {
-                setIsModalDeleteOpen(true)
-              }}
-            />
+          <div
+            className="increase-scale hover:cursor-pointer"
+            onClick={() => {
+              setIsModalDeleteOpen(true)
+            }}
+          >
+            <IoTrashOutline size={23} />
           </div>
         </div>
       </div>
       {isModalOpen && (
-        <div className="absolute inset-0 z-50 bg-white opacity-100">
+        <div className="fixed inset-0 z-50 overflow-y-scroll bg-white opacity-100 lg:pb-14">
           <EditBook
             {...bookData}
             setIsModalOpen={setIsModalOpen}
@@ -117,19 +115,11 @@ const BookCard: React.FC<Props> = ({
             deleteEntity="book"
             refresh={refresh}
           />
-          <div
-            className="increase-scale absolute right-4 top-4 cursor-pointer text-5xl font-semibold text-black"
-            onClick={() => {
-              setIsModalDeleteOpen(false)
-            }}
-          >
-            <IoMdClose />
-          </div>
         </div>
       )}
       {isModalDetails && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-white">
-          <div className="relative flex h-full w-11/12 flex-row items-center justify-center">
+        <div className="fixed inset-0 z-50 flex items-center justify-center overflow-y-scroll bg-white">
+          <div className="relative flex h-full w-11/12 flex-row justify-center pt-20">
             <BookDetail
               id={bookData.idBook}
               {...bookData}

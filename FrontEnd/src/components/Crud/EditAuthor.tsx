@@ -71,8 +71,9 @@ export const EditAuthor: React.FC<EditAuthorProps> = ({
     <div className="CrudCreateAndEditContainer">
       <div className="CrudCreateAndEditPositioner">
         <h2 className="mx-auto w-10/12 py-8 text-2xl font-bold leading-normal text-blueDark">
-          Edición del autor: {selectedAuthor.props.name} {selectedAuthor.props.lastName}{' '}
-          <span className="text-sm text-red-500"> (Los campos con * son obligatorios) </span>
+          Edición del autor: {selectedAuthor.props.name} {selectedAuthor.props.lastName}
+          <br />
+          <span className="text-sm"> (Los campos con * son obligatorios) </span>
         </h2>
         <form className="mx-auto w-10/12" onSubmit={handleSubmit}>
           <label className="labelForm " htmlFor="title">

@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { IoMdClose } from 'react-icons/io'
 import { Book } from '@/types/types'
 import RegisterLoan from '@/components/RegisterLoan'
+import overflowYdisable from '@/utils/overflowYdisable'
 
 interface PropsDetail extends Book {
   id: number
@@ -12,9 +13,9 @@ interface PropsDetail extends Book {
 const BookDetail: React.FC<PropsDetail> = props => {
   const { title, image, authorDto, genre, editorialDto, isbn, quantity, setIsModalDetails } = props
   const [isLoan, setIsLoan] = useState(false)
-
+  overflowYdisable()
   return (
-    <div className="shadow-2xlflex flex flex-col items-center overflow-y-auto rounded-xl border-[1px] border-solid border-[#c6e9ff] bg-[#0A7ABF] bg-opacity-5  p-10">
+    <div className="shadow-2xlflex flex h-fit flex-col items-center rounded-xl border-[1px] border-solid border-[#c6e9ff] bg-[#0A7ABF] bg-opacity-5 p-10  max-[300px]:p-4">
       <div className="bg-cover">
         <img
           className="h-[145px] w-[95px] shadow-lg "

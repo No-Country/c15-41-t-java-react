@@ -64,7 +64,8 @@ export const CreateGenre: React.FC<CreateGenreProps> = ({ setCloseModal, setRefr
         <div className="mx-auto mt-20 w-11/12 rounded-[40px] bg-grey  sm:max-w-[60%]">
           <h2 className="mx-auto w-10/12 py-8 text-2xl font-bold leading-normal text-blueDark">
             Registro de un nuevo género
-            <span className="ml-2 text-sm text-red-500"> (Los campos con * son obligatorios) </span>
+            <br />
+            <span className="text-sm"> (Los campos con * son obligatorios) </span>
           </h2>
           <form className="mx-auto w-10/12" onSubmit={handleSubmit}>
             <label className="labelForm " htmlFor="title">
