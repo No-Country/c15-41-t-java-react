@@ -4,6 +4,7 @@ import * as Yup from 'yup'
 import { useUser } from '../context/UserContext'
 import toast from 'react-hot-toast'
 import { User } from '../types/types'
+import { generateTempId } from '../utils/function'
 
 interface UserProps {
   user: User
@@ -11,9 +12,7 @@ interface UserProps {
   refresh?: () => void
   onSuccess?: () => void
 }
-function generateTempId() {
-  return new Date().getTime()
-}
+
 const validationSchema = Yup.object({
   dni: Yup.string()
     .required('El DNI es obligatorio')
@@ -34,7 +33,12 @@ const validationSchema = Yup.object({
   phoneNumber: Yup.string()
     .required('El celular es obligatorio')
     .matches(/^\d{10}$/, 'Ingresa un número de celular válido'),
-  address: Yup.string().required('La dirección es obligatoria')
+  address: Yup.string()
+    .required('La dirección es obligatoria')
+    .matches(
+      /^[A-Za-z0-9\sáéíóúÁÉÍÓÚñÑ,#-]{5,40}$/,
+      'Ingresa una dirección válida no puede superar los 40 caracteres'
+    )
 })
 
 const UserRegisterForm: React.FC<UserProps> = ({
@@ -216,7 +220,7 @@ const UserRegisterForm: React.FC<UserProps> = ({
                   onChange={handleChange}
                   placeholder="Ingresá la direccion"
                 />
-                <small className="absolute -bottom-6 text-xs font-bold text-red-500">
+                <small className="absolute top-10 text-xs font-bold text-red-500">
                   {errors?.address}
                 </small>
               </div>

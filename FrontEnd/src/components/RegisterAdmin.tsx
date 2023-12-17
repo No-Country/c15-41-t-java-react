@@ -21,6 +21,8 @@ const validationSchema = Yup.object({
       /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.(com|co|es|it|net|org|gov|edu|mil|io|xyz|info|biz|mx|ar)$/,
       'El email no es válido'
     ),
+  name: Yup.string().required('El nombre es requerido'),
+  lastName: Yup.string().required('El apellido es requerido'),
   password: Yup.string()
     .min(8, 'La contraseña es muy corta')
     .max(20, '20 carateres  maximo')
@@ -31,7 +33,7 @@ const validationSchema = Yup.object({
     .required('La contraseña es requerida'),
   passwordConfirm: Yup.string()
     .oneOf([Yup.ref('password')], 'Las contraseñas deben coincidir')
-    .nullable() // Agrega esta validación para permitir valores nulos
+    .nullable() 
     .required('La confirmación de la contraseña es requerida')
 })
 

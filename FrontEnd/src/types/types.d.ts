@@ -60,6 +60,16 @@ export interface Editorial {
   idEditorial: number
   establishedDate: string
 }
+
+
+export interface AdminPost{
+  idAdmin: number,
+  email: string,
+  name: string,
+  lastname: string,
+  password: string,
+
+}
 export interface Genre {
   name: string
   idGenre: number
