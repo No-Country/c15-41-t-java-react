@@ -1,10 +1,10 @@
 import React from 'react'
-import type { Book } from '../types/types'
-import imgDelete from '../assets/icons/delete.svg'
-import imgEditar from '../assets/icons/Edit.svg'
 import { IoMdClose } from 'react-icons/io'
+import type { Book } from '@/types/types'
+import imgDelete from '@/assets/icons/delete.svg'
+import imgEditar from '@/assets/icons/Edit.svg'
+import DeleteModal from '@/components/DeleteModal'
 import EditBook from './EditBook'
-import DeleteModal from './DeleteModal'
 import BookDetail from './BookDetail'
 
 interface Props extends Book {
@@ -135,7 +135,6 @@ const BookCard: React.FC<Props> = ({
               {...bookData}
               refresh={() => {
                 refresh()
-                
               }}
               setIsModalDetails={setIsModalDetails}
             />

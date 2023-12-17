@@ -1,7 +1,7 @@
 import { useState } from 'react'
-import { Book } from '../types/types'
-import RegisterLoan from './RegisterLoan'
 import { IoMdClose } from 'react-icons/io'
+import { Book } from '@/types/types'
+import RegisterLoan from '@/components/RegisterLoan'
 
 interface PropsDetail extends Book {
   id: number
@@ -10,7 +10,7 @@ interface PropsDetail extends Book {
 }
 
 const BookDetail: React.FC<PropsDetail> = props => {
-  const { title, image, authorDto, genre, editorialDto, isbn, quantity,setIsModalDetails } = props
+  const { title, image, authorDto, genre, editorialDto, isbn, quantity, setIsModalDetails } = props
   const [isLoan, setIsLoan] = useState(false)
 
   return (
@@ -49,14 +49,22 @@ const BookDetail: React.FC<PropsDetail> = props => {
       <button
         className="mt-5 flex h-[45px] w-full items-center justify-center gap-x-2 rounded-[32px] border-none bg-blueDark  py-3 text-[17px] font-bold leading-normal text-white shadow-btn hover:cursor-pointer disabled:cursor-not-allowed disabled:opacity-50"
         onClick={() => setIsLoan(!isLoan)}
+        disabled={quantity === 1}
       >
         Prestar Libro
       </button>
+      {quantity === 1 ? (
+        <small className="text-sm text-red-500">
+          la cantidad debe ser mayor a 1 <br /> para poder prestar este libro
+        </small>
+      ) : (
+        ''
+      )}
       {isLoan && (
         <div className="fixed inset-0 z-50  overflow-y-auto bg-white opacity-100">
-          <RegisterLoan {...props}  />
+          <RegisterLoan {...props} />
           <div
-            className="increase-scale absolute right-4 top-4 cursor-pointer text-5xl font-semibold text-black"
+            className="increase-scale absolute right-4 top-2 cursor-pointer text-3xl font-semibold text-black sm:top-4 sm:text-5xl "
             onClick={() => {
               setIsLoan(!isLoan)
               setIsModalDetails(false)
