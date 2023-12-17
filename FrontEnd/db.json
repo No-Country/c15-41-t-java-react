@@ -121,7 +121,7 @@
       }
     }
   ],
-  "Authors": [
+  "authors": [
     {
       "idAuthor": 1,
       "name": "Gabriel",
@@ -348,5 +348,6 @@
         }
       }
     }
-  ]
+  ],
+  "genres": [{"idGenre":1,"name":"Terror"}, {"idGenre":2,"name":"Fantasía"}]
 }
