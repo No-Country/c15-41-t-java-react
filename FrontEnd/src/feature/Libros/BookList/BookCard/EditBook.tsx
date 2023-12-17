@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { useFormik, type FormikValues } from 'formik'
 import * as Yup from 'yup'
 import toast from 'react-hot-toast'
-import type { Author, BookPost, Editorial } from '@/types/types'
+import type { Author, BookPost, Editorial, Genre } from '@/types/types'
 import { useUser } from '@/context/UserContext'
 import { blockNonNumericInput } from '@/utils/input'
 
@@ -34,7 +34,7 @@ const validationSchema = Yup.object({
 const EditBook: React.FC<BookProps> = props => {
   const [authors, setAuthors] = useState<Author[]>([])
   const [editorials, setEditorials] = useState<Editorial[]>([])
-  const [mockGenres, setMockGenres] = useState<string[]>([])
+  const [genres, setGenres] = useState<Genre[]>([])
   const { fetch } = useUser()
 
   useEffect(() => {
@@ -59,8 +59,8 @@ const EditBook: React.FC<BookProps> = props => {
 
   useEffect(() => {
     const getGenres = async () => {
-      const data = await fetch('http://localhost:3000/books/genres')
-      setMockGenres(data)
+      const data = await fetch('http://localhost:3000/genres')
+      setGenres(data)
     }
     getGenres().catch(error => {
       console.log(error)
@@ -192,9 +192,9 @@ const EditBook: React.FC<BookProps> = props => {
               <option value="" disabled>
                 Selecciona un genero
               </option>
-              {mockGenres.map(genre => (
-                <option key={genre} value={genre.toUpperCase()}>
-                  {genre}
+              {genres.map(genre => (
+                <option key={genre.idGenre} value={genre.idGenre}>
+                  {genre.name}
                 </option>
               ))}
             </select>
