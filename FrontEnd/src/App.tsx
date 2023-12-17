@@ -7,6 +7,7 @@ import Home from './pages/Home.tsx'
 import Catalogue from './pages/Catalogue.tsx'
 import UsersTabs from './pages/UsersTabs.tsx'
 import LoanRoute from './components/LoanRoute.tsx'
+import AdminRoute from './components/AdminRoute.tsx'
 
 const App = () => {
   const { currentUser, setupComplete } = useUser()
@@ -28,6 +29,8 @@ const App = () => {
           <Route path="/libros" element={<Catalogue />} />
           <Route path="/prestamos" element={<LoanRoute />} />
           <Route path="/miembros" element={<UsersTabs />} />
+          <Route path="*" element={<Navigate to="/home" />} />
+          <Route path='/admin' element={<AdminRoute/>}/>
         </Route>
       </Routes>
       <Toaster

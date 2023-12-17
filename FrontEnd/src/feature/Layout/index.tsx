@@ -1,18 +1,14 @@
-import { useState } from 'react'
 import { Link, Outlet } from 'react-router-dom'
 import Footer from './Footer'
 import { useUser } from '../../context/UserContext'
 import { NavBarMobile } from './NavBarMobile'
-import { IoIosPersonAdd, IoMdClose } from 'react-icons/io'
-import RegisterAdmin from '../../components/RegisterAdmin'
-
+import imgAdmin from '../../../public/icons/User Account.png'
 export default function Layout() {
-  const [isModalAdminOpen, setIsModalAdminOpen] = useState(false)
   const { signOut } = useUser()
 
   return (
     <>
-      <header className="flex h-36 items-center justify-around">
+      <header className="flex h-36 mr-24 items-center justify-around">
         <Link to="/home" className="ml-24 h-full max-lg:ml-12 max-lg:h-24 max-sm:ml-6">
           <img src="/brand/isologotipo.png" alt="logo" className="h-full w-auto" />
         </Link>
@@ -41,16 +37,15 @@ export default function Layout() {
           Miembros
         </Link>
 
-        <div className="ml-12 flex sm:ml-20">
+        <div className="ml-12 flex gap-2 sm:ml-20">
           <button className="border-none bg-white hover:cursor-pointer  " onClick={signOut}>
             <img src="/icons/Logout.png" alt="logout" />
           </button>
-          <button
-            className="border-none bg-white text-5xl hover:cursor-pointer "
-            onClick={() => setIsModalAdminOpen(!isModalAdminOpen)}
-          >
-            <IoIosPersonAdd />
-          </button>
+          <div className="border-none bg-white text-5xl hover:cursor-pointer">
+            <Link to={'/admin'}>
+            <img src={imgAdmin} alt='admin'/>
+            </Link>
+          </div>
         </div>
       </header>
       <main className="min-h-[calc(100vh-9rem-4rem)] max-lg:mb-40 max-lg:min-h-[calc(100vh-9rem-104px)]">
@@ -58,19 +53,6 @@ export default function Layout() {
       </main>
       <NavBarMobile />
       <Footer />
-      {isModalAdminOpen && (
-        <div className="fixed inset-0 z-50  overflow-y-auto bg-white opacity-100">
-          <RegisterAdmin />
-          <div
-            className="increase-scale absolute right-4 top-2 cursor-pointer text-3xl font-semibold text-black sm:top-4 sm:text-5xl"
-            onClick={() => {
-              setIsModalAdminOpen(!isModalAdminOpen)
-            }}
-          >
-            <IoMdClose />
-          </div>
-        </div>
-      )}
     </>
   )
 }
