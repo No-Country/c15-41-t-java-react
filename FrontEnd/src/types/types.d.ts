@@ -50,8 +50,17 @@ export interface Author {
   idAuthor: number
 }
 
+export interface AuthorPost {
+  name: string
+  lastName: string
+}
+
 export interface Editorial {
   name: string
   idEditorial: number
   establishedDate: string
+}
+export interface Genre {
+  name: string
+  idGenre: number
 }

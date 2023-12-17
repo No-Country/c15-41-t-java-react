@@ -537,5 +537,6 @@
       "email": "admin@admin.com",
       "password": "Admin2023"
     }
-  ]
+  ],
+  "genres": [{"idGenre":1,"name":"Terror"}, {"idGenre":2,"name":"Fantasía"}]
 }
