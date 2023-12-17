@@ -69,7 +69,8 @@ export const CreateAuthor: React.FC<CreateAuthorProps> = ({ setCloseModal, setRe
         <div className="CrudCreateAndEditPositioner">
           <h2 className="mx-auto w-10/12 py-8 text-2xl font-bold leading-normal text-blueDark">
             Registro de un nuevo autor
-            <span className="ml-2 text-sm text-red-500"> (Los campos con * son obligatorios) </span>
+            <br />
+            <span className="text-sm"> (Los campos con * son obligatorios) </span>
           </h2>
           <form className="mx-auto w-10/12" onSubmit={handleSubmit}>
             <label className="labelForm " htmlFor="title">

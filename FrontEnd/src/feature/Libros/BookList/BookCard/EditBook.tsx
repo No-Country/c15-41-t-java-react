@@ -5,6 +5,7 @@ import toast from 'react-hot-toast'
 import type { Author, BookPost, Editorial, Genre } from '@/types/types'
 import { useUser } from '@/context/UserContext'
 import { blockNonNumericInput } from '@/utils/input'
+import overflowYdisable from '@/utils/overflowYdisable'
 
 interface BookProps extends BookPost {
   id: number
@@ -98,13 +99,14 @@ const EditBook: React.FC<BookProps> = props => {
       })
     }
   }
-
+  overflowYdisable()
   return (
-    <div className="bg-white px-2 py-10">
+    <div className="bg-white px-2 py-16 max-lg:pb-60">
       <div className="mx-auto w-full rounded-[40px] bg-grey  sm:max-w-[70%]">
         <h2 className="mx-auto w-10/12 py-8 text-2xl font-bold leading-normal text-blueDark">
-          Edicion del libro {props.title}{' '}
-          <span className="text-sm text-red-500"> (Los campos con * son obligatorios) </span>
+          Edicion del libro: {props.title}
+          <br />
+          <span className="text-sm"> (Los campos con * son obligatorios) </span>
         </h2>
         <form className="mx-auto w-10/12 " onSubmit={handleSubmit}>
           <label className="text-base font-bold leading-[normal] text-blueLight " htmlFor="title">
