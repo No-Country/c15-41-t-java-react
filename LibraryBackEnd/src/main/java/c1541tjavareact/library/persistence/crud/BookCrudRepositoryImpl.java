@@ -53,6 +53,9 @@ public class BookCrudRepositoryImpl implements BookCrudRepository {
         idImage = getUpdateIdImage(bookDto, idImage);
         bookDto.setIdImage(idImage);
 
+        return saveBookLoan(bookDto);
+    }
+    public BookDto saveBookLoan(BookDto bookDto) {
         Book book = bookDaoMapper.toBook(bookDto);
         return bookDaoMapper.toBookDto(bookRepository.save(book));
     }
@@ -114,9 +117,7 @@ public class BookCrudRepositoryImpl implements BookCrudRepository {
             bookToUpdate.setQuantity(bookDto.getQuantity());
             Long newIdImage = getUpdateIdImage(bookDto,bookToUpdate.getIdImage());
             bookToUpdate.setIdImage(newIdImage);
-
-            Book book = bookDaoMapper.toBook(bookToUpdate);
-            return bookDaoMapper.toBookDto(bookRepository.save(book));
+            return saveBookLoan(bookToUpdate);
         }
         return null;
     }
