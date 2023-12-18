@@ -61,14 +61,12 @@ export interface Editorial {
   establishedDate: string
 }
 
-
-export interface AdminPost{
-  idAdmin: number,
-  email: string,
-  name: string,
-  lastName: string,
-  password: string,
-
+export interface AdminPost {
+  idAdmin: number
+  email: string
+  name: string
+  lastName: string
+  password: string
 }
 export interface Genre {
   name: string

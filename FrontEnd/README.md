@@ -2,8 +2,7 @@
 
 # BIBLIOTECH
 
-Bibliotech es una plataforma integral de gestión bibliotecaria que permite  buscar y registrar libros, controlar préstamos con fechas y usuarios, además de enviar recordatorios automáticos para devolver los libros a tiempo.
-
+Bibliotech es una plataforma integral de gestión bibliotecaria que permite buscar y registrar libros, controlar préstamos con fechas y usuarios, además de enviar recordatorios automáticos para devolver los libros a tiempo.
 
 Problema:
 Analizando la experiencia del usuario en bibliotecas, identificamos un obstáculo: muchos procesos de gestión se realizan manualmente. Aunque esta modalidad ha sido efectiva en algunos aspectos, sufre de problemas que afectan directamente a los usuarios. Tareas como la catalogación de libros, seguimiento de préstamos y devoluciones, y la gestión de inventario son laboriosas y propensas a errores, lo que impacta la productividad interna y puede causar tiempos de espera prolongados, dificultades para encontrar materiales y limitaciones en los servicios ofrecidos a los usuarios.
@@ -16,7 +15,6 @@ Objetivos:
 Implementar un sistema de gestión bibliotecaria que simplifique y agilice el control del inventario.
 Brindar un acceso fácil y amigable a los usuarios para buscar y solicitar préstamos de libros
 Poder planificar mejoras en el servicio y la adquisición de nuevos materiales.
-
 
 Requerimientos:
 Como bibliotecario quiero poder ingresar en la pantalla de acceso introduciendo email y contraseña para poder acceder a la página principal del sistema.
@@ -33,13 +31,16 @@ Como bibliotecario quiero poder registrar los libros devueltos para tenerlos nue
 Como bibliotecario quiero poder ver los libros que he tomado prestados y las fechas correspondientes para llevar un control de mis préstamos.
 Como bibliotecario quiero poder notificar las fechas de devolución de los libros prestados para asegurarme de su devolución a tiempo.
 
-
 # Stack Frontend
+
 ![React](https://img.shields.io/badge/-ReactJs-61DAFB?logo=react&logoColor=white&style=for-the-badge)
 ![TypeScript](https://img.shields.io/badge/TypeScript-blue.svg?style=for-the-badge&logo=TypeScript&logoColor=white)
 ![Tailwind](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
+
 ---
+
 # Stack backend
+
 ![Spring](https://img.shields.io/badge/Spring-6DB33F?style=for-the-badge&logo=spring&logoColor=white)
 ![Java](https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=java&logoColor=white)
 ![MongoDB](https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white)

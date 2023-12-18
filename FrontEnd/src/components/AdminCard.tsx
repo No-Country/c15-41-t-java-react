@@ -5,22 +5,23 @@ import { IoMdClose } from 'react-icons/io'
 import RegisterAdmin from './RegisterAdmin'
 
 interface PropsAdmin extends AdminPost {
- refresh?: () => void
+  refresh?: () => void
 }
 
 const AdminCard: React.FC<PropsAdmin> = Props => {
-  const { email, name, lastName, password} = Props
+  const { email, name, lastName, password } = Props
   const [isModalEditOpen, setIsModalEditOpen] = useState<boolean>(false)
   return (
     <div>
-      <div className="flex h-full w-full gap-3 border-0 border-t border-solid border-black p-3 overflow-hidden">
-        <div className="flex flex-col w-full">
-          <div className='flex items-center justify-between'>
+      <div className="flex h-full w-full gap-3 overflow-hidden border-0 border-t border-solid border-black p-3">
+        <div className="flex w-full flex-col">
+          <div className="flex items-center justify-between">
             <h3 className="text-2xl text-blueLight"> {`${name}  ${lastName}`}</h3>
-            <IoPencil 
-            onClick={() => setIsModalEditOpen(true)} 
-            size={20} 
-            className='hover:cursor-pointer increase-scale' />
+            <IoPencil
+              onClick={() => setIsModalEditOpen(true)}
+              size={20}
+              className="increase-scale hover:cursor-pointer"
+            />
           </div>
           <p className="text-lg">
             {' '}
@@ -31,15 +32,16 @@ const AdminCard: React.FC<PropsAdmin> = Props => {
       </div>
       {isModalEditOpen && (
         <div className="absolute inset-0 z-50 bg-white opacity-100">
-          <RegisterAdmin {...Props}
-           passwordConfirm={password}
-           setIsModalOpen={setIsModalEditOpen}
-           refresh={Props.refresh}
-           />
+          <RegisterAdmin
+            {...Props}
+            passwordConfirm={password}
+            setIsModalOpen={setIsModalEditOpen}
+            refresh={Props.refresh}
+          />
           <div
-            className="absolute right-4 sm:top-4 text-4xl top-0  cursor-pointer sm:text-5xl font-semibold text-black hover:scale-125"
+            className="absolute right-4 top-0 cursor-pointer text-4xl  font-semibold text-black hover:scale-125 sm:top-4 sm:text-5xl"
             onClick={() => {
-             setIsModalEditOpen(false)
+              setIsModalEditOpen(false)
             }}
           >
             <IoMdClose />

@@ -20,7 +20,7 @@ const AdminRoute = () => {
     name: '',
     lastName: '',
     password: '',
-    passwordConfirm: '',
+    passwordConfirm: ''
   }
 
   async function fetchAdmins(): Promise<void> {
@@ -44,12 +44,14 @@ const AdminRoute = () => {
 
   return (
     <>
-      <div className="mb-3 flex items-center gap-3 mx-auto w-[85%]">
+      <div className="mx-auto mb-3 flex w-[85%] items-center gap-3">
         <h2 className="text-Darkblue text-2xl">Administradores</h2>
-        <img 
-        src={AddNew} alt="Add new Admin"
-        onClick={() => setIsModalOpen(true)}
-        className='hover:cursor-pointer increase-scale' />
+        <img
+          src={AddNew}
+          alt="Add new Admin"
+          onClick={() => setIsModalOpen(true)}
+          className="increase-scale hover:cursor-pointer"
+        />
       </div>
       <div className="flex h-full w-full flex-col items-center justify-center">
         {isLoading ? (
@@ -66,12 +68,9 @@ const AdminRoute = () => {
       </div>
       {isModalOpen && (
         <div className="absolute inset-0 z-50 bg-white opacity-100">
-          <RegisterAdmin 
-          {...adminData} 
-          setIsModalOpen={setIsModalOpen}
-          refresh={fetchAdmins} />
+          <RegisterAdmin {...adminData} setIsModalOpen={setIsModalOpen} refresh={fetchAdmins} />
           <div
-            className="absolute right-4 sm:top-4 text-4xl top-0  cursor-pointer sm:text-5xl font-semibold text-black hover:scale-125"
+            className="absolute right-4 top-0 cursor-pointer text-4xl  font-semibold text-black hover:scale-125 sm:top-4 sm:text-5xl"
             onClick={() => {
               setIsModalOpen(false)
             }}

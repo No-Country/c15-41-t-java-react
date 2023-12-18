@@ -8,7 +8,7 @@ export default function Layout() {
 
   return (
     <>
-      <header className="flex h-36 mr-24 items-center justify-around">
+      <header className="mr-24 flex h-36 items-center justify-around">
         <Link to="/home" className="ml-24 h-full max-lg:ml-12 max-lg:h-24 max-sm:ml-6">
           <img src="/brand/isologotipo.png" alt="logo" className="h-full w-auto" />
         </Link>
@@ -37,13 +37,16 @@ export default function Layout() {
           Miembros
         </Link>
 
-        <div className="ml-12 flex gap-2 sm:ml-20">
-          <button className="border-none bg-white hover:cursor-pointer  " onClick={signOut}>
+        <div className="ml-12 flex items-end justify-center gap-2 sm:ml-20">
+          <button
+            className="border-none bg-white hover:cursor-pointer max-lg:ml-auto max-lg:mr-12 max-sm:mr-6 "
+            onClick={signOut}
+          >
             <img src="/icons/Logout.png" alt="logout" />
           </button>
           <div className="border-none bg-white text-5xl hover:cursor-pointer">
             <Link to={'/admin'}>
-            <img src={imgAdmin} alt='admin'/>
+              <img src={imgAdmin} alt="admin" />
             </Link>
           </div>
         </div>

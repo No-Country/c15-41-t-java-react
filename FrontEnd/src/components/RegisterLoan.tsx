@@ -24,17 +24,18 @@ const validationSchema = Yup.object({
     .test('15-dias', 'La fecha límite de la devolución son 15 días', function (value) {
       const currentDate = new Date()
 
-  // Comprobar si loanDate es una fecha válida
-  if (value instanceof Date && !isNaN(value.getTime()) && value) {
-    const maxDaysDifference = 15;
-    const differenceInDays = Math.ceil((value.getTime() - currentDate.getTime()) / (1000 * 60 * 60 * 24));
-    return differenceInDays <= maxDaysDifference;
-  }
+      // Comprobar si loanDate es una fecha válida
+      if (value instanceof Date && !isNaN(value.getTime()) && value) {
+        const maxDaysDifference = 15
+        const differenceInDays = Math.ceil(
+          (value.getTime() - currentDate.getTime()) / (1000 * 60 * 60 * 24)
+        )
+        return differenceInDays <= maxDaysDifference
+      }
 
-  return true;
+      return true
     }),
-  idUser: Yup.number().required('El miembro es requerido')
-  .min(1, 'El miembro es requerido'),
+  idUser: Yup.number().required('El miembro es requerido').min(1, 'El miembro es requerido'),
   idBook: Yup.number().required('El libro es requerido')
 })
 
