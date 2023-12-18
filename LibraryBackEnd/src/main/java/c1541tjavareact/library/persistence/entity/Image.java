@@ -16,7 +16,7 @@ public class Image {
     @Column(name="id_image")
     private Long idImage;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String name;
 
     @Column(name = "imagen_url", nullable = false)

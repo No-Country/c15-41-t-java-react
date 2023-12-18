@@ -6,7 +6,6 @@ import c1541tjavareact.library.domain.repository.BookCrudRepository;
 import c1541tjavareact.library.domain.repository.BookRepository;
 import c1541tjavareact.library.domain.repository.ImageRepository;
 import c1541tjavareact.library.domain.service.CloudinaryService;
-import c1541tjavareact.library.domain.service.ImageService;
 import c1541tjavareact.library.infra.exception.BibliotechException;
 import c1541tjavareact.library.persistence.entity.Book;
 import c1541tjavareact.library.persistence.entity.Image;
@@ -17,10 +16,10 @@ import org.springframework.stereotype.Repository;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 
 @Repository
@@ -51,7 +50,25 @@ public class BookCrudRepositoryImpl implements BookCrudRepository {
     @Override
     public BookDto save(BookDto bookDto) {
         Long idImage=1L;
-        if (!bookDto.getImage().isEmpty()){
+        idImage = getUpdateIdImage(bookDto, idImage);
+        bookDto.setIdImage(idImage);
+
+        Book book = bookDaoMapper.toBook(bookDto);
+        return bookDaoMapper.toBookDto(bookRepository.save(book));
+    }
+
+    private Long getUpdateIdImage(BookDto bookDto, Long idImage) {
+
+        if (isImageNotNullNotEmpty(bookDto)){
+
+            //Control existencia imagen en base de datos
+            int lastIndexImageName= Objects.requireNonNull(bookDto.getImage().getOriginalFilename()).lastIndexOf(".");
+            Optional<Image> imageOptional = imageRepository.findByName(bookDto.getImage().getOriginalFilename().substring(0,lastIndexImageName));
+            if(imageOptional.isPresent()){
+                return imageOptional.get().getIdImage();
+            }
+
+            //Imagen no existe en la base de datos
             try {
                 BufferedImage bi = ImageIO.read(bookDto.getImage().getInputStream());
                 Map result = cloudinaryService.upload(bookDto.getImage());
@@ -60,16 +77,15 @@ public class BookCrudRepositoryImpl implements BookCrudRepository {
                 image.setImagenUrl((String) result.get("url"));
                 image.setCloudinaryId((String) result.get("public_id"));
                 ImageDto imageSaved = imageDaoMapper.toImageDto(imageRepository.save(image));
+
                 idImage = imageSaved.getIdImage();
+
             } catch (IOException e) {
                 throw new BibliotechException("La imagen no se pudo leer" +
                         "No se pudo crear el libro");
             }
         }
-        bookDto.setIdImage(idImage);
-
-        Book book = bookDaoMapper.toBook(bookDto);
-        return bookDaoMapper.toBookDto(bookRepository.save(book));
+        return idImage;
     }
 
     @Override
@@ -96,7 +112,11 @@ public class BookCrudRepositoryImpl implements BookCrudRepository {
             }
             bookToUpdate.setIdGenre(bookDto.getIdGenre());
             bookToUpdate.setQuantity(bookDto.getQuantity());
-            return this.save(bookToUpdate);
+            Long newIdImage = getUpdateIdImage(bookDto,bookToUpdate.getIdImage());
+            bookToUpdate.setIdImage(newIdImage);
+
+            Book book = bookDaoMapper.toBook(bookToUpdate);
+            return bookDaoMapper.toBookDto(bookRepository.save(book));
         }
         return null;
     }
@@ -110,6 +130,11 @@ public class BookCrudRepositoryImpl implements BookCrudRepository {
         }
         return false;
 
+    }
+
+    private boolean isImageNotNullNotEmpty(BookDto bookDto) {
+        return bookDto.getImage() != null &&
+                !bookDto.getImage().isEmpty();
     }
 
 }

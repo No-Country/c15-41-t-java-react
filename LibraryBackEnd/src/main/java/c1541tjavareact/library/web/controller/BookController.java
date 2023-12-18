@@ -59,7 +59,10 @@ public class BookController {
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<BookDto> updateBook(@PathVariable("id") Long idBook, @RequestBody BookDto bookDto){
+    public ResponseEntity<BookDto> updateBook(@PathVariable("id") Long idBook,
+                                              @RequestParam("image") MultipartFile multipartFile,
+                                              @ModelAttribute @Valid BookDto bookDto){
+        bookDto.setImage(multipartFile);
         BookDto bookUpdated = bookService.update(idBook, bookDto);
         if(bookUpdated!=null){
             return ResponseEntity.ok(bookUpdated);
