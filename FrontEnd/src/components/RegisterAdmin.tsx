@@ -6,7 +6,7 @@ import { useUser } from '../context/UserContext'
 import toast from 'react-hot-toast'
 import { generateTempId } from '@/utils/function'
 import { AdminPost } from '@/types/types'
-import overflowYdisable from '@/utils/overflowYdisable'
+
 
 interface AdminProps {
   idAdmin: number
@@ -121,7 +121,7 @@ const RegisterAdmin: React.FC<AdminProps> = props => {
     <div className="flex justify-center px-2 py-10">
       <div className="sm:max-h[40%]  rounded-[40px] bg-grey sm:max-w-[70%] md:max-w-[60%] xl:w-full">
         <h2 className="mx-auto w-10/12 py-8 text-2xl font-bold leading-normal text-blueDark">
-          Registro de nuevo Administrador
+          {isEditMode ? `Actualización del Administrador ${props.name} ${props.lastName}` : 'Registro de nuevo Administrador'}
           <span className="text-[12px] text-blueDark sm:text-sm ">
             {' '}
             <br />
