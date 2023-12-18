@@ -62,12 +62,10 @@ public class BookCrudRepositoryImpl implements BookCrudRepository {
         if (isImageNotNullNotEmpty(bookDto)){
 
             //Control existencia imagen en base de datos
-            List<String> listNameImages = imageRepository.findAll().stream().map(Image::getName).toList();
             int lastIndexImageName= Objects.requireNonNull(bookDto.getImage().getOriginalFilename()).lastIndexOf(".");
-            if(!listNameImages.isEmpty() &&
-                    listNameImages.contains(
-                            bookDto.getImage().getOriginalFilename().substring(0,lastIndexImageName).toLowerCase())) {
-                return bookDto.getImageDto().getIdImage();
+            Optional<Image> imageOptional = imageRepository.findByName(bookDto.getImage().getOriginalFilename().substring(0,lastIndexImageName));
+            if(imageOptional.isPresent()){
+                return imageOptional.get().getIdImage();
             }
 
             //Imagen no existe en la base de datos
@@ -114,12 +112,8 @@ public class BookCrudRepositoryImpl implements BookCrudRepository {
             }
             bookToUpdate.setIdGenre(bookDto.getIdGenre());
             bookToUpdate.setQuantity(bookDto.getQuantity());
-            int lastIndexImageName= Objects.requireNonNull(bookDto.getImage().getOriginalFilename()).lastIndexOf(".");
-            if (isImageNotNullNotEmpty(bookDto) &&
-                    !bookToUpdate.getImageDto().getName().equalsIgnoreCase(bookDto.getImage().getOriginalFilename().substring(0,lastIndexImageName))){
-                Long newIdImage = getUpdateIdImage(bookDto,bookToUpdate.getIdImage());
-                bookToUpdate.setIdImage(newIdImage);
-            }
+            Long newIdImage = getUpdateIdImage(bookDto,bookToUpdate.getIdImage());
+            bookToUpdate.setIdImage(newIdImage);
 
             Book book = bookDaoMapper.toBook(bookToUpdate);
             return bookDaoMapper.toBookDto(bookRepository.save(book));
