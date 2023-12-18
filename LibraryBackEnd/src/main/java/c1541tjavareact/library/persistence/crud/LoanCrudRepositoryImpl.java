@@ -25,7 +25,7 @@ import static c1541tjavareact.library.domain.util.constant.Constants.INVALID_LOA
 public class LoanCrudRepositoryImpl implements LoanCrudRepository {
 
     @Autowired
-    private BookCrudRepositoryImpl bookCrudRepository;
+    private BookCrudRepositoryImpl bookCrudRepositoryImpl;
     
     @Autowired
     private LoanRepository loanRepository;
@@ -55,13 +55,13 @@ public class LoanCrudRepositoryImpl implements LoanCrudRepository {
 
         Loan loan = loanDaoMapper.toLoan(loanDto);
 
-        Optional<BookDto> bookDto = bookCrudRepository.getBook(loanDto.getIdBook());
+        Optional<BookDto> bookDto = bookCrudRepositoryImpl.getBook(loanDto.getIdBook());
 
         if(bookDto.isPresent()){
 
             if(bookDto.get().getQuantity() > 1){
                 bookDto.get().setQuantity(bookDto.get().getQuantity() - 1);
-                bookCrudRepository.save(bookDto.get());
+                bookCrudRepositoryImpl.saveBookLoan(bookDto.get());
 
                 loan.setLoanDate(today);
                 Loan loanSaved = loanRepository.save(loan);
@@ -136,7 +136,7 @@ public class LoanCrudRepositoryImpl implements LoanCrudRepository {
                 PendingDto pendingDto = optPending.get();
                 BookDto bookDto = loanToUpdate.getBookDto();
                 bookDto.setQuantity(bookDto.getQuantity() + 1);
-                bookCrudRepository.save(bookDto);
+                bookCrudRepositoryImpl.saveBookLoan(bookDto);
 
                 pendingDto.setStatus(Boolean.FALSE);
                 pendingCrudRepository.save(pendingDto);
