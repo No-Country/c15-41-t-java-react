@@ -43,6 +43,7 @@ const RegisterLoan: React.FC<propsLoan> = props => {
   const [users, setUsers] = useState<User[]>([])
   const { fetch, currentUser } = useUser()
   const [usersOptions, setusersOptions] = useState<{ value: number; label: string }[]>([])
+  const [isLoading, setIsLoading] = useState(false)
 
   async function getUsers(): Promise<void> {
     try {
@@ -88,6 +89,7 @@ const RegisterLoan: React.FC<propsLoan> = props => {
     }
 
     try {
+      setIsLoading(true)
       const postOptions = {
         method: 'POST',
         body: JSON.stringify(loan)
@@ -107,6 +109,8 @@ const RegisterLoan: React.FC<propsLoan> = props => {
         toast.error('Error al registrar el prestamo', {
           duration: 1500
         })
+    } finally {
+      setIsLoading(false)
     }
   }
 
@@ -289,8 +293,13 @@ const RegisterLoan: React.FC<propsLoan> = props => {
             <button
               className="flex h-[53px] w-full items-center justify-center gap-x-2 rounded-[32px] border-none bg-blueDark py-5 text-[17px] font-bold leading-normal text-white shadow-btn hover:cursor-pointer disabled:cursor-not-allowed disabled:opacity-50"
               type="submit"
+              disabled={isLoading}
             >
-              Enviar
+              {isLoading ? (
+                <div className="absolute h-4 w-4 animate-spin rounded-full border-solid border-x-blueDark"></div>
+              ) : (
+                'Enviar'
+              )}
             </button>
           </div>
         </form>

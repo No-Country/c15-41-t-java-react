@@ -36,6 +36,7 @@ const EditBook: React.FC<BookProps> = props => {
   const [authors, setAuthors] = useState<Author[]>([])
   const [editorials, setEditorials] = useState<Editorial[]>([])
   const [genres, setGenres] = useState<Genre[]>([])
+  const [isLoading, setIsLoading] = useState(false)
   const { fetch } = useUser()
 
   useEffect(() => {
@@ -84,6 +85,7 @@ const EditBook: React.FC<BookProps> = props => {
 
   async function onSubmit(values: FormikValues) {
     try {
+      setIsLoading(true)
       const postOptions = {
         method: 'PUT',
         body: JSON.stringify(values)
@@ -97,6 +99,8 @@ const EditBook: React.FC<BookProps> = props => {
         duration: 4000,
         position: 'top-center'
       })
+    } finally {
+      setIsLoading(false)
     }
   }
   overflowYdisable()
@@ -252,8 +256,13 @@ const EditBook: React.FC<BookProps> = props => {
             <button
               className="flex h-[53px] w-full items-center justify-center gap-x-2 rounded-[32px] border-none bg-blueDark py-5 text-[17px] font-bold leading-normal text-white shadow-btn hover:cursor-pointer disabled:cursor-not-allowed disabled:opacity-50"
               type="submit"
+              disabled={isLoading}
             >
-              Enviar
+              {isLoading ? (
+                <div className="absolute h-4 w-4 animate-spin rounded-full border-solid border-x-blueDark"></div>
+              ) : (
+                'Enviar'
+              )}
             </button>
           </div>
         </form>
