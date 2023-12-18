@@ -62,6 +62,7 @@ export default function UserCard({ user, refresh }: UserCardProps) {
       {isModalDeleteOpen && (
         <div className="fixed inset-0 z-50  bg-white opacity-100">
           <DeleteModal
+            name={`${user.name} ${user.lastName}`}
             id={user.idUser}
             setIsModalDeleteOpen={setIsModalDeleteOpen}
             deleteEntity="user"

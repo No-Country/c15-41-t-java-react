@@ -31,6 +31,8 @@ export default function ReturnModal({ loan, setIsModalOpen, refresh }: ReturnMod
     setIsModalOpen(false)
   }
 
+  
+
   return (
     <div className="fixed inset-0 z-50 flex justify-center overflow-y-scroll bg-white max-lg:mt-20 lg:items-center">
       <div className="mx-auto h-fit w-[80%] rounded-xl bg-gray-200 p-10 md:w-[50%] lg:w-[60%] lg:p-20 xl:w-[50%]">
