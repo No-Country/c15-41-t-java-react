@@ -66,7 +66,7 @@ export interface AdminPost{
   idAdmin: number,
   email: string,
   name: string,
-  lastname: string,
+  lastName: string,
   password: string,
 
 }

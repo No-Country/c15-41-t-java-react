@@ -4,13 +4,19 @@ import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import { useUser } from '../context/UserContext'
 import toast from 'react-hot-toast'
+import { generateTempId } from '@/utils/function'
+import { AdminPost } from '@/types/types'
+import overflowYdisable from '@/utils/overflowYdisable'
 
-interface FormValues {
+interface AdminProps {
+  idAdmin: number
   email: string
   name: string
   lastName: string
   password: string
   passwordConfirm: string
+  setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>
+  refresh?: () => void
 }
 
 const validationSchema = Yup.object({
@@ -37,11 +43,12 @@ const validationSchema = Yup.object({
     .required('La confirmación de la contraseña es requerida')
 })
 
-const RegisterAdmin = () => {
+const RegisterAdmin: React.FC<AdminProps> = (props) => {
   const [showPass, setShowPass] = useState(false)
   const {fetch} = useUser()
-  const onSubmit = async (values: FormValues) => {
+  const onSubmit = async (values: AdminPost) => {
     const valuesToSend = {
+      idAdmin: values.idAdmin,
       email: values.email,
       name: values.name,
       lastName: values.lastName,
@@ -49,17 +56,42 @@ const RegisterAdmin = () => {
    
   }
   console.log(valuesToSend)
-  /*
+  
   try {
-    const postOptions = {
-      method: 'POST',
-      body: JSON.stringify(valuesToSend),
+    if(isEditMode) {
+      const putOptions = {
+        method: 'PUT',
+        body: JSON.stringify(valuesToSend),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }
+      await fetch(`http://localhost:3000/admins/${values.idAdmin}`, putOptions)
+      if (props.refresh) props.refresh()
+      toast.success('El administrador se editó correctamente', {
+        duration: 4000,
+        position: 'top-center'
+      })
+      props.setIsModalOpen(false)
+    }else{
+    
+      const postOptions = {
+        method: 'POST',
+        body: JSON.stringify(valuesToSend),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }
+      await fetch('http://localhost:3000/admins', postOptions)
+      if (props.refresh) props.refresh()
+      toast.success('El administrador se registro correctamente', {
+        duration: 4000,
+        position: 'top-center'
+      })
+      resetForm()
+      props.setIsModalOpen(false)
     }
-    await fetch('http://localhost:3000/admin', postOptions)
-    toast.success('Administrador registrado con éxito', {
-      duration: 1500
-    })
- 
+   
   } catch (error: any) {
     if (error.message !== undefined && typeof error.message === 'string' && error.message !== '')
       toast.error(error.message, {
@@ -72,27 +104,32 @@ const RegisterAdmin = () => {
       })
 
   }
-  */
+  
 }
 
-  const { values, errors, handleChange, handleSubmit } = useFormik({
+const isEditMode = !!props.idAdmin
+
+  const { values, errors, handleChange, handleSubmit, resetForm } = useFormik({
     initialValues: {
-      email: '',
-      name: '',
-      lastName: '',
-      password: '',
-      passwordConfirm: ''
+      idAdmin: isEditMode ? props.idAdmin : generateTempId(),
+      email: props.email || '',
+      name: props.name || '',
+      lastName: props.lastName || '',
+      password: props.password || '',
+      passwordConfirm: props.passwordConfirm || ''
     },
     validationSchema,
     onSubmit
   })
 
+
+
   return (
     <div className="flex justify-center px-2 py-10">
-      <div className="sm:max-h[40%]  rounded-[40px] bg-grey sm:max-w-[70%] xl:w-full">
+      <div className="sm:max-h[40%]  rounded-[40px] bg-grey sm:max-w-[70%] md:max-w-[60%] xl:w-full">
         <h2 className="mx-auto w-10/12 py-8 text-2xl font-bold leading-normal text-blueDark">
           Registro de nuevo Administrador
-          <span className="text-sm text-blueDark"> (Los campos con * son obligatorios) </span>
+          <span className="sm:text-sm text-blueDark text-[12px] "> <br/>(Los campos con * son obligatorios) </span>
         </h2>
         <form className="mx-auto w-10/12" onSubmit={handleSubmit}>
           <div className="mb-14">
