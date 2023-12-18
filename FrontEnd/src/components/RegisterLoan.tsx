@@ -283,6 +283,7 @@ const RegisterLoan: React.FC<propsLoan> = props => {
             options={usersOptions}
             setFieldValue={setFieldValue}
             errors={errors.idUser}
+            setSelectedOption={setusersOptions}
           />
           <div className="pb-10">
             <button
