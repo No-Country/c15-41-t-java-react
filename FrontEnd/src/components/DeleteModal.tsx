@@ -3,6 +3,7 @@ import { useUser } from '../context/UserContext'
 import toast from 'react-hot-toast'
 
 interface Props {
+  name: string
   id: number
   setIsModalDeleteOpen: (value: boolean) => void
   deleteEntity: string
@@ -10,6 +11,7 @@ interface Props {
 }
 
 const DeleteModal: React.FC<Props> = ({
+  name,
   id,
   setIsModalDeleteOpen,
   refresh,
@@ -59,11 +61,11 @@ const DeleteModal: React.FC<Props> = ({
         <div className="ml-1 flex flex-col gap-8">
           <div className="flex flex-col items-start">
             <h2 className="mb-3 text-2xl font-bold leading-normal text-blueDark">
-              Eliminar {spanishDeleteEntity}
+              Eliminar {name}
             </h2>
             <p className="text-lg">
-              ¿Estás seguro de que quieres eliminar este {spanishDeleteEntity}? Una vez eliminado,
-              no podrás recuperarlo. Por favor, confirma tu elección.
+              ¿Estás seguro de que quieres eliminar este {spanishDeleteEntity}: <span className=" text-blueDark font-extrabold">{name}</span> ? 
+              Una vez eliminado, no podrás recuperarlo. Por favor, confirma tu elección.
             </p>
           </div>
           <div className="flex items-center justify-around gap-4">
