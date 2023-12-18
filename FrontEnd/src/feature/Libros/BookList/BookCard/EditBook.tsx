@@ -75,7 +75,7 @@ const EditBook: React.FC<BookProps> = props => {
       quantity: props.quantity,
       idAuthor: props.idAuthor,
       isbn: props.isbn,
-      genre: props.genre,
+      idGenre: props.idGenre,
       idEditorial: props.idEditorial,
       image: props.image
     },
@@ -88,6 +88,9 @@ const EditBook: React.FC<BookProps> = props => {
       setIsLoading(true)
       const postOptions = {
         method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
         body: JSON.stringify(values)
       }
       await fetch(`http://localhost:3000/books/update/${props.id}`, postOptions)

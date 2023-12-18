@@ -11,7 +11,16 @@ interface PropsDetail extends Book {
 }
 
 const BookDetail: React.FC<PropsDetail> = props => {
-  const { title, image, authorDto, genre, editorialDto, isbn, quantity, setIsModalDetails } = props
+  const {
+    title,
+    image,
+    authorDto,
+    genreDto: { name: genre },
+    editorialDto,
+    isbn,
+    quantity,
+    setIsModalDetails
+  } = props
   const [isLoan, setIsLoan] = useState(false)
   overflowYdisable()
   return (

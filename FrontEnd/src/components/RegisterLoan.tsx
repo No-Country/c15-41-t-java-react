@@ -63,7 +63,7 @@ const RegisterLoan: React.FC<propsLoan> = props => {
     initialValues: {
       title: props.title,
       author: props.authorDto.name + ' ' + props.authorDto.lastName,
-      genre: props.genre,
+      genre: props.genreDto.name,
       isbn: props.isbn,
       editorial: props.editorialDto.name,
       loanDate: new Date().toISOString().split('T')[0],
@@ -92,6 +92,9 @@ const RegisterLoan: React.FC<propsLoan> = props => {
       setIsLoading(true)
       const postOptions = {
         method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
         body: JSON.stringify(loan)
       }
       await fetch('http://localhost:3000/loans/save', postOptions)
@@ -292,7 +295,6 @@ const RegisterLoan: React.FC<propsLoan> = props => {
             setFieldValue={setFieldValue}
             errors={errors.idUser}
             setSelectedOption={setSelectedUser}
-
           />
           <div className="pb-10">
             <button

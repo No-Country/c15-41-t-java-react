@@ -48,6 +48,9 @@ export const CreateEditorial: React.FC<CreateEditorialProps> = ({
       setIsLoading(true)
       const postOptions = {
         method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
         body: JSON.stringify({
           ...values
         })

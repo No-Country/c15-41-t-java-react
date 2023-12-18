@@ -10,32 +10,20 @@ interface Props extends Book {
   refresh: () => void
 }
 
-const BookCard: React.FC<Props> = ({
-  idBook,
-  image,
-  title,
-  isbn,
-  authorDto,
-  genre,
-  editorialDto,
-  quantity,
-  refresh
-}) => {
+const BookCard: React.FC<Props> = ({ refresh, ...bookData }) => {
   const [isModalOpen, setIsModalOpen] = React.useState(false)
   const [isModalDeleteOpen, setIsModalDeleteOpen] = React.useState(false)
   const [isModalDetails, setIsModalDetails] = React.useState(false)
-  const bookData: Book = {
+
+  const {
     idBook,
-    image,
-    isbn,
     title,
     authorDto,
-    genre,
     editorialDto,
     quantity,
-    idAuthor: authorDto.idAuthor,
-    idEditorial: editorialDto.idEditorial
-  }
+    imageDto: { imagenUrl: image },
+    genreDto: { name: genre }
+  } = bookData
 
   return (
     <div>
@@ -59,7 +47,7 @@ const BookCard: React.FC<Props> = ({
             </p>
             <p>
               <span className="font-bold text-black">Genero: </span>
-              {genre.charAt(0) + genre.toLowerCase().slice(1)}
+              {genre}
             </p>
             <p>
               <span className="font-bold text-black">Editorial: </span>
@@ -91,12 +79,7 @@ const BookCard: React.FC<Props> = ({
       </div>
       {isModalOpen && (
         <div className="fixed inset-0 z-50 overflow-y-scroll bg-white opacity-100 lg:pb-14">
-          <EditBook
-            {...bookData}
-            setIsModalOpen={setIsModalOpen}
-            id={bookData.idBook}
-            refresh={refresh}
-          />
+          <EditBook {...bookData} setIsModalOpen={setIsModalOpen} id={idBook} refresh={refresh} />
           <div
             className="increase-scale absolute right-4 top-4 cursor-pointer text-5xl font-semibold text-black"
             onClick={() => {
@@ -111,7 +94,7 @@ const BookCard: React.FC<Props> = ({
         <div className="fixed inset-0 z-50  bg-white opacity-100">
           <DeleteModal
             name={bookData.title}
-            id={bookData.idBook}
+            id={idBook}
             setIsModalDeleteOpen={setIsModalDeleteOpen}
             deleteEntity="book"
             refresh={refresh}
@@ -122,7 +105,7 @@ const BookCard: React.FC<Props> = ({
         <div className="fixed inset-0 z-50 flex items-center justify-center overflow-y-scroll bg-white">
           <div className="relative flex h-full w-11/12 flex-row justify-center pt-20">
             <BookDetail
-              id={bookData.idBook}
+              id={idBook}
               {...bookData}
               refresh={() => {
                 refresh()
