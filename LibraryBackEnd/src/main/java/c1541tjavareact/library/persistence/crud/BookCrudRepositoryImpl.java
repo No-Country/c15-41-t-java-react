@@ -58,7 +58,19 @@ public class BookCrudRepositoryImpl implements BookCrudRepository {
     }
 
     private Long getUpdateIdImage(BookDto bookDto, Long idImage) {
+
         if (isImageNotNullNotEmpty(bookDto)){
+
+            //Control existencia imagen en base de datos
+            List<String> listNameImages = imageRepository.findAll().stream().map(Image::getName).toList();
+            int lastIndexImageName= Objects.requireNonNull(bookDto.getImage().getOriginalFilename()).lastIndexOf(".");
+            if(!listNameImages.isEmpty() &&
+                    listNameImages.contains(
+                            bookDto.getImage().getOriginalFilename().substring(0,lastIndexImageName).toLowerCase())) {
+                return bookDto.getImageDto().getIdImage();
+            }
+
+            //Imagen no existe en la base de datos
             try {
                 BufferedImage bi = ImageIO.read(bookDto.getImage().getInputStream());
                 Map result = cloudinaryService.upload(bookDto.getImage());
@@ -67,7 +79,9 @@ public class BookCrudRepositoryImpl implements BookCrudRepository {
                 image.setImagenUrl((String) result.get("url"));
                 image.setCloudinaryId((String) result.get("public_id"));
                 ImageDto imageSaved = imageDaoMapper.toImageDto(imageRepository.save(image));
+
                 idImage = imageSaved.getIdImage();
+
             } catch (IOException e) {
                 throw new BibliotechException("La imagen no se pudo leer" +
                         "No se pudo crear el libro");
