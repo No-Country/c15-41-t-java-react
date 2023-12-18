@@ -5,7 +5,7 @@ const Home: React.FC = () => {
   const { currentUser } = useUser()
 
   return (
-    <div className="flex min-h-screen p-10 max-lg:p-2 max-md:flex-col max-md:items-center">
+    <div className="flex min-h-screen max-lg:p-2 max-md:flex-col max-md:items-center">
       <div className="w-1/2 p-4 max-md:w-full max-md:text-center">
         <img
           src="/brand/rafiki.jpg"
@@ -13,8 +13,8 @@ const Home: React.FC = () => {
           className="h-full w-full object-cover"
         />
       </div>
-      <div className="w-1/2 flex-col p-4 px-4 max-md:w-full max-md:text-center">
-        <h1 className="mb-4 justify-items-start text-6xl font-bold text-blueLight max-md:text-2xl">
+      <div className="w-1/2 flex-col p-4 max-md:w-full max-md:text-center">
+        <h1 className="mb-4 justify-items-start text-5xl font-bold text-blueLight max-md:text-2xl lg:text-6xl">
           ¡Bienvenid@, {currentUser.userName}!
         </h1>
         <p className="text-justify text-lg">

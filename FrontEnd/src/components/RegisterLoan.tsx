@@ -121,12 +121,16 @@ const RegisterLoan: React.FC<propsLoan> = props => {
     }))
     setusersOptions(options)
   }, [users])
-
+  const [selectedUser, setSelectedUser] = useState<{
+    label: string
+    value: number
+  } | null>(null)
   return (
-    <div className="flex justify-center overflow-y-auto px-2 py-10">
-      <div className="sm:max-h[40%]  rounded-[40px] bg-grey sm:max-w-[70%] xl:w-full">
+    <div className="flex justify-center px-2 pb-10 pt-20">
+      <div className="sm:max-h[40%]  w-full rounded-[40px] bg-grey sm:max-w-[60%]">
         <h2 className="mx-auto w-10/12 py-8 text-2xl font-bold leading-normal text-blueDark">
           Prestamo de libro
+          <br />
           <span className="text-sm text-blueDark"> (Los campos con * son obligatorios) </span>
         </h2>
         <form className="mx-auto w-10/12" onSubmit={handleSubmit}>
@@ -287,7 +291,8 @@ const RegisterLoan: React.FC<propsLoan> = props => {
             options={usersOptions}
             setFieldValue={setFieldValue}
             errors={errors.idUser}
-            setSelectedOption={setusersOptions}
+            setSelectedOption={setSelectedUser}
+
           />
           <div className="pb-10">
             <button

@@ -41,7 +41,10 @@ export interface Loan {
 
 export interface Admin {
   idAdmin: number
-  username: string
+  email: string
+  name: string
+  lastName: string
+  password: string
 }
 
 export interface Author {

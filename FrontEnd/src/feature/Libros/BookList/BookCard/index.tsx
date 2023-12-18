@@ -110,6 +110,7 @@ const BookCard: React.FC<Props> = ({
       {isModalDeleteOpen && (
         <div className="fixed inset-0 z-50  bg-white opacity-100">
           <DeleteModal
+            name={bookData.title}
             id={bookData.idBook}
             setIsModalDeleteOpen={setIsModalDeleteOpen}
             deleteEntity="book"

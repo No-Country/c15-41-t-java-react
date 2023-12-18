@@ -178,7 +178,7 @@ export default function RegisterForm({ onSuccess }: { onSuccess: () => void }) {
   return (
     <>
       <div className="px-2 py-10">
-        <div className="mx-auto w-full rounded-[40px] bg-grey  sm:max-w-[70%]">
+        <div className="mx-auto w-full rounded-[40px] bg-grey  sm:max-w-[60%]">
           <h2 className="mx-auto w-10/12 py-8 text-2xl font-bold leading-normal text-blueDark">
             Registro de un nuevo libro
             <br />
