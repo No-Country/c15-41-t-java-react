@@ -31,8 +31,6 @@ export default function ReturnModal({ loan, setIsModalOpen, refresh }: ReturnMod
     setIsModalOpen(false)
   }
 
-  
-
   return (
     <div className="fixed inset-0 z-50 flex justify-center overflow-y-scroll bg-white max-lg:mt-20 lg:items-center">
       <div className="mx-auto h-fit w-[80%] rounded-xl bg-gray-200 p-10 md:w-[50%] lg:w-[60%] lg:p-20 xl:w-[50%]">
@@ -41,9 +39,12 @@ export default function ReturnModal({ loan, setIsModalOpen, refresh }: ReturnMod
             <h2 className="mb-3 text-2xl font-bold leading-normal text-blueDark">
               Devolver {loan.bookDto.title}
             </h2>
-            <span className="text-lg">Prestado a {`${loan.userDto.name} ${loan.userDto.lastName}`}</span>
             <p className="text-lg">
-              ¿Estás seguro de que quieres devolver este libro? Por favor, confirma tu elección.
+              ¿Estás seguro de que quieres devolver este libro:{' '}
+              <span className=" font-extrabold text-blueDark">{loan.bookDto.title}</span>? Prestado
+              a:{' '}
+              <span className=" font-extrabold text-blueDark">{`${loan.userDto.name} ${loan.userDto.lastName}`}</span>{' '}
+              Por favor, confirma tu elección.
             </p>
           </div>
           <div className="flex items-center justify-around gap-4">
