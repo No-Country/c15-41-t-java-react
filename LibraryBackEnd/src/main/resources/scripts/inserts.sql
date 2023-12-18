@@ -10,21 +10,23 @@ INSERT IGNORE INTO editorials (id_editorial, name) VALUES (3, 'Science Books');
 INSERT IGNORE INTO editorials (id_editorial, name) VALUES (4, 'Artistic Press');
 INSERT IGNORE INTO editorials (id_editorial, name) VALUES (5, 'Historical Editions');
 
-INSERT IGNORE INTO genres(id_genre, name) VALUES (1, 'Action');
-INSERT IGNORE INTO genres(id_genre, name) VALUES (2, 'Fantasy');
+INSERT IGNORE INTO genres(id_genre, name) VALUES (1, 'Acción');
+INSERT IGNORE INTO genres(id_genre, name) VALUES (2, 'Fantasia');
 INSERT IGNORE INTO genres(id_genre, name) VALUES (3, 'Thriller');
-INSERT IGNORE INTO genres(id_genre, name) VALUES (4, 'Adventure');
+INSERT IGNORE INTO genres(id_genre, name) VALUES (4, 'Aventura');
+INSERT IGNORE INTO genres(id_genre, name) VALUES (5, 'Romance');
 
-INSERT IGNORE INTO users (id_user, dni, email, name, last_name, phone_number, address, is_active) VALUES (1, '1111121', 'juan.perez11@gmail.com', 'Juan', 'Perez', '1111111121', 'Calle Falsa 123', true);
-INSERT IGNORE INTO users (id_user, dni, email, name, last_name, phone_number, address, is_active) VALUES (2, '22222311', 'maria.gomez12@gmail.com', 'Maria', 'Gomez', '2222222231', 'Calle real 456', true);
-INSERT IGNORE INTO users (id_user, dni, email, name, last_name, phone_number, address, is_active) VALUES (3, '3333341', 'carlos.lopez13@gmail.com', 'Carlos', 'Lopez', '3333333341', 'Calle principal 789', true);
-INSERT IGNORE INTO users (id_user, dni, email, name, last_name, phone_number, address, is_active) VALUES (4, '44444511', 'lucia.martinez14@gmail.com', 'Lucia', 'Martinez', '4444444451', 'Calle del medio 012', true);
-INSERT IGNORE INTO users (id_user, dni, email, name, last_name, phone_number, address, is_active) VALUES (5, '5555516122', 'javier.rodriguez15@gmail.com', 'Javier', 'Rodriguez', '5555555561', 'Calle country 345', true);
-INSERT IGNORE INTO users (id_user, dni, email, name, last_name, phone_number, address, is_active) VALUES (6, '66666711', 'sofia.fernandez16@gmail.com', 'Sofia', 'Fernandez', '6666666671', 'Calle plata 678', true);
-INSERT IGNORE INTO users (id_user, dni, email, name, last_name, phone_number, address, is_active) VALUES (7, '77777811', 'martin.gonzalez17@gmail.com', 'Martin', 'Gonzalez', '7777777781', 'Calle bombonera 901', true);
-INSERT IGNORE INTO users (id_user, dni, email, name, last_name, phone_number, address, is_active) VALUES (8, '88888911', 'valentina.diaz18@gmail.com', 'Valentina', 'Diaz', '8888888891', 'Calle del oceano 234', true);
-INSERT IGNORE INTO users (id_user, dni, email, name, last_name, phone_number, address, is_active) VALUES (9, '9999901112', 'perritogarces2@gmail.com', 'Facundo', 'Fernandez', '9999999901', 'Calle del norte 567', true);
-INSERT IGNORE INTO users (id_user, dni, email, name, last_name, phone_number, address, is_active) VALUES (10, '1010111211', 'perritogarces@gmail.com', 'Natalia', 'Molina', '1010101111', 'Calle ultima', true);
+INSERT IGNORE INTO users (id_user, dni, email, name, last_name, phone_number, address, is_active) VALUES (1, '1111121', 'juan.perez11@gmail.com', 'Rocio', 'Alcala', '1111111121', 'Calle Falsa 123', true);
+INSERT IGNORE INTO users (id_user, dni, email, name, last_name, phone_number, address, is_active) VALUES (2, '22222311', 'lohaorellano13@gmail.com', 'Lohana', 'Orellano', '2222222231', 'Calle real 456', true);
+INSERT IGNORE INTO users (id_user, dni, email, name, last_name, phone_number, address, is_active) VALUES (3, '3333341', 'premideness@gmail.com', 'Jhordy', 'Gavinchu', '3333333341', 'Calle principal 789', true);
+INSERT IGNORE INTO users (id_user, dni, email, name, last_name, phone_number, address, is_active) VALUES (4, '44444511', 'comando98svr@gmail.com', 'Jean Carlo', 'Marcacuzco', '4444444451', 'Calle del medio 012', true);
+INSERT IGNORE INTO users (id_user, dni, email, name, last_name, phone_number, address, is_active) VALUES (5, '5555516122', 'efren.morales.flores@gmail.com', 'Efrén', 'Morales', '5555555561', 'Calle country 345', true);
+INSERT IGNORE INTO users (id_user, dni, email, name, last_name, phone_number, address, is_active) VALUES (6, '66666711', 'jeisonmixix@gmail.com', 'Jeyson', 'Velázquez', '6666666671', 'Calle plata 678', true);
+INSERT IGNORE INTO users (id_user, dni, email, name, last_name, phone_number, address, is_active) VALUES (7, '77777811', 'jedamogar@gmail.com', 'Jesús', 'Monroy', '7777777781', 'Calle bombonera 901', true);
+INSERT IGNORE INTO users (id_user, dni, email, name, last_name, phone_number, address, is_active) VALUES (8, '88888911', 'perritogarces2@gmail.com', 'Pedro', 'Quirós', '8888888891', 'Calle del oceano 234', true);
+INSERT IGNORE INTO users (id_user, dni, email, name, last_name, phone_number, address, is_active) VALUES (9, '9999901112', 'crsanchez.n@gmail.com', 'Claudia', 'Sánchez', '9999999901', 'Calle del norte 567', true);
+INSERT IGNORE INTO users (id_user, dni, email, name, last_name, phone_number, address, is_active) VALUES (10, '1010111211', 'perritogarces@gmail.com', 'Milagros', 'Cifre', '1010101111', 'Calle ultima', true);
+INSERT IGNORE INTO users (id_user, dni, email, name, last_name, phone_number, address, is_active) VALUES (11, '1010184611', 'perritogarces3@gmail.com', 'Matias', 'Luengo', '1010165411', 'Calle Central 2', true);
 
 INSERT IGNORE INTO images (id_image, cloudinary_id, imagen_url, name) VALUES (1,"Bibliotech/ruqlsc5r0qdz6qwpc02x", "http://res.cloudinary.com/dnasbdg0i/image/upload/v1702762612/Bibliotech/ruqlsc5r0qdz6qwpc02x.jpg","Bibliotech");
 
