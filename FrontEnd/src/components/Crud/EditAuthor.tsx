@@ -5,6 +5,7 @@ import toast from 'react-hot-toast'
 import { IoMdClose } from 'react-icons/io'
 import { AuthorPost } from '../../types/types'
 import overflowYdisable from '../../utils/overflowYdisable'
+import { useState } from 'react'
 
 interface EditAuthorProps {
   setCloseModal: Function
@@ -27,6 +28,7 @@ export const EditAuthor: React.FC<EditAuthorProps> = ({
   setRefreshEntitys,
   selectedAuthor
 }) => {
+  const [isLoading, setIsLoading] = useState(false)
   const closeModal = () => {
     setCloseModal(false)
   }
@@ -45,6 +47,7 @@ export const EditAuthor: React.FC<EditAuthorProps> = ({
 
   async function onSubmit(values: FormikValues) {
     try {
+      setIsLoading(true)
       const postOptions = {
         method: 'PUT',
         body: JSON.stringify(values)
@@ -62,6 +65,8 @@ export const EditAuthor: React.FC<EditAuthorProps> = ({
         duration: 4000,
         position: 'top-center'
       })
+    } finally {
+      setIsLoading(false)
     }
   }
 
@@ -105,8 +110,12 @@ export const EditAuthor: React.FC<EditAuthorProps> = ({
             <small className="errorContainer">{errors?.lastName}</small>
           </div>
           <div className="pb-10">
-            <button className="onSubmitButton" type="submit">
-              Enviar
+            <button className="onSubmitButton" type="submit" disabled={isLoading}>
+              {isLoading ? (
+                <div className="absolute h-4 w-4 animate-spin rounded-full border-solid border-x-blueDark"></div>
+              ) : (
+                'Enviar'
+              )}
             </button>
           </div>
         </form>

@@ -7,7 +7,6 @@ import toast from 'react-hot-toast'
 import { generateTempId } from '@/utils/function'
 import { AdminPost } from '@/types/types'
 
-
 interface AdminProps {
   idAdmin: number
   email: string
@@ -45,6 +44,7 @@ const validationSchema = Yup.object({
 
 const RegisterAdmin: React.FC<AdminProps> = props => {
   const [showPass, setShowPass] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
   const { fetch } = useUser()
   const onSubmit = async (values: AdminPost) => {
     const valuesToSend = {
@@ -57,6 +57,7 @@ const RegisterAdmin: React.FC<AdminProps> = props => {
     console.log(valuesToSend)
 
     try {
+      setIsLoading(true)
       if (isEditMode) {
         const putOptions = {
           method: 'PUT',
@@ -65,7 +66,10 @@ const RegisterAdmin: React.FC<AdminProps> = props => {
             'Content-Type': 'application/json'
           }
         }
-        await fetch(`http://localhost:8080/bibliotech/api/admins/update/${values.idAdmin}`, putOptions)
+        await fetch(
+          `http://localhost:8080/bibliotech/api/admins/update/${values.idAdmin}`,
+          putOptions
+        )
         if (props.refresh) props.refresh()
         toast.success('El administrador se editó correctamente', {
           duration: 4000,
@@ -99,6 +103,8 @@ const RegisterAdmin: React.FC<AdminProps> = props => {
         toast.error('Error al registrar el administrador', {
           duration: 1500
         })
+    } finally {
+      setIsLoading(false)
     }
   }
 
@@ -121,7 +127,9 @@ const RegisterAdmin: React.FC<AdminProps> = props => {
     <div className="flex justify-center px-2 py-10">
       <div className="sm:max-h[40%]  rounded-[40px] bg-grey sm:max-w-[70%] md:max-w-[60%] xl:w-full">
         <h2 className="mx-auto w-10/12 py-8 text-2xl font-bold leading-normal text-blueDark">
-          {isEditMode ? `Actualización del Administrador ${props.name} ${props.lastName}` : 'Registro de nuevo Administrador'}
+          {isEditMode
+            ? `Actualización del Administrador ${props.name} ${props.lastName}`
+            : 'Registro de nuevo Administrador'}
           <span className="text-[12px] text-blueDark sm:text-sm ">
             {' '}
             <br />
@@ -248,8 +256,13 @@ const RegisterAdmin: React.FC<AdminProps> = props => {
             <button
               className="flex h-[53px] w-full items-center justify-center gap-x-2 rounded-[32px] border-none bg-blueDark py-5 text-[17px] font-bold leading-normal text-white shadow-btn hover:cursor-pointer disabled:cursor-not-allowed disabled:opacity-50"
               type="submit"
+              disabled={isLoading}
             >
-              Enviar
+              {isLoading ? (
+                <div className="absolute h-4 w-4 animate-spin rounded-full border-solid border-x-blueDark"></div>
+              ) : (
+                'Enviar'
+              )}
             </button>
           </div>
         </form>

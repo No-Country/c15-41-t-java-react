@@ -4,6 +4,7 @@ import * as Yup from 'yup'
 import toast from 'react-hot-toast'
 import { IoMdClose } from 'react-icons/io'
 import overflowYdisable from '../../utils/overflowYdisable'
+import { useState } from 'react'
 
 interface EditorialPut {
   name: string
@@ -25,6 +26,7 @@ export const EditEditorial: React.FC<EditEditorialProps> = ({
   setRefreshEntitys,
   selectedEditorial
 }) => {
+  const [isLoading, setIsLoading] = useState(false)
   const closeModal = () => {
     setCloseModal(false)
   }
@@ -42,6 +44,7 @@ export const EditEditorial: React.FC<EditEditorialProps> = ({
 
   async function onSubmit(values: FormikValues) {
     try {
+      setIsLoading(true)
       const postOptions = {
         method: 'PUT',
         body: JSON.stringify(values)
@@ -62,6 +65,8 @@ export const EditEditorial: React.FC<EditEditorialProps> = ({
         duration: 4000,
         position: 'top-center'
       })
+    } finally {
+      setIsLoading(false)
     }
   }
 
@@ -91,8 +96,12 @@ export const EditEditorial: React.FC<EditEditorialProps> = ({
             <small className="errorContainer">{errors?.name}</small>
           </div>
           <div className="pb-10">
-            <button className="onSubmitButton" type="submit">
-              Enviar
+            <button className="onSubmitButton" type="submit" disabled={isLoading}>
+              {isLoading ? (
+                <div className="absolute h-4 w-4 animate-spin rounded-full border-solid border-x-blueDark"></div>
+              ) : (
+                'Enviar'
+              )}
             </button>
           </div>
         </form>

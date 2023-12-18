@@ -70,6 +70,7 @@ export default function RegisterForm({ onSuccess }: { onSuccess: () => void }) {
   const [isModalOpenDeleteAuthor, setIsModalOpenDeleteAuthor] = useState(false)
   const [isModalOpenDeleteGenre, setIsModalOpenDeleteGenre] = useState(false)
   const [isModalOpenDeleteEditorial, setIsModalOpenDeleteEditorial] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
 
   const [selectedAuthor, setSelectedAuthor] = useState<{
     label: string
@@ -87,7 +88,7 @@ export default function RegisterForm({ onSuccess }: { onSuccess: () => void }) {
 
   useEffect(() => {
     const getAuthors = async () => {
-      const data = await fetch('http://localhost:8080/bibliotech/api/authors/all')
+      const data = await fetch(' http://localhost:3000/authors')
       setAuthors(data)
     }
     getAuthors().catch(error => {
@@ -97,7 +98,7 @@ export default function RegisterForm({ onSuccess }: { onSuccess: () => void }) {
 
   useEffect(() => {
     const getEditorials = async () => {
-      const data = await fetch('http://localhost:8080/bibliotech/api/editorials/all')
+      const data = await fetch('http://localhost:3000/editorials')
       setEditorials(data)
     }
     getEditorials().catch(error => {
@@ -107,7 +108,7 @@ export default function RegisterForm({ onSuccess }: { onSuccess: () => void }) {
 
   useEffect(() => {
     const getGenres = async () => {
-      const data = await fetch('http://localhost:8080/bibliotech/api/books/genres')
+      const data = await fetch(' http://localhost:3000/genres')
       setMockGenres(data)
     }
     getGenres().catch(error => {
@@ -146,6 +147,7 @@ export default function RegisterForm({ onSuccess }: { onSuccess: () => void }) {
 
   async function onSubmit(values: FormikValues) {
     try {
+      setIsLoading(true)
       const postOptions = {
         method: 'POST',
         body: JSON.stringify({
@@ -159,6 +161,8 @@ export default function RegisterForm({ onSuccess }: { onSuccess: () => void }) {
       onSuccess()
     } catch (error) {
       toast.error('Error al agregar el libro', { duration: 4000, position: 'top-center' })
+    } finally {
+      setIsLoading(false)
     }
   }
   const refreshAuthors = () => {
@@ -362,8 +366,12 @@ export default function RegisterForm({ onSuccess }: { onSuccess: () => void }) {
               <small className="errorContainer">{errors?.image}</small>
             </div>
             <div className="pb-10">
-              <button className="onSubmitButton" type="submit">
-                Enviar
+              <button className="onSubmitButton" type="submit" disabled={isLoading}>
+                {isLoading ? (
+                  <div className="absolute h-4 w-4 animate-spin rounded-full border-solid border-x-blueDark"></div>
+                ) : (
+                  'Enviar'
+                )}
               </button>
             </div>
           </form>

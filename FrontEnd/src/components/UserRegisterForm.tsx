@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { useFormik } from 'formik'
 import type { FormikValues } from 'formik'
 import * as Yup from 'yup'
@@ -48,6 +49,7 @@ const UserRegisterForm: React.FC<UserProps> = ({
   refresh,
   onSuccess
 }: UserProps) => {
+  const [isLoading, setIsLoading] = useState(false)
   const { fetch } = useUser()
 
   const isEditMode = !!user.idUser
@@ -68,6 +70,7 @@ const UserRegisterForm: React.FC<UserProps> = ({
 
   async function onSubmit(values: FormikValues) {
     try {
+      setIsLoading(true)
       if (isEditMode) {
         // Si estamos en modo edición
         const putOptions = {
@@ -108,6 +111,8 @@ const UserRegisterForm: React.FC<UserProps> = ({
         duration: 4000,
         position: 'top-center'
       })
+    } finally {
+      setIsLoading(false)
     }
   }
   isEditMode ? overflowYdisable() : null
@@ -249,8 +254,14 @@ const UserRegisterForm: React.FC<UserProps> = ({
             <button
               className="flex h-[53px] w-full items-center justify-center gap-x-2 rounded-[32px] border-none bg-blueDark py-5 text-[17px] font-bold leading-normal text-white shadow-btn hover:cursor-pointer disabled:cursor-not-allowed disabled:opacity-50"
               type="submit"
+              disabled={isLoading}
             >
-              Enviar
+              {' '}
+              {isLoading ? (
+                <div className="absolute h-4 w-4 animate-spin rounded-full border-solid border-x-blueDark"></div>
+              ) : (
+                'Enviar'
+              )}
             </button>
           </div>
         </form>
