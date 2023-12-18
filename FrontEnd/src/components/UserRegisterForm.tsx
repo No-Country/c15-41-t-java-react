@@ -5,6 +5,7 @@ import { useUser } from '../context/UserContext'
 import toast from 'react-hot-toast'
 import { User } from '../types/types'
 import { generateTempId } from '../utils/function'
+import overflowYdisable from '@/utils/overflowYdisable'
 
 interface UserProps {
   user: User
@@ -109,14 +110,15 @@ const UserRegisterForm: React.FC<UserProps> = ({
       })
     }
   }
-
+  isEditMode ? overflowYdisable() : null
   return (
-    <div className="flex justify-center px-2 py-10">
-      <div className="sm:max-h[40%]  rounded-[40px] bg-grey sm:max-w-[70%] xl:w-full">
+    <div className="flex justify-center px-2 pb-10 pt-20">
+      <div className="sm:max-h[40%]  w-full rounded-[40px] bg-grey sm:max-w-[60%]">
         <h2 className="mx-auto w-10/12 py-8 text-2xl font-bold leading-normal text-blueDark">
           {user.name
             ? `Actualización del Miembro: ${user.name} ${user.lastName}`
             : 'Registro de un Miembro Nuevo'}
+          <br />
           <span className="text-sm text-blueDark"> (Los campos con * son obligatorios) </span>
         </h2>
         <form className="mx-auto w-10/12 " onSubmit={handleSubmit}>
