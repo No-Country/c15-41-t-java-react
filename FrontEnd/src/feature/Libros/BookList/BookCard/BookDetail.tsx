@@ -62,10 +62,10 @@ const BookDetail: React.FC<PropsDetail> = props => {
         ''
       )}
       {isLoan && (
-        <div className="fixed inset-0 z-50  overflow-y-auto bg-white opacity-100">
+        <div className="CrudCreateAndEditContainer">
           <RegisterLoan {...props} />
           <div
-            className="increase-scale absolute right-4 top-2 cursor-pointer text-3xl font-semibold text-black sm:top-4 sm:text-5xl "
+            className="closeModal"
             onClick={() => {
               setIsLoan(!isLoan)
               setIsModalDetails(false)

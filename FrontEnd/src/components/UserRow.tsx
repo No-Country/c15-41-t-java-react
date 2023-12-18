@@ -73,18 +73,10 @@ export default function UserRow({ user, refresh }: UserRowProps) {
             deleteEntity="user"
             refresh={refresh}
           />
-          <div
-            className="absolute right-4 top-4 cursor-pointer text-5xl font-semibold text-black hover:scale-125"
-            onClick={() => {
-              setIsModalDeleteOpen(false)
-            }}
-          >
-            <IoMdClose />
-          </div>
         </div>
       )}
       {isModalOpen && (
-        <div className="absolute inset-0 z-50 bg-white opacity-100">
+        <div className="CrudCreateAndEditContainer">
           <UserRegisterForm user={user} setIsModalOpen={setIsModalOpen} refresh={refresh} />
           <div
             className="absolute right-4 top-4 cursor-pointer text-5xl font-semibold text-black hover:scale-125"

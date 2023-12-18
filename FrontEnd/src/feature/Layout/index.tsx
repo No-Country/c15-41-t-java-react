@@ -8,36 +8,36 @@ export default function Layout() {
 
   return (
     <>
-      <header className="mr-24 flex h-36 items-center justify-around">
-        <Link to="/home" className="ml-24 h-full max-lg:ml-12 max-lg:h-24 max-sm:ml-6">
+      <header className="mx-auto flex h-36 w-[90%] items-center justify-between lg:w-[90%]">
+        <Link to="/home" className="h-full  max-lg:h-24 ">
           <img src="/brand/isologotipo.png" alt="logo" className="h-full w-auto" />
         </Link>
         <Link
           to="/home"
-          className="p-8 text-center text-2xl text-black no-underline hover:underline max-lg:hidden"
+          className=" text-center text-2xl text-black no-underline hover:underline max-lg:hidden"
         >
           Inicio
         </Link>
         <Link
           to="/libros"
-          className="p-8 text-center text-2xl text-black no-underline hover:underline max-lg:hidden"
+          className=" text-center text-2xl text-black no-underline hover:underline max-lg:hidden"
         >
           Libros y catálogo
         </Link>
         <Link
           to="/prestamos"
-          className="p-8 text-center text-2xl text-black no-underline hover:underline max-lg:hidden"
+          className=" text-center text-2xl text-black no-underline hover:underline max-lg:hidden"
         >
           Préstamos
         </Link>
         <Link
           to="/miembros"
-          className="p-8 text-center text-2xl text-black no-underline hover:underline max-lg:hidden"
+          className=" text-center text-2xl text-black no-underline hover:underline max-lg:hidden"
         >
           Miembros
         </Link>
 
-        <div className="ml-12 flex items-end justify-center gap-2 sm:ml-20">
+        <div className="flex items-center justify-end gap-2 ">
           <button
             className="border-none bg-white hover:cursor-pointer max-lg:ml-auto max-lg:mr-12 max-sm:mr-6 "
             onClick={signOut}
@@ -46,7 +46,7 @@ export default function Layout() {
           </button>
           <div className="border-none bg-white text-5xl hover:cursor-pointer">
             <Link to={'/admin'}>
-              <img src={imgAdmin} alt="admin" />
+              <img src={imgAdmin} alt="admin" className="h-full" />
             </Link>
           </div>
         </div>
