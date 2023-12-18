@@ -59,7 +59,7 @@ public class UserCrudRepositoryImpl implements UserCrudRepository {
     @Override
     public List<UserDto> getAll() {
         List<User> users = userRepository.findAll();
-        users = users.stream().filter(u -> u.isActive()).toList();
+        users = users.stream().filter(User::isActive).toList();
         return userDaoMapper.toUsersDTO(users);
     }
 
