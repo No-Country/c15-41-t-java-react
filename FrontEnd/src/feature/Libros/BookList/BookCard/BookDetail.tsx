@@ -13,7 +13,7 @@ interface PropsDetail extends Book {
 const BookDetail: React.FC<PropsDetail> = props => {
   const {
     title,
-    image,
+    imageDto: { imagenUrl: image },
     authorDto,
     genreDto: { name: genre },
     editorialDto,
