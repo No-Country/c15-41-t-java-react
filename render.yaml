@@ -17,6 +17,12 @@ services:
         sync: false
       - key: API_SECURITY_SECRET
         sync: false
+      - key: EMAIL_USERNAME
+        sync: false
+      - key: EMAIL_PASSWORD
+        sync: false
+      - key: API_SECRET_CLOUDINARY
+        sync: false
 
   - type: web
     name: frontend

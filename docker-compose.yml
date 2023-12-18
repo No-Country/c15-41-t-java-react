@@ -44,6 +44,9 @@ services:
       - DB_PASSWORD=perez
       - DB_DATABASE=bibliotech
       - API_SECURITY_SECRET=secret
+      - EMAIL_USERNAME=bibliotech.c15@gmail.com
+      - EMAIL_PASSWORD=opqeqlkdygbcniiv
+      - API_SECRET_CLOUDINARY=Y9ROHDSs_BnjyNG5xDROMS-2tME
     ports:
       - "8080:8080"
     networks:
