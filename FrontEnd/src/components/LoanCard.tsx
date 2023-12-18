@@ -38,10 +38,11 @@ export default function LoanCard({ loan, refresh }: LoanCardProps) {
           <span className="font-bold text-black">ISBN: </span> {loan.bookDto.isbn}
         </p>
         <p>
-          <span className="font-bold text-black">Id admin: </span> {loan.idAdmin}
+          <span className="font-bold text-black">Administrador: </span>{' '}
+          {`${loan.adminDto.name} ${loan.adminDto.lastName}`}
         </p>
         <p>
-          <span className="font-bold text-black">Id usuario: </span> {loan.idUser}
+          <span className="font-bold text-black">Dni de usuario: </span> {loan.userDto.dni}
         </p>
         <p>
           <span className="font-bold text-black">Nombre de usuario: </span>{' '}
