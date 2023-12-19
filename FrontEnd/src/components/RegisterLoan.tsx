@@ -76,16 +76,11 @@ const RegisterLoan: React.FC<propsLoan> = props => {
   })
 
   async function onSubmit(values: FormikValues) {
-    const returnExpectedDate = new Date(values.returnExpectedDate)
-    const formattedExpectedDate = `${returnExpectedDate.getFullYear()}-${
-      returnExpectedDate.getMonth() + 1
-    }-${returnExpectedDate.getDate()}`
-
     const loan = {
       idBook: values.idBook,
       idUser: values.idUser,
       idAdmin: currentUser.idAdmin,
-      returnExpectedDate: formattedExpectedDate
+      returnExpectedDate: values.returnExpectedDate
     }
 
     try {
