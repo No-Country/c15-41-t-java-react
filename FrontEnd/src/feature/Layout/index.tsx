@@ -2,7 +2,6 @@ import { Link, Outlet } from 'react-router-dom'
 import Footer from './Footer'
 import { useUser } from '../../context/UserContext'
 import { NavBarMobile } from './NavBarMobile'
-import imgAdmin from '../../../public/icons/User Account.png'
 export default function Layout() {
   const { signOut } = useUser()
 
@@ -46,7 +45,7 @@ export default function Layout() {
           </button>
           <div className="border-none bg-white text-5xl hover:cursor-pointer">
             <Link to={'/admin'}>
-              <img src={imgAdmin} alt="admin" className="h-full" />
+              <img src="/icons/User Account.png" alt="admin" className="h-full" />
             </Link>
           </div>
         </div>
