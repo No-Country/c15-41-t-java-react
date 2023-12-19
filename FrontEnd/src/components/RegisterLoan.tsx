@@ -124,7 +124,7 @@ const RegisterLoan: React.FC<propsLoan> = props => {
     }))
     setusersOptions(options)
   }, [users])
-  const [selectedUser, setSelectedUser] = useState<{
+  const [_, setSelectedUser] = useState<{
     label: string
     value: number
   } | null>(null)
