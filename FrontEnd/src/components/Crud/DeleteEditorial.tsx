@@ -15,7 +15,7 @@ const DeleteEditorial: React.FC<Props> = ({
 }: Props) => {
   const { fetch } = useUser()
   const handleDelete = () => {
-    fetch(`http://localhost:8080/bibliotech/api/editorials/delete/${deleteEntity.value}`, {
+    fetch(`http://localhost:3000/editorials/delete/${deleteEntity.value}`, {
       method: 'DELETE'
     })
       .then(() => {
@@ -26,13 +26,13 @@ const DeleteEditorial: React.FC<Props> = ({
           icon: '♻'
         })
       })
-      .catch(error => {
+      .catch(_ => {
         toast.error(`Hubo un error eliminando su editorial`, {
           duration: 3000,
           position: 'top-center',
           icon: '♻'
         })
-        console.error(error)
+        // console.error(error)
       })
     setIsModalDeleteOpen(false)
   }

@@ -5,6 +5,7 @@ import toast from 'react-hot-toast'
 import { IoMdClose } from 'react-icons/io'
 import overflowYdisable from '../../utils/overflowYdisable'
 import { useState } from 'react'
+import { useUser } from '@/context/UserContext'
 
 interface CreateAuthorProps {
   setCloseModal: Function
@@ -28,6 +29,7 @@ const validationSchema = Yup.object({
 })
 
 export const CreateAuthor: React.FC<CreateAuthorProps> = ({ setCloseModal, setRefreshEntitys }) => {
+  const { fetch } = useUser()
   const [isLoading, setIsLoading] = useState(false)
 
   const closeModal = () => {
@@ -54,11 +56,9 @@ export const CreateAuthor: React.FC<CreateAuthorProps> = ({ setCloseModal, setRe
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({
-          ...values
-        })
+        body: JSON.stringify(values)
       }
-      await fetch('http://localhost:8080/bibliotech/api/authors/save', postOptions)
+      await fetch('http://localhost:3000/authors/save', postOptions)
       resetForm()
       toast.success('Su autor se agregó correctamente', { duration: 4000, position: 'top-center' })
       refreshEntitys()

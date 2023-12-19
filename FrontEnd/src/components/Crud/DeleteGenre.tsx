@@ -11,7 +11,7 @@ interface Props {
 const DeleteGenre: React.FC<Props> = ({ setIsModalDeleteOpen, refresh, deleteEntity }: Props) => {
   const { fetch } = useUser()
   const handleDelete = () => {
-    fetch(`http://localhost:8080/bibliotech/api/books/genres/delete/${deleteEntity.value}`, {
+    fetch(`http://localhost:3000/books/genres/delete/${deleteEntity.value}`, {
       method: 'DELETE'
     })
       .then(() => {
@@ -22,13 +22,13 @@ const DeleteGenre: React.FC<Props> = ({ setIsModalDeleteOpen, refresh, deleteEnt
           icon: '♻'
         })
       })
-      .catch(error => {
+      .catch(_ => {
         toast.error(`Hubo un error eliminando su género`, {
           duration: 3000,
           position: 'top-center',
           icon: '♻'
         })
-        console.error(error)
+        // console.error(error)
       })
     setIsModalDeleteOpen(false)
   }
