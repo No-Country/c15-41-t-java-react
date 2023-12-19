@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react'
 import Select from 'react-select'
 
 interface ReactSelectProps {
@@ -19,6 +20,11 @@ export const ReactSelect: React.FC<ReactSelectProps> = ({
   errors,
   setSelectedOption
 }) => {
+  const [selectedValue, setSelectedValue] = useState<{ value: number; label: string } | null>(null)
+  useEffect(() => {
+    setSelectedValue(null)
+  }, [options])
+
   return (
     <div className="w-full">
       <label className="formLabel" htmlFor="idAuthor">
@@ -52,9 +58,11 @@ export const ReactSelect: React.FC<ReactSelectProps> = ({
           isSearchable={true}
           name={selectName}
           options={options}
+          value={selectedValue}
           onChange={(selectedOption: { value: number; label: string } | null) => {
             setFieldValue(selectName, selectedOption?.value || -1)
             setSelectedOption(selectedOption)
+            setSelectedValue(selectedOption)
           }}
         />
         <small className="errorContainer">{errors}</small>
