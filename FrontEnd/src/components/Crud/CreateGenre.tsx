@@ -76,12 +76,12 @@ export const CreateGenre: React.FC<CreateGenreProps> = ({ setCloseModal, setRefr
             <span className="text-sm"> (Los campos con * son obligatorios) </span>
           </h2>
           <form className="mx-auto w-10/12" onSubmit={handleSubmit}>
-            <label className="labelForm " htmlFor="title">
+            <label className="formLabel " htmlFor="title">
               Género <span className="text-red-500">*</span>
             </label>
-            <div className="divContent">
+            <div className="ReactSelectContainer">
               <input
-                className="reactSelect"
+                className="ReactSelect"
                 name="name"
                 type="text"
                 placeholder="Ingresá el género"

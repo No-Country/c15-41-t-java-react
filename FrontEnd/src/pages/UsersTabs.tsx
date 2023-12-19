@@ -30,7 +30,7 @@ const UsersTabs = () => {
       selectedIndex={tabIndex}
       onSelect={index => setTabIndex(index)}
     >
-      <TabList className="flex h-11 w-full list-none justify-evenly gap-x-1 ">
+      <TabList className="h-13 flex w-full list-none justify-evenly gap-x-1 min-[353px]:h-11 ">
         <Tab
           className="flex w-full flex-col flex-wrap items-center justify-center bg-[#E6E7E9] px-2 text-center text-base font-[500] leading-[24px] text-blueLight hover:cursor-pointer aria-selected:bg-blueLight aria-selected:text-white"
           selectedClassName="bg-blueLight"
