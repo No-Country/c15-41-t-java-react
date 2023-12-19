@@ -12,10 +12,9 @@ interface AdminProps {
   email: string
   name: string
   lastName: string
-  password: string
-  passwordConfirm: string
   setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>
   refresh?: () => void
+  isItSelf: boolean
 }
 
 const validationSchema = Yup.object({
@@ -35,26 +34,44 @@ const validationSchema = Yup.object({
       /^(?=.*[A-Z])(?=.*\d)[a-zA-Z0-9.!@#$&*%_\-=]+$/,
       'La contraseña debe tener una Mayuscula y al menos  un numero'
     )
-    .required('La contraseña es requerida'),
+    .when('isEditMode', {
+      is: false,
+      then: schema => schema.required('La contraseña es requerida')
+    }),
   passwordConfirm: Yup.string()
     .oneOf([Yup.ref('password')], 'Las contraseñas deben coincidir')
     .nullable()
-    .required('La confirmación de la contraseña es requerida')
+    .when('isEditMode', {
+      is: false,
+      then: schema => schema.required('La confirmación de la contraseña es requerida')
+    }),
+  isEditMode: Yup.boolean()
 })
 
 const RegisterAdmin: React.FC<AdminProps> = props => {
   const [showPass, setShowPass] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
-  const { fetch } = useUser()
+  const {
+    fetch,
+    currentUser: { userName },
+    signOut,
+    updateName
+  } = useUser()
   const onSubmit = async (values: AdminPost) => {
-    const valuesToSend = {
-      idAdmin: values.idAdmin,
+    let valuesToSend: {
+      email: string
+      name: string
+      lastName: string
+      password?: string
+    } = {
       email: values.email,
       name: values.name,
-      lastName: values.lastName,
-      password: values.password
+      lastName: values.lastName
     }
-    console.log(valuesToSend)
+
+    if (values.password !== '') {
+      valuesToSend['password'] = values.password
+    }
 
     try {
       setIsLoading(true)
@@ -67,12 +84,30 @@ const RegisterAdmin: React.FC<AdminProps> = props => {
           }
         }
         await fetch(`http://localhost:3000/admins/update/${values.idAdmin}`, putOptions)
-        if (props.refresh) props.refresh()
-        toast.success('El administrador se editó correctamente', {
-          duration: 4000,
-          position: 'top-center'
-        })
-        props.setIsModalOpen(false)
+        if (props.isItSelf) {
+          if (props.email !== values.email || values.password !== '') {
+            signOut()
+            toast.success('Actualizaste tus datos correctamente, vuelve a iniciar sesión', {
+              duration: 4000,
+              position: 'top-center'
+            })
+          } else {
+            if (values.name !== userName) {
+              updateName(values.name)
+            }
+            toast.success('Actualizaste tus datos correctamente', {
+              duration: 4000,
+              position: 'top-center'
+            })
+          }
+        } else {
+          if (props.refresh) props.refresh()
+          toast.success('El administrador se editó correctamente', {
+            duration: 4000,
+            position: 'top-center'
+          })
+          props.setIsModalOpen(false)
+        }
       } else {
         const postOptions = {
           method: 'POST',
@@ -113,8 +148,9 @@ const RegisterAdmin: React.FC<AdminProps> = props => {
       email: props.email || '',
       name: props.name || '',
       lastName: props.lastName || '',
-      password: props.password || '',
-      passwordConfirm: props.passwordConfirm || ''
+      password: '',
+      passwordConfirm: '',
+      isEditMode
     },
     validationSchema,
     onSubmit
@@ -125,7 +161,9 @@ const RegisterAdmin: React.FC<AdminProps> = props => {
       <div className="sm:max-h[40%]  rounded-[40px] bg-grey sm:max-w-[70%] md:max-w-[60%] xl:w-full">
         <h2 className="mx-auto w-10/12 py-8 text-2xl font-bold leading-normal text-blueDark">
           {isEditMode
-            ? `Actualización del Administrador ${props.name} ${props.lastName}`
+            ? props.isItSelf
+              ? 'Editar mis datos'
+              : `Actualización del Administrador ${props.name} ${props.lastName}`
             : 'Registro de nuevo Administrador'}
           <span className="text-[12px] text-blueDark sm:text-sm ">
             {' '}
@@ -196,7 +234,8 @@ const RegisterAdmin: React.FC<AdminProps> = props => {
               className="text-base font-bold leading-[normal] text-blueLight"
               htmlFor="password"
             >
-              Contraseña <span className="text-red-500">*</span>
+              {isEditMode ? 'Nueva contraseña' : 'Contraseña '}
+              {!isEditMode && <span className="text-red-500">*</span>}
             </label>
             <div className="relative mb-14 flex h-8 w-full items-center gap-2 border-0 border-b-2 border-solid  hover:border-blueDark">
               <input
@@ -225,7 +264,8 @@ const RegisterAdmin: React.FC<AdminProps> = props => {
               className="text-base font-bold leading-[normal] text-blueLight"
               htmlFor="passwordConfirm"
             >
-              Confirmar Contraseña <span className="text-red-500">*</span>
+              {isEditMode ? 'Confirmar nueva contraseña' : 'Confirmar contraseña '}
+              {!isEditMode && <span className="text-red-500">*</span>}
             </label>
             <div className="relative mb-14 flex h-8 w-full items-center gap-2 border-0 border-b-2 border-solid  hover:border-blueDark">
               <input
