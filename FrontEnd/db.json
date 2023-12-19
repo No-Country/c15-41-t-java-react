@@ -5,19 +5,29 @@
       "title": "Harry Potter 1",
       "idAuthor": 1,
       "idEditorial": 1,
-      "isbn": "978-665527862",
-      "genre": "ACTION",
+      "isbn": "978-3-16-148410-1",
+      "idGenre": 1,
+      "image": null,
+      "idImage": 1,
       "quantity": 2,
-      "image": "/sample/imagen1.png",
       "editorialDto": {
         "idEditorial": 1,
-        "name": "Tech Publications",
-        "establishedDate": "2020-01-15"
+        "name": "Babel NUevoUpdate"
       },
       "authorDto": {
         "idAuthor": 1,
         "name": "John",
         "lastName": "Doe"
+      },
+      "genreDto": {
+        "idGenre": 1,
+        "name": "Acción"
+      },
+      "imageDto": {
+        "idImage": 1,
+        "name": "Bibliotech",
+        "imagenUrl": "http://res.cloudinary.com/dnasbdg0i/image/upload/v1702762612/Bibliotech/ruqlsc5r0qdz6qwpc02x.jpg",
+        "cloudinaryId": "Bibliotech/ruqlsc5r0qdz6qwpc02x"
       }
     },
     {
@@ -25,19 +35,29 @@
       "title": "Cien años de soledad",
       "idAuthor": 2,
       "idEditorial": 2,
-      "isbn": "978-0307474729",
-      "genre": "FANTASY",
-      "quantity": 4,
-      "image": "/sample/imagen2.png",
+      "isbn": "978-3-16-148410-2",
+      "idGenre": 2,
+      "image": null,
+      "idImage": 1,
+      "quantity": 5,
       "editorialDto": {
         "idEditorial": 2,
-        "name": "Literary Works",
-        "establishedDate": "2015-08-22"
+        "name": "Literary Works"
       },
       "authorDto": {
         "idAuthor": 2,
         "name": "Alice",
         "lastName": "Smith"
+      },
+      "genreDto": {
+        "idGenre": 2,
+        "name": "Fantasia"
+      },
+      "imageDto": {
+        "idImage": 1,
+        "name": "Bibliotech",
+        "imagenUrl": "http://res.cloudinary.com/dnasbdg0i/image/upload/v1702762612/Bibliotech/ruqlsc5r0qdz6qwpc02x.jpg",
+        "cloudinaryId": "Bibliotech/ruqlsc5r0qdz6qwpc02x"
       }
     },
     {
@@ -45,19 +65,29 @@
       "title": "El túnel",
       "idAuthor": 3,
       "idEditorial": 3,
-      "isbn": "978-0307473272",
-      "genre": "THRILLER",
+      "isbn": "978-3-16-148410-3",
+      "idGenre": 3,
+      "image": null,
+      "idImage": 1,
       "quantity": 9,
-      "image": "/sample/image3.png",
       "editorialDto": {
         "idEditorial": 3,
-        "name": "Science Books",
-        "establishedDate": "2000-05-10"
+        "name": "Science Books"
       },
       "authorDto": {
         "idAuthor": 3,
-        "name": "Michael",
+        "name": "Michaels",
         "lastName": "Johnson"
+      },
+      "genreDto": {
+        "idGenre": 3,
+        "name": "Thriller"
+      },
+      "imageDto": {
+        "idImage": 1,
+        "name": "Bibliotech",
+        "imagenUrl": "http://res.cloudinary.com/dnasbdg0i/image/upload/v1702762612/Bibliotech/ruqlsc5r0qdz6qwpc02x.jpg",
+        "cloudinaryId": "Bibliotech/ruqlsc5r0qdz6qwpc02x"
       }
     },
     {
@@ -65,19 +95,29 @@
       "title": "Martín Fierro",
       "idAuthor": 4,
       "idEditorial": 4,
-      "isbn": "978-9871135477",
-      "genre": "ADVENTURE",
-      "quantity": 7,
-      "image": "/sample/image4.png",
+      "isbn": "978-3-16-148410-4",
+      "idGenre": 4,
+      "image": null,
+      "idImage": 1,
+      "quantity": 8,
       "editorialDto": {
         "idEditorial": 4,
-        "name": "Artistic Press",
-        "establishedDate": "1998-12-03"
+        "name": "Artistic Press"
       },
       "authorDto": {
         "idAuthor": 4,
         "name": "Emma",
         "lastName": "Brown"
+      },
+      "genreDto": {
+        "idGenre": 4,
+        "name": "Aventura"
+      },
+      "imageDto": {
+        "idImage": 1,
+        "name": "Bibliotech",
+        "imagenUrl": "http://res.cloudinary.com/dnasbdg0i/image/upload/v1702762612/Bibliotech/ruqlsc5r0qdz6qwpc02x.jpg",
+        "cloudinaryId": "Bibliotech/ruqlsc5r0qdz6qwpc02x"
       }
     },
     {
@@ -85,19 +125,29 @@
       "title": "Don Quijote de la Mancha",
       "idAuthor": 5,
       "idEditorial": 5,
-      "isbn": "978-8424172629",
-      "genre": "ACTION",
-      "quantity": 11,
-      "image": "/sample/imagen5.png",
+      "isbn": "978-3-16-148410-5",
+      "idGenre": 1,
+      "image": null,
+      "idImage": 1,
+      "quantity": 12,
       "editorialDto": {
         "idEditorial": 5,
-        "name": "Historical Editions",
-        "establishedDate": "2012-06-28"
+        "name": "Historical Editions"
       },
       "authorDto": {
         "idAuthor": 5,
         "name": "Daniel",
         "lastName": "Garcia"
+      },
+      "genreDto": {
+        "idGenre": 1,
+        "name": "Acción"
+      },
+      "imageDto": {
+        "idImage": 1,
+        "name": "Bibliotech",
+        "imagenUrl": "http://res.cloudinary.com/dnasbdg0i/image/upload/v1702762612/Bibliotech/ruqlsc5r0qdz6qwpc02x.jpg",
+        "cloudinaryId": "Bibliotech/ruqlsc5r0qdz6qwpc02x"
       }
     },
     {
@@ -105,19 +155,29 @@
       "title": "Fahrenheit 451",
       "idAuthor": 1,
       "idEditorial": 2,
-      "isbn": "978-8490321478",
-      "genre": "FANTASY",
+      "isbn": "978-3-16-148410-6",
+      "idGenre": 2,
+      "image": null,
+      "idImage": 1,
       "quantity": 6,
-      "image": "/sample/imagen6.png",
       "editorialDto": {
         "idEditorial": 2,
-        "name": "Literary Works",
-        "establishedDate": "2015-08-22"
+        "name": "Literary Works"
       },
       "authorDto": {
         "idAuthor": 1,
         "name": "John",
         "lastName": "Doe"
+      },
+      "genreDto": {
+        "idGenre": 2,
+        "name": "Fantasia"
+      },
+      "imageDto": {
+        "idImage": 1,
+        "name": "Bibliotech",
+        "imagenUrl": "http://res.cloudinary.com/dnasbdg0i/image/upload/v1702762612/Bibliotech/ruqlsc5r0qdz6qwpc02x.jpg",
+        "cloudinaryId": "Bibliotech/ruqlsc5r0qdz6qwpc02x"
       }
     }
   ],
@@ -151,189 +211,157 @@
   "editorials": [
     {
       "idEditorial": 1,
-      "name": "Tech Publications",
-      "establishedDate": "2020-01-15"
+      "name": "Babel NUevoUpdate"
     },
     {
       "idEditorial": 2,
-      "name": "Literary Works",
-      "establishedDate": "2015-08-22"
+      "name": "Literary Works"
     },
     {
       "idEditorial": 3,
-      "name": "Science Books",
-      "establishedDate": "2000-05-10"
+      "name": "Science Books"
     },
     {
       "idEditorial": 4,
-      "name": "Artistic Press",
-      "establishedDate": "1998-12-03"
+      "name": "Artistic Press"
     },
     {
       "idEditorial": 5,
-      "name": "Historical Editions",
-      "establishedDate": "2012-06-28"
+      "name": "Historical Editions"
     }
   ],
   "users": [
     {
       "idUser": 1,
-      "dni": "111112",
-      "name": "Juan",
-      "lastName": "Perez",
-      "email": "juan.perez11@gmail.com",
-      "phoneNumber": "111111112",
+      "dni": "1111121",
+      "name": "Rocio",
+      "lastName": "Alcala",
+      "email": "Ro.alcala@hotmail.com",
+      "phoneNumber": "1111111121",
       "address": "Calle Falsa 123",
-      "loansDto": [
-        {
-          "idLoan": 1,
-          "loanDate": "2023-12-15",
-          "returnExpectedDate": "2023-12-20",
-          "returnEffectiveDate": null,
-          "idBook": 2,
-          "idAdmin": 1,
-          "idUser": 1,
-          "bookDto": null,
-          "adminDto": null,
-          "userDto": null
-        },
-        {
-          "idLoan": 4,
-          "loanDate": "2023-12-15",
-          "returnExpectedDate": "2023-12-19",
-          "returnEffectiveDate": null,
-          "idBook": 5,
-          "idAdmin": 1,
-          "idUser": 1,
-          "bookDto": null,
-          "adminDto": null,
-          "userDto": null
-        }
-      ],
-      "active": true
-    },
-    {
-      "idUser": 2,
-      "dni": "222223",
-      "name": "Maria",
-      "lastName": "Gomez",
-      "email": "maria.gomez12@gmail.com",
-      "phoneNumber": "222222223",
-      "address": "Calle real 456",
-      "loansDto": [
-        {
-          "idLoan": 2,
-          "loanDate": "2023-12-15",
-          "returnExpectedDate": "2023-12-21",
-          "returnEffectiveDate": null,
-          "idBook": 3,
-          "idAdmin": 1,
-          "idUser": 2,
-          "bookDto": null,
-          "adminDto": null,
-          "userDto": null
-        }
-      ],
-      "active": true
-    },
-    {
-      "idUser": 3,
-      "dni": "333334",
-      "name": "Carlos",
-      "lastName": "Lopez",
-      "email": "carlos.lopez13@gmail.com",
-      "phoneNumber": "333333334",
-      "address": "Calle principal 789",
-      "loansDto": [
-        {
-          "idLoan": 3,
-          "loanDate": "2023-12-15",
-          "returnExpectedDate": "2023-12-21",
-          "returnEffectiveDate": null,
-          "idBook": 4,
-          "idAdmin": 1,
-          "idUser": 3,
-          "bookDto": null,
-          "adminDto": null,
-          "userDto": null
-        }
-      ],
-      "active": true
-    },
-    {
-      "idUser": 4,
-      "dni": "444445",
-      "name": "Lucia",
-      "lastName": "Martinez",
-      "email": "lucia.martinez14@gmail.com",
-      "phoneNumber": "444444445",
-      "address": "Calle del medio 012",
       "loansDto": [],
       "active": true
     },
     {
+      "idUser": 2,
+      "dni": "22222311",
+      "name": "Lohana",
+      "lastName": "Orellano",
+      "email": "lohaorellano13@gmail.com",
+      "phoneNumber": "2222222231",
+      "address": "Calle real 456",
+      "loansDto": [],
+      "active": true
+    },
+    {
+      "idUser": 3,
+      "dni": "3333341",
+      "name": "Jhordy",
+      "lastName": "Gavinchu",
+      "email": "premideness@gmail.com",
+      "phoneNumber": "3333333341",
+      "address": "Calle principal 789",
+      "loansDto": [],
+      "active": true
+    },
+    {
+      "idUser": 4,
+      "dni": "44444511",
+      "name": "Jean Carlo",
+      "lastName": "Marcacuzco",
+      "email": "comando98svr@gmail.com",
+      "phoneNumber": "4444444451",
+      "address": "Calle del medio 012",
+      "loansDto": [
+        {
+          "idLoan": 1,
+          "loanDate": "2023-12-19",
+          "returnExpectedDate": "2023-12-21",
+          "returnEffectiveDate": null,
+          "idBook": 3,
+          "idAdmin": 1,
+          "idUser": 4,
+          "bookDto": null,
+          "adminDto": null,
+          "userDto": null
+        }
+      ],
+      "active": true
+    },
+    {
       "idUser": 5,
-      "dni": "555556",
-      "name": "Javier",
-      "lastName": "Rodriguez",
-      "email": "javier.rodriguez15@gmail.com",
-      "phoneNumber": "555555556",
+      "dni": "5555516122",
+      "name": "Efrén",
+      "lastName": "Morales",
+      "email": "efren.morales.flores@gmail.com",
+      "phoneNumber": "5555555561",
       "address": "Calle country 345",
       "loansDto": [],
       "active": true
     },
     {
       "idUser": 6,
-      "dni": "666667",
-      "name": "Sofia",
-      "lastName": "Fernandez",
-      "email": "sofia.fernandez16@gmail.com",
-      "phoneNumber": "666666667",
+      "dni": "66666711",
+      "name": "Jeyson",
+      "lastName": "Velázquez",
+      "email": "jeisonmixix@gmail.com",
+      "phoneNumber": "6666666671",
       "address": "Calle plata 678",
       "loansDto": [],
       "active": true
     },
     {
       "idUser": 7,
-      "dni": "777778",
-      "name": "Martin",
-      "lastName": "Gonzalez",
-      "email": "martin.gonzalez17@gmail.com",
-      "phoneNumber": "777777778",
+      "dni": "77777811",
+      "name": "Jesús",
+      "lastName": "Monroy",
+      "email": "jedamogar@gmail.com",
+      "phoneNumber": "7777777781",
       "address": "Calle bombonera 901",
       "loansDto": [],
       "active": true
     },
     {
       "idUser": 8,
-      "dni": "888889",
-      "name": "Valentina",
-      "lastName": "Diaz",
-      "email": "valentina.diaz18@gmail.com",
-      "phoneNumber": "888888889",
+      "dni": "88888911",
+      "name": "Pedro",
+      "lastName": "Quirós",
+      "email": "pedrobquiros@gmail.com",
+      "phoneNumber": "8888888891",
       "address": "Calle del oceano 234",
       "loansDto": [],
       "active": true
     },
     {
       "idUser": 9,
-      "dni": "999990",
-      "name": "Facundo",
-      "lastName": "Fernandez",
-      "email": "facundo.fernandez19@gmail.com",
-      "phoneNumber": "999999990",
+      "dni": "9999901112",
+      "name": "Claudia",
+      "lastName": "Sánchez",
+      "email": "crsanchez.n@gmail.com",
+      "phoneNumber": "9999999901",
       "address": "Calle del norte 567",
       "loansDto": [],
       "active": true
     },
     {
       "idUser": 10,
-      "dni": "101011",
-      "name": "Natalia",
-      "lastName": "Molina",
-      "email": "natalia.molina20@gmail.com",
-      "phoneNumber": "101010111",
+      "dni": "1010111211",
+      "name": "Milagros",
+      "lastName": "Cifre",
+      "email": "dev@matiasluengo.com",
+      "phoneNumber": "1010101111",
       "address": "Calle ultima",
+      "loansDto": [],
+      "active": true
+    },
+    {
+      "idUser": 11,
+      "dni": "1010184611",
+      "name": "Matias",
+      "lastName": "Luengo",
+      "email": "matiasluengoo95@gmail.com",
+      "phoneNumber": "1010165411",
+      "address": "Calle Central 2",
       "loansDto": [],
       "active": true
     }
@@ -531,55 +559,31 @@
   "admins": [
     {
       "idAdmin": 1,
-      "email": "admin@admin.com",
-      "name": "Lohana P",
-      "lastName": "Orellano",
-      "password": "Bibliotech2023"
+      "name": "José",
+      "lastName": "Lara",
+      "email": "jose.lara@gmail.com",
+      "password": "$2a$10$nFqAPEAI/QjNNunc1q3yt.jm8WKW/iNU9.ee0WamKdwqLnp2Ai4jK"
     },
     {
       "idAdmin": 2,
-      "email": "mariaPerez@admin.com",
-      "name": "Mária H",
-      "lastName": "Perez ",
-      "password": "Admin2024"
-    },
-    {
-      "idAdmin": 3,
-      "email": "arielfernandez@admin.com",
-      "name": "Ariel",
-      "lastName": "Fernandez",
-      "password": "Admin2024"
-    },
-    {
-      "idAdmin": 1702895479857,
-      "email": "lohaorellano13@gmail.com",
-      "name": "Paola A",
-      "lastName": "Medrano",
-      "password": "Lohana2020"
-    },
-    {
-      "idAdmin": 1702896762647,
-      "email": "guillermomedrano85@hotmail.com",
-      "name": "Guillermo",
-      "lastName": "Medrano",
-      "password": "Guille2023"
-    },
-    {
-      "idAdmin": 1702896861672,
-      "email": "admin@gmail.com",
-      "name": "Benjamin",
-      "lastName": "Ledesma",
-      "password": "Benja2025"
+      "name": "José",
+      "lastName": "Lara",
+      "email": "bibliotech.c15@gmail.com",
+      "password": "$2a$12$YWG.dX4vnhM/1sMIwvsee.lYghep2sVhgcmghaoFxESPnnIeOSwgK"
     }
   ],
   "genres": [
     {
       "idGenre": 1,
-      "name": "Terror"
+      "name": "Acción"
+    },
+    {
+      "idGenre": 4,
+      "name": "Aventura"
     },
     {
       "idGenre": 2,
-      "name": "Fantasía"
+      "name": "Fantasia"
     },
     {
       "idGenre": 3,

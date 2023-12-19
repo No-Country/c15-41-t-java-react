@@ -5,6 +5,7 @@ import toast from 'react-hot-toast'
 import { IoMdClose } from 'react-icons/io'
 import overflowYdisable from '../../utils/overflowYdisable'
 import { useState } from 'react'
+import { useUser } from '@/context/UserContext'
 
 interface EditorialPut {
   name: string
@@ -26,6 +27,7 @@ export const EditEditorial: React.FC<EditEditorialProps> = ({
   setRefreshEntitys,
   selectedEditorial
 }) => {
+  const { fetch } = useUser()
   const [isLoading, setIsLoading] = useState(false)
   const closeModal = () => {
     setCloseModal(false)
@@ -52,10 +54,7 @@ export const EditEditorial: React.FC<EditEditorialProps> = ({
         },
         body: JSON.stringify(values)
       }
-      await fetch(
-        `http://localhost:8080/bibliotech/api/editorials/update/${selectedEditorial.value}`,
-        postOptions
-      )
+      await fetch(`http://localhost:3000/editorials/update/${selectedEditorial.value}`, postOptions)
       resetForm()
       toast.success('Su editorial se editó correctamente', {
         duration: 4000,
