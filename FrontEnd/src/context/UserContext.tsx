@@ -171,13 +171,10 @@ export const UserProvider: FC<{
     })
 
     if (!response.ok) {
-      try {
-        const error = await response.json()
-        throw new Error(error)
-      } catch (error) {
-        // console.log('error', error)
-        throw new Error('Request error')
-      }
+      const error = await response.json()
+      if (error.message !== undefined && typeof error.message === 'string' && error.message !== '')
+        throw new Error(error.message)
+      else throw new Error('Request error')
     }
 
     // TODO Temporalmente, mientras no se implemente el backend(en DELETE)

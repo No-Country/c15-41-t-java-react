@@ -12,49 +12,61 @@ interface AdminProps {
   email: string
   name: string
   lastName: string
-  password: string
-  passwordConfirm: string
   setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>
   refresh?: () => void
 }
 
-const validationSchema = Yup.object({
-  email: Yup.string()
-    .email('El email no es valido')
-    .required('El email es obligatorio')
-    .matches(
-      /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.(com|co|es|it|net|org|gov|edu|mil|io|xyz|info|biz|mx|ar)$/,
-      'El email no es válido'
-    ),
-  name: Yup.string().required('El nombre es requerido'),
-  lastName: Yup.string().required('El apellido es requerido'),
-  password: Yup.string()
-    .min(8, 'La contraseña es muy corta')
-    .max(20, '20 carateres  maximo')
-    .matches(
-      /^(?=.*[A-Z])(?=.*\d)[a-zA-Z0-9.!@#$&*%_\-=]+$/,
-      'La contraseña debe tener una Mayuscula y al menos  un numero'
-    )
-    .required('La contraseña es requerida'),
-  passwordConfirm: Yup.string()
-    .oneOf([Yup.ref('password')], 'Las contraseñas deben coincidir')
-    .nullable()
-    .required('La confirmación de la contraseña es requerida')
-})
+const validationSchema = (isEdit = false) =>
+  Yup.object({
+    email: Yup.string()
+      .email('El email no es valido')
+      .required('El email es obligatorio')
+      .matches(
+        /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.(com|co|es|it|net|org|gov|edu|mil|io|xyz|info|biz|mx|ar)$/,
+        'El email no es válido'
+      ),
+    name: Yup.string().required('El nombre es requerido'),
+    lastName: Yup.string().required('El apellido es requerido'),
+    password: Yup.string()
+      .min(8, 'La contraseña es muy corta')
+      .max(20, '20 carateres  maximo')
+      .matches(
+        /^(?=.*[A-Z])(?=.*\d)[a-zA-Z0-9.!@#$&*%_\-=]+$/,
+        'La contraseña debe tener una Mayuscula y al menos  un numero'
+      )
+      .when('isEdit', {
+        is: false,
+        then: schema => schema.required('La contraseña es requerida')
+      }),
+    passwordConfirm: Yup.string()
+      .oneOf([Yup.ref('password')], 'Las contraseñas deben coincidir')
+      .nullable()
+      .when('isEdit', {
+        is: false,
+        then: schema => schema.required('La confirmación de la contraseña es requerida')
+      }),
+    isEdit: Yup.boolean().default(isEdit)
+  })
 
 const RegisterAdmin: React.FC<AdminProps> = props => {
   const [showPass, setShowPass] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const { fetch } = useUser()
   const onSubmit = async (values: AdminPost) => {
-    const valuesToSend = {
-      idAdmin: values.idAdmin,
+    let valuesToSend: {
+      email: string
+      name: string
+      lastName: string
+      password?: string
+    } = {
       email: values.email,
       name: values.name,
-      lastName: values.lastName,
-      password: values.password
+      lastName: values.lastName
     }
-    console.log(valuesToSend)
+
+    if (values.password !== '') {
+      valuesToSend['password'] = values.password
+    }
 
     try {
       setIsLoading(true)
@@ -113,10 +125,10 @@ const RegisterAdmin: React.FC<AdminProps> = props => {
       email: props.email || '',
       name: props.name || '',
       lastName: props.lastName || '',
-      password: props.password || '',
-      passwordConfirm: props.passwordConfirm || ''
+      password: '',
+      passwordConfirm: ''
     },
-    validationSchema,
+    validationSchema: validationSchema(isEditMode),
     onSubmit
   })
 
@@ -196,7 +208,8 @@ const RegisterAdmin: React.FC<AdminProps> = props => {
               className="text-base font-bold leading-[normal] text-blueLight"
               htmlFor="password"
             >
-              Contraseña <span className="text-red-500">*</span>
+              {isEditMode ? 'Nueva contraseña' : 'Contraseña '}
+              {!isEditMode && <span className="text-red-500">*</span>}
             </label>
             <div className="relative mb-14 flex h-8 w-full items-center gap-2 border-0 border-b-2 border-solid  hover:border-blueDark">
               <input
@@ -225,7 +238,8 @@ const RegisterAdmin: React.FC<AdminProps> = props => {
               className="text-base font-bold leading-[normal] text-blueLight"
               htmlFor="passwordConfirm"
             >
-              Confirmar Contraseña <span className="text-red-500">*</span>
+              {isEditMode ? 'Confirmar nueva contraseña' : 'Confirmar contraseña '}
+              {!isEditMode && <span className="text-red-500">*</span>}
             </label>
             <div className="relative mb-14 flex h-8 w-full items-center gap-2 border-0 border-b-2 border-solid  hover:border-blueDark">
               <input
