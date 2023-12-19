@@ -12,10 +12,12 @@ interface LoanCardProps {
 
 export default function LoanCard({ loan, refresh }: LoanCardProps) {
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
   const { fetch } = useUser()
 
   async function handleNotificacion(id: Loan['idLoan']) {
     try {
+      setIsLoading(true)
       await fetch(`http://localhost:3000/loans/sendMail/${id}`)
       toast.success('Se envio la notificacion correctamente', {
         duration: 4000,
@@ -27,6 +29,8 @@ export default function LoanCard({ loan, refresh }: LoanCardProps) {
         duration: 4000,
         position: 'top-center'
       })
+    } finally {
+      setIsLoading(false)
     }
   }
 
@@ -65,9 +69,13 @@ export default function LoanCard({ loan, refresh }: LoanCardProps) {
           <button
             onClick={() => handleNotificacion(loan.idLoan)}
             className="my-3 flex h-[53px] w-5/6 items-center justify-center gap-x-2 rounded-[32px] border-none bg-blueDark p-5 py-5 text-[17px] font-bold leading-normal text-white shadow-btn hover:cursor-pointer disabled:cursor-not-allowed disabled:opacity-50 max-md:mx-2"
+            disabled={isLoading}
           >
             <img className="h-10 p-1 text-center" src="/icons/Notification.png"></img>
             <p className="p-1">Recordar devolución</p>
+            {isLoading && (
+              <div className="ml-2 h-4 w-4 animate-spin rounded-full border-solid border-x-blueDark"></div>
+            )}
           </button>
         </div>
         {isModalOpen && (
