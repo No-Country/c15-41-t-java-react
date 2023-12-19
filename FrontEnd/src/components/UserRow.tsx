@@ -21,16 +21,13 @@ export default function UserRow({ user, refresh }: UserRowProps) {
     <>
       <tr className="h-12">
         <td className="border-[1px] border-x-0 border-solid border-slate-200 text-center">
-          {user.idUser}
+          {user.dni}
         </td>
         <td className="border-[1px] border-x-0 border-solid border-slate-200 text-center">
           {user.name}
         </td>
         <td className="border-[1px] border-x-0 border-solid border-slate-200 text-center">
           {user.lastName}
-        </td>
-        <td className="border-[1px] border-x-0 border-solid border-slate-200 text-center">
-          {user.phoneNumber}
         </td>
         <td className="border-[1px] border-x-0 border-solid border-slate-200 text-center">
           {user.address}

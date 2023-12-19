@@ -43,8 +43,8 @@ export default function UserCard({ user, refresh }: UserCardProps) {
       </div>
       <div className="flex-col p-4">
         <p>
-          <span className="font-medium text-black">ID: </span>
-          {user.idUser}
+          <span className="font-medium text-black">DNI: </span>
+          {user.dni}
         </p>
         <p>
           <span className="font-medium text-black">Celular: </span>
