@@ -38,9 +38,9 @@ Jean Carlo / Efrén Morales / Jeyson Velázquez / German Anselmo / Jesús Monroy
 
 # Stack QA
 <div align="start">
-<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/trello/trello-plain-wordmark.svg" alt="Logo" width="90" height="90">
-<img width="50"  src="https://img.shields.io/badge/Excel-green"/>
-<img width="50"  src="https://img.shields.io/badge/Word-blue"/>
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/trello/trello-plain-wordmark.svg" alt="Logo" width="70" height="70">
+<img width="110"  src="https://img.shields.io/badge/Google%20Sheets-green"/>
+<img width="100"  src="https://img.shields.io/badge/Google%20Docs-blue"/>
 </div>
 Pedro Quirós / Claudia Sánchez
 
