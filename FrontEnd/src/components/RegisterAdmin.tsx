@@ -66,10 +66,7 @@ const RegisterAdmin: React.FC<AdminProps> = props => {
             'Content-Type': 'application/json'
           }
         }
-        await fetch(
-          `http://localhost:8080/bibliotech/api/admins/update/${values.idAdmin}`,
-          putOptions
-        )
+        await fetch(`http://localhost:3000/admins/update/${values.idAdmin}`, putOptions)
         if (props.refresh) props.refresh()
         toast.success('El administrador se editó correctamente', {
           duration: 4000,
@@ -84,7 +81,7 @@ const RegisterAdmin: React.FC<AdminProps> = props => {
             'Content-Type': 'application/json'
           }
         }
-        await fetch('http://localhost:8080/bibliotech/api/admins/save', postOptions)
+        await fetch('http://localhost:3000/admins/save', postOptions)
         if (props.refresh) props.refresh()
         toast.success('El administrador se registro correctamente', {
           duration: 4000,
