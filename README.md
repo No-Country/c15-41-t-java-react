@@ -31,6 +31,12 @@ Poder planificar mejoras en el servicio y la adquisición de nuevos materiales.
 <a href="https://trello.com/w/biblio143">
   <img src="https://img.shields.io/badge/Trello-0052CC?style=for-the-badge&logo=trello&logoColor=white"/>
 </a>
+<a href="" target="_blank">
+<img  src="https://img.shields.io/badge/VER_DEMO-38B2AC?style=for-the-badge&logo=figma-css&logoColor=white"/>
+</a>
+<a href="" target="_blank">
+<img  src="https://img.shields.io/badge/VER_API-3178C6?style=for-the-badge&logo=figma-css&logoColor=white"/>
+</a> <a href="https://www.figma.com/proto/iYJbDiH3MF0na4aJMJeYUK/Bibliotech?type=design&node-id=114-1950&t=ob64hBs8tDp6nVrm-1&scaling=scale-down&page-id=1%3A2&starting-point-node-id=15%3A17&show-proto-sidebar=1" target="_blank">
 
 
 ## Stack Frontend
