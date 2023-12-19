@@ -15,6 +15,7 @@ interface IUserContext {
   setupComplete: boolean
   signInWaiting: boolean
   fetch: (url: string, options?: RequestInit) => Promise<any>
+  updateName: (name: string) => void
 }
 
 const initialUserState: UserState = {
@@ -187,9 +188,31 @@ export const UserProvider: FC<{
     }
   }
 
+  const updateName = (name: string) => {
+    setCurrentUser({
+      ...currentUser,
+      userName: name
+    })
+    localStorage.setItem(
+      LOCAL_STORAGE_KEY,
+      JSON.stringify({
+        ...currentUser,
+        userName: name
+      })
+    )
+  }
+
   return (
     <UserContext.Provider
-      value={{ signIn, currentUser, signOut, setupComplete, signInWaiting, fetch: fetchHOF }}
+      value={{
+        signIn,
+        currentUser,
+        signOut,
+        setupComplete,
+        signInWaiting,
+        fetch: fetchHOF,
+        updateName
+      }}
     >
       {children}
     </UserContext.Provider>

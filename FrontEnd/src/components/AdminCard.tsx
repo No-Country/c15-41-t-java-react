@@ -6,6 +6,7 @@ import RegisterAdmin from './RegisterAdmin'
 
 interface PropsAdmin extends AdminPost {
   refresh?: () => void
+  isItSelf: boolean
 }
 
 const AdminCard: React.FC<PropsAdmin> = Props => {
@@ -16,7 +17,10 @@ const AdminCard: React.FC<PropsAdmin> = Props => {
       <div className="flex h-full w-full gap-3 overflow-hidden border-0 border-t border-solid border-black p-3">
         <div className="flex w-full flex-col">
           <div className="flex items-center justify-between">
-            <h3 className="text-2xl text-blueLight"> {`${name}  ${lastName}`}</h3>
+            <h3 className="text-2xl text-blueLight">
+              {`${name}  ${lastName}`}
+              {Props.isItSelf && <span className="text-lg font-[500]"> (Tú)</span>}
+            </h3>
             <IoPencil
               onClick={() => setIsModalEditOpen(true)}
               size={20}

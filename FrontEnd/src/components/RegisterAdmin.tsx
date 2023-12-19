@@ -14,44 +14,49 @@ interface AdminProps {
   lastName: string
   setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>
   refresh?: () => void
+  isItSelf: boolean
 }
 
-const validationSchema = (isEdit = false) =>
-  Yup.object({
-    email: Yup.string()
-      .email('El email no es valido')
-      .required('El email es obligatorio')
-      .matches(
-        /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.(com|co|es|it|net|org|gov|edu|mil|io|xyz|info|biz|mx|ar)$/,
-        'El email no es válido'
-      ),
-    name: Yup.string().required('El nombre es requerido'),
-    lastName: Yup.string().required('El apellido es requerido'),
-    password: Yup.string()
-      .min(8, 'La contraseña es muy corta')
-      .max(20, '20 carateres  maximo')
-      .matches(
-        /^(?=.*[A-Z])(?=.*\d)[a-zA-Z0-9.!@#$&*%_\-=]+$/,
-        'La contraseña debe tener una Mayuscula y al menos  un numero'
-      )
-      .when('isEdit', {
-        is: false,
-        then: schema => schema.required('La contraseña es requerida')
-      }),
-    passwordConfirm: Yup.string()
-      .oneOf([Yup.ref('password')], 'Las contraseñas deben coincidir')
-      .nullable()
-      .when('isEdit', {
-        is: false,
-        then: schema => schema.required('La confirmación de la contraseña es requerida')
-      }),
-    isEdit: Yup.boolean().default(isEdit)
-  })
+const validationSchema = Yup.object({
+  email: Yup.string()
+    .email('El email no es valido')
+    .required('El email es obligatorio')
+    .matches(
+      /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.(com|co|es|it|net|org|gov|edu|mil|io|xyz|info|biz|mx|ar)$/,
+      'El email no es válido'
+    ),
+  name: Yup.string().required('El nombre es requerido'),
+  lastName: Yup.string().required('El apellido es requerido'),
+  password: Yup.string()
+    .min(8, 'La contraseña es muy corta')
+    .max(20, '20 carateres  maximo')
+    .matches(
+      /^(?=.*[A-Z])(?=.*\d)[a-zA-Z0-9.!@#$&*%_\-=]+$/,
+      'La contraseña debe tener una Mayuscula y al menos  un numero'
+    )
+    .when('isEditMode', {
+      is: false,
+      then: schema => schema.required('La contraseña es requerida')
+    }),
+  passwordConfirm: Yup.string()
+    .oneOf([Yup.ref('password')], 'Las contraseñas deben coincidir')
+    .nullable()
+    .when('isEditMode', {
+      is: false,
+      then: schema => schema.required('La confirmación de la contraseña es requerida')
+    }),
+  isEditMode: Yup.boolean()
+})
 
 const RegisterAdmin: React.FC<AdminProps> = props => {
   const [showPass, setShowPass] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
-  const { fetch } = useUser()
+  const {
+    fetch,
+    currentUser: { userName },
+    signOut,
+    updateName
+  } = useUser()
   const onSubmit = async (values: AdminPost) => {
     let valuesToSend: {
       email: string
@@ -79,12 +84,30 @@ const RegisterAdmin: React.FC<AdminProps> = props => {
           }
         }
         await fetch(`http://localhost:3000/admins/update/${values.idAdmin}`, putOptions)
-        if (props.refresh) props.refresh()
-        toast.success('El administrador se editó correctamente', {
-          duration: 4000,
-          position: 'top-center'
-        })
-        props.setIsModalOpen(false)
+        if (props.isItSelf) {
+          if (props.email !== values.email || values.password !== '') {
+            signOut()
+            toast.success('Actualizaste tus datos correctamente, vuelve a iniciar sesión', {
+              duration: 4000,
+              position: 'top-center'
+            })
+          } else {
+            if (values.name !== userName) {
+              updateName(values.name)
+            }
+            toast.success('Actualizaste tus datos correctamente', {
+              duration: 4000,
+              position: 'top-center'
+            })
+          }
+        } else {
+          if (props.refresh) props.refresh()
+          toast.success('El administrador se editó correctamente', {
+            duration: 4000,
+            position: 'top-center'
+          })
+          props.setIsModalOpen(false)
+        }
       } else {
         const postOptions = {
           method: 'POST',
@@ -126,9 +149,10 @@ const RegisterAdmin: React.FC<AdminProps> = props => {
       name: props.name || '',
       lastName: props.lastName || '',
       password: '',
-      passwordConfirm: ''
+      passwordConfirm: '',
+      isEditMode
     },
-    validationSchema: validationSchema(isEditMode),
+    validationSchema,
     onSubmit
   })
 
@@ -137,7 +161,9 @@ const RegisterAdmin: React.FC<AdminProps> = props => {
       <div className="sm:max-h[40%]  rounded-[40px] bg-grey sm:max-w-[70%] md:max-w-[60%] xl:w-full">
         <h2 className="mx-auto w-10/12 py-8 text-2xl font-bold leading-normal text-blueDark">
           {isEditMode
-            ? `Actualización del Administrador ${props.name} ${props.lastName}`
+            ? props.isItSelf
+              ? 'Editar mis datos'
+              : `Actualización del Administrador ${props.name} ${props.lastName}`
             : 'Registro de nuevo Administrador'}
           <span className="text-[12px] text-blueDark sm:text-sm ">
             {' '}
