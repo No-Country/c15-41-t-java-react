@@ -25,7 +25,7 @@ INSERT IGNORE INTO users (id_user, dni, email, name, last_name, phone_number, ad
 INSERT IGNORE INTO users (id_user, dni, email, name, last_name, phone_number, address, is_active) VALUES (7, '77777811', 'jedamogar@gmail.com', 'Jesús', 'Monroy', '7777777781', 'Calle bombonera 901', true);
 INSERT IGNORE INTO users (id_user, dni, email, name, last_name, phone_number, address, is_active) VALUES (8, '88888911', 'pedrobquiros@gmail.com', 'Pedro', 'Quirós', '8888888891', 'Calle del oceano 234', true);
 INSERT IGNORE INTO users (id_user, dni, email, name, last_name, phone_number, address, is_active) VALUES (9, '9999901112', 'crsanchez.n@gmail.com', 'Claudia', 'Sánchez', '9999999901', 'Calle del norte 567', true);
-INSERT IGNORE INTO users (id_user, dni, email, name, last_name, phone_number, address, is_active) VALUES (10, '1010111211', 'perritogarces@gmail.com', 'Milagros', 'Cifre', '1010101111', 'Calle ultima', true);
+INSERT IGNORE INTO users (id_user, dni, email, name, last_name, phone_number, address, is_active) VALUES (10, '1010111211', 'dev@matiasluengo.com', 'Milagros', 'Cifre', '1010101111', 'Calle ultima', true);
 INSERT IGNORE INTO users (id_user, dni, email, name, last_name, phone_number, address, is_active) VALUES (11, '1010184611', 'matiasluengoo95@gmail.com', 'Matias', 'Luengo', '1010165411', 'Calle Central 2', true);
 
 INSERT IGNORE INTO images (id_image, cloudinary_id, imagen_url, name) VALUES (1,"Bibliotech/ruqlsc5r0qdz6qwpc02x", "http://res.cloudinary.com/dnasbdg0i/image/upload/v1702762612/Bibliotech/ruqlsc5r0qdz6qwpc02x.jpg","Bibliotech");
