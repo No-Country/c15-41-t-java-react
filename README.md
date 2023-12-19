@@ -25,7 +25,7 @@ Poder planificar mejoras en el servicio y la adquisición de nuevos materiales.
 <a href="https://docs.google.com/spreadsheets/d/1WwwZNct-rgo3cJoCeri07BVksg9rOFvy/edit?usp=sharing&ouid=102442372613982485496&rtpof=true&sd=true">
   <img src="https://img.shields.io/badge/-Ver%20Casos%20de%20Pruebas-34A853?style=for-the-badge&logo=google-sheets&logoColor=white"/>
 </a>
-<a href="https://www.figma.com/file/iYJbDiH3MF0na4aJMJeYUK/Bibliotech?node-id=114%3A1951&mode=dev">
+<a href="https://www.figma.com/proto/iYJbDiH3MF0na4aJMJeYUK/Bibliotech?type=design&node-id=15-17&t=ob64hBs8tDp6nVrm-1&scaling=scale-down&page-id=1%3A2&starting-point-node-id=15%3A17&show-proto-sidebar=1&mode=design">
   <img src="https://img.shields.io/badge/Figma-F24E1E?style=for-the-badge&logo=figma&logoColor=white"/>
 </a>
 <a href="https://trello.com/w/biblio143">
