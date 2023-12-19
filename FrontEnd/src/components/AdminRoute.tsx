@@ -3,7 +3,6 @@ import Spinner from './Spinner'
 import { AdminPost } from '@/types/types'
 import { useUser } from '@/context/UserContext'
 import AdminCard from './AdminCard'
-import AddNew from '../../public/icons/Add New.png'
 import { IoMdClose } from 'react-icons/io'
 import RegisterAdmin from './RegisterAdmin'
 
@@ -47,7 +46,7 @@ const AdminRoute = () => {
       <div className="mx-auto mb-3 flex w-[85%] items-center gap-3">
         <h2 className="text-Darkblue text-2xl">Administradores</h2>
         <img
-          src={AddNew}
+          src="/icons/Add New.png"
           alt="Add new Admin"
           onClick={() => setIsModalOpen(true)}
           className="increase-scale hover:cursor-pointer"
