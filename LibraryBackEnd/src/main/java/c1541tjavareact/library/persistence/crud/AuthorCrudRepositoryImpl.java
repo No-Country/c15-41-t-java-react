@@ -2,6 +2,7 @@ package c1541tjavareact.library.persistence.crud;
 
 import c1541tjavareact.library.domain.dto.AuthorDto;
 import c1541tjavareact.library.domain.repository.*;
+import c1541tjavareact.library.infra.exception.BibliotechException;
 import c1541tjavareact.library.persistence.entity.Author;
 import c1541tjavareact.library.persistence.mapper.AuthorDaoMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,7 +43,7 @@ public class AuthorCrudRepositoryImpl implements AuthorCrudRepository {
             authorDtoUpdate.setName(authorDto.getName());
             authorDtoUpdate.setLastName(authorDto.getLastName());
             return save(authorDtoUpdate);
-        }).orElse(null);
+        }).orElseThrow(() -> new BibliotechException("No se pudo actualizar el autor"));
     }
 
     @Override
