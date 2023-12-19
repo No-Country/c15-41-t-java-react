@@ -6,6 +6,17 @@ import { Pagination } from '@mui/material'
 import Spinner from './Spinner'
 import SearchLoan from './SearchLoan'
 
+/**
+ * Formats a date string from "YYYY-MM-DD" to "DD-MM-YYYY".
+ *
+ * @param {string} dateStr - The date string to format.
+ * @returns {string} The formatted date string.
+ */
+const formatDate = (dateStr: string): string => {
+  const [year, month, day] = dateStr.split('-')
+  return `${day}-${month}-${year}`
+}
+
 export default function LoanRoute() {
   const { fetch } = useUser()
   const [loans, setUsers] = useState<Loan[] | []>([])
@@ -51,9 +62,17 @@ export default function LoanRoute() {
         <p className="p-10 text-center">Error cargando prestamos</p>
       ) : (
         <div className="grid w-full justify-items-center gap-y-5 py-5 align-middle md:grid-cols-2">
-          {searchResults.map((loan, index) =>
+          {searchResults.map(({ loanDate, returnExpectedDate, ...loan }, index) =>
             index < page * PAGE_SIZE && index >= (page - 1) * PAGE_SIZE ? (
-              <LoanCard key={loan.idLoan} loan={loan} refresh={fetchLoans} />
+              <LoanCard
+                key={loan.idLoan}
+                loan={{
+                  ...loan,
+                  loanDate: formatDate(loanDate),
+                  returnExpectedDate: formatDate(returnExpectedDate)
+                }}
+                refresh={fetchLoans}
+              />
             ) : null
           )}
         </div>
