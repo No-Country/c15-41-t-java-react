@@ -47,6 +47,9 @@ export const EditEditorial: React.FC<EditEditorialProps> = ({
       setIsLoading(true)
       const postOptions = {
         method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
         body: JSON.stringify(values)
       }
       await fetch(

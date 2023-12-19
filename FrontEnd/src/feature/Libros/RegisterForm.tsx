@@ -24,7 +24,7 @@ const initialValues: BookPost = {
   idAuthor: -1,
   idEditorial: -1,
   isbn: '',
-  genre: '',
+  idGenre: -1,
   quantity: 0,
   image: ''
 }
@@ -44,8 +44,9 @@ const validationSchema = Yup.object({
     .min(1, 'El valor debe ser mayor a 0')
     .max(100, 'El máximo que puede ingresar son 100 copias'),
   idAuthor: Yup.number().min(1, 'Seleccione autor').required('El autor es requerido'),
-  genre: Yup.string().required('El genero es requerido'),
-  idEditorial: Yup.number().min(1, 'Seleccione editorial').required('La editorial es requerida')
+  idEditorial: Yup.number().min(1, 'Seleccione editorial').required('La editorial es requerida'),
+  idGenre: Yup.number().min(1, 'Seleccione genero').required('El genero es requerido'),
+  image: Yup.string()
 })
 
 export default function RegisterForm({ onSuccess }: { onSuccess: () => void }) {
@@ -71,6 +72,7 @@ export default function RegisterForm({ onSuccess }: { onSuccess: () => void }) {
   const [isModalOpenDeleteGenre, setIsModalOpenDeleteGenre] = useState(false)
   const [isModalOpenDeleteEditorial, setIsModalOpenDeleteEditorial] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
+  const [imageFile, setImageFile] = useState<File | null>(null)
 
   const [selectedAuthor, setSelectedAuthor] = useState<{
     label: string
@@ -88,7 +90,7 @@ export default function RegisterForm({ onSuccess }: { onSuccess: () => void }) {
 
   useEffect(() => {
     const getAuthors = async () => {
-      const data = await fetch(' http://localhost:3000/authors')
+      const data = await fetch(' http://localhost:3000/authors/all')
       setAuthors(data)
     }
     getAuthors().catch(error => {
@@ -98,7 +100,7 @@ export default function RegisterForm({ onSuccess }: { onSuccess: () => void }) {
 
   useEffect(() => {
     const getEditorials = async () => {
-      const data = await fetch('http://localhost:3000/editorials')
+      const data = await fetch('http://localhost:3000/editorials/all')
       setEditorials(data)
     }
     getEditorials().catch(error => {
@@ -108,7 +110,7 @@ export default function RegisterForm({ onSuccess }: { onSuccess: () => void }) {
 
   useEffect(() => {
     const getGenres = async () => {
-      const data = await fetch(' http://localhost:3000/genres')
+      const data = await fetch(' http://localhost:3000/books/genres/all')
       setMockGenres(data)
     }
     getGenres().catch(error => {
@@ -145,21 +147,36 @@ export default function RegisterForm({ onSuccess }: { onSuccess: () => void }) {
     onSubmit
   })
 
+  const handleImageChange: React.ChangeEventHandler<HTMLInputElement> = event => {
+    if (!event.target.files || !event.target.files[0]) return
+    setImageFile(event.target.files[0])
+    handleChange(event)
+  }
+
   async function onSubmit(values: FormikValues) {
     try {
       setIsLoading(true)
+
+      const formData = new FormData()
+      formData.append('title', values.title)
+      formData.append('isbn', values.isbn)
+      formData.append('quantity', values.quantity)
+      formData.append('idAuthor', values.idAuthor)
+      formData.append('idEditorial', values.idEditorial)
+      formData.append('idGenre', values.idGenre)
+      formData.append('image', imageFile ? imageFile : new Blob())
+
       const postOptions = {
         method: 'POST',
-        body: JSON.stringify({
-          ...values,
-          genre: values.genre.toUpperCase()
-        })
+        body: formData
       }
+
       await fetch('http://localhost:3000/books/save', postOptions)
       resetForm()
       toast.success('Su libro se agregó correctamente', { duration: 4000, position: 'top-center' })
       onSuccess()
     } catch (error) {
+      console.log('error', error)
       toast.error('Error al agregar el libro', { duration: 4000, position: 'top-center' })
     } finally {
       setIsLoading(false)
@@ -273,10 +290,10 @@ export default function RegisterForm({ onSuccess }: { onSuccess: () => void }) {
               <ReactSelect
                 label="Género"
                 placeHolder="Selecciona un genero"
-                selectName="genre"
+                selectName="idGenre"
                 options={genresOptions}
                 setFieldValue={setFieldValue}
-                errors={errors.genre}
+                errors={errors.idGenre}
                 setSelectedOption={setSelectedGenre}
               />
               <div
@@ -360,7 +377,7 @@ export default function RegisterForm({ onSuccess }: { onSuccess: () => void }) {
                 type="file"
                 name="image"
                 value={values.image}
-                onChange={handleChange}
+                onChange={handleImageChange}
                 accept=".jpg, .jpeg, .png"
               />
               <small className="errorContainer">{errors?.image}</small>

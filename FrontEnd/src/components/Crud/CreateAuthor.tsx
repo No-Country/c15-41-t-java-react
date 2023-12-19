@@ -51,6 +51,9 @@ export const CreateAuthor: React.FC<CreateAuthorProps> = ({ setCloseModal, setRe
       setIsLoading(true)
       const postOptions = {
         method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
         body: JSON.stringify({
           ...values
         })

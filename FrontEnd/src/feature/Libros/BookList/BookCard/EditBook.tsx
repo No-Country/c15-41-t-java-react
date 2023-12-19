@@ -28,8 +28,9 @@ const validationSchema = Yup.object({
     .min(1, 'El valor debe ser mayor a 0')
     .max(100, 'El máximo que puede ingresar son 100 copias'),
   idAuthor: Yup.number().min(1, 'Seleccione autor').required('El autor es requerido'),
-  genre: Yup.string().required('El genero es requerido'),
-  idEditorial: Yup.number().min(1, 'Seleccione editorial').required('La editorial es requerida')
+  idGenre: Yup.number().min(1, 'Seleccione genero').required('El genero es requerido'),
+  idEditorial: Yup.number().min(1, 'Seleccione editorial').required('La editorial es requerida'),
+  image: Yup.string()
 })
 
 const EditBook: React.FC<BookProps> = props => {
@@ -38,6 +39,7 @@ const EditBook: React.FC<BookProps> = props => {
   const [genres, setGenres] = useState<Genre[]>([])
   const [isLoading, setIsLoading] = useState(false)
   const { fetch } = useUser()
+  const [imageFile, setImageFile] = useState<File | null>(null)
 
   useEffect(() => {
     const getAuthors = async () => {
@@ -61,7 +63,7 @@ const EditBook: React.FC<BookProps> = props => {
 
   useEffect(() => {
     const getGenres = async () => {
-      const data = await fetch('http://localhost:3000/genres')
+      const data = await fetch('http://localhost:3000/books/genres/all')
       setGenres(data)
     }
     getGenres().catch(error => {
@@ -69,26 +71,42 @@ const EditBook: React.FC<BookProps> = props => {
     })
   }, [])
 
-  const { values, errors, handleChange, handleSubmit, setFieldValue } = useFormik({
+  const { values, errors, handleChange, handleSubmit } = useFormik({
     initialValues: {
       title: props.title,
       quantity: props.quantity,
       idAuthor: props.idAuthor,
       isbn: props.isbn,
-      genre: props.genre,
+      idGenre: props.idGenre,
       idEditorial: props.idEditorial,
-      image: props.image
+      image: props.image ?? ''
     },
     validationSchema,
     onSubmit
   })
 
+  const handleImageChange: React.ChangeEventHandler<HTMLInputElement> = event => {
+    if (!event.target.files || !event.target.files[0]) return
+    setImageFile(event.target.files[0])
+    handleChange(event)
+  }
+
   async function onSubmit(values: FormikValues) {
     try {
       setIsLoading(true)
+
+      const formData = new FormData()
+      formData.append('title', values.title)
+      formData.append('isbn', values.isbn)
+      formData.append('quantity', values.quantity)
+      formData.append('idAuthor', values.idAuthor)
+      formData.append('idEditorial', values.idEditorial)
+      formData.append('idGenre', values.idGenre)
+      formData.append('image', imageFile ? imageFile : new Blob())
+
       const postOptions = {
         method: 'PUT',
-        body: JSON.stringify(values)
+        body: formData
       }
       await fetch(`http://localhost:3000/books/update/${props.id}`, postOptions)
       props.setIsModalOpen(false)
@@ -183,11 +201,11 @@ const EditBook: React.FC<BookProps> = props => {
           <div className="ReactSelectContainer">
             <select
               className="ReactSelect"
-              name="genre"
-              value={values.genre}
+              name="idGenre"
+              value={values.idGenre}
               onChange={handleChange}
             >
-              <option value="" disabled>
+              <option value="-1" disabled>
                 Selecciona un genero
               </option>
               {genres.map(genre => (
@@ -196,7 +214,7 @@ const EditBook: React.FC<BookProps> = props => {
                 </option>
               ))}
             </select>
-            <small className="text-xs font-bold text-red-500">{errors?.genre}</small>
+            <small className="text-xs font-bold text-red-500">{errors?.idGenre}</small>
           </div>
           <label className="formLabel" htmlFor="idEditorial">
             Editorial <span className="text-red-500">*</span>
@@ -208,7 +226,7 @@ const EditBook: React.FC<BookProps> = props => {
               value={values.idEditorial}
               onChange={handleChange}
             >
-              <option value="" disabled>
+              <option value="-1" disabled>
                 Selecciona una editorial
               </option>
               {editorials.map(editorial => (
@@ -227,12 +245,9 @@ const EditBook: React.FC<BookProps> = props => {
               className="ReactSelect"
               type="file"
               name="image"
-              onChange={event => {
-                const file = event.currentTarget.files?.[0]
-                if (file) {
-                  setFieldValue('image', file)
-                }
-              }}
+              accept=".jpg, .jpeg, .png"
+              value={values.image}
+              onChange={handleImageChange}
             />
             {/* Muestra la imagen actual */}
             {props.image && <img src={props.image} alt="Imagen actual" className="h-24 w-24" />}

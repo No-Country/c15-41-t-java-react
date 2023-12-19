@@ -64,8 +64,9 @@ const DeleteModal: React.FC<Props> = ({
               Eliminar {name}
             </h2>
             <p className="text-lg">
-              ¿Estás seguro de que quieres eliminar este {spanishDeleteEntity}: <span className=" text-blueDark font-extrabold">{name}</span> ? 
-              Una vez eliminado, no podrás recuperarlo. Por favor, confirma tu elección.
+              ¿Estás seguro de que quieres eliminar este {spanishDeleteEntity}:{' '}
+              <span className=" font-extrabold text-blueDark">{name}</span> ? Una vez eliminado, no
+              podrás recuperarlo. Por favor, confirma tu elección.
             </p>
           </div>
           <div className="flex items-center justify-around gap-4">

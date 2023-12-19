@@ -45,6 +45,9 @@ export const CreateGenre: React.FC<CreateGenreProps> = ({ setCloseModal, setRefr
       setIsLoading(true)
       const postOptions = {
         method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
         body: JSON.stringify({
           ...values
         })

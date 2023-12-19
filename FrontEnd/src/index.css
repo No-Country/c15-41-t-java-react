@@ -69,13 +69,13 @@
 .CrudCreateAndEditPositioner {
   @apply mx-auto mt-4 h-fit w-11/12 rounded-[40px] bg-grey min-[390px]:mt-20  sm:max-w-[60%];
 }
-.formLabel{
+.formLabel {
   @apply text-base font-bold leading-[normal] text-blueLight;
 }
-.ReactSelectContainer{
+.ReactSelectContainer {
   @apply mb-14 flex h-8 w-full flex-col gap-y-2;
 }
-.ReactSelect{
+.ReactSelect {
   @apply w-full border-0 border-b-2 border-solid border-blueDark bg-grey text-base font-[400] leading-[normal] text-[#263238] placeholder-[#ABABAB] focus:outline-none;
 }
 .errorContainer {

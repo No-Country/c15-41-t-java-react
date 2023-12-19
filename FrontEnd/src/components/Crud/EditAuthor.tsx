@@ -50,6 +50,9 @@ export const EditAuthor: React.FC<EditAuthorProps> = ({
       setIsLoading(true)
       const postOptions = {
         method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
         body: JSON.stringify(values)
       }
       await fetch(
