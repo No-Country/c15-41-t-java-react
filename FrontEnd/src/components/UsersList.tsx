@@ -52,10 +52,9 @@ export default function UsersList() {
           <table className="min-w-full  table-auto border-collapse rounded border-[1px] border-solid border-slate-800 max-lg:hidden">
             <thead className="p-10">
               <tr>
-                <th>ID</th>
+                <th>DNI</th>
                 <th>Nombre</th>
                 <th>Apellido</th>
-                <th>Celular</th>
                 <th>Direccion</th>
                 <th>E-mail</th>
                 <th></th>
