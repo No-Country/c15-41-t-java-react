@@ -5,6 +5,7 @@ import toast from 'react-hot-toast'
 import { IoMdClose } from 'react-icons/io'
 import overflowYdisable from '../../utils/overflowYdisable'
 import { useState } from 'react'
+import { useUser } from '@/context/UserContext'
 
 interface CreateEditorialProps {
   setCloseModal: Function
@@ -26,6 +27,7 @@ export const CreateEditorial: React.FC<CreateEditorialProps> = ({
   setCloseModal,
   setRefreshEntitys
 }) => {
+  const { fetch } = useUser()
   const [isLoading, setIsLoading] = useState(false)
   const closeModal = () => {
     setCloseModal(false)
@@ -51,11 +53,9 @@ export const CreateEditorial: React.FC<CreateEditorialProps> = ({
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({
-          ...values
-        })
+        body: JSON.stringify(values)
       }
-      await fetch('http://localhost:8080/bibliotech/api/editorials/save', postOptions)
+      await fetch('http://localhost:3000/editorials/save', postOptions)
       resetForm()
       toast.success('La editorial se agregó correctamente', {
         duration: 4000,

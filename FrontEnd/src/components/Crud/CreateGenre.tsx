@@ -5,6 +5,7 @@ import toast from 'react-hot-toast'
 import { IoMdClose } from 'react-icons/io'
 import overflowYdisable from '../../utils/overflowYdisable'
 import { useState } from 'react'
+import { useUser } from '@/context/UserContext'
 
 interface CreateGenreProps {
   setCloseModal: Function
@@ -23,6 +24,7 @@ const validationSchema = Yup.object({
 })
 
 export const CreateGenre: React.FC<CreateGenreProps> = ({ setCloseModal, setRefreshEntitys }) => {
+  const { fetch } = useUser()
   const [isLoading, setIsLoading] = useState(false)
   const closeModal = () => {
     setCloseModal(false)
@@ -48,11 +50,9 @@ export const CreateGenre: React.FC<CreateGenreProps> = ({ setCloseModal, setRefr
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({
-          ...values
-        })
+        body: JSON.stringify(values)
       }
-      await fetch('http://localhost:8080/bibliotech/api/books/genres/save', postOptions)
+      await fetch('http://localhost:3000/books/genres/save', postOptions)
       resetForm()
       toast.success('El género se agregó correctamente', { duration: 4000, position: 'top-center' })
       refreshEntitys()

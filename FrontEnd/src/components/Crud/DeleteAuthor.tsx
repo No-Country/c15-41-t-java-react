@@ -11,7 +11,7 @@ interface Props {
 const DeleteAuthor: React.FC<Props> = ({ setIsModalDeleteOpen, refresh, deleteEntity }: Props) => {
   const { fetch } = useUser()
   const handleDelete = () => {
-    fetch(`http://localhost:8080/bibliotech/api/authors/delete/${deleteEntity.value}`, {
+    fetch(`http://localhost:3000/authors/delete/${deleteEntity.value}`, {
       method: 'DELETE'
     })
       .then(() => {
@@ -22,13 +22,13 @@ const DeleteAuthor: React.FC<Props> = ({ setIsModalDeleteOpen, refresh, deleteEn
           icon: '♻'
         })
       })
-      .catch(error => {
+      .catch(_ => {
         toast.error(`Hubo un error eliminando su Autor`, {
           duration: 3000,
           position: 'top-center',
           icon: '♻'
         })
-        console.error(error)
+        // console.error(error)
       })
     setIsModalDeleteOpen(false)
   }
