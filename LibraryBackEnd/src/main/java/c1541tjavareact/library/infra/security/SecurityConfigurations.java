@@ -37,7 +37,7 @@ public class SecurityConfigurations {
         return httpSecurity.csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(session -> {
             session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                    .maximumSessions(1);
+                    .maximumSessions(3);
             session.sessionFixation(SessionManagementConfigurer
                                         .SessionFixationConfigurer::migrateSession);
             })
