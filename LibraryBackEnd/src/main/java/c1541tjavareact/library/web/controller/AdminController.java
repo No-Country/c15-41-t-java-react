@@ -40,7 +40,7 @@ public class AdminController {
     @PutMapping("/update/{id}")
     public ResponseEntity<AdminDto> update(@PathVariable Long id,
                                            @RequestBody AdminDto adminDto){
-        return ResponseEntity.ok(adminService.update(id,adminDto));
+        return  ResponseEntity.ok(adminService.update(id,adminDto));
     }
 
     @DeleteMapping("/delete/{id}")
