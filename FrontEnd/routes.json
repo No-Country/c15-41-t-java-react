@@ -2,7 +2,8 @@
   "/books/all": "/books",
   "/authors/all": "/authors",
   "/editorials/all": "/editorials",
-  "/books/genres": "/genres",
+  "/books/genres/all": "/genres",
   "/users/all": "/users",
-  "/loans/all": "/loans"
+  "/loans/all": "/loans",
+  "/admins/all": "/admins"
 }
