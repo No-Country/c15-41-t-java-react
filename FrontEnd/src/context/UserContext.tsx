@@ -15,6 +15,7 @@ interface IUserContext {
   setupComplete: boolean
   signInWaiting: boolean
   fetch: (url: string, options?: RequestInit) => Promise<any>
+  updateName: (name: string) => void
 }
 
 const initialUserState: UserState = {
@@ -171,13 +172,10 @@ export const UserProvider: FC<{
     })
 
     if (!response.ok) {
-      try {
-        const error = await response.json()
-        throw new Error(error)
-      } catch (error) {
-        // console.log('error', error)
-        throw new Error('Request error')
-      }
+      const error = await response.json()
+      if (error.message !== undefined && typeof error.message === 'string' && error.message !== '')
+        throw new Error(error.message)
+      else throw new Error('Request error')
     }
 
     // TODO Temporalmente, mientras no se implemente el backend(en DELETE)
@@ -190,9 +188,31 @@ export const UserProvider: FC<{
     }
   }
 
+  const updateName = (name: string) => {
+    setCurrentUser({
+      ...currentUser,
+      userName: name
+    })
+    localStorage.setItem(
+      LOCAL_STORAGE_KEY,
+      JSON.stringify({
+        ...currentUser,
+        userName: name
+      })
+    )
+  }
+
   return (
     <UserContext.Provider
-      value={{ signIn, currentUser, signOut, setupComplete, signInWaiting, fetch: fetchHOF }}
+      value={{
+        signIn,
+        currentUser,
+        signOut,
+        setupComplete,
+        signInWaiting,
+        fetch: fetchHOF,
+        updateName
+      }}
     >
       {children}
     </UserContext.Provider>
