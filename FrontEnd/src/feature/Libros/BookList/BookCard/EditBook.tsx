@@ -106,51 +106,47 @@ const EditBook: React.FC<BookProps> = props => {
   overflowYdisable()
   return (
     <div className="bg-white px-2 py-16 max-lg:pb-60">
-      <div className="mx-auto w-full rounded-[40px] bg-grey  sm:max-w-[70%]">
+      <div className="mx-auto w-11/12 max-w-[650px]  rounded-[40px] bg-grey">
         <h2 className="mx-auto w-10/12 py-8 text-2xl font-bold leading-normal text-blueDark">
           Edicion del libro: {props.title}
           <br />
           <span className="text-sm"> (Los campos con * son obligatorios) </span>
         </h2>
         <form className="mx-auto w-10/12 " onSubmit={handleSubmit}>
-          <label className="text-base font-bold leading-[normal] text-blueLight " htmlFor="title">
+          <label className="formLabel" htmlFor="title">
             Titulo <span className="text-red-500">*</span>
           </label>
-          <div className="relative mb-14 flex h-8 w-full items-center gap-2 border-0 border-b-2 border-solid border-blueDark">
+          <div className="ReactSelectContainer">
             <input
-              className="w-full border-0 bg-grey text-base font-[400] leading-[normal] text-[#263238] placeholder-[#ABABAB] focus:outline-none"
+              className="ReactSelect"
               name="title"
               type="text"
               placeholder="Ingresá el titulo"
               value={values.title}
               onChange={handleChange}
             />
-            <small className="absolute -bottom-6 text-xs font-bold text-red-500">
-              {errors?.title}
-            </small>
+            <small className="text-xs font-bold text-red-500">{errors?.title}</small>
           </div>
-          <label className="text-base font-bold leading-[normal] text-blueLight " htmlFor="isbn">
+          <label className="formLabel " htmlFor="isbn">
             ISBN <span className="text-red-500">*</span>
           </label>
-          <div className="relative mb-14 flex h-8 w-full items-center gap-2 border-0 border-b-2 border-solid border-blueDark">
+          <div className="ReactSelectContainer">
             <input
-              className="w-full border-0 bg-grey text-base font-[400] leading-[normal] text-[#263238] placeholder-[#ABABAB] focus:outline-none"
+              className="ReactSelect"
               name="isbn"
               type="text"
               placeholder="Ingresá el isbn"
               value={values.isbn}
               onChange={handleChange}
             />
-            <small className="absolute -bottom-6 text-xs font-bold text-red-500">
-              {errors?.isbn}
-            </small>
+            <small className="text-xs font-bold text-red-500">{errors?.isbn}</small>
           </div>
-          <label className="text-base font-bold leading-[normal] text-blueLight" htmlFor="quantity">
+          <label className="formLabel" htmlFor="quantity">
             Cantidad <span className="text-red-500">*</span>
           </label>
-          <div className="relative mb-14 flex h-8 w-full items-center gap-2 border-0 border-b-2 border-solid border-blueDark">
+          <div className="ReactSelectContainer">
             <input
-              className="w-full  border-0 bg-grey text-base font-[400] leading-[normal] text-[#263238] placeholder-[#ABABAB] focus:outline-none"
+              className="ReactSelect"
               name="quantity"
               type="number"
               placeholder="Ingresá la cantidad"
@@ -158,16 +154,14 @@ const EditBook: React.FC<BookProps> = props => {
               onChange={handleChange}
               onKeyDown={blockNonNumericInput}
             />
-            <small className="absolute -bottom-6 text-xs font-bold text-red-500">
-              {errors?.quantity}
-            </small>
+            <small className="text-xs font-bold text-red-500">{errors?.quantity}</small>
           </div>
-          <label className="text-base font-bold leading-[normal] text-blueLight" htmlFor="idAuthor">
+          <label className="formLabel" htmlFor="idAuthor">
             Autor <span className="text-red-500">*</span>
           </label>
-          <div className="relative mb-14 flex h-8 w-full items-center gap-2 border-0 border-b-2 border-solid border-blueDark">
+          <div className="ReactSelectContainer">
             <select
-              className="w-full border-0 bg-grey text-base font-[400] leading-[normal] text-blueDark placeholder-[#ABABAB] focus:outline-none"
+              className="ReactSelect"
               name="idAuthor"
               value={values.idAuthor}
               onChange={handleChange}
@@ -181,16 +175,14 @@ const EditBook: React.FC<BookProps> = props => {
                 </option>
               ))}
             </select>
-            <small className="absolute -bottom-6 text-xs font-bold text-red-500">
-              {errors?.idAuthor}
-            </small>
+            <small className="text-xs font-bold text-red-500">{errors?.idAuthor}</small>
           </div>
-          <label className="text-base font-bold leading-[normal] text-blueLight" htmlFor="genre">
+          <label className="formLabel" htmlFor="genre">
             Género <span className="text-red-500">*</span>
           </label>
-          <div className="relative mb-14 flex h-8 w-full items-center gap-2 border-0 border-b-2 border-solid border-blueDark">
+          <div className="ReactSelectContainer">
             <select
-              className="w-full border-0 bg-grey text-base font-[400] leading-[normal] text-blueDark placeholder-[#ABABAB] focus:outline-none"
+              className="ReactSelect"
               name="genre"
               value={values.genre}
               onChange={handleChange}
@@ -204,19 +196,14 @@ const EditBook: React.FC<BookProps> = props => {
                 </option>
               ))}
             </select>
-            <small className="absolute -bottom-6 text-xs font-bold text-red-500">
-              {errors?.genre}
-            </small>
+            <small className="text-xs font-bold text-red-500">{errors?.genre}</small>
           </div>
-          <label
-            className="text-base font-bold leading-[normal] text-blueLight"
-            htmlFor="idEditorial"
-          >
+          <label className="formLabel" htmlFor="idEditorial">
             Editorial <span className="text-red-500">*</span>
           </label>
-          <div className="relative mb-14 flex h-8 w-full items-center gap-2 border-0 border-b-2 border-solid border-blueDark">
+          <div className="ReactSelectContainer">
             <select
-              className="w-full border-0 bg-grey text-base font-[400] leading-[normal] text-blueDark placeholder-[#ABABAB] focus:outline-none"
+              className="ReactSelect"
               name="idEditorial"
               value={values.idEditorial}
               onChange={handleChange}
@@ -230,16 +217,14 @@ const EditBook: React.FC<BookProps> = props => {
                 </option>
               ))}
             </select>
-            <small className="absolute -bottom-6 text-xs font-bold text-red-500">
-              {errors?.idEditorial}
-            </small>
+            <small className="text-xs font-bold text-red-500">{errors?.idEditorial}</small>
           </div>
-          <label className="text-base font-bold leading-[normal] text-blueLight" htmlFor="image">
+          <label className="formLabel" htmlFor="image">
             Agrega una imagen
           </label>
-          <div className="relative mb-14 flex h-8 w-full items-center gap-2 border-0 border-b-2 border-solid border-blueDark">
+          <div className="mb-20 flex h-8 w-full flex-row gap-y-2">
             <input
-              className="w-full border-0 bg-grey text-base font-[400] leading-[normal] text-blueDark placeholder-[#ABABAB] focus:outline-none"
+              className="ReactSelect"
               type="file"
               name="image"
               onChange={event => {
