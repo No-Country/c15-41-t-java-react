@@ -3,8 +3,10 @@ package c1541tjavareact.library.persistence.crud;
 import c1541tjavareact.library.domain.dto.AdminDto;
 import c1541tjavareact.library.domain.repository.AdminCrudRepository;
 import c1541tjavareact.library.domain.repository.AdminRepository;
+import c1541tjavareact.library.infra.exception.BibliotechException;
 import c1541tjavareact.library.persistence.entity.Admin;
 import c1541tjavareact.library.persistence.mapper.AdminDaoMapper;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Repository;
@@ -52,10 +54,12 @@ public class AdminCrudRepositoryImpl implements AdminCrudRepository {
         return getAdminDto(idAdmin).map(adminDtoUpdate -> {
             adminDtoUpdate.setName(adminDto.getName());
             adminDtoUpdate.setLastName(adminDto.getLastName());
-            adminDtoUpdate.setPassword(adminDto.getPassword());
+            if(StringUtils.isNotEmpty(adminDto.getPassword())) {
+                adminDtoUpdate.setPassword(adminDto.getPassword());
+            }
             adminDtoUpdate.setEmail(adminDto.getEmail());
             return save(adminDtoUpdate);
-            }).orElse(null);
+            }).orElseThrow(() -> new BibliotechException("No se pudo actualizar el admin"));
     }
 
 }

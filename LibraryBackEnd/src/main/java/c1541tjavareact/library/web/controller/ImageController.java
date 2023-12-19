@@ -9,6 +9,7 @@ import javax.imageio.ImageIO;
 import c1541tjavareact.library.domain.service.CloudinaryService;
 import c1541tjavareact.library.domain.service.ImageService;
 import c1541tjavareact.library.persistence.entity.Image;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +24,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequestMapping("/images")
+@SecurityRequirement(name = "bearer-key")
 public class ImageController {
 
     @Autowired

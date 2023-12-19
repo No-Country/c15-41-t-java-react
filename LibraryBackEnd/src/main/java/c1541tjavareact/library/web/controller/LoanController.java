@@ -3,6 +3,7 @@ package c1541tjavareact.library.web.controller;
 import c1541tjavareact.library.domain.dto.LoanDto;
 import c1541tjavareact.library.domain.service.LoanService;
 import c1541tjavareact.library.persistence.entity.Loan;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,6 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/loans")
+@SecurityRequirement(name = "bearer-key")
 public class LoanController {
     @Autowired
     private LoanService loanService;

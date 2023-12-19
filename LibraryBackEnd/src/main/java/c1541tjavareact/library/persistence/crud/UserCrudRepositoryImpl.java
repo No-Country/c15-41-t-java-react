@@ -4,6 +4,7 @@ package c1541tjavareact.library.persistence.crud;
 import c1541tjavareact.library.domain.dto.UserDto;
 import c1541tjavareact.library.domain.repository.UserCrudRepository;
 import c1541tjavareact.library.domain.repository.UserRepository;
+import c1541tjavareact.library.infra.exception.BibliotechException;
 import c1541tjavareact.library.persistence.entity.User;
 import c1541tjavareact.library.persistence.mapper.UserDaoMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,37 +25,6 @@ public class UserCrudRepositoryImpl implements UserCrudRepository {
         this.userDaoMapper = userDaoMapper;
     }
 
-//    public Optional findByID(Long userId) {
-//
-//        Optional<User> answer = userRepository.findById(userId);
-//
-//        return answer;
-//
-//    }
-
-//    public User findByDni(String dni) {
-//        return userRepository.findByDni(dni);
-//    }
-//
-//    public List<User> findByName(String searchParam) {
-//        return userRepository.findByName(searchParam);
-//    }
-//
-//    public List<User> findByLastname(String searchParam) {
-//        return userRepository.findByLastName(searchParam);
-//    }
-//
-//    public User findByPhoneNumber(String searchParam) {
-//        return userRepository.findByPhoneNumber(searchParam);
-//    }
-//
-//    public User findByEmail(String searchParam) {
-//        return userRepository.findByEmail(searchParam);
-//    }
-//
-//    public User findByAddress(String searchParam) {
-//        return userRepository.findByAddress(searchParam);
-//    }
 
     @Override
     public List<UserDto> getAll() {
@@ -85,7 +55,7 @@ public class UserCrudRepositoryImpl implements UserCrudRepository {
             userDtoUpdate.setPhoneNumber(userDto.getPhoneNumber());
             userDtoUpdate.setAddress(userDto.getAddress());
             return save(userDtoUpdate);
-        }).orElse(null);
+        }).orElseThrow(() -> new BibliotechException("No se pudo actualizar el usuario"));
     }
 
 
