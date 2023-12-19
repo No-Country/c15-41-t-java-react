@@ -26,7 +26,7 @@ const AdminRoute = () => {
     try {
       setIsLoading(true)
       setIsError(false)
-      const admin = await fetch('http://localhost:3000/admins')
+      const admin = await fetch('http://localhost:3000/admins/all')
       setAdmins(admin)
     } catch (error) {
       console.error(error)

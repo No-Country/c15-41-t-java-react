@@ -5,6 +5,7 @@ import toast from 'react-hot-toast'
 import { IoMdClose } from 'react-icons/io'
 import overflowYdisable from '../../utils/overflowYdisable'
 import { useState } from 'react'
+import { useUser } from '@/context/UserContext'
 
 interface GenrePut {
   name: string
@@ -26,6 +27,7 @@ export const EditGenre: React.FC<EditGenreProps> = ({
   setRefreshEntitys,
   selectedGenre
 }) => {
+  const { fetch } = useUser()
   const [isLoading, setIsLoading] = useState(false)
   const closeModal = () => {
     setCloseModal(false)
@@ -52,10 +54,7 @@ export const EditGenre: React.FC<EditGenreProps> = ({
         },
         body: JSON.stringify(values)
       }
-      await fetch(
-        `http://localhost:8080/bibliotech/api/books/genres/update/${selectedGenre.value}`,
-        postOptions
-      )
+      await fetch(`http://localhost:3000/books/genres/update/${selectedGenre.value}`, postOptions)
       resetForm()
       toast.success('Su género se editó correctamente', { duration: 4000, position: 'top-center' })
       refreshEntitys()

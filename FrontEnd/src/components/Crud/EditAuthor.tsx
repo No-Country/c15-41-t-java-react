@@ -6,6 +6,7 @@ import { IoMdClose } from 'react-icons/io'
 import { AuthorPost } from '../../types/types'
 import overflowYdisable from '../../utils/overflowYdisable'
 import { useState } from 'react'
+import { useUser } from '@/context/UserContext'
 
 interface EditAuthorProps {
   setCloseModal: Function
@@ -28,6 +29,7 @@ export const EditAuthor: React.FC<EditAuthorProps> = ({
   setRefreshEntitys,
   selectedAuthor
 }) => {
+  const { fetch } = useUser()
   const [isLoading, setIsLoading] = useState(false)
   const closeModal = () => {
     setCloseModal(false)
@@ -55,10 +57,7 @@ export const EditAuthor: React.FC<EditAuthorProps> = ({
         },
         body: JSON.stringify(values)
       }
-      await fetch(
-        `http://localhost:8080/bibliotech/api/authors/update/${selectedAuthor.value}`,
-        postOptions
-      )
+      await fetch(`http://localhost:3000/authors/update/${selectedAuthor.value}`, postOptions)
       resetForm()
       toast.success('Su autor se editó correctamente', { duration: 4000, position: 'top-center' })
       refreshEntitys()
