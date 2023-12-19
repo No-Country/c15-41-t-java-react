@@ -54,19 +54,19 @@ export default function LoanCard({ loan, refresh }: LoanCardProps) {
         <p>
           <span className="font-bold text-black">Devolución: </span> {loan.returnExpectedDate}
         </p>
-        <div className="flex max-[525px]:flex-col md:flex-col">
+        <div className="mt-3 flex max-[525px]:flex-col md:flex-col">
           <button
             onClick={() => setIsModalOpen(true)}
-            className="my-3 flex h-[53px] w-5/6 items-center justify-center gap-x-2 rounded-[32px] border-none bg-blueDark p-5 py-5 text-[17px] font-bold leading-normal text-white shadow-btn hover:cursor-pointer disabled:cursor-not-allowed disabled:opacity-50 max-md:mx-2"
+            className="my-3 flex h-[53px] w-5/6 items-center justify-center gap-x-2 rounded-[32px] border-none bg-blueDark p-5 py-5 text-[17px] font-bold leading-normal text-white shadow-btn hover:cursor-pointer disabled:cursor-not-allowed disabled:opacity-50 max-md:mx-2 max-md:text-sm"
           >
-            <img className="h-10 p-1 text-center" src="/icons/Return.png"></img>
+            <img className="h-10 p-1 text-center max-md:h-9" src="/icons/Return.png"></img>
             <p className="p-1">Devolver libro</p>
           </button>
           <button
             onClick={() => handleNotificacion(loan.idLoan)}
-            className="my-3 flex h-[53px] w-5/6 items-center justify-center gap-x-2 rounded-[32px] border-none bg-blueDark p-5 py-5 text-[17px] font-bold leading-normal text-white shadow-btn hover:cursor-pointer disabled:cursor-not-allowed disabled:opacity-50 max-md:mx-2"
+            className="my-3 flex h-[53px] w-5/6 items-center justify-center gap-x-2 rounded-[32px] border-none bg-blueDark p-5 py-5 text-[17px] font-bold leading-normal text-white shadow-btn hover:cursor-pointer disabled:cursor-not-allowed disabled:opacity-50 max-md:mx-2 max-md:text-sm"
           >
-            <img className="h-10 p-1 text-center" src="/icons/Notification.png"></img>
+            <img className="h-10 p-1 text-center max-md:h-9" src="/icons/Notification.png"></img>
             <p className="p-1">Recordar devolución</p>
           </button>
         </div>
