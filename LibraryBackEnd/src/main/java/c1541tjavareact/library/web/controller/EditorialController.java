@@ -3,6 +3,7 @@ package c1541tjavareact.library.web.controller;
 
 import c1541tjavareact.library.domain.dto.EditorialDto;
 import c1541tjavareact.library.domain.service.EditorialService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/editorials")
+@SecurityRequirement(name = "bearer-key")
 public class EditorialController {
 
     @Autowired

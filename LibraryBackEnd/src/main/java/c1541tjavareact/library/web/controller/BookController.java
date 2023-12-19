@@ -5,6 +5,7 @@ import c1541tjavareact.library.domain.service.BookService;
 import c1541tjavareact.library.domain.service.CloudinaryService;
 import c1541tjavareact.library.domain.service.ImageService;
 import c1541tjavareact.library.persistence.entity.Image;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,6 +21,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/books")
+@SecurityRequirement(name = "bearer-key")
 public class BookController {
     @Autowired
     private BookService bookService;
