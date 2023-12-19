@@ -54,7 +54,7 @@ const SearchUser: React.FC<SearchUserProps> = ({ allUsers, onSearchResults, setP
           className="absolute right-0 top-14 z-10 hidden w-[60vw] rounded-md bg-[#0A7ABF] p-4 text-white shadow-xl group-hover:block min-[750px]:w-[35vw]"
         >
           <p>
-            Puede buscar por <b>Nombre y/o Apellido o Id</b>
+            Puede buscar por <b>Nombre y/o Apellido o DNI</b>
             <br />
             <br />
             Puede escribir las palabras de su búsqueda en

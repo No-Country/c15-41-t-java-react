@@ -15,7 +15,7 @@ interface UserCardProps {
 export default function UserCard({ user, refresh }: UserCardProps) {
   const [isModalDeleteOpen, setIsModalDeleteOpen] = useState(false)
   const [isModalLoansOpen, setIsModalLoansOpen] = useState(false)
-  const [isModaEditlOpen, setIsModaEditOpen] = useState(false)	
+  const [isModaEditlOpen, setIsModaEditOpen] = useState(false)
 
   return (
     <div className="flex-col p-3">
@@ -25,20 +25,18 @@ export default function UserCard({ user, refresh }: UserCardProps) {
           onClick={() => {
             setIsModalLoansOpen(true)
           }}
-          className="px-0.5 hover:cursor-pointer increase-scale"
+          className="increase-scale px-0.5 hover:cursor-pointer"
         >
           <IoEyeOutline size={20} />
         </div>
-        <div className="px-0.5 hover:cursor-pointer increase-scale">
-          <IoPencil 
-          size={20}
-          onClick={() => setIsModaEditOpen(true)} />
+        <div className="increase-scale px-0.5 hover:cursor-pointer">
+          <IoPencil size={20} onClick={() => setIsModaEditOpen(true)} />
         </div>
         <div
           onClick={() => {
             setIsModalDeleteOpen(true)
           }}
-          className="px-0.5 hover:cursor-pointer increase-scale"
+          className="increase-scale px-0.5 hover:cursor-pointer"
         >
           <IoTrashOutline size={20} />
         </div>
@@ -64,19 +62,12 @@ export default function UserCard({ user, refresh }: UserCardProps) {
       {isModalDeleteOpen && (
         <div className="fixed inset-0 z-50  bg-white opacity-100">
           <DeleteModal
+            name={`${user.name} ${user.lastName}`}
             id={user.idUser}
             setIsModalDeleteOpen={setIsModalDeleteOpen}
             deleteEntity="user"
             refresh={refresh}
           />
-          <div
-            className="absolute right-4 top-4 cursor-pointer text-5xl font-semibold text-black hover:scale-125"
-            onClick={() => {
-              setIsModalDeleteOpen(false)
-            }}
-          >
-            <IoMdClose />
-          </div>
         </div>
       )}
       {isModalLoansOpen && (
@@ -93,18 +84,18 @@ export default function UserCard({ user, refresh }: UserCardProps) {
         </div>
       )}
       {isModaEditlOpen && (
-         <div className="absolute inset-0 z-50 bg-white opacity-100">
-         <UserRegisterForm user={user} setIsModalOpen={setIsModaEditOpen} refresh={refresh} />
-         <div
-           className="absolute right-4 top-1 cursor-pointer text-3xl font-semibold text-black hover:scale-125"
-           onClick={() => {
-             setIsModaEditOpen(false)
-           }}
-         >
-           <IoMdClose />
-         </div>
-       </div>
-     )}
+        <div className="CrudCreateAndEditContainer">
+          <UserRegisterForm user={user} setIsModalOpen={setIsModaEditOpen} refresh={refresh} />
+          <div
+            className="closeModal"
+            onClick={() => {
+              setIsModaEditOpen(false)
+            }}
+          >
+            <IoMdClose />
+          </div>
+        </div>
+      )}
     </div>
   )
 }

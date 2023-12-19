@@ -2,15 +2,20 @@ import { useState } from 'react'
 import { IoEyeOffOutline, IoEyeOutline } from 'react-icons/io5'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
-//import { useUser } from '../context/UserContext'
-//import toast from 'react-hot-toast'
+import { useUser } from '../context/UserContext'
+import toast from 'react-hot-toast'
+import { generateTempId } from '@/utils/function'
+import { AdminPost } from '@/types/types'
 
-interface FormValues {
+interface AdminProps {
+  idAdmin: number
   email: string
   name: string
   lastName: string
   password: string
   passwordConfirm: string
+  setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>
+  refresh?: () => void
 }
 
 const validationSchema = Yup.object({
@@ -21,6 +26,8 @@ const validationSchema = Yup.object({
       /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.(com|co|es|it|net|org|gov|edu|mil|io|xyz|info|biz|mx|ar)$/,
       'El email no es válido'
     ),
+  name: Yup.string().required('El nombre es requerido'),
+  lastName: Yup.string().required('El apellido es requerido'),
   password: Yup.string()
     .min(8, 'La contraseña es muy corta')
     .max(20, '20 carateres  maximo')
@@ -31,55 +38,86 @@ const validationSchema = Yup.object({
     .required('La contraseña es requerida'),
   passwordConfirm: Yup.string()
     .oneOf([Yup.ref('password')], 'Las contraseñas deben coincidir')
-    .nullable() // Agrega esta validación para permitir valores nulos
+    .nullable()
     .required('La confirmación de la contraseña es requerida')
 })
 
-const RegisterAdmin = () => {
+const RegisterAdmin: React.FC<AdminProps> = props => {
   const [showPass, setShowPass] = useState(false)
-  //const {fetch} = useUser()
-  const onSubmit = async (values: FormValues) => {
+  const [isLoading, setIsLoading] = useState(false)
+  const { fetch } = useUser()
+  const onSubmit = async (values: AdminPost) => {
     const valuesToSend = {
+      idAdmin: values.idAdmin,
       email: values.email,
       name: values.name,
       lastName: values.lastName,
-      password: values.password,
-   
-  }
-  console.log(valuesToSend)
-  /*
-  try {
-    const postOptions = {
-      method: 'POST',
-      body: JSON.stringify(valuesToSend),
+      password: values.password
     }
-    await fetch('http://localhost:3000/admin', postOptions)
-    toast.success('Administrador registrado con éxito', {
-      duration: 1500
-    })
- 
-  } catch (error: any) {
-    if (error.message !== undefined && typeof error.message === 'string' && error.message !== '')
-      toast.error(error.message, {
-        duration: 2000,
-        position: 'top-center'
-      })
-    else
-      toast.error('Error al registrar el administrador', {
-        duration: 1500
-      })
+    console.log(valuesToSend)
 
+    try {
+      setIsLoading(true)
+      if (isEditMode) {
+        const putOptions = {
+          method: 'PUT',
+          body: JSON.stringify(valuesToSend),
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        }
+        await fetch(
+          `http://localhost:8080/bibliotech/api/admins/update/${values.idAdmin}`,
+          putOptions
+        )
+        if (props.refresh) props.refresh()
+        toast.success('El administrador se editó correctamente', {
+          duration: 4000,
+          position: 'top-center'
+        })
+        props.setIsModalOpen(false)
+      } else {
+        const postOptions = {
+          method: 'POST',
+          body: JSON.stringify(valuesToSend),
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        }
+        await fetch('http://localhost:8080/bibliotech/api/admins/save', postOptions)
+        if (props.refresh) props.refresh()
+        toast.success('El administrador se registro correctamente', {
+          duration: 4000,
+          position: 'top-center'
+        })
+        resetForm()
+        props.setIsModalOpen(false)
+      }
+    } catch (error: any) {
+      if (error.message !== undefined && typeof error.message === 'string' && error.message !== '')
+        toast.error(error.message, {
+          duration: 2000,
+          position: 'top-center'
+        })
+      else
+        toast.error('Error al registrar el administrador', {
+          duration: 1500
+        })
+    } finally {
+      setIsLoading(false)
+    }
   }
-  */
-}
 
-  const { values, errors, handleChange, handleSubmit } = useFormik({
+  const isEditMode = !!props.idAdmin
+
+  const { values, errors, handleChange, handleSubmit, resetForm } = useFormik({
     initialValues: {
-      email: '',
-      name: '',
-      lastName: '',
-      password: '',
-      passwordConfirm: ''
+      idAdmin: isEditMode ? props.idAdmin : generateTempId(),
+      email: props.email || '',
+      name: props.name || '',
+      lastName: props.lastName || '',
+      password: props.password || '',
+      passwordConfirm: props.passwordConfirm || ''
     },
     validationSchema,
     onSubmit
@@ -87,10 +125,16 @@ const RegisterAdmin = () => {
 
   return (
     <div className="flex justify-center px-2 py-10">
-      <div className="sm:max-h[40%]  rounded-[40px] bg-grey sm:max-w-[70%] xl:w-full">
+      <div className="sm:max-h[40%]  rounded-[40px] bg-grey sm:max-w-[70%] md:max-w-[60%] xl:w-full">
         <h2 className="mx-auto w-10/12 py-8 text-2xl font-bold leading-normal text-blueDark">
-          Registro de nuevo Administrador
-          <span className="text-sm text-blueDark"> (Los campos con * son obligatorios) </span>
+          {isEditMode
+            ? `Actualización del Administrador ${props.name} ${props.lastName}`
+            : 'Registro de nuevo Administrador'}
+          <span className="text-[12px] text-blueDark sm:text-sm ">
+            {' '}
+            <br />
+            (Los campos con * son obligatorios){' '}
+          </span>
         </h2>
         <form className="mx-auto w-10/12" onSubmit={handleSubmit}>
           <div className="mb-14">
@@ -159,7 +203,7 @@ const RegisterAdmin = () => {
             </label>
             <div className="relative mb-14 flex h-8 w-full items-center gap-2 border-0 border-b-2 border-solid  hover:border-blueDark">
               <input
-                 className="w-full border-0 bg-grey text-base font-[400] leading-[normal] text-blueDark placeholder-[#ABABAB] focus:outline-none"
+                className="w-full border-0 bg-grey text-base font-[400] leading-[normal] text-blueDark placeholder-[#ABABAB] focus:outline-none"
                 name="password"
                 type={showPass ? 'text' : 'password'}
                 placeholder="Ingresá tu contraseña"
@@ -188,7 +232,7 @@ const RegisterAdmin = () => {
             </label>
             <div className="relative mb-14 flex h-8 w-full items-center gap-2 border-0 border-b-2 border-solid  hover:border-blueDark">
               <input
-                 className="w-full border-0 bg-grey text-base font-[400] leading-[normal] text-blueDark placeholder-[#ABABAB] focus:outline-none"
+                className="w-full border-0 bg-grey text-base font-[400] leading-[normal] text-blueDark placeholder-[#ABABAB] focus:outline-none"
                 name="passwordConfirm"
                 type={showPass ? 'text' : 'password'}
                 placeholder="Ingresá tu contraseña"
@@ -212,8 +256,13 @@ const RegisterAdmin = () => {
             <button
               className="flex h-[53px] w-full items-center justify-center gap-x-2 rounded-[32px] border-none bg-blueDark py-5 text-[17px] font-bold leading-normal text-white shadow-btn hover:cursor-pointer disabled:cursor-not-allowed disabled:opacity-50"
               type="submit"
+              disabled={isLoading}
             >
-              Enviar
+              {isLoading ? (
+                <div className="absolute h-4 w-4 animate-spin rounded-full border-solid border-x-blueDark"></div>
+              ) : (
+                'Enviar'
+              )}
             </button>
           </div>
         </form>

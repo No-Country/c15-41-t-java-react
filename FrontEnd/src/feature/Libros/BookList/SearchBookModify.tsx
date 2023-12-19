@@ -23,7 +23,7 @@ const SearchBookModify: React.FC<SearchBookModifyProps> = ({
       const filtered = allBooks.filter(
         book =>
           searchIncludes(book.title, searchTerm) ||
-          searchIncludes(book.genre, searchTerm) ||
+          searchIncludes(book.genreDto.name, searchTerm) ||
           searchIncludes(book.editorialDto.name, searchTerm) ||
           searchIncludes(`${book.authorDto.name} ${book.authorDto.lastName}`, searchTerm)
       )

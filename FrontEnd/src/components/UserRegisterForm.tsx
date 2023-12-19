@@ -1,9 +1,12 @@
+import { useState } from 'react'
 import { useFormik } from 'formik'
 import type { FormikValues } from 'formik'
 import * as Yup from 'yup'
 import { useUser } from '../context/UserContext'
 import toast from 'react-hot-toast'
 import { User } from '../types/types'
+import { generateTempId } from '../utils/function'
+import overflowYdisable from '@/utils/overflowYdisable'
 
 interface UserProps {
   user: User
@@ -11,9 +14,7 @@ interface UserProps {
   refresh?: () => void
   onSuccess?: () => void
 }
-function generateTempId() {
-  return new Date().getTime()
-}
+
 const validationSchema = Yup.object({
   dni: Yup.string()
     .required('El DNI es obligatorio')
@@ -34,7 +35,12 @@ const validationSchema = Yup.object({
   phoneNumber: Yup.string()
     .required('El celular es obligatorio')
     .matches(/^\d{10}$/, 'Ingresa un número de celular válido'),
-  address: Yup.string().required('La dirección es obligatoria')
+  address: Yup.string()
+    .required('La dirección es obligatoria')
+    .matches(
+      /^[A-Za-z0-9\sáéíóúÁÉÍÓÚñÑ,#-]{5,40}$/,
+      'Ingresa una dirección válida no puede superar los 40 caracteres'
+    )
 })
 
 const UserRegisterForm: React.FC<UserProps> = ({
@@ -43,6 +49,7 @@ const UserRegisterForm: React.FC<UserProps> = ({
   refresh,
   onSuccess
 }: UserProps) => {
+  const [isLoading, setIsLoading] = useState(false)
   const { fetch } = useUser()
 
   const isEditMode = !!user.idUser
@@ -63,6 +70,7 @@ const UserRegisterForm: React.FC<UserProps> = ({
 
   async function onSubmit(values: FormikValues) {
     try {
+      setIsLoading(true)
       if (isEditMode) {
         // Si estamos en modo edición
         const putOptions = {
@@ -103,26 +111,29 @@ const UserRegisterForm: React.FC<UserProps> = ({
         duration: 4000,
         position: 'top-center'
       })
+    } finally {
+      setIsLoading(false)
     }
   }
-
+  isEditMode ? overflowYdisable() : null
   return (
-    <div className="flex justify-center px-2 py-10">
-      <div className="sm:max-h[40%]  rounded-[40px] bg-grey sm:max-w-[70%] xl:w-full">
+    <div className="flex justify-center px-2 pb-10 pt-20">
+      <div className="sm:max-h[40%]  w-11/12 max-w-[650px] rounded-[40px] bg-grey ">
         <h2 className="mx-auto w-10/12 py-8 text-2xl font-bold leading-normal text-blueDark">
           {user.name
             ? `Actualización del Miembro: ${user.name} ${user.lastName}`
             : 'Registro de un Miembro Nuevo'}
+          <br />
           <span className="text-sm text-blueDark"> (Los campos con * son obligatorios) </span>
         </h2>
         <form className="mx-auto w-10/12 " onSubmit={handleSubmit}>
-          <label className="text-base font-bold leading-[normal] text-blueLight " htmlFor="title">
+          <label className="formLabel" htmlFor="title">
             DNI <span className="text-red-500">*</span>
           </label>
 
-          <div className="relative mb-14 flex h-8 w-full items-center gap-2 border-0 border-b-2 border-solid border-blueDark">
+          <div className="ReactSelectContainer">
             <input
-              className="w-full border-0 bg-grey text-base font-[400] leading-[normal] text-[#263238] placeholder-[#ABABAB] focus:outline-none"
+              className="ReactSelect"
               name="dni"
               type="text"
               // disabled={isEditMode}
@@ -130,104 +141,82 @@ const UserRegisterForm: React.FC<UserProps> = ({
               value={values.dni}
               onChange={handleChange}
             />
-            <small className="absolute -bottom-6 text-xs font-bold text-red-500">
-              {errors.dni}
-            </small>
+            <small className="errorContainer">{errors.dni}</small>
           </div>
-          <div className="grid-cols-2 gap-1 sm:grid">
+          <div className="grid-cols-2 gap-x-6 sm:grid">
             <div>
-              <label
-                className="text-base font-bold leading-[normal] text-blueLight"
-                htmlFor="quantity"
-              >
+              <label className="formLabel" htmlFor="quantity">
                 Nombre <span className="text-red-500">*</span>
               </label>
-              <div className="relative mb-14 flex h-8 w-full items-center gap-2 border-0 border-b-2 border-solid border-blueDark sm:w-[85%]">
+              <div className="ReactSelectContainer">
                 <input
-                  className="w-full  border-0 bg-grey text-base font-[400] leading-[normal] text-[#263238] placeholder-[#ABABAB] focus:outline-none"
+                  className="ReactSelect"
                   name="name"
                   type="text"
                   placeholder="Ingresá el Nombre "
                   value={values.name}
                   onChange={handleChange}
                 />
-                <small className="absolute -bottom-6 text-xs font-bold text-red-500">
-                  {errors?.name}
-                </small>
+                <small className="errorContainer">{errors?.name}</small>
               </div>
             </div>
             <div>
-              <label
-                className="text-base font-bold leading-[normal] text-blueLight"
-                htmlFor="author"
-              >
+              <label className="formLabel" htmlFor="author">
                 Apellido <span className="text-red-500">*</span>
               </label>
-              <div className="relative mb-14 flex h-8 w-full items-center gap-2 border-0 border-b-2 border-solid border-blueDark">
+              <div className="ReactSelectContainer">
                 <input
-                  className="w-full  border-0 bg-grey text-base font-[400] leading-[normal] text-[#263238] placeholder-[#ABABAB] focus:outline-none"
+                  className="ReactSelect"
                   name="lastName"
                   type="text"
                   value={values.lastName}
                   placeholder="Ingresá el apellido "
                   onChange={handleChange}
                 />
-                <small className="absolute -bottom-6 text-xs font-bold text-red-500">
-                  {errors?.lastName}
-                </small>
+                <small className="errorContainer">{errors?.lastName}</small>
               </div>
             </div>
           </div>
-          <div className="grid-cols-2 gap-1 sm:grid">
+          <div className="grid-cols-2 gap-x-6 sm:grid">
             <div>
-              <label
-                className="text-base font-bold leading-[normal] text-blueLight"
-                htmlFor="genre"
-              >
+              <label className="formLabel" htmlFor="genre">
                 Celular <span className="text-red-500">*</span>
               </label>
-              <div className="relative mb-14 flex h-8 w-full items-center gap-2 border-0 border-b-2 border-solid border-blueDark sm:w-[85%]">
+              <div className="ReactSelectContainer">
                 <input
-                  className="w-full  border-0 bg-grey text-base font-[400] leading-[normal] text-[#263238] placeholder-[#ABABAB] focus:outline-none"
+                  className="ReactSelect"
                   name="phoneNumber"
                   type="text"
                   value={values.phoneNumber}
-                  placeholder="Ingresá numero de télefono"
+                  placeholder="Ingresá número de télefono"
                   onChange={handleChange}
                 />
-                <small className="absolute -bottom-6 text-xs font-bold text-red-500">
-                  {errors?.phoneNumber}
-                </small>
+                <small className="errorContainer">{errors?.phoneNumber}</small>
               </div>
             </div>
             <div>
-              <label
-                className="text-base font-bold leading-[normal] text-blueLight"
-                htmlFor="editorial"
-              >
+              <label className="formLabel" htmlFor="editorial">
                 Dirección <span className="text-red-500">*</span>
               </label>
-              <div className="relative mb-14 flex h-8 w-full items-center gap-2 border-0 border-b-2 border-solid border-blueDark">
+              <div className="ReactSelectContainer">
                 <input
-                  className="w-full  border-0 bg-grey text-base font-[400] leading-[normal] text-[#263238] placeholder-[#ABABAB] focus:outline-none"
+                  className="ReactSelect"
                   name="address"
                   type="text"
                   value={values.address}
                   onChange={handleChange}
                   placeholder="Ingresá la direccion"
                 />
-                <small className="absolute -bottom-6 text-xs font-bold text-red-500">
-                  {errors?.address}
-                </small>
+                <small className="errorContainer">{errors?.address}</small>
               </div>
             </div>
           </div>
-          <label className="text-base font-bold leading-[normal] text-blueLight" htmlFor="image">
+          <label className="formLabel" htmlFor="image">
             Mail <span className="text-red-500">*</span>
           </label>
-          <div className="relative mb-14 flex h-8 w-full items-center gap-2 border-0 border-b-2 border-solid border-blueDark">
+          <div className="ReactSelectContainer">
             <input
-              className="w-full border-0 bg-grey text-base font-[400] leading-[normal] text-blueDark placeholder-[#ABABAB] focus:outline-none"
+              className="ReactSelect"
               type="email"
               name="email"
               onChange={handleChange}
@@ -235,16 +224,20 @@ const UserRegisterForm: React.FC<UserProps> = ({
               placeholder="Ingresá el correo"
             />
 
-            <small className="absolute -bottom-6 text-xs font-bold text-red-500">
-              {errors?.email}
-            </small>
+            <small className="errorContainer">{errors?.email}</small>
           </div>
           <div className="pb-10">
             <button
               className="flex h-[53px] w-full items-center justify-center gap-x-2 rounded-[32px] border-none bg-blueDark py-5 text-[17px] font-bold leading-normal text-white shadow-btn hover:cursor-pointer disabled:cursor-not-allowed disabled:opacity-50"
               type="submit"
+              disabled={isLoading}
             >
-              Enviar
+              {' '}
+              {isLoading ? (
+                <div className="absolute h-4 w-4 animate-spin rounded-full border-solid border-x-blueDark"></div>
+              ) : (
+                'Enviar'
+              )}
             </button>
           </div>
         </form>

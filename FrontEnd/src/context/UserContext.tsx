@@ -166,7 +166,6 @@ export const UserProvider: FC<{
       ...otherOptions,
       headers: {
         ...headers,
-        'Content-Type': 'application/json',
         Authorization: `Bearer ${currentUser.authToken}`
       }
     })

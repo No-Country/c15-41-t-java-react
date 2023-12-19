@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { IoMdClose } from 'react-icons/io'
 import { Book } from '@/types/types'
 import RegisterLoan from '@/components/RegisterLoan'
+import overflowYdisable from '@/utils/overflowYdisable'
 
 interface PropsDetail extends Book {
   id: number
@@ -10,11 +11,20 @@ interface PropsDetail extends Book {
 }
 
 const BookDetail: React.FC<PropsDetail> = props => {
-  const { title, image, authorDto, genre, editorialDto, isbn, quantity, setIsModalDetails } = props
+  const {
+    title,
+    imageDto: { imagenUrl: image },
+    authorDto,
+    genreDto: { name: genre },
+    editorialDto,
+    isbn,
+    quantity,
+    setIsModalDetails
+  } = props
   const [isLoan, setIsLoan] = useState(false)
-
+  overflowYdisable()
   return (
-    <div className="shadow-2xlflex flex flex-col items-center overflow-y-auto rounded-xl border-[1px] border-solid border-[#c6e9ff] bg-[#0A7ABF] bg-opacity-5  p-10">
+    <div className="shadow-2xlflex flex h-fit flex-col items-center rounded-xl border-[1px] border-solid border-[#c6e9ff] bg-[#0A7ABF] bg-opacity-5 p-10  max-[300px]:p-4">
       <div className="bg-cover">
         <img
           className="h-[145px] w-[95px] shadow-lg "
@@ -61,10 +71,10 @@ const BookDetail: React.FC<PropsDetail> = props => {
         ''
       )}
       {isLoan && (
-        <div className="fixed inset-0 z-50  overflow-y-auto bg-white opacity-100">
+        <div className="CrudCreateAndEditContainer">
           <RegisterLoan {...props} />
           <div
-            className="increase-scale absolute right-4 top-2 cursor-pointer text-3xl font-semibold text-black sm:top-4 sm:text-5xl "
+            className="closeModal"
             onClick={() => {
               setIsLoan(!isLoan)
               setIsModalDetails(false)

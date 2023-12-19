@@ -2,9 +2,10 @@ import { useState, useEffect } from 'react'
 import { useFormik, type FormikValues } from 'formik'
 import * as Yup from 'yup'
 import toast from 'react-hot-toast'
-import type { Author, BookPost, Editorial } from '@/types/types'
+import type { Author, BookPost, Editorial, Genre } from '@/types/types'
 import { useUser } from '@/context/UserContext'
 import { blockNonNumericInput } from '@/utils/input'
+import overflowYdisable from '@/utils/overflowYdisable'
 
 interface BookProps extends BookPost {
   id: number
@@ -27,15 +28,18 @@ const validationSchema = Yup.object({
     .min(1, 'El valor debe ser mayor a 0')
     .max(100, 'El máximo que puede ingresar son 100 copias'),
   idAuthor: Yup.number().min(1, 'Seleccione autor').required('El autor es requerido'),
-  genre: Yup.string().required('El genero es requerido'),
-  idEditorial: Yup.number().min(1, 'Seleccione editorial').required('La editorial es requerida')
+  idGenre: Yup.number().min(1, 'Seleccione genero').required('El genero es requerido'),
+  idEditorial: Yup.number().min(1, 'Seleccione editorial').required('La editorial es requerida'),
+  image: Yup.string()
 })
 
 const EditBook: React.FC<BookProps> = props => {
   const [authors, setAuthors] = useState<Author[]>([])
   const [editorials, setEditorials] = useState<Editorial[]>([])
-  const [mockGenres, setMockGenres] = useState<string[]>([])
+  const [genres, setGenres] = useState<Genre[]>([])
+  const [isLoading, setIsLoading] = useState(false)
   const { fetch } = useUser()
+  const [imageFile, setImageFile] = useState<File | null>(null)
 
   useEffect(() => {
     const getAuthors = async () => {
@@ -59,33 +63,50 @@ const EditBook: React.FC<BookProps> = props => {
 
   useEffect(() => {
     const getGenres = async () => {
-      const data = await fetch('http://localhost:3000/books/genres')
-      setMockGenres(data)
+      const data = await fetch('http://localhost:3000/books/genres/all')
+      setGenres(data)
     }
     getGenres().catch(error => {
       console.log(error)
     })
   }, [])
 
-  const { values, errors, handleChange, handleSubmit, setFieldValue } = useFormik({
+  const { values, errors, handleChange, handleSubmit } = useFormik({
     initialValues: {
       title: props.title,
       quantity: props.quantity,
       idAuthor: props.idAuthor,
       isbn: props.isbn,
-      genre: props.genre,
+      idGenre: props.idGenre,
       idEditorial: props.idEditorial,
-      image: props.image
+      image: props.image ?? ''
     },
     validationSchema,
     onSubmit
   })
 
+  const handleImageChange: React.ChangeEventHandler<HTMLInputElement> = event => {
+    if (!event.target.files || !event.target.files[0]) return
+    setImageFile(event.target.files[0])
+    handleChange(event)
+  }
+
   async function onSubmit(values: FormikValues) {
     try {
+      setIsLoading(true)
+
+      const formData = new FormData()
+      formData.append('title', values.title)
+      formData.append('isbn', values.isbn)
+      formData.append('quantity', values.quantity)
+      formData.append('idAuthor', values.idAuthor)
+      formData.append('idEditorial', values.idEditorial)
+      formData.append('idGenre', values.idGenre)
+      formData.append('image', imageFile ? imageFile : new Blob())
+
       const postOptions = {
         method: 'PUT',
-        body: JSON.stringify(values)
+        body: formData
       }
       await fetch(`http://localhost:3000/books/update/${props.id}`, postOptions)
       props.setIsModalOpen(false)
@@ -96,55 +117,54 @@ const EditBook: React.FC<BookProps> = props => {
         duration: 4000,
         position: 'top-center'
       })
+    } finally {
+      setIsLoading(false)
     }
   }
-
+  overflowYdisable()
   return (
-    <div className="bg-white px-2 py-10">
-      <div className="mx-auto w-full rounded-[40px] bg-grey  sm:max-w-[70%]">
+    <div className="bg-white px-2 py-16 max-lg:pb-60">
+      <div className="mx-auto w-11/12 max-w-[650px]  rounded-[40px] bg-grey">
         <h2 className="mx-auto w-10/12 py-8 text-2xl font-bold leading-normal text-blueDark">
-          Edicion del libro {props.title}{' '}
-          <span className="text-sm text-red-500"> (Los campos con * son obligatorios) </span>
+          Edicion del libro: {props.title}
+          <br />
+          <span className="text-sm"> (Los campos con * son obligatorios) </span>
         </h2>
         <form className="mx-auto w-10/12 " onSubmit={handleSubmit}>
-          <label className="text-base font-bold leading-[normal] text-blueLight " htmlFor="title">
+          <label className="formLabel" htmlFor="title">
             Titulo <span className="text-red-500">*</span>
           </label>
-          <div className="relative mb-14 flex h-8 w-full items-center gap-2 border-0 border-b-2 border-solid border-blueDark">
+          <div className="ReactSelectContainer">
             <input
-              className="w-full border-0 bg-grey text-base font-[400] leading-[normal] text-[#263238] placeholder-[#ABABAB] focus:outline-none"
+              className="ReactSelect"
               name="title"
               type="text"
               placeholder="Ingresá el titulo"
               value={values.title}
               onChange={handleChange}
             />
-            <small className="absolute -bottom-6 text-xs font-bold text-red-500">
-              {errors?.title}
-            </small>
+            <small className="text-xs font-bold text-red-500">{errors?.title}</small>
           </div>
-          <label className="text-base font-bold leading-[normal] text-blueLight " htmlFor="isbn">
+          <label className="formLabel " htmlFor="isbn">
             ISBN <span className="text-red-500">*</span>
           </label>
-          <div className="relative mb-14 flex h-8 w-full items-center gap-2 border-0 border-b-2 border-solid border-blueDark">
+          <div className="ReactSelectContainer">
             <input
-              className="w-full border-0 bg-grey text-base font-[400] leading-[normal] text-[#263238] placeholder-[#ABABAB] focus:outline-none"
+              className="ReactSelect"
               name="isbn"
               type="text"
               placeholder="Ingresá el isbn"
               value={values.isbn}
               onChange={handleChange}
             />
-            <small className="absolute -bottom-6 text-xs font-bold text-red-500">
-              {errors?.isbn}
-            </small>
+            <small className="text-xs font-bold text-red-500">{errors?.isbn}</small>
           </div>
-          <label className="text-base font-bold leading-[normal] text-blueLight" htmlFor="quantity">
+          <label className="formLabel" htmlFor="quantity">
             Cantidad <span className="text-red-500">*</span>
           </label>
-          <div className="relative mb-14 flex h-8 w-full items-center gap-2 border-0 border-b-2 border-solid border-blueDark">
+          <div className="ReactSelectContainer">
             <input
-              className="w-full  border-0 bg-grey text-base font-[400] leading-[normal] text-[#263238] placeholder-[#ABABAB] focus:outline-none"
+              className="ReactSelect"
               name="quantity"
               type="number"
               placeholder="Ingresá la cantidad"
@@ -152,16 +172,14 @@ const EditBook: React.FC<BookProps> = props => {
               onChange={handleChange}
               onKeyDown={blockNonNumericInput}
             />
-            <small className="absolute -bottom-6 text-xs font-bold text-red-500">
-              {errors?.quantity}
-            </small>
+            <small className="text-xs font-bold text-red-500">{errors?.quantity}</small>
           </div>
-          <label className="text-base font-bold leading-[normal] text-blueLight" htmlFor="idAuthor">
+          <label className="formLabel" htmlFor="idAuthor">
             Autor <span className="text-red-500">*</span>
           </label>
-          <div className="relative mb-14 flex h-8 w-full items-center gap-2 border-0 border-b-2 border-solid border-blueDark">
+          <div className="ReactSelectContainer">
             <select
-              className="w-full border-0 bg-grey text-base font-[400] leading-[normal] text-blueDark placeholder-[#ABABAB] focus:outline-none"
+              className="ReactSelect"
               name="idAuthor"
               value={values.idAuthor}
               onChange={handleChange}
@@ -175,47 +193,40 @@ const EditBook: React.FC<BookProps> = props => {
                 </option>
               ))}
             </select>
-            <small className="absolute -bottom-6 text-xs font-bold text-red-500">
-              {errors?.idAuthor}
-            </small>
+            <small className="text-xs font-bold text-red-500">{errors?.idAuthor}</small>
           </div>
-          <label className="text-base font-bold leading-[normal] text-blueLight" htmlFor="genre">
+          <label className="formLabel" htmlFor="genre">
             Género <span className="text-red-500">*</span>
           </label>
-          <div className="relative mb-14 flex h-8 w-full items-center gap-2 border-0 border-b-2 border-solid border-blueDark">
+          <div className="ReactSelectContainer">
             <select
-              className="w-full border-0 bg-grey text-base font-[400] leading-[normal] text-blueDark placeholder-[#ABABAB] focus:outline-none"
-              name="genre"
-              value={values.genre}
+              className="ReactSelect"
+              name="idGenre"
+              value={values.idGenre}
               onChange={handleChange}
             >
-              <option value="" disabled>
+              <option value="-1" disabled>
                 Selecciona un genero
               </option>
-              {mockGenres.map(genre => (
-                <option key={genre} value={genre.toUpperCase()}>
-                  {genre}
+              {genres.map(genre => (
+                <option key={genre.idGenre} value={genre.idGenre}>
+                  {genre.name}
                 </option>
               ))}
             </select>
-            <small className="absolute -bottom-6 text-xs font-bold text-red-500">
-              {errors?.genre}
-            </small>
+            <small className="text-xs font-bold text-red-500">{errors?.idGenre}</small>
           </div>
-          <label
-            className="text-base font-bold leading-[normal] text-blueLight"
-            htmlFor="idEditorial"
-          >
+          <label className="formLabel" htmlFor="idEditorial">
             Editorial <span className="text-red-500">*</span>
           </label>
-          <div className="relative mb-14 flex h-8 w-full items-center gap-2 border-0 border-b-2 border-solid border-blueDark">
+          <div className="ReactSelectContainer">
             <select
-              className="w-full border-0 bg-grey text-base font-[400] leading-[normal] text-blueDark placeholder-[#ABABAB] focus:outline-none"
+              className="ReactSelect"
               name="idEditorial"
               value={values.idEditorial}
               onChange={handleChange}
             >
-              <option value="" disabled>
+              <option value="-1" disabled>
                 Selecciona una editorial
               </option>
               {editorials.map(editorial => (
@@ -224,24 +235,19 @@ const EditBook: React.FC<BookProps> = props => {
                 </option>
               ))}
             </select>
-            <small className="absolute -bottom-6 text-xs font-bold text-red-500">
-              {errors?.idEditorial}
-            </small>
+            <small className="text-xs font-bold text-red-500">{errors?.idEditorial}</small>
           </div>
-          <label className="text-base font-bold leading-[normal] text-blueLight" htmlFor="image">
+          <label className="formLabel" htmlFor="image">
             Agrega una imagen
           </label>
-          <div className="relative mb-14 flex h-8 w-full items-center gap-2 border-0 border-b-2 border-solid border-blueDark">
+          <div className="mb-20 flex h-8 w-full flex-row gap-y-2">
             <input
-              className="w-full border-0 bg-grey text-base font-[400] leading-[normal] text-blueDark placeholder-[#ABABAB] focus:outline-none"
+              className="ReactSelect"
               type="file"
               name="image"
-              onChange={event => {
-                const file = event.currentTarget.files?.[0]
-                if (file) {
-                  setFieldValue('image', file)
-                }
-              }}
+              accept=".jpg, .jpeg, .png"
+              value={values.image}
+              onChange={handleImageChange}
             />
             {/* Muestra la imagen actual */}
             {props.image && <img src={props.image} alt="Imagen actual" className="h-24 w-24" />}
@@ -250,8 +256,13 @@ const EditBook: React.FC<BookProps> = props => {
             <button
               className="flex h-[53px] w-full items-center justify-center gap-x-2 rounded-[32px] border-none bg-blueDark py-5 text-[17px] font-bold leading-normal text-white shadow-btn hover:cursor-pointer disabled:cursor-not-allowed disabled:opacity-50"
               type="submit"
+              disabled={isLoading}
             >
-              Enviar
+              {isLoading ? (
+                <div className="absolute h-4 w-4 animate-spin rounded-full border-solid border-x-blueDark"></div>
+              ) : (
+                'Enviar'
+              )}
             </button>
           </div>
         </form>

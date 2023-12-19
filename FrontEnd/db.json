@@ -175,7 +175,6 @@
       "establishedDate": "2012-06-28"
     }
   ],
-  "genres": ["Thriller", "Fantasy", "Adventure", "Action"],
   "users": [
     {
       "idUser": 1,
@@ -529,13 +528,62 @@
       }
     }
   ],
-
-  "admin": [
+  "admins": [
     {
-      "name": "admin",
-      "lastName": "admin",
+      "idAdmin": 1,
       "email": "admin@admin.com",
-      "password": "Admin2023"
+      "name": "Lohana P",
+      "lastName": "Orellano",
+      "password": "Bibliotech2023"
+    },
+    {
+      "idAdmin": 2,
+      "email": "mariaPerez@admin.com",
+      "name": "Mária H",
+      "lastName": "Perez ",
+      "password": "Admin2024"
+    },
+    {
+      "idAdmin": 3,
+      "email": "arielfernandez@admin.com",
+      "name": "Ariel",
+      "lastName": "Fernandez",
+      "password": "Admin2024"
+    },
+    {
+      "idAdmin": 1702895479857,
+      "email": "lohaorellano13@gmail.com",
+      "name": "Paola A",
+      "lastName": "Medrano",
+      "password": "Lohana2020"
+    },
+    {
+      "idAdmin": 1702896762647,
+      "email": "guillermomedrano85@hotmail.com",
+      "name": "Guillermo",
+      "lastName": "Medrano",
+      "password": "Guille2023"
+    },
+    {
+      "idAdmin": 1702896861672,
+      "email": "admin@gmail.com",
+      "name": "Benjamin",
+      "lastName": "Ledesma",
+      "password": "Benja2025"
+    }
+  ],
+  "genres": [
+    {
+      "idGenre": 1,
+      "name": "Terror"
+    },
+    {
+      "idGenre": 2,
+      "name": "Fantasía"
+    },
+    {
+      "idGenre": 3,
+      "name": "Thriller"
     }
   ]
 }

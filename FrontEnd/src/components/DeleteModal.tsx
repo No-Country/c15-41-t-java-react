@@ -1,7 +1,9 @@
+import overflowYdisable from '@/utils/overflowYdisable'
 import { useUser } from '../context/UserContext'
 import toast from 'react-hot-toast'
 
 interface Props {
+  name: string
   id: number
   setIsModalDeleteOpen: (value: boolean) => void
   deleteEntity: string
@@ -9,6 +11,7 @@ interface Props {
 }
 
 const DeleteModal: React.FC<Props> = ({
+  name,
   id,
   setIsModalDeleteOpen,
   refresh,
@@ -51,18 +54,19 @@ const DeleteModal: React.FC<Props> = ({
       })
     setIsModalDeleteOpen(false)
   }
-
+  overflowYdisable()
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-white ">
-      <div className="mx-auto w-[80%] rounded-xl bg-gray-200 p-10 md:w-[50%] lg:w-[60%] lg:p-20 xl:w-[50%]">
+    <div className="fixed inset-0 z-50 flex justify-center overflow-y-scroll bg-white max-lg:mt-20 lg:items-center">
+      <div className="mx-auto h-fit w-[80%] rounded-xl bg-gray-200 p-10 md:w-[50%] lg:w-[60%] lg:p-20 xl:w-[50%]">
         <div className="ml-1 flex flex-col gap-8">
           <div className="flex flex-col items-start">
             <h2 className="mb-3 text-2xl font-bold leading-normal text-blueDark">
-              Eliminar {spanishDeleteEntity}
+              Eliminar {name}
             </h2>
-            <p className="text-justify text-lg">
-              ¿Estás seguro de que quieres eliminar este {spanishDeleteEntity}? Una vez eliminado,
-              no podrás recuperarlo. Por favor, confirma tu elección.
+            <p className="text-lg">
+              ¿Estás seguro de que quieres eliminar este {spanishDeleteEntity}:{' '}
+              <span className=" font-extrabold text-blueDark">{name}</span> ? Una vez eliminado, no
+              podrás recuperarlo. Por favor, confirma tu elección.
             </p>
           </div>
           <div className="flex items-center justify-around gap-4">

@@ -21,17 +21,19 @@ const validationSchema = Yup.object({
   returnExpectedDate: Yup.date()
     .required('La fecha de devolución es requerida')
     .min(new Date(), 'La fecha de devolución no puede ser menor o igual a la fecha actual')
-    .test('15-dias', 'La diferencia debe ser de máximo 15 días', function (value) {
+    .test('15-dias', 'La fecha límite de la devolución son 15 días', function (value) {
       const currentDate = new Date()
 
-  // Comprobar si loanDate es una fecha válida
-  if (value instanceof Date && !isNaN(value.getTime()) && value) {
-    const maxDaysDifference = 15;
-    const differenceInDays = Math.ceil((value.getTime() - currentDate.getTime()) / (1000 * 60 * 60 * 24));
-    return differenceInDays <= maxDaysDifference;
-  }
+      // Comprobar si loanDate es una fecha válida
+      if (value instanceof Date && !isNaN(value.getTime()) && value) {
+        const maxDaysDifference = 15
+        const differenceInDays = Math.ceil(
+          (value.getTime() - currentDate.getTime()) / (1000 * 60 * 60 * 24)
+        )
+        return differenceInDays <= maxDaysDifference
+      }
 
-  return true;
+      return true
     }),
   idUser: Yup.number().required('El miembro es requerido').min(1, 'El miembro es requerido'),
   idBook: Yup.number().required('El libro es requerido')
@@ -41,6 +43,7 @@ const RegisterLoan: React.FC<propsLoan> = props => {
   const [users, setUsers] = useState<User[]>([])
   const { fetch, currentUser } = useUser()
   const [usersOptions, setusersOptions] = useState<{ value: number; label: string }[]>([])
+  const [isLoading, setIsLoading] = useState(false)
 
   async function getUsers(): Promise<void> {
     try {
@@ -60,7 +63,7 @@ const RegisterLoan: React.FC<propsLoan> = props => {
     initialValues: {
       title: props.title,
       author: props.authorDto.name + ' ' + props.authorDto.lastName,
-      genre: props.genre,
+      genre: props.genreDto.name,
       isbn: props.isbn,
       editorial: props.editorialDto.name,
       loanDate: new Date().toISOString().split('T')[0],
@@ -86,8 +89,12 @@ const RegisterLoan: React.FC<propsLoan> = props => {
     }
 
     try {
+      setIsLoading(true)
       const postOptions = {
         method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
         body: JSON.stringify(loan)
       }
       await fetch('http://localhost:3000/loans/save', postOptions)
@@ -105,6 +112,8 @@ const RegisterLoan: React.FC<propsLoan> = props => {
         toast.error('Error al registrar el prestamo', {
           duration: 1500
         })
+    } finally {
+      setIsLoading(false)
     }
   }
 
@@ -115,12 +124,16 @@ const RegisterLoan: React.FC<propsLoan> = props => {
     }))
     setusersOptions(options)
   }, [users])
-
+  const [_, setSelectedUser] = useState<{
+    label: string
+    value: number
+  } | null>(null)
   return (
-    <div className="flex justify-center overflow-y-auto px-2 py-10">
-      <div className="sm:max-h[40%]  rounded-[40px] bg-grey sm:max-w-[70%] xl:w-full">
+    <div className="flex justify-center px-2 pb-10 pt-20">
+      <div className="sm:max-h[40%]  w-full rounded-[40px] bg-grey sm:max-w-[60%]">
         <h2 className="mx-auto w-10/12 py-8 text-2xl font-bold leading-normal text-blueDark">
           Prestamo de libro
+          <br />
           <span className="text-sm text-blueDark"> (Los campos con * son obligatorios) </span>
         </h2>
         <form className="mx-auto w-10/12" onSubmit={handleSubmit}>
@@ -281,13 +294,19 @@ const RegisterLoan: React.FC<propsLoan> = props => {
             options={usersOptions}
             setFieldValue={setFieldValue}
             errors={errors.idUser}
+            setSelectedOption={setSelectedUser}
           />
           <div className="pb-10">
             <button
               className="flex h-[53px] w-full items-center justify-center gap-x-2 rounded-[32px] border-none bg-blueDark py-5 text-[17px] font-bold leading-normal text-white shadow-btn hover:cursor-pointer disabled:cursor-not-allowed disabled:opacity-50"
               type="submit"
+              disabled={isLoading}
             >
-              Enviar
+              {isLoading ? (
+                <div className="absolute h-4 w-4 animate-spin rounded-full border-solid border-x-blueDark"></div>
+              ) : (
+                'Enviar'
+              )}
             </button>
           </div>
         </form>

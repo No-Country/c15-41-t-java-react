@@ -7,6 +7,7 @@ interface ReactSelectProps {
   options: any
   setFieldValue: any
   errors: any
+  setSelectedOption: Function
 }
 
 export const ReactSelect: React.FC<ReactSelectProps> = ({
@@ -15,18 +16,19 @@ export const ReactSelect: React.FC<ReactSelectProps> = ({
   selectName,
   options,
   setFieldValue,
-  errors
+  errors,
+  setSelectedOption
 }) => {
   return (
-    <>
-      <label className="labelForm" htmlFor="idAuthor">
+    <div className="w-full">
+      <label className="formLabel" htmlFor="idAuthor">
         {label} <span className="text-red-500">*</span>
       </label>
-      <div className="divContent">
+      <div className="ReactSelectContainer">
         <Select
           placeholder={placeHolder}
           unstyled={true}
-          className="reactSelect"
+          className="ReactSelect"
           styles={{
             menu: (provided: any) => ({
               ...provided,
@@ -50,12 +52,13 @@ export const ReactSelect: React.FC<ReactSelectProps> = ({
           isSearchable={true}
           name={selectName}
           options={options}
-          onChange={(selectedOption: { value: number | string; label: string } | null) => {
+          onChange={(selectedOption: { value: number; label: string } | null) => {
             setFieldValue(selectName, selectedOption?.value || -1)
+            setSelectedOption(selectedOption)
           }}
         />
         <small className="errorContainer">{errors}</small>
       </div>
-    </>
+    </div>
   )
 }

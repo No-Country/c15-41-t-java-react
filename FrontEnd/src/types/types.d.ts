@@ -1,19 +1,23 @@
 export interface Book {
   idBook: number
   title: string
-  isbn: string
-  quantity: number
   idAuthor: number
   idEditorial: number
-  genre: string
-  quantity: number
-  image: string
   isbn: string
+  idGenre: number
+  image: string
+  idImage: number
+  quantity: number
   editorialDto: Editorial
   authorDto: Author
+  genreDto: Genre
+  imageDto: Image
 }
 
-export type BookPost = Omit<Book, 'editorialDto' | 'authorDto' | 'idBook'>
+export type BookPost = Omit<
+  Book,
+  'editorialDto' | 'authorDto' | 'idBook' | 'imageDto' | 'genreDto' | 'idImage'
+>
 
 export interface User {
   idUser: number
@@ -41,7 +45,10 @@ export interface Loan {
 
 export interface Admin {
   idAdmin: number
-  username: string
+  email: string
+  name: string
+  lastName: string
+  password: string
 }
 
 export interface Author {
@@ -50,8 +57,33 @@ export interface Author {
   idAuthor: number
 }
 
+export interface AuthorPost {
+  name: string
+  lastName: string
+}
+
 export interface Editorial {
   name: string
   idEditorial: number
   establishedDate: string
+}
+
+export interface AdminPost {
+  idAdmin: number
+  email: string
+  name: string
+  lastName: string
+  password: string
+}
+
+export interface Genre {
+  name: string
+  idGenre: number
+}
+
+export interface Image {
+  idImage: number
+  name: string
+  imagenUrl: string
+  cloudinaryId: string
 }
