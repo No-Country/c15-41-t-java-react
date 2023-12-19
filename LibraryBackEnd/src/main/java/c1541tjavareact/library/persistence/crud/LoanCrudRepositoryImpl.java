@@ -154,6 +154,8 @@ public class LoanCrudRepositoryImpl implements LoanCrudRepository {
         if(optLoanDto.isPresent()) {
             LoanDto loanDto = optLoanDto.get();
             this.sendTaskMail(loanDto);
+        } else {
+            throw new BibliotechException("El prestamo no existe");
         }
     }
 
@@ -165,11 +167,11 @@ public class LoanCrudRepositoryImpl implements LoanCrudRepository {
 
             simpleMailMessage.setTo(userDto.getEmail());
             simpleMailMessage.setFrom(loanDto.getAdminDto().getEmail());
-            simpleMailMessage.setSubject("Recordatorio devolucion de libro ");
+            simpleMailMessage.setSubject("Recordatorio devolución de libro");
             simpleMailMessage.setText("""
                     Hola %s %s,
                                         
-                    La devolucion del libro %s es el dia %s.
+                    La devolución del libro %s es el día %s del mes %s del año %s.
                                         
                     Gracias,
                                         
@@ -178,7 +180,9 @@ public class LoanCrudRepositoryImpl implements LoanCrudRepository {
                     """
                     .formatted(userDto.getName(), userDto.getLastName(),
                             loanDto.getBookDto().getTitle(),
-                            loanDto.getReturnExpectedDate(),
+                            loanDto.getReturnExpectedDate().getDayOfMonth(),
+                            loanDto.getReturnExpectedDate().getMonthValue(),
+                            loanDto.getReturnExpectedDate().getYear(),
                             loanDto.getAdminDto().getName(), loanDto.getAdminDto().getLastName()
                     )
             );
