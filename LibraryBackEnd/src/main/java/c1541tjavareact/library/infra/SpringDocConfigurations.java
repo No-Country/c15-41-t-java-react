@@ -23,6 +23,7 @@ public class SpringDocConfigurations {
                                 new SecurityScheme().type(SecurityScheme.Type.HTTP).scheme("bearer").bearerFormat("JWT")))
                 .info(new Info()
                         .title("Bibliotech")
+                        .version("v1")
                         .description("API-Rest de la aplicación Bibliotech para la gestión de libros.")
                         .contact(new Contact()
                                 .name("Grupo Biliotech")
