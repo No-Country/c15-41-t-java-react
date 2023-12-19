@@ -16,7 +16,7 @@ export default function LoanCard({ loan, refresh }: LoanCardProps) {
 
   async function handleNotificacion(id: Loan['idLoan']) {
     try {
-      await fetch(`http://localhost:3000/bibliotech/api/loans/sendMail/${id}`)
+      await fetch(`http://localhost:3000/loans/sendMail/${id}`)
       toast.success('Se envio la notificacion correctamente', {
         duration: 4000,
         position: 'top-center'
