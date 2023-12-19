@@ -178,19 +178,19 @@ export default function RegisterForm({ onSuccess }: { onSuccess: () => void }) {
   return (
     <>
       <div className="px-2 py-10">
-        <div className="mx-auto w-full rounded-[40px] bg-grey  sm:max-w-[60%]">
+        <div className="mx-auto w-full max-w-[650px] rounded-[40px]  bg-grey">
           <h2 className="mx-auto w-10/12 py-8 text-2xl font-bold leading-normal text-blueDark">
             Registro de un nuevo libro
             <br />
             <span className="text-sm"> (Los campos con * son obligatorios) </span>
           </h2>
           <form className="mx-auto w-10/12" onSubmit={handleSubmit}>
-            <label className="labelForm " htmlFor="title">
+            <label className="formLabel " htmlFor="title">
               Titulo <span className="text-red-500">*</span>
             </label>
-            <div className="divContent">
+            <div className="ReactSelectContainer">
               <input
-                className="reactSelect"
+                className="ReactSelect"
                 name="title"
                 type="text"
                 placeholder="Ingresá el titulo"
@@ -199,12 +199,12 @@ export default function RegisterForm({ onSuccess }: { onSuccess: () => void }) {
               />
               <small className="errorContainer">{errors?.title}</small>
             </div>
-            <label className="labelForm " htmlFor="isbn">
+            <label className="formLabel " htmlFor="isbn">
               ISBN <span className="text-red-500">*</span>
             </label>
-            <div className="divContent">
+            <div className="ReactSelectContainer">
               <input
-                className="reactSelect"
+                className="ReactSelect"
                 name="isbn"
                 type="text"
                 placeholder="ISBN 13: 978-0-596-52068-7 - ISBN 10: 0-321-48410-7 "
@@ -213,12 +213,12 @@ export default function RegisterForm({ onSuccess }: { onSuccess: () => void }) {
               />
               <small className="errorContainer">{errors?.isbn}</small>
             </div>
-            <label className="labelForm" htmlFor="quantity">
+            <label className="formLabel" htmlFor="quantity">
               Cantidad <span className="text-red-500">*</span>
             </label>
-            <div className="divContent">
+            <div className="ReactSelectContainer">
               <input
-                className="reactSelect"
+                className="ReactSelect"
                 name="quantity"
                 type="number"
                 placeholder="Ingresá la cantidad"
@@ -351,12 +351,12 @@ export default function RegisterForm({ onSuccess }: { onSuccess: () => void }) {
                 </div>
               )}
             </div>
-            <label className="labelForm" htmlFor="image">
+            <label className="formLabel" htmlFor="image">
               Agrega una imagen
             </label>
-            <div className="divContent">
+            <div className="ReactSelectContainer">
               <input
-                className="reactSelect"
+                className="ReactSelect"
                 type="file"
                 name="image"
                 value={values.image}

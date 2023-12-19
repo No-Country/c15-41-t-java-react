@@ -21,14 +21,14 @@ export const ReactSelect: React.FC<ReactSelectProps> = ({
 }) => {
   return (
     <div className="w-full">
-      <label className="labelForm" htmlFor="idAuthor">
+      <label className="formLabel" htmlFor="idAuthor">
         {label} <span className="text-red-500">*</span>
       </label>
-      <div className="divContent">
+      <div className="ReactSelectContainer">
         <Select
           placeholder={placeHolder}
           unstyled={true}
-          className="reactSelect"
+          className="ReactSelect"
           styles={{
             menu: (provided: any) => ({
               ...provided,
