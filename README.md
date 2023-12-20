@@ -26,18 +26,17 @@ Poder planificar mejoras en el servicio y la adquisición de nuevos materiales.
   <img src="https://img.shields.io/badge/-Ver%20Casos%20de%20Pruebas-34A853?style=for-the-badge&logo=google-sheets&logoColor=white"/>
 </a>
 <a href="https://www.figma.com/proto/iYJbDiH3MF0na4aJMJeYUK/Bibliotech?type=design&node-id=15-17&t=ob64hBs8tDp6nVrm-1&scaling=scale-down&page-id=1%3A2&starting-point-node-id=15%3A17&show-proto-sidebar=1&mode=design">
-  <img src="https://img.shields.io/badge/Figma-F24E1E?style=for-the-badge&logo=figma&logoColor=white"/>
+  <img src="https://img.shields.io/badge/Ver%20Figma-F24E1E?style=for-the-badge&logo=figma&logoColor=white"/>
 </a>
 <a href="https://trello.com/w/biblio143">
-  <img src="https://img.shields.io/badge/Trello-0052CC?style=for-the-badge&logo=trello&logoColor=white"/>
+  <img src="https://img.shields.io/badge/Ver%20Trello-0052CC?style=for-the-badge&logo=trello&logoColor=white"/>
 </a>
-<a href="" target="_blank">
+<a href="https://frontend-27zf.onrender.com" target="_blank">
 <img  src="https://img.shields.io/badge/VER_DEMO-38B2AC?style=for-the-badge&logo=figma-css&logoColor=white"/>
 </a>
-<a href="" target="_blank">
-<img  src="https://img.shields.io/badge/VER_API-3178C6?style=for-the-badge&logo=figma-css&logoColor=white"/>
-</a> <a href="https://www.figma.com/proto/iYJbDiH3MF0na4aJMJeYUK/Bibliotech?type=design&node-id=114-1950&t=ob64hBs8tDp6nVrm-1&scaling=scale-down&page-id=1%3A2&starting-point-node-id=15%3A17&show-proto-sidebar=1" target="_blank">
-
+<a href="https://backend-pybf.onrender.com/bibliotech/api/swagger-ui/index.html" target="_blank">
+<img  src="https://img.shields.io/badge/VER_API-85EA2D?style=for-the-badge&logo=Swagger&logoColor=black"/>
+</a>
 
 ## Stack Frontend
 
@@ -63,7 +62,7 @@ Poder planificar mejoras en el servicio y la adquisición de nuevos materiales.
 
 | **Jean Carlo** | **Efrén Morales** | **Jeyson Velázquez** | **German Anselmo** | **Jesús Monroy** |
 | :---: | :---: | :---: | :---: | :---: |
-| <a href="https://github.com/jeancarlo98"><img src="https://img.shields.io/badge/-GitHub-181717?style=flat-square&logo=github&logoColor=white"></a> | <a href=""><img src="https://img.shields.io/badge/-GitHub-181717?style=flat-square&logo=github&logoColor=white"></a> | <a href="https://github.com/jeysonvelas"><img src="https://img.shields.io/badge/-GitHub-181717?style=flat-square&logo=github&logoColor=white"></a> | <a href=""><img src="https://img.shields.io/badge/-GitHub-181717?style=flat-square&logo=github&logoColor=white"></a> | <a href="https://github.com/jdmonroyg"><img src="https://img.shields.io/badge/-GitHub-181717?style=flat-square&logo=github&logoColor=white"></a> |
+| <a href="https://github.com/jeancarlo98"><img src="https://img.shields.io/badge/-GitHub-181717?style=flat-square&logo=github&logoColor=white"></a> | <a href="https://github.com/fr3nm0"><img src="https://img.shields.io/badge/-GitHub-181717?style=flat-square&logo=github&logoColor=white"></a> | <a href="https://github.com/jeysonvelas"><img src="https://img.shields.io/badge/-GitHub-181717?style=flat-square&logo=github&logoColor=white"></a> | <a href=""><img src="https://img.shields.io/badge/-GitHub-181717?style=flat-square&logo=github&logoColor=white"></a> | <a href="https://github.com/jdmonroyg"><img src="https://img.shields.io/badge/-GitHub-181717?style=flat-square&logo=github&logoColor=white"></a> |
 
 ## Stack QA
 
