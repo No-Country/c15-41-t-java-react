@@ -27,8 +27,16 @@ public class AuthorCrudRepositoryImpl implements AuthorCrudRepository {
 
     @Override
    public AuthorDto save(AuthorDto authorDto) {
-       Author author = authorDaoMapper.toAuthor(authorDto);
-       return authorDaoMapper.toAuthorDto(authorRepository.save(author));
+        //control existencia name y lastName autor en la base de datos
+        List<Author> names = authorRepository.findByName(authorDto.getName());
+        List<Author> lastNames = authorRepository.findByLastName(authorDto.getLastName());
+
+        if(!names.isEmpty() && !lastNames.isEmpty()){
+            throw new BibliotechException("Ya existe un autor con ese nombre y ese apellido.");
+        }
+
+        Author author = authorDaoMapper.toAuthor(authorDto);
+        return authorDaoMapper.toAuthorDto(authorRepository.save(author));
    }
 
     @Override
@@ -40,6 +48,12 @@ public class AuthorCrudRepositoryImpl implements AuthorCrudRepository {
     @Override
     public AuthorDto update(Long idAuthor, AuthorDto authorDto) {
         return getAuthorDto(idAuthor).map(authorDtoUpdate -> {
+
+            if(authorDto.getName().equalsIgnoreCase(authorDtoUpdate.getName())
+                    && authorDto.getLastName().equalsIgnoreCase(authorDtoUpdate.getLastName())){
+                throw new BibliotechException("No se pudo actualizar, nuevo nombre y nuevo apellido son los mismo al original.");
+            }
+
             authorDtoUpdate.setName(authorDto.getName());
             authorDtoUpdate.setLastName(authorDto.getLastName());
             return save(authorDtoUpdate);
