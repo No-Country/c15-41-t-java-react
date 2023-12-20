@@ -3,6 +3,7 @@ package c1541tjavareact.library.persistence.crud;
 import c1541tjavareact.library.domain.dto.GenreDto;
 import c1541tjavareact.library.domain.repository.GenreCrudRepository;
 import c1541tjavareact.library.domain.repository.GenreRepository;
+import c1541tjavareact.library.infra.exception.BibliotechException;
 import c1541tjavareact.library.persistence.entity.Genre;
 import c1541tjavareact.library.persistence.mapper.GenreDaoMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +40,11 @@ public class GenreCrudRepositoryImpl implements GenreCrudRepository {
     @Override
     public GenreDto update(Long idGenre, GenreDto genreDto) {
         return this.getGenreDto(idGenre).map(genre -> {
+
+            if(genreDto.getName().equalsIgnoreCase(genre.getName())){
+                throw new BibliotechException("No se pudo actualizar, nuevo nombre de genre es el mismo al original.");
+            }
+
             genre.setName(genreDto.getName());
             return save(genre);
         }).orElse(null);

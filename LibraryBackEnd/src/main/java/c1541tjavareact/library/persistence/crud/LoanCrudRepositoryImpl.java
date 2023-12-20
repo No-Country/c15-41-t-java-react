@@ -128,6 +128,10 @@ public class LoanCrudRepositoryImpl implements LoanCrudRepository {
         Optional<LoanDto> optLoan = this.getLoan(idLoan);
         if(optLoan.isPresent()){
             LoanDto loanToUpdate = optLoan.get();
+            if(loanToUpdate.getReturnEffectiveDate()!=null){
+                throw new BibliotechException("El libro ya se devolvió.");
+            }
+
             loanToUpdate.setReturnEffectiveDate(LocalDate.now());
 
             //Cambio Status Pending a False
