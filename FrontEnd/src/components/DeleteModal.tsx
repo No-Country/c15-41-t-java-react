@@ -8,6 +8,7 @@ interface Props {
   setIsModalDeleteOpen: (value: boolean) => void
   deleteEntity: string
   refresh: () => void
+  setIsLoading: (value: boolean) => void
 }
 
 const DeleteModal: React.FC<Props> = ({
@@ -15,7 +16,8 @@ const DeleteModal: React.FC<Props> = ({
   id,
   setIsModalDeleteOpen,
   refresh,
-  deleteEntity
+  deleteEntity,
+  setIsLoading
 }: Props) => {
   const { fetch } = useUser()
   let spanishDeleteEntity: string = ''
@@ -33,6 +35,7 @@ const DeleteModal: React.FC<Props> = ({
       break
   }
   const handleDelete = () => {
+    setIsLoading(true)
     fetch(deleteUrl, {
       method: 'DELETE'
     })
@@ -52,7 +55,10 @@ const DeleteModal: React.FC<Props> = ({
         })
         console.error(error)
       })
-    setIsModalDeleteOpen(false)
+      .finally(() => {
+        setIsLoading(false)
+        setIsModalDeleteOpen(false)
+      })
   }
   overflowYdisable()
   return (

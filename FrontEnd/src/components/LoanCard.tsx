@@ -13,7 +13,12 @@ interface LoanCardProps {
 export default function LoanCard({ loan, refresh }: LoanCardProps) {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
+  const [countClick, setCountClick] = useState(0)
   const { fetch } = useUser()
+
+  const addClick = () => {
+    setCountClick(countClick + 1)
+  }
 
   async function handleNotificacion(id: Loan['idLoan']) {
     try {
@@ -80,7 +85,13 @@ export default function LoanCard({ loan, refresh }: LoanCardProps) {
         </div>
         {isModalOpen && (
           <div className="fixed inset-0 z-50  bg-white opacity-100">
-            <ReturnModal loan={loan} setIsModalOpen={setIsModalOpen} refresh={refresh} />
+            <ReturnModal
+              loan={loan}
+              setIsModalOpen={setIsModalOpen}
+              refresh={refresh}
+              counter={countClick}
+              addClick={addClick}
+            />
             <div
               className="absolute right-4 top-4 cursor-pointer text-5xl font-semibold text-black hover:scale-125"
               onClick={() => {

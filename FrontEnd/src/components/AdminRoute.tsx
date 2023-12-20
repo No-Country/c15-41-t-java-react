@@ -7,7 +7,10 @@ import { IoMdClose } from 'react-icons/io'
 import RegisterAdmin from './RegisterAdmin'
 
 const AdminRoute = () => {
-  const { fetch } = useUser()
+  const {
+    fetch,
+    currentUser: { idAdmin: currIdAdmin }
+  } = useUser()
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [isError, setIsError] = useState(false)
   const [admins, setAdmins] = useState<AdminPost[]>([])
@@ -60,14 +63,24 @@ const AdminRoute = () => {
         ) : (
           <div className="grid w-[85%] items-center justify-center gap-x-14 gap-y-5 py-5 align-middle md:grid-cols-2">
             {admins.map(admin => (
-              <AdminCard key={admin.idAdmin} {...admin} refresh={fetchAdmins} />
+              <AdminCard
+                key={admin.idAdmin}
+                {...admin}
+                refresh={fetchAdmins}
+                isItSelf={currIdAdmin === admin.idAdmin}
+              />
             ))}
           </div>
         )}
       </div>
       {isModalOpen && (
         <div className="fixed inset-0 z-50 overflow-y-scroll bg-white opacity-100 max-lg:pb-[140px]">
-          <RegisterAdmin {...adminData} setIsModalOpen={setIsModalOpen} refresh={fetchAdmins} />
+          <RegisterAdmin
+            {...adminData}
+            setIsModalOpen={setIsModalOpen}
+            refresh={fetchAdmins}
+            isItSelf={false}
+          />
           <div
             className="absolute right-4 top-0 cursor-pointer text-4xl  font-semibold text-black hover:scale-125 sm:top-4 sm:text-5xl"
             onClick={() => {

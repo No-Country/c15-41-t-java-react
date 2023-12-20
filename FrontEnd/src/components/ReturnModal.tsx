@@ -6,29 +6,42 @@ interface ReturnModalProps {
   loan: Loan
   setIsModalOpen: (value: boolean) => void
   refresh: () => void
+  counter: number
+  addClick: () => void
 }
 
-export default function ReturnModal({ loan, setIsModalOpen, refresh }: ReturnModalProps) {
+export default function ReturnModal({
+  loan,
+  setIsModalOpen,
+  refresh,
+  counter,
+  addClick
+}: ReturnModalProps) {
   const { fetch } = useUser()
   async function handleReturn(loan: Loan) {
     const putOptions = {
       method: 'PUT'
     }
     try {
-      await fetch(`http://localhost:3000/loans/return/${loan.idLoan}`, putOptions)
-      refresh()
-      toast.success('Se realizo la devolucion correctamente', {
-        duration: 4000,
-        position: 'top-center'
-      })
+      if (counter === 1) {
+        await fetch(`http://localhost:3000/loans/return/${loan.idLoan}`, putOptions)
+        // delay of 2 s
+        await new Promise(resolve => setTimeout(resolve, 2000))
+        refresh()
+        toast.success('Se realizo la devolucion correctamente', {
+          duration: 4000,
+          position: 'top-center'
+        })
+        setIsModalOpen(false)
+      }
     } catch (error) {
-      console.error(error)
+      // console.error(error)
       toast.error('Hubo un error al intentar devolver el libro', {
         duration: 4000,
         position: 'top-center'
       })
+      setIsModalOpen(false)
     }
-    setIsModalOpen(false)
   }
 
   return (
@@ -50,7 +63,10 @@ export default function ReturnModal({ loan, setIsModalOpen, refresh }: ReturnMod
           <div className="flex items-center justify-around gap-4">
             <button
               className="flex h-10 w-[50%] items-center justify-center rounded-[32px] border-none bg-blueDark text-xl font-extrabold leading-normal text-white shadow-btn hover:cursor-pointer xl:h-12"
-              onClick={() => handleReturn(loan)}
+              onClick={() => {
+                addClick()
+                handleReturn(loan)
+              }}
             >
               Si
             </button>
