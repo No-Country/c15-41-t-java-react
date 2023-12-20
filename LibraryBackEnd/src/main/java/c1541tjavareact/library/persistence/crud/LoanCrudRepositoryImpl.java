@@ -128,7 +128,7 @@ public class LoanCrudRepositoryImpl implements LoanCrudRepository {
         Optional<LoanDto> optLoan = this.getLoan(idLoan);
         if(optLoan.isPresent()){
             LoanDto loanToUpdate = optLoan.get();
-            if(loanToUpdate.getReturnExpectedDate()!=null){
+            if(loanToUpdate.getReturnEffectiveDate()!=null){
                 throw new BibliotechException("El libro ya se devolvió.");
             }
 

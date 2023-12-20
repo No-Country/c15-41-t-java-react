@@ -2,13 +2,12 @@ package c1541tjavareact.library.persistence.crud;
 
 import c1541tjavareact.library.domain.dto.BookDto;
 import c1541tjavareact.library.domain.dto.ImageDto;
-import c1541tjavareact.library.domain.repository.BookCrudRepository;
-import c1541tjavareact.library.domain.repository.BookRepository;
-import c1541tjavareact.library.domain.repository.ImageRepository;
+import c1541tjavareact.library.domain.repository.*;
 import c1541tjavareact.library.domain.service.CloudinaryService;
 import c1541tjavareact.library.infra.exception.BibliotechException;
 import c1541tjavareact.library.persistence.entity.Book;
 import c1541tjavareact.library.persistence.entity.Image;
+import c1541tjavareact.library.persistence.entity.Loan;
 import c1541tjavareact.library.persistence.mapper.BookDaoMapper;
 import c1541tjavareact.library.persistence.mapper.ImageDaoMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +39,8 @@ public class BookCrudRepositoryImpl implements BookCrudRepository {
     @Autowired
     private ImageDaoMapper imageDaoMapper;
 
+    @Autowired
+    private LoanRepository loanRepository;
 
     @Override
     public List<BookDto> getAll() {
@@ -126,6 +127,14 @@ public class BookCrudRepositoryImpl implements BookCrudRepository {
     public boolean delete(Long idBook) {
         Optional<BookDto> optBook = this.getBook(idBook);
         if(optBook.isPresent()){
+
+            //control si idBook existe en loans
+            List<Loan> byIdBook = loanRepository.findByIdBook(idBook);
+            //byIdBook = byIdBook.stream().filter(b -> b.getReturnEffectiveDate()==null).toList();
+            if(!byIdBook.isEmpty()){
+                throw new BibliotechException("No se puede eliminar un libro que haya sido prestato alguna vez.");
+            }
+
             bookRepository.deleteById(idBook);
             return true;
         }
