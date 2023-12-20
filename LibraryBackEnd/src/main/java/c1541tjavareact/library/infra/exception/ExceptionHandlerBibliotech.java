@@ -34,10 +34,10 @@ public class ExceptionHandlerBibliotech {
         Map<String, String> errors = new HashMap<>();
         String message = exception.getMessage();
         if (message != null && message.startsWith("Duplicate")) {
-            errors.put("valorDuplicado", message.substring(
+            errors.put("message", "El valor " + message.substring(
                     message.indexOf(" '") + 2,
-                    message.indexOf("' ")
-            ));
+                    message.indexOf("' ")) + " ya existe."
+            );
         } else if (message != null && message.startsWith("Cannot")){
             errors.put("message", "Acción no permitida");
         }
