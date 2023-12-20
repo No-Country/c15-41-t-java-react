@@ -6,6 +6,8 @@ import { useUser } from '../context/UserContext'
 import toast from 'react-hot-toast'
 import { generateTempId } from '@/utils/function'
 import { AdminPost } from '@/types/types'
+import { IoMdClose } from 'react-icons/io'
+import overflowYdisable from '@/utils/overflowYdisable'
 
 interface AdminProps {
   idAdmin: number
@@ -158,10 +160,10 @@ const RegisterAdmin: React.FC<AdminProps> = props => {
     validationSchema,
     onSubmit
   })
-
+  overflowYdisable()
   return (
-    <div className="flex justify-center px-2 py-10">
-      <div className="sm:max-h[40%]  rounded-[40px] bg-grey sm:max-w-[70%] md:max-w-[60%] xl:w-full">
+    <div className="CrudCreateAndEditContainer">
+      <div className="CrudCreateAndEditPositioner">
         <h2 className="mx-auto w-10/12 py-8 text-2xl font-bold leading-normal text-blueDark">
           {isEditMode
             ? props.isItSelf
@@ -176,120 +178,105 @@ const RegisterAdmin: React.FC<AdminProps> = props => {
         </h2>
         <form className="mx-auto w-10/12" onSubmit={handleSubmit}>
           <div className="mb-14">
-            <label className="text-base font-bold leading-[normal] text-blueLight" htmlFor="email">
+            <label className="formLabel" htmlFor="email">
               Email <span className="text-red-500">*</span>
             </label>
-            <div className="relative flex h-8 w-full items-center gap-2 border-0 border-b-2 border-solid border-blueDark">
+            <div className="ReactSelectContainer">
               <input
-                className="w-full border-0 bg-grey text-base font-[400] leading-[normal] text-[#263238] placeholder-[#ABABAB] focus:outline-none"
+                className="ReactSelect"
                 name="email"
                 type="email"
                 placeholder="Ingrese el mail del Administrador"
                 value={values.email}
                 onChange={handleChange}
               />
-              <small className="absolute -bottom-6 text-xs font-bold text-red-500">
-                {errors.email}
-              </small>
+              <small className="errorContainer">{errors.email}</small>
             </div>
           </div>
           <div className="mb-14">
-            <label className="text-base font-bold leading-[normal] text-blueLight" htmlFor="name">
+            <label className="formLabel" htmlFor="name">
               Nombre <span className="text-red-500">*</span>
             </label>
-            <div className="relative flex h-8 w-full items-center gap-2 border-0 border-b-2 border-solid border-blueDark">
+            <div className="ReactSelectContainer">
               <input
-                className="w-full border-0 bg-grey text-base font-[400] leading-[normal] text-blueDark placeholder-[#ABABAB] focus:outline-none"
+                className="ReactSelect"
                 type="text"
                 name="name"
                 placeholder="Ingresá el nombre del Administrador"
                 value={values.name}
                 onChange={handleChange}
               />
-              <small className="absolute -bottom-6 text-xs font-bold text-red-500">
-                {errors.name}
-              </small>
+              <small className="errorContainer">{errors.name}</small>
             </div>
           </div>
           <div className="mb-14">
-            <label
-              className="text-base font-bold leading-[normal] text-blueLight"
-              htmlFor="lastName"
-            >
+            <label className="formLabel" htmlFor="lastName">
               Apellido <span className="text-red-500">*</span>
             </label>
-            <div className="relative flex h-8 w-full items-center gap-2 border-0 border-b-2 border-solid border-blueDark">
+            <div className="ReactSelectContainer">
               <input
-                className="w-full border-0 bg-grey text-base font-[400] leading-[normal] text-blueDark placeholder-[#ABABAB] focus:outline-none"
+                className="ReactSelect"
                 type="text"
                 name="lastName"
                 placeholder="Ingresá el apellido del Administrador"
                 value={values.lastName}
                 onChange={handleChange}
               />
-              <small className="absolute -bottom-6 text-xs font-bold text-red-500">
-                {errors.lastName}
-              </small>
+              <small className="errorContainer">{errors.lastName}</small>
             </div>
           </div>
           <div className="mb-14">
-            <label
-              className="text-base font-bold leading-[normal] text-blueLight"
-              htmlFor="password"
-            >
+            <label className="formLabel" htmlFor="password">
               {isEditMode ? 'Nueva contraseña' : 'Contraseña '}
               {!isEditMode && <span className="text-red-500">*</span>}
             </label>
-            <div className="relative mb-14 flex h-8 w-full items-center gap-2 border-0 border-b-2 border-solid  hover:border-blueDark">
+            <div className="ReactSelectContainer">
               <input
-                className="w-full border-0 bg-grey text-base font-[400] leading-[normal] text-blueDark placeholder-[#ABABAB] focus:outline-none"
+                className="ReactSelect"
                 name="password"
                 type={showPass ? 'text' : 'password'}
                 placeholder="Ingresá tu contraseña"
                 value={values.password}
                 onChange={handleChange}
               />
-              <div
-                className="cursor-pointer self-end"
-                onClick={() => {
-                  setShowPass(!showPass)
-                }}
-              >
-                {showPass ? <IoEyeOutline size={16} /> : <IoEyeOffOutline size={16} />}
+              <div className="flex justify-between">
+                <small className="errorContainer">{errors.password}</small>
+                <div
+                  className="cursor-pointer self-end"
+                  onClick={() => {
+                    setShowPass(!showPass)
+                  }}
+                >
+                  {showPass ? <IoEyeOutline size={16} /> : <IoEyeOffOutline size={16} />}
+                </div>
               </div>
-              <small className="absolute -bottom-6 text-xs font-bold text-red-500">
-                {errors.password}
-              </small>
             </div>
           </div>
           <div className="mb-14">
-            <label
-              className="text-base font-bold leading-[normal] text-blueLight"
-              htmlFor="passwordConfirm"
-            >
+            <label className="formLabel" htmlFor="passwordConfirm">
               {isEditMode ? 'Confirmar nueva contraseña' : 'Confirmar contraseña '}
               {!isEditMode && <span className="text-red-500">*</span>}
             </label>
-            <div className="relative mb-14 flex h-8 w-full items-center gap-2 border-0 border-b-2 border-solid  hover:border-blueDark">
+            <div className="ReactSelectContainer">
               <input
-                className="w-full border-0 bg-grey text-base font-[400] leading-[normal] text-blueDark placeholder-[#ABABAB] focus:outline-none"
+                className="ReactSelect"
                 name="passwordConfirm"
                 type={showPass ? 'text' : 'password'}
                 placeholder="Ingresá tu contraseña"
                 value={values.passwordConfirm}
                 onChange={handleChange}
               />
-              <div
-                className="cursor-pointer self-end"
-                onClick={() => {
-                  setShowPass(!showPass)
-                }}
-              >
-                {showPass ? <IoEyeOutline size={16} /> : <IoEyeOffOutline size={16} />}
+              <div className="flex justify-between">
+                <small className="errorContainer">{errors.passwordConfirm}</small>
+                <div
+                  className="cursor-pointer self-end"
+                  onClick={() => {
+                    setShowPass(!showPass)
+                  }}
+                >
+                  {showPass ? <IoEyeOutline size={16} /> : <IoEyeOffOutline size={16} />}
+                </div>
               </div>
-              <small className="absolute -bottom-6 text-xs font-bold text-red-500">
-                {errors.passwordConfirm}
-              </small>
             </div>
           </div>
           <div className="pb-10">
@@ -306,6 +293,14 @@ const RegisterAdmin: React.FC<AdminProps> = props => {
             </button>
           </div>
         </form>
+      </div>
+      <div
+        className="closeModal"
+        onClick={() => {
+          props.setIsModalOpen(false)
+        }}
+      >
+        <IoMdClose />
       </div>
     </div>
   )
