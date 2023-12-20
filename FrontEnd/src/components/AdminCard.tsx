@@ -35,7 +35,7 @@ const AdminCard: React.FC<PropsAdmin> = Props => {
         </div>
       </div>
       {isModalEditOpen && (
-        <div className="absolute inset-0 z-50 bg-white opacity-100">
+        <div className="absolute inset-0 z-50 overflow-y-scroll bg-white opacity-100 max-lg:pb-[140px]">
           <RegisterAdmin {...Props} setIsModalOpen={setIsModalEditOpen} refresh={Props.refresh} />
           <div
             className="absolute right-4 top-0 cursor-pointer text-4xl  font-semibold text-black hover:scale-125 sm:top-4 sm:text-5xl"

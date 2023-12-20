@@ -74,7 +74,7 @@ const AdminRoute = () => {
         )}
       </div>
       {isModalOpen && (
-        <div className="absolute inset-0 z-50 bg-white opacity-100">
+        <div className="fixed inset-0 z-50 overflow-y-scroll bg-white opacity-100 max-lg:pb-[140px]">
           <RegisterAdmin
             {...adminData}
             setIsModalOpen={setIsModalOpen}
