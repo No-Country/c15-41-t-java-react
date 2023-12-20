@@ -16,6 +16,7 @@ export default function UserRow({ user, refresh }: UserRowProps) {
   const [isModalDeleteOpen, setIsModalDeleteOpen] = useState(false)
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [isModalLoansOpen, setIsModalLoansOpen] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
 
   return (
     <>
@@ -51,14 +52,18 @@ export default function UserRow({ user, refresh }: UserRowProps) {
             >
               <IoPencil size={20} />
             </div>
-            <div
-              onClick={() => {
-                setIsModalDeleteOpen(true)
-              }}
-              className="increase-scale mr-1 hover:cursor-pointer"
+            <button
+              className="increase-scale border-none bg-transparent hover:cursor-pointer"
+              onClick={() => setIsModalDeleteOpen(true)}
+              disabled={isLoading}
             >
-              <IoTrashOutline size={20} />
-            </div>
+              {' '}
+              {isLoading ? (
+                <div className="absolute h-4 w-4 animate-spin rounded-full border-solid border-x-blueDark"></div>
+              ) : (
+                <IoTrashOutline size={23} />
+              )}
+            </button>
           </div>
         </td>
       </tr>
@@ -70,6 +75,7 @@ export default function UserRow({ user, refresh }: UserRowProps) {
             setIsModalDeleteOpen={setIsModalDeleteOpen}
             deleteEntity="user"
             refresh={refresh}
+            setIsLoading={setIsLoading}
           />
         </div>
       )}

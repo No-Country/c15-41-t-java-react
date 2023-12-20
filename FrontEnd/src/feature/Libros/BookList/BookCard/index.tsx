@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { IoMdClose } from 'react-icons/io'
 import { IoPencil, IoTrashOutline } from 'react-icons/io5'
 import type { Book } from '@/types/types'
@@ -14,6 +14,7 @@ const BookCard: React.FC<Props> = ({ refresh, ...bookData }) => {
   const [isModalOpen, setIsModalOpen] = React.useState(false)
   const [isModalDeleteOpen, setIsModalDeleteOpen] = React.useState(false)
   const [isModalDetails, setIsModalDetails] = React.useState(false)
+  const [isLoading, setIsLoading] = useState(false)
 
   const {
     idBook,
@@ -67,14 +68,18 @@ const BookCard: React.FC<Props> = ({ refresh, ...bookData }) => {
           >
             <IoPencil size={23} />
           </div>
-          <div
-            className="increase-scale hover:cursor-pointer"
-            onClick={() => {
-              setIsModalDeleteOpen(true)
-            }}
+          <button
+            className="increase-scale border-none bg-transparent hover:cursor-pointer"
+            onClick={() => setIsModalDeleteOpen(true)}
+            disabled={isLoading}
           >
-            <IoTrashOutline size={23} />
-          </div>
+            {' '}
+            {isLoading ? (
+              <div className="absolute h-4 w-4 animate-spin rounded-full border-solid border-x-blueDark"></div>
+            ) : (
+              <IoTrashOutline size={23} />
+            )}
+          </button>
         </div>
       </div>
       {isModalOpen && (
@@ -98,6 +103,7 @@ const BookCard: React.FC<Props> = ({ refresh, ...bookData }) => {
             setIsModalDeleteOpen={setIsModalDeleteOpen}
             deleteEntity="book"
             refresh={refresh}
+            setIsLoading={setIsLoading}
           />
         </div>
       )}
