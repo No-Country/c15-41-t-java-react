@@ -31,7 +31,7 @@ const AdminCard: React.FC<PropsAdmin> = Props => {
         </div>
       </div>
       {isModalEditOpen && (
-        <div className="absolute inset-0 z-50 bg-white opacity-100">
+        <div className="absolute inset-0 z-50 overflow-y-scroll bg-white opacity-100 max-lg:pb-[140px]">
           <RegisterAdmin
             {...Props}
             passwordConfirm={password}
