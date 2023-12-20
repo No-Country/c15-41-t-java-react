@@ -16,6 +16,7 @@ export default function UserCard({ user, refresh }: UserCardProps) {
   const [isModalDeleteOpen, setIsModalDeleteOpen] = useState(false)
   const [isModalLoansOpen, setIsModalLoansOpen] = useState(false)
   const [isModaEditlOpen, setIsModaEditOpen] = useState(false)
+  const [isLoading, setIsLoading]=useState(false)
 
   return (
     <div className="flex-col p-3">
@@ -32,14 +33,19 @@ export default function UserCard({ user, refresh }: UserCardProps) {
         <div className="increase-scale px-0.5 hover:cursor-pointer">
           <IoPencil size={20} onClick={() => setIsModaEditOpen(true)} />
         </div>
-        <div
-          onClick={() => {
-            setIsModalDeleteOpen(true)
-          }}
-          className="increase-scale px-0.5 hover:cursor-pointer"
-        >
-          <IoTrashOutline size={20} />
-        </div>
+        <button
+            className="increase-scale hover:cursor-pointer bg-transparent border-none"
+            onClick={() => setIsModalDeleteOpen(true)}
+            disabled={isLoading}
+          >
+             {' '}
+              {isLoading ? (
+                <div className="absolute h-4 w-4 animate-spin rounded-full border-solid border-x-blueDark"></div>
+              ) : (
+                <IoTrashOutline size={23} />
+              )}
+          
+          </button>
       </div>
       <div className="flex-col p-4">
         <p>
@@ -67,6 +73,7 @@ export default function UserCard({ user, refresh }: UserCardProps) {
             setIsModalDeleteOpen={setIsModalDeleteOpen}
             deleteEntity="user"
             refresh={refresh}
+            setIsLoading={setIsLoading}
           />
         </div>
       )}
