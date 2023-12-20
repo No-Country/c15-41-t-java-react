@@ -14,7 +14,7 @@ const BookCard: React.FC<Props> = ({ refresh, ...bookData }) => {
   const [isModalOpen, setIsModalOpen] = React.useState(false)
   const [isModalDeleteOpen, setIsModalDeleteOpen] = React.useState(false)
   const [isModalDetails, setIsModalDetails] = React.useState(false)
-  const [isLoading, setIsLoading]=useState(false)
+  const [isLoading, setIsLoading] = useState(false)
 
   const {
     idBook,
@@ -69,17 +69,16 @@ const BookCard: React.FC<Props> = ({ refresh, ...bookData }) => {
             <IoPencil size={23} />
           </div>
           <button
-            className="increase-scale hover:cursor-pointer bg-transparent border-none"
+            className="increase-scale border-none bg-transparent hover:cursor-pointer"
             onClick={() => setIsModalDeleteOpen(true)}
             disabled={isLoading}
           >
-             {' '}
-              {isLoading ? (
-                <div className="absolute h-4 w-4 animate-spin rounded-full border-solid border-x-blueDark"></div>
-              ) : (
-                <IoTrashOutline size={23} />
-              )}
-          
+            {' '}
+            {isLoading ? (
+              <div className="absolute h-4 w-4 animate-spin rounded-full border-solid border-x-blueDark"></div>
+            ) : (
+              <IoTrashOutline size={23} />
+            )}
           </button>
         </div>
       </div>
@@ -97,9 +96,7 @@ const BookCard: React.FC<Props> = ({ refresh, ...bookData }) => {
         </div>
       )}
       {isModalDeleteOpen && (
-        <div
-         className="fixed inset-0 z-50  bg-white opacity-100"
-         >
+        <div className="fixed inset-0 z-50  bg-white opacity-100">
           <DeleteModal
             name={bookData.title}
             id={idBook}
@@ -107,7 +104,6 @@ const BookCard: React.FC<Props> = ({ refresh, ...bookData }) => {
             deleteEntity="book"
             refresh={refresh}
             setIsLoading={setIsLoading}
-            
           />
         </div>
       )}

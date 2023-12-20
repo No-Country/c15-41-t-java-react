@@ -53,18 +53,17 @@ export default function UserRow({ user, refresh }: UserRowProps) {
               <IoPencil size={20} />
             </div>
             <button
-            className="increase-scale hover:cursor-pointer bg-transparent border-none"
-            onClick={() => setIsModalDeleteOpen(true)}
-            disabled={isLoading}
-          >
-             {' '}
+              className="increase-scale border-none bg-transparent hover:cursor-pointer"
+              onClick={() => setIsModalDeleteOpen(true)}
+              disabled={isLoading}
+            >
+              {' '}
               {isLoading ? (
                 <div className="absolute h-4 w-4 animate-spin rounded-full border-solid border-x-blueDark"></div>
               ) : (
                 <IoTrashOutline size={23} />
               )}
-          
-          </button>
+            </button>
           </div>
         </td>
       </tr>

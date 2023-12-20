@@ -16,7 +16,7 @@ export default function UserCard({ user, refresh }: UserCardProps) {
   const [isModalDeleteOpen, setIsModalDeleteOpen] = useState(false)
   const [isModalLoansOpen, setIsModalLoansOpen] = useState(false)
   const [isModaEditlOpen, setIsModaEditOpen] = useState(false)
-  const [isLoading, setIsLoading]=useState(false)
+  const [isLoading, setIsLoading] = useState(false)
 
   return (
     <div className="flex-col p-3">
@@ -34,18 +34,17 @@ export default function UserCard({ user, refresh }: UserCardProps) {
           <IoPencil size={20} onClick={() => setIsModaEditOpen(true)} />
         </div>
         <button
-            className="increase-scale hover:cursor-pointer bg-transparent border-none"
-            onClick={() => setIsModalDeleteOpen(true)}
-            disabled={isLoading}
-          >
-             {' '}
-              {isLoading ? (
-                <div className="absolute h-4 w-4 animate-spin rounded-full border-solid border-x-blueDark"></div>
-              ) : (
-                <IoTrashOutline size={23} />
-              )}
-          
-          </button>
+          className="increase-scale border-none bg-transparent hover:cursor-pointer"
+          onClick={() => setIsModalDeleteOpen(true)}
+          disabled={isLoading}
+        >
+          {' '}
+          {isLoading ? (
+            <div className="absolute h-4 w-4 animate-spin rounded-full border-solid border-x-blueDark"></div>
+          ) : (
+            <IoTrashOutline size={23} />
+          )}
+        </button>
       </div>
       <div className="flex-col p-4">
         <p>
