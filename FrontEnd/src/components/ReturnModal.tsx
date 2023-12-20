@@ -23,10 +23,8 @@ export default function ReturnModal({
       method: 'PUT'
     }
     try {
-      if (counter === 1) {
+      if (counter === 0) {
         await fetch(`http://localhost:3000/loans/return/${loan.idLoan}`, putOptions)
-        // delay of 2 s
-        await new Promise(resolve => setTimeout(resolve, 2000))
         refresh()
         toast.success('Se realizo la devolucion correctamente', {
           duration: 4000,
