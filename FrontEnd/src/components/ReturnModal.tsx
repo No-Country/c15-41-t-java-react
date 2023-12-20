@@ -6,9 +6,15 @@ interface ReturnModalProps {
   loan: Loan
   setIsModalOpen: (value: boolean) => void
   refresh: () => void
+  setReturnCompleted: (value: boolean) => void
 }
 
-export default function ReturnModal({ loan, setIsModalOpen, refresh }: ReturnModalProps) {
+export default function ReturnModal({
+  loan,
+  setIsModalOpen,
+  refresh,
+  setReturnCompleted
+}: ReturnModalProps) {
   const { fetch } = useUser()
   async function handleReturn(loan: Loan) {
     const putOptions = {
@@ -28,6 +34,7 @@ export default function ReturnModal({ loan, setIsModalOpen, refresh }: ReturnMod
         position: 'top-center'
       })
     }
+    setReturnCompleted(true)
     setIsModalOpen(false)
   }
 

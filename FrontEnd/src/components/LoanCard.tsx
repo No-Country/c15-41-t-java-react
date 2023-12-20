@@ -13,6 +13,7 @@ interface LoanCardProps {
 export default function LoanCard({ loan, refresh }: LoanCardProps) {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
+  const [returnCompleted, setReturnCompleted] = useState(false)
   const { fetch } = useUser()
 
   async function handleNotificacion(id: Loan['idLoan']) {
@@ -62,9 +63,13 @@ export default function LoanCard({ loan, refresh }: LoanCardProps) {
           <button
             onClick={() => setIsModalOpen(true)}
             className="my-3 flex h-[53px] w-5/6 items-center justify-center gap-x-2 rounded-[32px] border-none bg-blueDark p-5 py-5 text-[17px] font-bold leading-normal text-white shadow-btn hover:cursor-pointer disabled:cursor-not-allowed disabled:opacity-50 max-md:mx-2 max-md:text-sm"
+            disabled={returnCompleted}
           >
             <img className="h-10 p-1 text-center max-md:h-9" src="/icons/Return.png"></img>
             <p className="p-1">Devolver libro</p>
+            {returnCompleted && (
+              <div className="ml-2 h-4 w-4 animate-spin rounded-full border-solid border-x-blueDark"></div>
+            )}
           </button>
           <button
             onClick={() => handleNotificacion(loan.idLoan)}
@@ -80,7 +85,12 @@ export default function LoanCard({ loan, refresh }: LoanCardProps) {
         </div>
         {isModalOpen && (
           <div className="fixed inset-0 z-50  bg-white opacity-100">
-            <ReturnModal loan={loan} setIsModalOpen={setIsModalOpen} refresh={refresh} />
+            <ReturnModal
+              loan={loan}
+              setIsModalOpen={setIsModalOpen}
+              refresh={refresh}
+              setReturnCompleted={setReturnCompleted}
+            />
             <div
               className="absolute right-4 top-4 cursor-pointer text-5xl font-semibold text-black hover:scale-125"
               onClick={() => {
