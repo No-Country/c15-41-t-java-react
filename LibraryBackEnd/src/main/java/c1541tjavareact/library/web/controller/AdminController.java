@@ -4,6 +4,7 @@ import c1541tjavareact.library.domain.dto.AdminDto;
 import c1541tjavareact.library.domain.service.AdminService;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -42,6 +43,10 @@ public class AdminController {
     @PutMapping("/update/{id}")
     public ResponseEntity<AdminDto> update(@PathVariable Long id,
                                            @RequestBody AdminDto adminDto){
+        if(StringUtils.isNotEmpty(adminDto.getPassword())) {
+            adminDto.setPassword(passwordEncoder.encode(adminDto.getPassword()));
+            System.out.println("Entro");
+        }
         return  ResponseEntity.ok(adminService.update(id,adminDto));
     }
 
