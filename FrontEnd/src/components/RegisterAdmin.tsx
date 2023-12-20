@@ -94,11 +94,14 @@ const RegisterAdmin: React.FC<AdminProps> = props => {
           } else {
             if (values.name !== userName) {
               updateName(values.name)
+              // INFO Este metodo genera un re-render por lo que cuando se cumpla este bloque, no necesita cerrar el modal...
             }
+            if (props.refresh) props.refresh()
             toast.success('Actualizaste tus datos correctamente', {
               duration: 4000,
               position: 'top-center'
             })
+            props.setIsModalOpen(false)
           }
         } else {
           if (props.refresh) props.refresh()
