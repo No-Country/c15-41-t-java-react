@@ -59,11 +59,10 @@ export const EditGenre: React.FC<EditGenreProps> = ({
       toast.success('Su género se editó correctamente', { duration: 4000, position: 'top-center' })
       refreshEntitys()
       closeModal()
-    } catch (error) {
-      toast.error('Hubo un error al intentar editar el género', {
-        duration: 4000,
-        position: 'top-center'
-      })
+    } catch (error: any) {
+      if (error.message !== undefined && typeof error.message === 'string' && error.message !== '')
+        toast.error(error.message, { duration: 4000, position: 'top-center' })
+      else toast.error('Error al editar el género', { duration: 4000, position: 'top-center' })
     } finally {
       setIsLoading(false)
     }

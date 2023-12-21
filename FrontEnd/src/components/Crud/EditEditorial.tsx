@@ -62,11 +62,10 @@ export const EditEditorial: React.FC<EditEditorialProps> = ({
       })
       refreshEntitys()
       closeModal()
-    } catch (error) {
-      toast.error('Hubo un error al intentar editar la editorial', {
-        duration: 4000,
-        position: 'top-center'
-      })
+    } catch (error: any) {
+      if (error.message !== undefined && typeof error.message === 'string' && error.message !== '')
+        toast.error(error.message, { duration: 4000, position: 'top-center' })
+      else toast.error('Error al editar la editorial', { duration: 4000, position: 'top-center' })
     } finally {
       setIsLoading(false)
     }

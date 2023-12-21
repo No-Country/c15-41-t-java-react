@@ -1,6 +1,7 @@
 import { useUser } from '@/context/UserContext'
 import { Loan } from '@/types/types'
 import toast from 'react-hot-toast'
+import { useState } from 'react'
 
 interface ReturnModalProps {
   loan: Loan
@@ -18,12 +19,14 @@ export default function ReturnModal({
   addClick
 }: ReturnModalProps) {
   const { fetch } = useUser()
+  const [isLoading, setIsLoading] = useState(false)
   async function handleReturn(loan: Loan) {
     const putOptions = {
       method: 'PUT'
     }
     try {
       if (counter === 0) {
+        setIsLoading(true)
         await fetch(`http://localhost:3000/loans/return/${loan.idLoan}`, putOptions)
         refresh()
         toast.success('Se realizo la devolucion correctamente', {
@@ -32,12 +35,12 @@ export default function ReturnModal({
         })
         setIsModalOpen(false)
       }
-    } catch (error) {
-      // console.error(error)
-      toast.error('Hubo un error al intentar devolver el libro', {
-        duration: 4000,
-        position: 'top-center'
-      })
+    } catch (error: any) {
+      if (error.message !== undefined && typeof error.message === 'string' && error.message !== '')
+        toast.error(error.message, { duration: 4000, position: 'top-center' })
+      else toast.error('Error al devolver el libro', { duration: 4000, position: 'top-center' })
+    } finally {
+      setIsLoading(false)
       setIsModalOpen(false)
     }
   }
@@ -65,6 +68,7 @@ export default function ReturnModal({
                 addClick()
                 handleReturn(loan)
               }}
+              disabled={isLoading}
             >
               Si
             </button>

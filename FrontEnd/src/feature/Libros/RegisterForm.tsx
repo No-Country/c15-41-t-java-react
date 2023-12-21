@@ -175,9 +175,10 @@ export default function RegisterForm({ onSuccess }: { onSuccess: () => void }) {
       resetForm()
       toast.success('Su libro se agregó correctamente', { duration: 4000, position: 'top-center' })
       onSuccess()
-    } catch (error) {
-      console.log('error', error)
-      toast.error('Error al agregar el libro', { duration: 4000, position: 'top-center' })
+    } catch (error: any) {
+      if (error.message !== undefined && typeof error.message === 'string' && error.message !== '')
+        toast.error(error.message, { duration: 4000, position: 'top-center' })
+      else toast.error('Error al agregar el libro', { duration: 4000, position: 'top-center' })
     } finally {
       setIsLoading(false)
     }

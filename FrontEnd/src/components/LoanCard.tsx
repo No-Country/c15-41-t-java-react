@@ -28,12 +28,10 @@ export default function LoanCard({ loan, refresh }: LoanCardProps) {
         duration: 4000,
         position: 'top-center'
       })
-    } catch (error) {
-      console.error(error)
-      toast.error('Hubo un error al enviar notificacion', {
-        duration: 4000,
-        position: 'top-center'
-      })
+    } catch (error: any) {
+      if (error.message !== undefined && typeof error.message === 'string' && error.message !== '')
+        toast.error(error.message, { duration: 4000, position: 'top-center' })
+      else toast.error('Error al enviar notificación', { duration: 4000, position: 'top-center' })
     } finally {
       setIsLoading(false)
     }

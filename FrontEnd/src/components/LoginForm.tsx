@@ -14,8 +14,8 @@ interface typeInitialValues {
 }
 
 const initialValues = {
-  email: '',
-  password: ''
+  email: 'jose.lara@gmail.com',
+  password: '@Biblio73#'
 }
 
 const validationSchema = Yup.object({
