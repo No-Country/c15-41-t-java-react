@@ -104,6 +104,7 @@ export default function RegisterForm(props: bookProps) {
   }, [props])
 
   useEffect(() => {
+    setSelectedAuthor(null)
     const getAuthors = async () => {
       const data = await fetch('http://localhost:3000/authors/all')
       setAuthors(data)
@@ -114,6 +115,7 @@ export default function RegisterForm(props: bookProps) {
   }, [isAuthorDBmodify])
 
   useEffect(() => {
+    setSelectedEditorial(null)
     const getEditorials = async () => {
       const data = await fetch('http://localhost:3000/editorials/all')
       setEditorials(data)
@@ -124,6 +126,7 @@ export default function RegisterForm(props: bookProps) {
   }, [isEditorialDBmodify])
 
   useEffect(() => {
+    setSelectedGenre(null)
     const getGenres = async () => {
       const data = await fetch('http://localhost:3000/books/genres/all')
       setMockGenres(data)
