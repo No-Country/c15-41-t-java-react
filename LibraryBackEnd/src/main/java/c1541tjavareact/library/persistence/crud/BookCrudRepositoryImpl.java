@@ -45,6 +45,7 @@ public class BookCrudRepositoryImpl implements BookCrudRepository {
     @Override
     public List<BookDto> getAll() {
         List<Book> books = bookRepository.findAll();
+        books = books.stream().filter(Book::getIsActive).toList();
         return bookDaoMapper.toBooksDto(books);
     }
 
@@ -53,6 +54,14 @@ public class BookCrudRepositoryImpl implements BookCrudRepository {
         Long idImage=1L;
         idImage = getUpdateIdImage(bookDto, idImage);
         bookDto.setIdImage(idImage);
+
+        //control si isbn de book ya existe en la base de dato
+        Optional<Book> optByIsbn = bookRepository.findByIsbn(bookDto.getIsbn());
+        if(optByIsbn.isPresent() && !optByIsbn.get().getIsActive()){
+            //actualizo el book ya existente en la bd
+            bookDto.setIsActive(Boolean.TRUE);
+            return this.update(optByIsbn.get().getIdBook(), bookDto);
+        }
 
         return saveBookLoan(bookDto);
     }
@@ -114,6 +123,9 @@ public class BookCrudRepositoryImpl implements BookCrudRepository {
             if(!bookToUpdate.getIsbn().equalsIgnoreCase(bookDto.getIsbn())){
                 bookToUpdate.setIsbn(bookDto.getIsbn());
             }
+            if(bookDto.getIsActive()!=null){
+                bookToUpdate.setIsActive(bookDto.getIsActive());
+            }
             bookToUpdate.setIdGenre(bookDto.getIdGenre());
             bookToUpdate.setQuantity(bookDto.getQuantity());
             Long newIdImage = getUpdateIdImage(bookDto,bookToUpdate.getIdImage());
@@ -130,12 +142,18 @@ public class BookCrudRepositoryImpl implements BookCrudRepository {
 
             //control si idBook existe en loans
             List<Loan> byIdBook = loanRepository.findByIdBook(idBook);
-            //byIdBook = byIdBook.stream().filter(b -> b.getReturnEffectiveDate()==null).toList();
             if(!byIdBook.isEmpty()){
-                throw new BibliotechException("No se puede eliminar un libro que haya sido prestato alguna vez.");
+                List<Loan> onLoan = byIdBook.stream().filter(b -> b.getReturnEffectiveDate()==null).toList();
+                if(!onLoan.isEmpty()){
+                    throw new BibliotechException("No se puede eliminar un libro con un prestamo activo.");
+                }
+                //throw new BibliotechException("No se puede eliminar un libro que haya sido prestato alguna vez.");
             }
 
-            bookRepository.deleteById(idBook);
+            //bookRepository.deleteById(idBook);
+            //Set active book false and save
+            optBook.get().setIsActive(false);
+            this.saveBookLoan(optBook.get());
             return true;
         }
         return false;
