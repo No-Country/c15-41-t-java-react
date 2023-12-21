@@ -1,0 +1,36 @@
+services:
+  - type: web
+    name: backend
+    runtime: docker
+    autoDeploy: false
+    plan: free
+    branch: docker
+    rootDir: ./LibraryBackEnd
+    envVars:
+      - key: DB_HOSTNAME
+        sync: false
+      - key: DB_DATABASE
+        sync: false
+      - key: DB_USERNAME
+        sync: false
+      - key: DB_PASSWORD
+        sync: false
+      - key: API_SECURITY_SECRET
+        sync: false
+      - key: EMAIL_USERNAME
+        sync: false
+      - key: EMAIL_PASSWORD
+        sync: false
+      - key: API_SECRET_CLOUDINARY
+        sync: false
+
+  - type: web
+    name: frontend
+    runtime: docker
+    autoDeploy: false
+    plan: free
+    branch: docker
+    rootDir: ./FrontEnd
+    envVars:
+      - key: VITE_BACKEND_HOST
+        sync: false

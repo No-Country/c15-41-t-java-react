@@ -1,0 +1,76 @@
+services:
+  mysql:
+    image: mysql:8.2
+    container_name: c15-41-t-java-react_mysql
+    restart: always
+    ports:
+      - 3306:3306
+    environment:
+      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+      - MYSQL_USER=juan
+      - MYSQL_PASSWORD=perez
+      - MYSQL_DATABASE=bibliotech
+    volumes:
+      - type: volume
+        source: mysql-data
+        target: /var/lib/mysql
+    networks:
+      - localnet
+
+  pma:
+    depends_on:
+      - mysql
+    image: phpmyadmin
+    container_name: c15-41-t-java-react_pma
+    restart: always
+    ports:
+      - 81:80
+    environment:
+      - PMA_HOST=mysql
+    networks:
+      - localnet
+
+  backend:
+    depends_on:
+      - mysql
+    container_name: c15-41-t-java-react_backend
+    restart: always
+    build:
+      context: ./LibraryBackEnd
+      dockerfile: Dockerfile
+    environment:
+      - DB_HOSTNAME=mysql:3306
+      - DB_USERNAME=juan
+      - DB_PASSWORD=perez
+      - DB_DATABASE=bibliotech
+      - API_SECURITY_SECRET=secret
+      - EMAIL_USERNAME=bibliotech.c15@gmail.com
+      - EMAIL_PASSWORD=opqeqlkdygbcniiv
+      - API_SECRET_CLOUDINARY=Y9ROHDSs_BnjyNG5xDROMS-2tME
+    ports:
+      - "8080:8080"
+    networks:
+      - localnet
+
+  frontend:
+    depends_on:
+      - backend
+    container_name: c15-41-t-java-react_frontend
+    build:
+      context: ./FrontEnd
+      dockerfile: Dockerfile
+      args:
+        - VITE_BACKEND_HOST=http://localhost:8080
+    restart: always
+    ports:
+      - "80:80"
+    networks:
+      - localnet
+
+volumes:
+  mysql-data:
+
+
+networks:
+  localnet:
+    driver: bridge

@@ -1,0 +1,9 @@
+{
+  "/books/all": "/books",
+  "/authors/all": "/authors",
+  "/editorials/all": "/editorials",
+  "/books/genres/all": "/genres",
+  "/users/all": "/users",
+  "/loans/all": "/loans",
+  "/admins/all": "/admins"
+}
