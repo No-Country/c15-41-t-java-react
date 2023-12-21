@@ -56,7 +56,7 @@ export default function UserCard({ user, refresh }: UserCardProps) {
           {user.phoneNumber}
         </p>
         <p>
-          <span className="font-medium text-black">Direccion: </span>
+          <span className="font-medium text-black">Dirección: </span>
           {user.address}
         </p>
         <p>

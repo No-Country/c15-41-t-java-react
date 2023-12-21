@@ -55,7 +55,7 @@ const SearchLoan: React.FC<SearchLoanProps> = ({ allLoans, onSearchResults, setP
           className="absolute right-0 top-14 z-10 hidden w-[60vw] rounded-md bg-[#0A7ABF] p-4 text-white shadow-xl group-hover:block min-[750px]:w-[35vw]"
         >
           <p>
-            Puede buscar por <b>Dni, Nombre y/o Apellido del miembro o título de la obra.</b>
+            Puede buscar por <b>DNI, Nombre y/o Apellido del miembro o título de la obra.</b>
             <br />
             <br />
             Puede escribir las palabras de su búsqueda en

@@ -14,17 +14,16 @@ const DeleteEditorial: React.FC<Props> = ({
   deleteEntity
 }: Props) => {
   const { fetch } = useUser()
-  const handleDelete = () => {
+  const handleDelete = async () => {
     try {
-      fetch(`http://localhost:3000/editorials/delete/${deleteEntity.value}`, {
+      await fetch(`http://localhost:3000/editorials/delete/${deleteEntity.value}`, {
         method: 'DELETE'
-      }).then(() => {
-        refresh()
-        toast.success(`Su editorial ha sido eliminada`, {
-          duration: 3000,
-          position: 'top-center',
-          icon: '♻'
-        })
+      })
+      refresh()
+      toast.success(`Su editorial ha sido eliminada`, {
+        duration: 3000,
+        position: 'top-center',
+        icon: '♻'
       })
       setIsModalDeleteOpen(false)
     } catch (error: any) {

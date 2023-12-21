@@ -12,12 +12,12 @@ interface propsLoan extends Book {
 }
 
 const validationSchema = Yup.object({
-  title: Yup.string().required('El titulo es requerido'),
+  title: Yup.string().required('El título es requerido'),
   author: Yup.string().required('El autor es requerido'),
-  genre: Yup.string().required('El genero es requerido'),
-  editorial: Yup.string().required('la editorial es requerida'),
+  genre: Yup.string().required('El género es requerido'),
+  editorial: Yup.string().required('La editorial es requerida'),
   isbn: Yup.string().required('El ISBN es requerido'),
-  loanDate: Yup.string().required('La fecha de prestamo es requerida'),
+  loanDate: Yup.string().required('La fecha de préstamo es requerida'),
   returnExpectedDate: Yup.date()
     .required('La fecha de devolución es requerida')
     .min(new Date(), 'La fecha de devolución no puede ser menor o igual a la fecha actual')
@@ -93,7 +93,7 @@ const RegisterLoan: React.FC<propsLoan> = props => {
         body: JSON.stringify(loan)
       }
       await fetch('http://localhost:3000/loans/save', postOptions)
-      toast.success('Prestamo registrado con éxito', {
+      toast.success('Préstamo registrado con éxito', {
         duration: 1500
       })
       props.refresh()
@@ -104,7 +104,7 @@ const RegisterLoan: React.FC<propsLoan> = props => {
           position: 'top-center'
         })
       else
-        toast.error('Error al registrar el prestamo', {
+        toast.error('Error al registrar el préstamo', {
           duration: 1500
         })
     } finally {
@@ -127,13 +127,13 @@ const RegisterLoan: React.FC<propsLoan> = props => {
     <div className="flex justify-center px-2 pb-10 pt-20">
       <div className="sm:max-h[40%]  w-full rounded-[40px] bg-grey sm:max-w-[60%]">
         <h2 className="mx-auto w-10/12 py-8 text-2xl font-bold leading-normal text-blueDark">
-          Prestamo de libro
+          Préstamo de libro
           <br />
           <span className="text-sm text-blueDark"> (Los campos con * son obligatorios) </span>
         </h2>
         <form className="mx-auto w-10/12" onSubmit={handleSubmit}>
           <label className="text-base font-bold leading-[normal] text-blueLight " htmlFor="title">
-            Titulo <span className="text-red-500">*</span>
+            Título <span className="text-red-500">*</span>
           </label>
 
           <div className="relative mb-14 flex h-8 w-full items-center gap-2 border-0 border-b-2 border-solid border-blueDark">
@@ -144,7 +144,7 @@ const RegisterLoan: React.FC<propsLoan> = props => {
               value={values.title}
               onChange={handleChange}
               disabled
-              placeholder="Ingresá el titulo"
+              placeholder="Ingresá el título"
             />
             <small className="absolute -bottom-6 text-xs font-bold text-red-500">
               {errors?.title}
@@ -178,7 +178,7 @@ const RegisterLoan: React.FC<propsLoan> = props => {
                 className="text-base font-bold leading-[normal] text-blueLight"
                 htmlFor="genre"
               >
-                Genero <span className="text-red-500">*</span>
+                Género <span className="text-red-500">*</span>
               </label>
               <div className="relative mb-14 flex h-8 w-full items-center gap-2 border-0 border-b-2 border-solid border-blueDark">
                 <input
@@ -188,7 +188,7 @@ const RegisterLoan: React.FC<propsLoan> = props => {
                   value={values.genre}
                   onChange={handleChange}
                   disabled
-                  placeholder="Ingresá el Genero "
+                  placeholder="Ingresá el Género "
                 />
                 <small className="absolute -bottom-6 text-xs font-bold text-red-500">
                   {errors?.genre}

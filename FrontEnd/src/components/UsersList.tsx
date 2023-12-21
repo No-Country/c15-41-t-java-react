@@ -55,7 +55,7 @@ export default function UsersList() {
                 <th>DNI</th>
                 <th>Nombre</th>
                 <th>Apellido</th>
-                <th>Direccion</th>
+                <th>Dirección</th>
                 <th>E-mail</th>
                 <th></th>
               </tr>

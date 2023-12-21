@@ -59,7 +59,7 @@ export default function LoanRoute() {
       {isLoading ? (
         <Spinner />
       ) : isError ? (
-        <p className="p-10 text-center">Error cargando prestamos</p>
+        <p className="p-10 text-center">Error cargando préstamos</p>
       ) : (
         <div className="grid w-full justify-items-center gap-y-5 py-5 align-middle md:grid-cols-2">
           {searchResults.map(({ loanDate, returnExpectedDate, ...loan }, index) =>
