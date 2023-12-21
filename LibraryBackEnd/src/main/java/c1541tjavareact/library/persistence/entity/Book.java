@@ -33,6 +33,9 @@ public class Book implements Serializable {
     @Column(nullable = false)
     private Integer quantity;
 
+    @Column(name = "is_active")
+    private Boolean isActive = Boolean.TRUE;
+
     @Column(name = "id_genre", nullable = false)
     private Long idGenre;
 

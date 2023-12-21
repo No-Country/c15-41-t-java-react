@@ -49,6 +49,8 @@ public class BookDto {
     @Max(value = 999, message = MAX_QUANTITY)
     private Integer quantity;
 
+    private Boolean isActive = Boolean.TRUE;
+
     private EditorialDto editorialDto;
 
     private AuthorDto authorDto;

@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface BookRepository extends JpaRepository<Book, Long> {
      @Query("""
@@ -16,4 +17,6 @@ public interface BookRepository extends JpaRepository<Book, Long> {
                     LOWER(a.lastName) LIKE LOWER(CONCAT('%', :param, '%'))
             """)
     List<Book> searchBooksBytitleGenreAuthor(@Param("param") String param);//TODO genre
+
+    Optional<Book> findByIsbn(String isbn);
 }
