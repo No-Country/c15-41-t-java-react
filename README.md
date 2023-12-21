@@ -75,7 +75,7 @@ Poder planificar mejoras en el servicio y la adquisición de nuevos materiales.
 
 | **José Lara** |
 | :---: |
-| <a href=""><img src="https://img.shields.io/badge/-LinkedIn-0A66C2?style=flat-square&logo=linkedin&logoColor=white"></a> |
+| <a href="https://www.linkedin.com/in/jose-luis-lara-ledezma-qa-tester-salesforce-administrator/"><img src="https://img.shields.io/badge/-LinkedIn-0A66C2?style=flat-square&logo=linkedin&logoColor=white"></a> |
 
 ## Gestión y comunicación
 
