@@ -15,10 +15,10 @@ const DeleteEditorial: React.FC<Props> = ({
 }: Props) => {
   const { fetch } = useUser()
   const handleDelete = () => {
-    fetch(`http://localhost:3000/editorials/delete/${deleteEntity.value}`, {
-      method: 'DELETE'
-    })
-      .then(() => {
+    try {
+      fetch(`http://localhost:3000/editorials/delete/${deleteEntity.value}`, {
+        method: 'DELETE'
+      }).then(() => {
         refresh()
         toast.success(`Su editorial ha sido eliminada`, {
           duration: 3000,
@@ -26,15 +26,17 @@ const DeleteEditorial: React.FC<Props> = ({
           icon: '♻'
         })
       })
-      .catch(_ => {
+      setIsModalDeleteOpen(false)
+    } catch (error: any) {
+      if (error.message !== undefined && typeof error.message === 'string' && error.message !== '')
+        toast.error(error.message, { duration: 4000, position: 'top-center' })
+      else
         toast.error(`Hubo un error eliminando su editorial`, {
           duration: 3000,
           position: 'top-center',
           icon: '♻'
         })
-        // console.error(error)
-      })
-    setIsModalDeleteOpen(false)
+    }
   }
 
   overflowYdisable()

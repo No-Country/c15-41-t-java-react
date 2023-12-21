@@ -48,12 +48,18 @@ const DeleteModal: React.FC<Props> = ({
         })
       })
       .catch(error => {
-        toast.error(`Hubo un error eliminando su ${spanishDeleteEntity}`, {
-          duration: 3000,
-          position: 'top-center',
-          icon: '♻'
-        })
-        console.error(error)
+        if (
+          error.message !== undefined &&
+          typeof error.message === 'string' &&
+          error.message !== ''
+        )
+          toast.error(error.message, { duration: 4000, position: 'top-center' })
+        else
+          toast.error(`Hubo un error eliminando su ${spanishDeleteEntity}`, {
+            duration: 3000,
+            position: 'top-center',
+            icon: '♻'
+          })
       })
       .finally(() => {
         setIsLoading(false)
