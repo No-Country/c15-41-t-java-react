@@ -104,7 +104,6 @@ export default function RegisterForm(props: bookProps) {
   }, [props])
 
   useEffect(() => {
-    setSelectedAuthor(null)
     const getAuthors = async () => {
       const data = await fetch('http://localhost:3000/authors/all')
       setAuthors(data)
@@ -115,7 +114,6 @@ export default function RegisterForm(props: bookProps) {
   }, [isAuthorDBmodify])
 
   useEffect(() => {
-    setSelectedEditorial(null)
     const getEditorials = async () => {
       const data = await fetch('http://localhost:3000/editorials/all')
       setEditorials(data)
@@ -126,7 +124,6 @@ export default function RegisterForm(props: bookProps) {
   }, [isEditorialDBmodify])
 
   useEffect(() => {
-    setSelectedGenre(null)
     const getGenres = async () => {
       const data = await fetch('http://localhost:3000/books/genres/all')
       setMockGenres(data)
@@ -225,13 +222,13 @@ export default function RegisterForm(props: bookProps) {
     }
   }
   const refreshAuthors = () => {
-    setisAuthorDBmodify(!isAuthorDBmodify)
+    setisAuthorDBmodify(true)
   }
   const refreshGenres = () => {
-    setisGenreDBmodify(!isGenreDBmodify)
+    setisGenreDBmodify(true)
   }
   const refreshEditorials = () => {
-    setisEditorialDBmodify(!isEditorialDBmodify)
+    setisEditorialDBmodify(true)
   }
 
   return (
@@ -299,6 +296,8 @@ export default function RegisterForm(props: bookProps) {
                 errors={errors.idAuthor}
                 setSelectedOption={setSelectedAuthor}
                 initialValue={selectedAuthor}
+                isValueModify={isAuthorDBmodify}
+                setisValueModify={setisAuthorDBmodify}
               />
               <div
                 className="increase-scale text-2xl hover:cursor-pointer"
@@ -341,6 +340,8 @@ export default function RegisterForm(props: bookProps) {
                 errors={errors.idGenre}
                 setSelectedOption={setSelectedGenre}
                 initialValue={selectedGenre}
+                isValueModify={isGenreDBmodify}
+                setisValueModify={setisGenreDBmodify}
               />
               <div
                 className="increase-scale text-2xl hover:cursor-pointer"
@@ -383,6 +384,8 @@ export default function RegisterForm(props: bookProps) {
                 errors={errors.idEditorial}
                 setSelectedOption={setSelectedEditorial}
                 initialValue={selectedEditorial}
+                isValueModify={isEditorialDBmodify}
+                setisValueModify={setisEditorialDBmodify}
               />
               <div
                 className="increase-scale text-2xl hover:cursor-pointer"

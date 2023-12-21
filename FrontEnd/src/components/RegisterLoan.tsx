@@ -261,14 +261,17 @@ const RegisterLoan: React.FC<propsLoan> = props => {
               </div>
             </div>
             <ReactSelect
-            label="Nombre y apellido"
-            placeHolder="Selecciona un miembro"
-            selectName="idUser"
-            options={usersOptions}
-            setFieldValue={setFieldValue}
-            errors={errors.idUser}
-            setSelectedOption={setSelectedUser}
-          />
+              label="Nombre y apellido"
+              placeHolder="Selecciona un miembro"
+              selectName="idUser"
+              options={usersOptions}
+              setFieldValue={setFieldValue}
+              errors={errors.idUser}
+              setSelectedOption={setSelectedUser}
+              initialValue={null}
+              isValueModify={null}
+              setisValueModify={null}
+            />
             <div>
               <label
                 className="text-base font-bold leading-[normal] text-blueLight"
@@ -291,7 +294,7 @@ const RegisterLoan: React.FC<propsLoan> = props => {
               </div>
             </div>
           </div>
-          
+
           <div className="pb-10">
             <button
               className="flex h-[53px] w-full items-center justify-center gap-x-2 rounded-[32px] border-none bg-blueDark py-5 text-[17px] font-bold leading-normal text-white shadow-btn hover:cursor-pointer disabled:cursor-not-allowed disabled:opacity-50"
