@@ -178,7 +178,6 @@ export const UserProvider: FC<{
       else throw new Error('Request error')
     }
 
-    // TODO Temporalmente, mientras no se implemente el backend(en DELETE)
     try {
       return await response.json()
     } catch (error) {
