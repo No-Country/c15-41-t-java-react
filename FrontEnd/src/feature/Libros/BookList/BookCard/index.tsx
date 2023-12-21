@@ -3,8 +3,8 @@ import { IoMdClose } from 'react-icons/io'
 import { IoPencil, IoTrashOutline } from 'react-icons/io5'
 import type { Book } from '@/types/types'
 import DeleteModal from '@/components/DeleteModal'
-import EditBook from './EditBook'
 import BookDetail from './BookDetail'
+import RegisterForm from '../../RegisterForm'
 
 interface Props extends Book {
   refresh: () => void
@@ -84,7 +84,7 @@ const BookCard: React.FC<Props> = ({ refresh, ...bookData }) => {
       </div>
       {isModalOpen && (
         <div className="fixed inset-0 z-50 overflow-y-scroll bg-white opacity-100 lg:pb-14">
-          <EditBook {...bookData} setIsModalOpen={setIsModalOpen} id={idBook} refresh={refresh} />
+          <RegisterForm {...bookData} setIsModalOpen={setIsModalOpen} id={idBook} refresh={refresh} />
           <div
             className="increase-scale absolute right-4 top-4 cursor-pointer text-5xl font-semibold text-black"
             onClick={() => {

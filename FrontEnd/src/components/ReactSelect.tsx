@@ -9,6 +9,7 @@ interface ReactSelectProps {
   setFieldValue: any
   errors: any
   setSelectedOption: Function
+  initialValue: any
 }
 
 export const ReactSelect: React.FC<ReactSelectProps> = ({
@@ -18,11 +19,12 @@ export const ReactSelect: React.FC<ReactSelectProps> = ({
   options,
   setFieldValue,
   errors,
-  setSelectedOption
+  setSelectedOption,
+  initialValue
 }) => {
   const [selectedValue, setSelectedValue] = useState<{ value: number; label: string } | null>(null)
   useEffect(() => {
-    setSelectedValue(null)
+    setSelectedValue(initialValue)
   }, [options])
 
   return (
