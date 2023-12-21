@@ -31,7 +31,7 @@ public class TokenService {
                     .withExpiresAt(generateExpirationDate())
                     .sign(algorithm);
         }catch (JWTCreationException exception){
-            throw new RuntimeException("Generate token fail");
+            throw new RuntimeException("No se pudo crear el token");
         }
     }
 
@@ -43,7 +43,7 @@ public class TokenService {
                     .build()
                     .verify(token).getSubject();
         }catch (JWTVerificationException exception){
-            throw new RuntimeException("");
+            throw new RuntimeException("Error al verificar el token JWT");
         }
     }
 
