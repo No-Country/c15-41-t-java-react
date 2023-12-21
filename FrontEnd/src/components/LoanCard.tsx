@@ -24,7 +24,7 @@ export default function LoanCard({ loan, refresh }: LoanCardProps) {
     try {
       setIsLoading(true)
       await fetch(`http://localhost:3000/loans/sendMail/${id}`)
-      toast.success('Se envio la notificacion correctamente', {
+      toast.success('Se envio la notificación correctamente', {
         duration: 4000,
         position: 'top-center'
       })

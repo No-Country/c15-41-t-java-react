@@ -125,7 +125,7 @@ const EditBook: React.FC<BookProps> = props => {
     <div className="bg-white px-2 py-16 max-lg:pb-60">
       <div className="mx-auto w-11/12 max-w-[650px]  rounded-[40px] bg-grey">
         <h2 className="mx-auto w-10/12 py-8 text-2xl font-bold leading-normal text-blueDark">
-          Edicion del libro: {props.title}
+          Edición del libro: {props.title}
           <br />
           <span className="text-sm"> (Los campos con * son obligatorios) </span>
         </h2>
