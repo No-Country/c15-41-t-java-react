@@ -3,7 +3,6 @@ import Spinner from './Spinner'
 import { AdminPost } from '@/types/types'
 import { useUser } from '@/context/UserContext'
 import AdminCard from './AdminCard'
-import { IoMdClose } from 'react-icons/io'
 import RegisterAdmin from './RegisterAdmin'
 
 const AdminRoute = () => {
