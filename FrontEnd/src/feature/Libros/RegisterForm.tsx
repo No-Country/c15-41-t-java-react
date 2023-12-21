@@ -20,12 +20,10 @@ import { blockNonNumericInput } from '@/utils/input'
 import { ReactSelect } from '@/components/ReactSelect'
 import { generateTempId } from '@/utils/function'
 
-
 interface bookProps extends Book {
   id: number
   setIsModalOpen: (value: boolean) => void
   refresh: () => void
-
 }
 
 const ISBN_REGEX =
@@ -88,10 +86,23 @@ export default function RegisterForm(props: bookProps) {
   } | null>(null)
 
   useEffect(() => {
-    setSelectedAuthor({value: props.idAuthor,
-      label: `${props.authorDto.name} ${props.authorDto.lastName}`,
-      props: { name: props.authorDto.name, lastName: props.authorDto.lastName }})
-  },[])
+    if (props.id != 0) {
+      setSelectedAuthor({
+        value: props.idAuthor,
+        label: `${props.authorDto.name} ${props.authorDto.lastName}`,
+        props: { name: props.authorDto.name, lastName: props.authorDto.lastName }
+      })
+      setSelectedGenre({
+        value: props.idGenre,
+        label: `${props.genreDto.name}`
+      })
+      setSelectedEditorial({
+        value: props.idEditorial,
+        label: `${props.editorialDto.name}`
+      })
+    }
+  }, [props])
+
   useEffect(() => {
     const getAuthors = async () => {
       const data = await fetch('http://localhost:3000/authors/all')
@@ -145,19 +156,18 @@ export default function RegisterForm(props: bookProps) {
     setEditorialsOptions(options)
   }, [editorials])
 
-  
   const isEditMode = !!props.id
 
   const { values, errors, handleChange, handleSubmit, resetForm, setFieldValue } = useFormik({
     initialValues: {
       idUser: isEditMode ? props.id : generateTempId(),
-      title: props.title|| '',
-      idAuthor: props.idAuthor|| -1,
-      idEditorial:props.idEditorial|| -1,
-      isbn:props.isbn|| '',
-      idGenre: props.idGenre|| -1,
-      quantity:props.quantity || 0,
-      image:  props.image ?? '',
+      title: props.title || '',
+      idAuthor: props.idAuthor || -1,
+      idEditorial: props.idEditorial || -1,
+      isbn: props.isbn || '',
+      idGenre: props.idGenre || -1,
+      quantity: props.quantity || 0,
+      image: props.image ?? ''
     },
     validationSchema,
     onSubmit
@@ -180,8 +190,8 @@ export default function RegisterForm(props: bookProps) {
       formData.append('idEditorial', values.idEditorial)
       formData.append('idGenre', values.idGenre)
       formData.append('image', imageFile ? imageFile : new Blob())
-      
-      if(isEditMode){
+
+      if (isEditMode) {
         const postOptions = {
           method: 'PUT',
           body: formData
@@ -190,18 +200,21 @@ export default function RegisterForm(props: bookProps) {
         props.setIsModalOpen(false)
         props.refresh()
         toast.success('Su libro se editó correctamente', { duration: 4000, position: 'top-center' })
-      }else{
+      } else {
+        const postOptions = {
+          method: 'POST',
+          body: formData
+        }
 
-      const postOptions = {
-        method: 'POST',
-        body: formData
+        await fetch('http://localhost:3000/books/save', postOptions)
+        resetForm()
+        toast.success('Su libro se agregó correctamente', {
+          duration: 4000,
+          position: 'top-center'
+        })
+        props.refresh()
       }
-
-      await fetch('http://localhost:3000/books/save', postOptions)
-      resetForm()
-      toast.success('Su libro se agregó correctamente', { duration: 4000, position: 'top-center' })
-      props.refresh()} 
-    }catch (error) {
+    } catch (error) {
       console.log('error', error)
       toast.error('Error al agregar el libro', { duration: 4000, position: 'top-center' })
     } finally {
@@ -223,7 +236,9 @@ export default function RegisterForm(props: bookProps) {
       <div className="px-2 py-10">
         <div className="mx-auto w-full max-w-[650px] rounded-[40px]  bg-grey">
           <h2 className="mx-auto w-10/12 py-8 text-2xl font-bold leading-normal text-blueDark">
-            Registro de un nuevo libro
+            {props.idBook
+              ? `Actualización del libro: ${props.title}`
+              : 'Registro de un nuevo libro'}
             <br />
             <span className="text-sm"> (Los campos con * son obligatorios) </span>
           </h2>
@@ -280,6 +295,7 @@ export default function RegisterForm(props: bookProps) {
                 setFieldValue={setFieldValue}
                 errors={errors.idAuthor}
                 setSelectedOption={setSelectedAuthor}
+                initialValue={selectedAuthor}
               />
               <div
                 className="increase-scale text-2xl hover:cursor-pointer"
@@ -321,6 +337,7 @@ export default function RegisterForm(props: bookProps) {
                 setFieldValue={setFieldValue}
                 errors={errors.idGenre}
                 setSelectedOption={setSelectedGenre}
+                initialValue={selectedGenre}
               />
               <div
                 className="increase-scale text-2xl hover:cursor-pointer"
@@ -362,6 +379,7 @@ export default function RegisterForm(props: bookProps) {
                 setFieldValue={setFieldValue}
                 errors={errors.idEditorial}
                 setSelectedOption={setSelectedEditorial}
+                initialValue={selectedEditorial}
               />
               <div
                 className="increase-scale text-2xl hover:cursor-pointer"
