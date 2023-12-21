@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import * as Yup from 'yup'
-import type { Author, BookPost, Editorial, Genre } from '../../types/types'
+import type { Author, Book, Editorial, Genre } from '../../types/types'
 import { FaRegPlusSquare } from 'react-icons/fa'
 import { CreateAuthor } from '../../components/Crud/CreateAuthor'
 import { CreateGenre } from '../../components/Crud/CreateGenre'
@@ -18,15 +18,14 @@ import toast from 'react-hot-toast'
 import { useUser } from '@/context/UserContext'
 import { blockNonNumericInput } from '@/utils/input'
 import { ReactSelect } from '@/components/ReactSelect'
+import { generateTempId } from '@/utils/function'
 
-const initialValues: BookPost = {
-  title: '',
-  idAuthor: -1,
-  idEditorial: -1,
-  isbn: '',
-  idGenre: -1,
-  quantity: 0,
-  image: ''
+
+interface bookProps extends Book {
+  id: number
+  setIsModalOpen: (value: boolean) => void
+  refresh: () => void
+
 }
 
 const ISBN_REGEX =
@@ -49,7 +48,7 @@ const validationSchema = Yup.object({
   image: Yup.string()
 })
 
-export default function RegisterForm({ onSuccess }: { onSuccess: () => void }) {
+export default function RegisterForm(props: bookProps) {
   const { fetch } = useUser()
   const [authors, setAuthors] = useState<Author[]>([])
   const [editorials, setEditorials] = useState<Editorial[]>([])
@@ -88,6 +87,11 @@ export default function RegisterForm({ onSuccess }: { onSuccess: () => void }) {
     value: number
   } | null>(null)
 
+  useEffect(() => {
+    setSelectedAuthor({value: props.idAuthor,
+      label: `${props.authorDto.name} ${props.authorDto.lastName}`,
+      props: { name: props.authorDto.name, lastName: props.authorDto.lastName }})
+  },[])
   useEffect(() => {
     const getAuthors = async () => {
       const data = await fetch('http://localhost:3000/authors/all')
@@ -141,8 +145,20 @@ export default function RegisterForm({ onSuccess }: { onSuccess: () => void }) {
     setEditorialsOptions(options)
   }, [editorials])
 
+  
+  const isEditMode = !!props.id
+
   const { values, errors, handleChange, handleSubmit, resetForm, setFieldValue } = useFormik({
-    initialValues,
+    initialValues: {
+      idUser: isEditMode ? props.id : generateTempId(),
+      title: props.title|| '',
+      idAuthor: props.idAuthor|| -1,
+      idEditorial:props.idEditorial|| -1,
+      isbn:props.isbn|| '',
+      idGenre: props.idGenre|| -1,
+      quantity:props.quantity || 0,
+      image:  props.image ?? '',
+    },
     validationSchema,
     onSubmit
   })
@@ -156,7 +172,6 @@ export default function RegisterForm({ onSuccess }: { onSuccess: () => void }) {
   async function onSubmit(values: FormikValues) {
     try {
       setIsLoading(true)
-
       const formData = new FormData()
       formData.append('title', values.title)
       formData.append('isbn', values.isbn)
@@ -165,6 +180,17 @@ export default function RegisterForm({ onSuccess }: { onSuccess: () => void }) {
       formData.append('idEditorial', values.idEditorial)
       formData.append('idGenre', values.idGenre)
       formData.append('image', imageFile ? imageFile : new Blob())
+      
+      if(isEditMode){
+        const postOptions = {
+          method: 'PUT',
+          body: formData
+        }
+        await fetch(`http://localhost:3000/books/update/${props.id}`, postOptions)
+        props.setIsModalOpen(false)
+        props.refresh()
+        toast.success('Su libro se editó correctamente', { duration: 4000, position: 'top-center' })
+      }else{
 
       const postOptions = {
         method: 'POST',
@@ -174,11 +200,10 @@ export default function RegisterForm({ onSuccess }: { onSuccess: () => void }) {
       await fetch('http://localhost:3000/books/save', postOptions)
       resetForm()
       toast.success('Su libro se agregó correctamente', { duration: 4000, position: 'top-center' })
-      onSuccess()
-    } catch (error: any) {
-      if (error.message !== undefined && typeof error.message === 'string' && error.message !== '')
-        toast.error(error.message, { duration: 4000, position: 'top-center' })
-      else toast.error('Error al agregar el libro', { duration: 4000, position: 'top-center' })
+      props.refresh()} 
+    }catch (error) {
+      console.log('error', error)
+      toast.error('Error al agregar el libro', { duration: 4000, position: 'top-center' })
     } finally {
       setIsLoading(false)
     }
