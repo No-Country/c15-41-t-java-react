@@ -46,7 +46,7 @@ public class AuthController {
             return ResponseEntity.ok(new AuthDto(jwtToken,idAdmin,name));
         } catch (RuntimeException ignore){
             Map<String,String> responseError = new HashMap<>();
-            responseError.put("message","Credenciales invalidas");
+            responseError.put("message","Credenciales inválidas");
             return ResponseEntity.badRequest().body(responseError);
         }
 
