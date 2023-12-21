@@ -204,7 +204,7 @@ const UserRegisterForm: React.FC<UserProps> = ({
                   type="text"
                   value={values.address}
                   onChange={handleChange}
-                  placeholder="Ingresá la direccion"
+                  placeholder="Ingresá la dirección"
                 />
                 <small className="errorContainer">{errors?.address}</small>
               </div>

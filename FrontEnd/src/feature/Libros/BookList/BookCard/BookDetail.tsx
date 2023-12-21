@@ -33,13 +33,13 @@ const BookDetail: React.FC<PropsDetail> = props => {
         />
       </div>
       <div className="xs:text-sm flex h-auto w-full flex-col lg:gap-2">
-        <h3 className="text-lg text-blueLight"> Titulo: {title}</h3>
+        <h3 className="text-lg text-blueLight"> Título: {title}</h3>
         <p className="">
           <span className="font-bold text-black">Autor: </span>
           {`${authorDto.name}  ${authorDto.lastName}`}
         </p>
         <p>
-          <span className="font-bold text-black">Genero: </span>
+          <span className="font-bold text-black">Género: </span>
           {genre.charAt(0) + genre.toLowerCase().slice(1)}
         </p>
         <p>

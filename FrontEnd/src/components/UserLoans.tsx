@@ -53,7 +53,7 @@ export default function UserLoans({ user }: UserLoansProps) {
               {user.phoneNumber}
             </p>
             <p>
-              <span className="font-medium text-black">Direccion: </span>
+              <span className="font-medium text-black">Dirección: </span>
               {user.address}
             </p>
             <p>
@@ -71,7 +71,7 @@ export default function UserLoans({ user }: UserLoansProps) {
             {isLoading ? (
               <Spinner />
             ) : isError ? (
-              <p>Error cargando prestamos</p>
+              <p>Error cargando préstamos</p>
             ) : userLoans.length > 0 ? (
               userLoans.map(loan => {
                 return (
