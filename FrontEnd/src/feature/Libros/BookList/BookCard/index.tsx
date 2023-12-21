@@ -84,7 +84,12 @@ const BookCard: React.FC<Props> = ({ refresh, ...bookData }) => {
       </div>
       {isModalOpen && (
         <div className="fixed inset-0 z-50 overflow-y-scroll bg-white opacity-100 lg:pb-14">
-          <RegisterForm {...bookData} setIsModalOpen={setIsModalOpen} id={idBook} refresh={refresh} />
+          <RegisterForm
+            {...bookData}
+            setIsModalOpen={setIsModalOpen}
+            id={idBook}
+            refresh={refresh}
+          />
           <div
             className="increase-scale absolute right-4 top-4 cursor-pointer text-5xl font-semibold text-black"
             onClick={() => {
