@@ -49,14 +49,14 @@ export default function LoanCard({ loan, refresh }: LoanCardProps) {
           {`${loan.adminDto.name} ${loan.adminDto.lastName}`}
         </p>
         <p>
-          <span className="font-bold text-black">Dni de usuario: </span> {loan.userDto.dni}
+          <span className="font-bold text-black">DNI de miembro: </span> {loan.userDto.dni}
         </p>
         <p>
-          <span className="font-bold text-black">Nombre de usuario: </span>{' '}
+          <span className="font-bold text-black">Nombre de miembro: </span>{' '}
           {`${loan.userDto.name} ${loan.userDto.lastName}`}
         </p>
         <p>
-          <span className="font-bold text-black">Fecha de prestamo: </span> {loan.loanDate}
+          <span className="font-bold text-black">Fecha de préstamo: </span> {loan.loanDate}
         </p>
         <p>
           <span className="font-bold text-black">Devolución: </span> {loan.returnExpectedDate}

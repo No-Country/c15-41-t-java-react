@@ -10,17 +10,16 @@ interface Props {
 
 const DeleteGenre: React.FC<Props> = ({ setIsModalDeleteOpen, refresh, deleteEntity }: Props) => {
   const { fetch } = useUser()
-  const handleDelete = () => {
+  const handleDelete = async () => {
     try {
-      fetch(`http://localhost:3000/books/genres/delete/${deleteEntity.value}`, {
+      await fetch(`http://localhost:3000/books/genres/delete/${deleteEntity.value}`, {
         method: 'DELETE'
-      }).then(() => {
-        refresh()
-        toast.success(`Su género ha sido eliminado`, {
-          duration: 3000,
-          position: 'top-center',
-          icon: '♻'
-        })
+      })
+      refresh()
+      toast.success(`Su género ha sido eliminado`, {
+        duration: 3000,
+        position: 'top-center',
+        icon: '♻'
       })
     } catch (error: any) {
       if (error.message !== undefined && typeof error.message === 'string' && error.message !== '')

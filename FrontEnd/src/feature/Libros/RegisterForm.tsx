@@ -34,18 +34,18 @@ const ISBN_REGEX =
 
 const validationSchema = Yup.object({
   title: Yup.string()
-    .required('El titulo es requerido')
+    .required('El título es requerido')
     .matches(/^[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ0-9\s]+$/, 'Ingresa un nombre válido')
     .min(3, 'El nombre es demasiado corto')
     .max(50, 'El nombre es demasiado extenso'),
-  isbn: Yup.string().required('El isbn es requerido').matches(ISBN_REGEX, 'El ISBN no es valido'),
+  isbn: Yup.string().required('El ISBN es requerido').matches(ISBN_REGEX, 'El ISBN no es valido'),
   quantity: Yup.number()
     .required('Cantidad es requerida')
     .min(1, 'El valor debe ser mayor a 0')
     .max(100, 'El máximo que puede ingresar son 100 copias'),
   idAuthor: Yup.number().min(1, 'Seleccione autor').required('El autor es requerido'),
   idEditorial: Yup.number().min(1, 'Seleccione editorial').required('La editorial es requerida'),
-  idGenre: Yup.number().min(1, 'Seleccione genero').required('El genero es requerido'),
+  idGenre: Yup.number().min(1, 'Seleccione género').required('El género es requerido'),
   image: Yup.string()
 })
 
@@ -204,14 +204,14 @@ export default function RegisterForm({ onSuccess }: { onSuccess: () => void }) {
           </h2>
           <form className="mx-auto w-10/12" onSubmit={handleSubmit}>
             <label className="formLabel " htmlFor="title">
-              Titulo <span className="text-red-500">*</span>
+              Título <span className="text-red-500">*</span>
             </label>
             <div className="ReactSelectContainer">
               <input
                 className="ReactSelect"
                 name="title"
                 type="text"
-                placeholder="Ingresá el titulo"
+                placeholder="Ingresá el título"
                 value={values.title}
                 onChange={handleChange}
               />
@@ -290,7 +290,7 @@ export default function RegisterForm({ onSuccess }: { onSuccess: () => void }) {
             <div className="flex items-center gap-x-4">
               <ReactSelect
                 label="Género"
-                placeHolder="Selecciona un genero"
+                placeHolder="Selecciona un género"
                 selectName="idGenre"
                 options={genresOptions}
                 setFieldValue={setFieldValue}

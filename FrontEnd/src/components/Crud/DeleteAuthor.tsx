@@ -10,17 +10,16 @@ interface Props {
 
 const DeleteAuthor: React.FC<Props> = ({ setIsModalDeleteOpen, refresh, deleteEntity }: Props) => {
   const { fetch } = useUser()
-  const handleDelete = () => {
+  const handleDelete = async () => {
     try {
-      fetch(`http://localhost:3000/authors/delete/${deleteEntity.value}`, {
+      await fetch(`http://localhost:3000/authors/delete/${deleteEntity.value}`, {
         method: 'DELETE'
-      }).then(() => {
-        refresh()
-        toast.success(`Su Autor ha sido eliminado`, {
-          duration: 3000,
-          position: 'top-center',
-          icon: '♻'
-        })
+      })
+      refresh()
+      toast.success(`Su Autor ha sido eliminado`, {
+        duration: 3000,
+        position: 'top-center',
+        icon: '♻'
       })
       setIsModalDeleteOpen(false)
     } catch (error: any) {
