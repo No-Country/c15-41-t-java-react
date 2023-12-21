@@ -48,7 +48,7 @@ Poder planificar mejoras en el servicio y la adquisición de nuevos materiales.
 
 | **Jean Carlo** | **Efrén Morales** | **Jeyson Velázquez** | **German Anselmo** | **Jesús Monroy** |
 | :---: | :---: | :---: | :---: | :---: |
-| <a href="https://github.com/jeancarlo98"><img src="https://img.shields.io/badge/-GitHub-181717?style=flat-square&logo=github&logoColor=white"></a> | <a href="https://github.com/fr3nm0"><img src="https://img.shields.io/badge/-GitHub-181717?style=flat-square&logo=github&logoColor=white"></a> | <a href="https://github.com/jeysonvelas"><img src="https://img.shields.io/badge/-GitHub-181717?style=flat-square&logo=github&logoColor=white"></a> | <a href=""><img src="https://img.shields.io/badge/-GitHub-181717?style=flat-square&logo=github&logoColor=white"></a> | <a href="https://github.com/jdmonroyg"><img src="https://img.shields.io/badge/-GitHub-181717?style=flat-square&logo=github&logoColor=white"></a> |
+| <a href="https://github.com/jeancarlo98"><img src="https://img.shields.io/badge/-GitHub-181717?style=flat-square&logo=github&logoColor=white"></a> | <a href="https://github.com/fr3nm0"><img src="https://img.shields.io/badge/-GitHub-181717?style=flat-square&logo=github&logoColor=white"></a> | <a href="https://github.com/jeysonvelas"><img src="https://img.shields.io/badge/-GitHub-181717?style=flat-square&logo=github&logoColor=white"></a> | <a href="https://github.com/gmanselmo"><img src="https://img.shields.io/badge/-GitHub-181717?style=flat-square&logo=github&logoColor=white"></a> | <a href="https://github.com/jdmonroyg"><img src="https://img.shields.io/badge/-GitHub-181717?style=flat-square&logo=github&logoColor=white"></a> |
 
 ## Stack QA
 
