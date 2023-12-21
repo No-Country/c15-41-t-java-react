@@ -106,11 +106,10 @@ const UserRegisterForm: React.FC<UserProps> = ({
 
       resetForm()
       setIsModalOpen(false) // Cerrar el modal después de enviar el formulario
-    } catch (error) {
-      toast.error('Error al procesar la solicitud', {
-        duration: 4000,
-        position: 'top-center'
-      })
+    } catch (error: any) {
+      if (error.message !== undefined && typeof error.message === 'string' && error.message !== '')
+        toast.error(error.message, { duration: 4000, position: 'top-center' })
+      else toast.error('Error al procesar el Miembro', { duration: 4000, position: 'top-center' })
     } finally {
       setIsLoading(false)
     }

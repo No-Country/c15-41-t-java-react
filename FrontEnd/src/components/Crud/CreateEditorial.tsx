@@ -63,8 +63,10 @@ export const CreateEditorial: React.FC<CreateEditorialProps> = ({
       })
       refreshEntitys()
       closeModal()
-    } catch (error) {
-      toast.error('Error al agregar la editorial', { duration: 4000, position: 'top-center' })
+    } catch (error: any) {
+      if (error.message !== undefined && typeof error.message === 'string' && error.message !== '')
+        toast.error(error.message, { duration: 4000, position: 'top-center' })
+      else toast.error('Error al agregar la editorial', { duration: 4000, position: 'top-center' })
     } finally {
       setIsLoading(false)
     }
