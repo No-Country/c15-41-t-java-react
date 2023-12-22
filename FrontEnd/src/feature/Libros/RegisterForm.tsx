@@ -161,10 +161,10 @@ export default function RegisterForm(props: bookProps) {
   const { values, errors, handleChange, handleSubmit, resetForm, setFieldValue } = useFormik({
     initialValues: {
       idUser: isEditMode ? props.id : generateTempId(),
-      title: props.title || '',
+      title: props.title || 'La divina comedia',
       idAuthor: props.idAuthor || -1,
       idEditorial: props.idEditorial || -1,
-      isbn: props.isbn || '',
+      isbn: props.isbn || '978-0-564-89564-8',
       idGenre: props.idGenre || -1,
       quantity: props.quantity || 0,
       image: props.image ?? ''
