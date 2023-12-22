@@ -268,6 +268,9 @@ const RegisterLoan: React.FC<propsLoan> = props => {
               setFieldValue={setFieldValue}
               errors={errors.idUser}
               setSelectedOption={setSelectedUser}
+              initialValue={null}
+              isValueModify={null}
+              setisValueModify={null}
             />
             <div>
               <label

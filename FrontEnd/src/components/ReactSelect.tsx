@@ -10,6 +10,8 @@ interface ReactSelectProps {
   errors: any
   setSelectedOption: Function
   initialValue: any
+  isValueModify: any
+  setisValueModify: any
 }
 
 export const ReactSelect: React.FC<ReactSelectProps> = ({
@@ -20,11 +22,17 @@ export const ReactSelect: React.FC<ReactSelectProps> = ({
   setFieldValue,
   errors,
   setSelectedOption,
-  initialValue
+  initialValue,
+  isValueModify,
+  setisValueModify
 }) => {
   const [selectedValue, setSelectedValue] = useState<{ value: number; label: string } | null>(null)
   useEffect(() => {
-    setSelectedValue(initialValue)
+    if (isValueModify == true) {
+      setSelectedValue(null)
+      setSelectedOption(null)
+      setisValueModify(false)
+    } else setSelectedValue(initialValue)
   }, [options])
 
   return (

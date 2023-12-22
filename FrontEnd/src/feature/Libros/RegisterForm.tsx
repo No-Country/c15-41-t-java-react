@@ -222,13 +222,13 @@ export default function RegisterForm(props: bookProps) {
     }
   }
   const refreshAuthors = () => {
-    setisAuthorDBmodify(!isAuthorDBmodify)
+    setisAuthorDBmodify(true)
   }
   const refreshGenres = () => {
-    setisGenreDBmodify(!isGenreDBmodify)
+    setisGenreDBmodify(true)
   }
   const refreshEditorials = () => {
-    setisEditorialDBmodify(!isEditorialDBmodify)
+    setisEditorialDBmodify(true)
   }
 
   return (
@@ -296,6 +296,8 @@ export default function RegisterForm(props: bookProps) {
                 errors={errors.idAuthor}
                 setSelectedOption={setSelectedAuthor}
                 initialValue={selectedAuthor}
+                isValueModify={isAuthorDBmodify}
+                setisValueModify={setisAuthorDBmodify}
               />
               <div
                 className="increase-scale text-2xl hover:cursor-pointer"
@@ -338,6 +340,8 @@ export default function RegisterForm(props: bookProps) {
                 errors={errors.idGenre}
                 setSelectedOption={setSelectedGenre}
                 initialValue={selectedGenre}
+                isValueModify={isGenreDBmodify}
+                setisValueModify={setisGenreDBmodify}
               />
               <div
                 className="increase-scale text-2xl hover:cursor-pointer"
@@ -380,6 +384,8 @@ export default function RegisterForm(props: bookProps) {
                 errors={errors.idEditorial}
                 setSelectedOption={setSelectedEditorial}
                 initialValue={selectedEditorial}
+                isValueModify={isEditorialDBmodify}
+                setisValueModify={setisEditorialDBmodify}
               />
               <div
                 className="increase-scale text-2xl hover:cursor-pointer"
