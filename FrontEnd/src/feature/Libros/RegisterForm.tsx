@@ -233,7 +233,7 @@ export default function RegisterForm(props: bookProps) {
 
   return (
     <>
-      <div className="px-2 py-10">
+      <div className="px-2 pb-36 pt-20 opacity-100 lg:pb-10 lg:pt-10">
         <div className="mx-auto w-full max-w-[650px] rounded-[40px]  bg-grey">
           <h2 className="mx-auto w-10/12 py-8 text-2xl font-bold leading-normal text-blueDark">
             {props.idBook
