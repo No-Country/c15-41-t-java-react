@@ -57,12 +57,12 @@ const UserRegisterForm: React.FC<UserProps> = ({
   const { values, errors, handleChange, handleSubmit, resetForm } = useFormik({
     initialValues: {
       idUser: isEditMode ? user.idUser : generateTempId(),
-      dni: user.dni || '37777777',
-      name: user.name || 'Matias',
-      lastName: user.lastName || 'Luengo',
-      email: user.email || 'matiasluengo@outlook.com',
-      phoneNumber: user.phoneNumber || '3564404040',
-      address: user.address || 'Calle 32 145'
+      dni: user.dni || '',
+      name: user.name || '',
+      lastName: user.lastName || '',
+      email: user.email || '',
+      phoneNumber: user.phoneNumber || '',
+      address: user.address || ''
     },
     validationSchema,
     onSubmit
