@@ -68,9 +68,9 @@ public class SecurityConfigurations {
             @Override
             public void addCorsMappings(@NotNull CorsRegistry registry) {
                 registry.addMapping("/**")
-                        .allowedOrigins("https://frontend-27zf.onrender.com/",
+                        .allowedOrigins("https://bibliotech-frontend.onrender.com/",
                                 "https://bibliotechapp.website/",
-                                "https://bibliotechapp.es/",
+                                "https://www.bibliotechapp.website/",
                                 "http://localhost:8080/",
                                 "http://localhost:5173",
                                 "http://localhost")
